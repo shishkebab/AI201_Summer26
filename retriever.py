@@ -3,8 +3,8 @@ from chromadb.utils import embedding_functions
 from config import CHROMA_COLLECTION, CHROMA_PATH, EMBEDDING_MODEL, N_RESULTS
 
 # Embedding function and ChromaDB client are initialized once at module load.
-# sentence-transformers downloads the model on first use — this may take
-# 30–60 seconds the very first time. Subsequent runs use a local cache.
+# sentence-transformers downloads the model on first use ??this may take
+# 30??0 seconds the very first time. Subsequent runs use a local cache.
 _ef = embedding_functions.SentenceTransformerEmbeddingFunction(
     model_name=EMBEDDING_MODEL
 )
@@ -25,17 +25,17 @@ def embed_and_store(chunks):
     """
     Embed a list of chunks and store them in the vector database.
 
-    This function is already implemented — read through it before moving on.
+    This function is already implemented ??read through it before moving on.
 
     _collection.add() takes three parallel lists built from the chunks
     returned by chunk_document():
-      - documents : raw text strings — ChromaDB's embedding function converts
+      - documents : raw text strings ??ChromaDB's embedding function converts
                     these to vectors automatically using sentence-transformers
       - metadatas : one dict per chunk, stored alongside the vector so that
                     retrieve() can surface which game a result came from
       - ids       : the unique chunk_id strings used to identify each entry
 
-    You don't generate embeddings manually here — you hand over the text
+    You don't generate embeddings manually here ??you hand over the text
     and ChromaDB handles the vector math.
     """
     _collection.add(
@@ -50,12 +50,12 @@ def retrieve(query, n_results=N_RESULTS):
     """
     Find the most relevant rule chunks for a user's question.
 
-    TODO — Milestone 2:
+    TODO ??Milestone 2:
 
     Use _collection.query() to run a semantic search. It takes:
       - query_texts : a list containing your query string
       - n_results   : how many results to return
-      - include     : what to return — use ["documents", "metadatas", "distances"]
+      - include     : what to return ??use ["documents", "metadatas", "distances"]
 
     Return a list of dicts, each with:
       - "text"     : the chunk text
@@ -68,5 +68,26 @@ def retrieve(query, n_results=N_RESULTS):
     if _collection.count() == 0:
         return []
 
-    # Your implementation here.
-    return []
+    results = _collection.query(
+        query_texts=[query],
+        n_results=n_results,
+        include=["documents", "metadatas", "distances"],
+    )
+
+    chunks = [
+        {
+            "text": doc,
+            "game": meta["game"],
+            "distance": dist,
+        }
+        for doc, meta, dist in zip(
+            results["documents"][0],
+            results["metadatas"][0],
+            results["distances"][0],
+        )
+    ]
+
+    for chunk in chunks:
+        print(f"[{chunk['game']}] (dist: {chunk['distance']:.3f}) {chunk['text'][:80]}...")
+
+    return chunks

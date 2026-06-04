@@ -33,6 +33,7 @@ def run_ingestion():
 
     if all_chunks:
         embed_and_store(all_chunks)
+        # print(all_chunks[0:10])
         print(f"Ingestion complete. {len(all_chunks)} chunks stored.")
     else:
         print(
@@ -138,4 +139,5 @@ if __name__ == "__main__":
     print("  RulesBot — starting up")
     print("="*50 + "\n")
     run_ingestion()
+    # demo.queue()
     demo.launch()
