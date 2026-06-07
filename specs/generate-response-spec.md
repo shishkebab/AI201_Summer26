@@ -23,9 +23,9 @@ Given a user query and a list of retrieved rule chunks, generate a response that
 **Output:** `str`
 
 A plain string containing the response to show the user. The response should:
-- Answer the question using only the retrieved rule text
-- Identify which game the answer comes from
-- Acknowledge clearly when the answer is not found in the loaded rules
+- Answer the question using only the retrieved rule text.
+- Identify which game the answer comes from.
+- Acknowledge clearly when the answer is not found in the loaded rules.
 
 Returns a fallback string (not an error) when `retrieved_chunks` is empty.
 
@@ -42,7 +42,26 @@ Returns a fallback string (not an error) when `retrieved_chunks` is empty.
 *How will you format the retrieved chunks before passing them to the LLM? Describe the structure — not the code. Consider: will you label chunks by game? Include distance scores? Separate chunks with delimiters?*
 
 ```
-[your answer here]
+Each chunk is formatted as a labeled block with a game header and plain text body,
+separated by a horizontal delimiter:
+
+  [Source: Catan]
+  Players take turns rolling two dice and moving their token clockwise...
+
+  ---
+
+  [Source: Monopoly]
+  When a player passes Go, they collect $200 from the bank...
+
+Rules:
+- Label every chunk with [Source: <game>] so the LLM can attribute its answer.
+- Separate chunks with "---" to signal clear boundaries between sources.
+- Omit distance scores — they are retrieval artifacts, not semantic content,
+  and can cause the model to hedge or misweight chunks.
+- Use plain text, not JSON or XML — prose chunks don't benefit from markup
+  at this scale (<=5 chunks, ~300 chars each).
+- The assembled context string goes in the user message, not the system message,
+  because it is query-specific data rather than standing instructions.
 ```
 
 ---
@@ -52,7 +71,11 @@ Returns a fallback string (not an error) when `retrieved_chunks` is empty.
 *Write the exact system prompt instruction you will use to prevent the model from answering beyond the retrieved text. This is the most important design decision in this function.*
 
 ```
-[your answer here]
+You are a board game rules assistant. Answer the user's question using ONLY the rule text provided in the context below. 
+Do not use any knowledge about board games that is not explicitly stated in that context. 
+Do not infer, speculate, or fill in gaps from general knowledge — even if you believe you know the answer. 
+If the context only partially answers the question, answer only what the text supports and state that the rest is not covered. 
+If the answer is not found in the context at all, say so and nothing more.
 ```
 
 ---
@@ -62,7 +85,19 @@ Returns a fallback string (not an error) when `retrieved_chunks` is empty.
 *Write the exact instruction you will use to tell the model to identify which game its answer comes from.*
 
 ```
-[your answer here]
+At the end of your answer, cite the game(s) your answer draws from using
+this exact format on its own line:
+
+  [Source: <game_name>]
+
+If your answer draws from multiple games, list each on a separate line:
+
+  [Source: Catan]
+  [Source: Monopoly]
+
+Use only the game names exactly as they appear in the Source labels in the
+context. If the answer is not found in the context, omit the citation entirely.
+
 ```
 
 ---

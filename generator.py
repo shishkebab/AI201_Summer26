@@ -35,5 +35,41 @@ def generate_response(query, retrieved_chunks):
             "Try rephrasing your question — or check that your ingestion pipeline is working."
         )
 
-    # Your implementation here.
-    return "⚙️ Response generation not yet implemented. Complete Milestone 3 to activate answers."
+    # Build context block: each chunk as a labeled block separated by "---"
+    chunk_blocks = []
+    for chunk in retrieved_chunks:
+        chunk_blocks.append(f"[Source: {chunk['game']}]\n{chunk['text']}")
+    context = "\n\n---\n\n".join(chunk_blocks)
+
+    citation_instruction = (
+        "At the end of your answer, cite the game(s) your answer draws from using "
+        "this exact format on its own line:\n\n"
+        "  [Source: <game_name>]\n\n"
+        "If your answer draws from multiple games, list each on a separate line:\n\n"
+        "  [Source: Catan]\n"
+        "  [Source: Monopoly]\n\n"
+        "Use only the game names exactly as they appear in the Source labels in the "
+        "context. If the answer is not found in the context, omit the citation entirely."
+    )
+
+    system_prompt = (
+        "You are a board game rules assistant. Answer the user's question using ONLY "
+        "the rule text provided in the context below. "
+        "Do not use any knowledge about board games that is not explicitly stated in that context. "
+        "Do not infer, speculate, or fill in gaps from general knowledge — even if you believe you know the answer. "
+        "If the context only partially answers the question, answer only what the text supports and state that the rest is not covered. "
+        "If the answer is not found in the context at all, say so and nothing more.\n\n"
+        + citation_instruction
+    )
+
+    user_message = f"Context:\n\n{context}\n\nQuestion: {query}"
+
+    response = _client.chat.completions.create(
+        model=LLM_MODEL,
+        messages=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_message},
+        ],
+    )
+
+    return response.choices[0].message.content
