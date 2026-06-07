@@ -14,6 +14,8 @@
      Example: "Student reviews of CS professors at [university] — useful because official
      course descriptions don't reflect teaching style, exam difficulty, or workload." -->
 
+Domain: Student reviews of CS professors at University of Arizona.
+
 ---
 
 ## Document Sources
@@ -24,16 +26,16 @@
 
 | # | Source | Type | URL or file path |
 |---|--------|------|-----------------|
-| 1 | | | |
-| 2 | | | |
-| 3 | | | |
-| 4 | | | |
-| 5 | | | |
-| 6 | | | |
-| 7 | | | |
-| 8 | | | |
-| 9 | | | |
-| 10 | | | |
+| 1 | Rate My Professor Website | text|https://www.ratemyprofessors.com/professor/2633139 |
+| 2 | Rate My Professor Website| text|https://www.ratemyprofessors.com/professor/2713150 |
+| 3 | Rate My Professor Website| text|https://www.ratemyprofessors.com/professor/787531 |
+| 4 | Rate My Professor Website| text|https://www.ratemyprofessors.com/professor/2430005 |
+| 5 | Rate My Professor Website| text|https://www.ratemyprofessors.com/professor/2298882 |
+| 6 | Rate My Professor Website| text|https://www.ratemyprofessors.com/professor/510557 |
+| 7 | Rate My Professor Website| text|https://www.ratemyprofessors.com/professor/2004717 |
+| 8 | Rate My Professor Website| text|https://www.ratemyprofessors.com/professor/1815234 |
+| 9 | Rate My Professor Website| text|https://www.ratemyprofessors.com/professor/2058047 |
+| 10 |Rate My Professor Website| text|https://www.ratemyprofessors.com/professor/376230 |
 
 ---
 

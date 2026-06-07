@@ -9,7 +9,9 @@
 
 ## Domain
 
-<!-- What domain did you choose? Why is this knowledge valuable and hard to find through official channels? -->
+I chose the student reviews of CS professors at University of Arizona as my domain.
+Throught the interaction with the chat, students can easily compare teaching styles and exam difficulty 
+of different professors withouth having to read the entire reviews of each professor..
 
 ---
 
@@ -20,16 +22,16 @@
 
 | # | Source | Description | URL or location |
 |---|--------|-------------|-----------------|
-| 1 | | | |
-| 2 | | | |
-| 3 | | | |
-| 4 | | | |
-| 5 | | | |
-| 6 | | | |
-| 7 | | | |
-| 8 | | | |
-| 9 | | | |
-| 10 | | | |
+| 1 | Rate My Professor Website | text|https://www.ratemyprofessors.com/professor/2633139 |
+| 2 | Rate My Professor Website| text|https://www.ratemyprofessors.com/professor/2713150 |
+| 3 | Rate My Professor Website| text|https://www.ratemyprofessors.com/professor/787531 |
+| 4 | Rate My Professor Website| text|https://www.ratemyprofessors.com/professor/2430005 |
+| 5 | Rate My Professor Website| text|https://www.ratemyprofessors.com/professor/2298882 |
+| 6 | Rate My Professor Website| text|https://www.ratemyprofessors.com/professor/510557 |
+| 7 | Rate My Professor Website| text|https://www.ratemyprofessors.com/professor/2004717 |
+| 8 | Rate My Professor Website| text|https://www.ratemyprofessors.com/professor/1815234 |
+| 9 | Rate My Professor Website| text|https://www.ratemyprofessors.com/professor/2058047 |
+| 10 |Rate My Professor Website| text|https://www.ratemyprofessors.com/professor/376230 |
 
 ---
 
