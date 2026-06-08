@@ -83,9 +83,32 @@ of different professors withouth having to read the entire reviews of each profe
      Do not just say "I told it to use the documents" — show the actual instruction or explain
      the mechanism. -->
 
-**System prompt grounding instruction:** 
+**System prompt grounding instruction:**
+I used the following system and citation prompt to guide the model to answer the question based on the provided contexts from RAG only. At the end of each answer, I will provide the professor name(s) that the answer is based on. If the answer is not found in the context, I will omit the citation entirely.
 
-**How source attribution is surfaced in the response:** 
+    citation_instruction = (
+        "At the end of your answer, cite the professor name(s) your answer draws from using "
+        "this exact format on its own line:\n\n"
+        "  [Source: <professor_name>]\n\n"
+        "If your answer draws from multiple reviews from different professors, list each on a separate line:\n\n"
+        "  [Source: Professor A]\n"
+        "  [Source: Professor B]\n\n"
+        "Use only the professor names exactly as they appear in the Source labels in the "
+        "context. If the answer is not found in the context, omit the citation entirely."
+    )
+
+    system_prompt = (
+        "You are an assistant who helps find professor rating. Answer the user's question using ONLY "
+        "the rule text provided in the context below. "
+        "Do not use any knowledge about professors and college classes that is NOT explicitly stated in that context. "
+        "Do not infer, speculate, or fill in gaps from general knowledge — even if you believe you know the answer. "
+        "If the context only partially answers the question, answer only what the text supports and state that the rest is not covered. "
+        "If the answer is not found in the context at all, say so and nothing more.\n\n"
+        + citation_instruction
+    )
+
+**How source attribution is surfaced in the response:** I instrcuted the model to cite the professor name(s) that the answer is based on at the end of each answer. The final answer has the following format for the source. This is a real citation format from an answer:
+`Melanie Lotz (2633139_Lotz.txt, 2633139_lotz_20)`
 
 ---
 
@@ -97,11 +120,11 @@ of different professors withouth having to read the entire reviews of each profe
 
 | # | Question | Expected answer | System response (summarized) | Retrieval quality | Response accuracy |
 |---|----------|-----------------|------------------------------|-------------------|-------------------|
-| 1 | | | | | |
-| 2 | | | | | |
-| 3 | | | | | |
-| 4 | | | | | |
-| 5 | | | | | |
+| 1 | What do students say about Abu Ahmed's teaching style and exam difficulty? | Straightforward and exams are at the same difficulty as homework. | Teaching style is boring, but the exams are easy | Partially relevant | Partially accurate |
+| 2 | Is Christian Collberg a good choice for clear lectures and reasonable exams? | Yes, the professor makes the lecture interesting and the exams are reasonable | makes a great effort to keep the subject engaging, exams are described as extremely fair | Relevant | Accurate |
+| 3 | Which professor has especially negative reviews about CSC335? | Melanie Lotz | Did not give specific name, but correct review and grounded in the material | Relevant | Partially accurate |
+| 4 | Who teaches AI or ML/NLP classes? |Mihai Surdeanu  |Mihai Surdeanu | Relevant| Accurate|
+| 5 | Which professor seems to have the highest difficulty for CSC252 and why?| Jonathan Misurda, because his teaching style is not organized (teaching backwards and forwards) | Jonathan Misurda, extremely hard with no structure to the course  | Relevant | Accurate |
 
 **Retrieval quality:** Relevant / Partially relevant / Off-target  
 **Response accuracy:** Accurate / Partially accurate / Inaccurate
