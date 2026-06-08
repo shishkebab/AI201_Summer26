@@ -1,0 +1,56 @@
+Professor: Stephen Kobourov
+Department: Computer Science — University of Arizona
+Overall quality: 3.9/5 | Difficulty: 4.5/5 | Would take again: 50% | Ratings: 13
+Courses: 473, 573, CS345, CS445, CSC343, CSC345, CSC445, CSC473
+
+Course: CSC343 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Lecture heavy, Test heavy
+Review: Do not take a class with this professor.He gives us no guidance for the exams, except to look at the slides (there are over 500 slides for the first exam). The class has you programming in JS, and he bragged about having not done JS in 10 years. He teaches theory, and depends on the TAs to teach JS (we all learned through the internet).DO NOT TAKE
+
+Course: CSC343 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough grader, Beware of pop quizzes
+Review: Homework assignments are done in JavaScript, however, Kobourov admitted to the class that he hasn't coded in JavaScript in over 10 years, so, in his own words "trying to teach it would be a nightmare." There are quizzes every week, and if you want to get 100 on them, you might as well memorize the entire slide deck the quiz is on.
+
+Course: CS445 | Quality: 4.0/5 | Difficulty: 3/5
+Tags: Graded by few things, Test heavy
+Review: This man just can't show up to class on time nor can get stay within the time limit. Everyday shows up at least 10 minutes late and go past the time by 15 minutes to make up for it. By the class is pretty easy if you just style your question like how he does them in class
+
+Course: CSC473 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Lots of homework, Skip class? You won't pass., Graded by few things
+Review: Very good lecturer, does examples the entire lecture. Homework assignments take about 15+ hours, but are due every two weeks. I did them all the night before, they get easier, so don't be discouraged by the first one. Exams are meant to be easier than the HW. Don't skip class, this is very much like a math class, every topic builds upon each other.
+
+Course: CSC345 | Quality: 3.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: If this course is not required, better not to take it. If you are a CS major student, be aware this is the most failing course. Also, this professor's Homework and exams are really hard, and terrible hand writing.
+
+Course: CS345 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: Dr. Kobourov is one of the best professors i've had at UA. The material was interesting but challenging, and his lectures were always entertaining and clear. He's a funny guy, he's very quick to respond to emails and he's very helpful. He expects a lot though, and the homeworks are pretty long. Also, his handwriting is maybe the worst i've seen.
+
+Course: 573 | Quality: 4.5/5 | Difficulty: 4/5
+Tags: (none)
+Review: ...
+
+Course: 473 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: Awesome Professor!
+
+Course: CS445 | Quality: 5.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: Homeworks are hard and time consuming. Exams are easier. Grades with strict cutoff. You will learn a lot from this course. classes are fun.
+
+Course: CSC345 | Quality: 5.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: Tests and homework's are tough, but he's fair and a great teacher.
+
+Course: CSC445 | Quality: 3.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: His tests are VERY tough and his homeworks are TONS of work. On the bright side, he tries to keep class fun and interesting.
+
+Course: CS445 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: Hard class, good prof, funny jokes.
+
+Course: CS445 | Quality: 4.5/5 | Difficulty: 5/5
+Tags: (none)
+Review: The class is extremely tough but he really knows his stuff and is interesting, even when the subject may not be. He is very tough but very fair.

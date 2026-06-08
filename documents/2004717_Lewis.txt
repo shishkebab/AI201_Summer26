@@ -1,0 +1,684 @@
+Professor: Russell Lewis
+Department: Computer Science — University of Arizona
+Overall quality: 3.2/5 | Difficulty: 4/5 | Would take again: 53.3% | Ratings: 170
+Courses: 127A, CS120, CS345, CS352, CSC120, CSC127A, CSC252, CSC337, CSC345, CSC352, CSC452
+
+Course: CSC252 | Quality: 4.0/5 | Difficulty: 2/5
+Tags: Lecture heavy, Test heavy
+Review: I think hes a great teacher, hes very kind and he is very helpful in office hours, especially when you are trying to finish a project. There is a ton of projects and tests though so as long as you understand the fundamentals you will be fine.
+
+Course: CSC252 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Lecture heavy, Test heavy, Accessible outside class
+Review: Great dude and the most knowledgeable in the CS department with respect to what the professor teaches. He just reads off of slides, which I didn't like, but his obvious mastery of this class makes up for it. Study hard for tests, outside of the homework he gives you. Start the projects early. His exams are difficult and so was the final. Good luck!
+
+Course: CSC252 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Amazing lectures, Hilarious, Caring
+Review: Hands down my favorite person in the CS department. He has tons of experience from working at IBM, is very knowledgeable, and is both passionate and caring.
+
+Course: CSC252 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Amazing lectures, Lots of homework, Hilarious
+Review: Lewis is an amazing professor who clearly explains topics. Although class projects (especially the assembly ones) are incredibly hard and time consuming, this course teaches more than any of the CS courses prior to it combined. Russ makes lectures enjoyable and is hilarious, and he explains everything you need to know to do well on exams.
+
+Course: CSC252 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Amazing lectures, Hilarious, Caring
+Review: I wish I could take more classes with Russ, his teaching style works so well for me, and he is the only CS lecturer/professor that I have genuinely and thoroughly enjoyed listening to lectures from.
+
+Course: CSC252 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Amazing lectures, Inspirational, Hilarious
+Review: Professor Lewis is probably my favorite lecturer in the CS department. His passion for the subjects is unmatched by any other professor. His lectures were fun to attend and listen to. Even though I dislike coding in assembly, Professor Lewis still made it enjoyable to learn the content of the course. I would highly recommend taking Professor Lewis.
+
+Course: CSC252 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: Very intellectually challenging, but Russ was amazing. Long specs, but he tells you exactly what he wants; the sim projects are just implementing diagrams. The class is hard. There's no way around it, but Russ took so much weight off me; most of the assembly projects are just converting C code he gives you.If you take this class, take it with him.
+
+Course: CSC252 | Quality: 5.0/5 | Difficulty: 1/5
+Tags: Inspirational, Hilarious, Caring
+Review: My favorite CS class at UA, I genuinely learned so much and Russ made me want to dive deeper and learn more.
+
+Course: CSC252 | Quality: 5.0/5 | Difficulty: 1/5
+Tags: Amazing lectures, Hilarious, Caring
+Review: He single-handedly reignited my enthusiasm for CS, I wish all CS professors were like this guy
+
+Course: CSC252 | Quality: 5.0/5 | Difficulty: 2/5
+Tags: Amazing lectures, Hilarious, Caring
+Review: Wow I respect this guy so much. He used to work at IBM and has like a million patents to his name, he really knows his stuff. He also really knows how to keep the class engaged and make every single topic interesting. Absolute legend!
+
+Course: CSC252 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Amazing lectures, Hilarious, Caring
+Review: Literally my favorite CS class at UofA so far, even though it was kind of difficult.
+
+Course: CSC252 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Amazing lectures, Caring, Lecture heavy
+Review: A fun and interesting lecturer, helped me regain my love for CS.
+
+Course: CSC252 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Amazing lectures, Gives good feedback, Hilarious
+Review: Honestly this class was the peak of my CS learning so far, I wish my current classes were as good and interesting.
+
+Course: CSC252 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Amazing lectures, Hilarious, Caring
+Review: Very good at keeping the class engaged during lectures, gives good explanations.
+
+Course: CSC252 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Amazing lectures, Hilarious, Caring
+Review: I never thought I would say this, but I legitimately enjoyed learning assembly programming last semester with Russ. A topic that I hated before and found super boring, he made fascinating. Highly recommend.
+
+Course: CSC252 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Amazing lectures, Hilarious, Caring
+Review: I learned more in this class than the rest of my CS classes combined to date. Russ was a great lecturer and I could tell that he is passionate about what he does.
+
+Course: CSC252 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Amazing lectures, Clear grading criteria, Hilarious
+Review: He made stuff that would normally be super boring to me incredibly interesting, and the way he explained things worked super well for how I learn (I am ADHD).
+
+Course: CSC252 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Amazing lectures, Gives good feedback, Inspirational
+Review: He is clearly super passionate about the material, which makes the class so much more interesting. Additionally, he switched from electrical engineering to computer science, so he has a very good hardware background, and he also has real industry experience (unlike a lot of other professors here).
+
+Course: CSC252 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Amazing lectures, Hilarious, Caring
+Review: This was a really difficult class, but Russ honestly made the content so much more interesting than I think any other professor possibly could, and he explained absolutely every piece of the puzzle super in-depth. You will come out of this class knowing so much more about how computers actually work, they are not just magical machines to me anymore
+
+Course: CSC252 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Clear grading criteria, Caring, Test heavy
+Review: I honestly learned so incredibly much from this class (the same cannot be said for 210 and 335), and Russ made every single topic super interesting. Its a difficult class but Russ does it well.
+
+Course: CSC252 | Quality: 5.0/5 | Difficulty: 5/5
+Tags: Amazing lectures, Clear grading criteria, Hilarious
+Review: If you are looking for a good teacher, look no further. The content is difficult, but russ is entertaining and you can tell he enjoys to teach.
+
+Course: CSC252 | Quality: 5.0/5 | Difficulty: 5/5
+Tags: Lots of homework, Respected, Test heavy
+Review: Russ does not deserve this low of a rating - but I can't deny is class is just way too much work. 25 minute tests every two weeks are universally hated but he generally adapts to the class's preferences. His class is absolutely challenging but absolutely rewarding. Don't take another hard class at the same time (345) and you'll get a lot out of it.
+
+Course: CSC452 | Quality: 5.0/5 | Difficulty: 5/5
+Tags: Tough grader, Group projects, Lots of homework
+Review: Scope to practice more if you like operating systems and want to do well in the interviews for programming in c.
+
+Course: CSC252 | Quality: 5.0/5 | Difficulty: 5/5
+Tags: Amazing lectures, Clear grading criteria, Hilarious
+Review: An absolutely amazing lecturer, it fit my learning style super well (I am ADHD, so being able to ask questions and get in-depth answers about anything was super helpful). Also, unpopular opinion, but I preferred the 6 short tests over having 2 or 3 midterms because if I did poorly on one, it wasn't as big of a deal.
+
+Course: CSC252 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Amazing lectures, Lots of homework, Hilarious
+Review: I took 252 last semester and wow, I learned more than all of my previous CS classes combined. Additionally, he keeps the class super engaged with his lecturing style. Yeah, its a difficult class, but I would much rather take it with Russ than any other prof.
+
+Course: CSC252 | Quality: 4.0/5 | Difficulty: 5/5
+Tags: Tough grader, Lots of homework, Test heavy
+Review: You know, we know. I've learned a lot, but was it worth that terrible times? But still quite useful. Probably better than Mccann.
+
+Course: CSC252 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Amazing lectures, Clear grading criteria, Gives good feedback
+Review: This was a very difficult class last semester, but Russel Lewis kept the class constantly engaged with his amazing lecturing style. He very much cares for his students, and tries to make even the most boring topics interesting.
+
+Course: CSC337 | Quality: 3.0/5 | Difficulty: 3/5
+Tags: Group projects, Caring, Accessible outside class
+Review: I understand that Dr. Lewis was thrown into the fire just before the start of the semester, so he was not fully prepared to teach this course. However, I wasn't a fan of the question-based teaching, where he would ask students to hit him with questions and half of the class time would lead to tomfoolery. This class made me realized I hate web dev.
+
+Course: CSC252 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Get ready to read, Lots of homework, Test heavy
+Review: 6 exams was a LOT, but he did drop one. The sims were difficult because there wasn't a clear guide how the parts he gives us work. The assembly parts are simple, and the logic/ theory is straight forward. He teaches the content fine, but sometimes rambles and I feel like the content and teaching become less interesting throughout the semester.
+
+Course: CSC252 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough grader, Get ready to read, Test heavy
+Review: You would feel like the professor is intentionally making assignments/tests more challenging in an attempt to reduce the number of A's given. While he records most lectures, he somehow 'forgets' to record sessions covering critical topics or exam material, leaving students who might have missed class at a disadvantage.
+
+Course: CSC252 | Quality: 2.0/5 | Difficulty: 5/5
+Tags: Tough grader, Hilarious, Test heavy
+Review: While I enjoy Russ's speaking and class engagement skills, the cons outweigh the pros: About 90 percent of lecture time is spent on questions which usually devolves into semi-related tangents, we only have 25 minutes for tests which my table-mates and I agree would normally take us 45 minutes plus to finish. Specs for projects are very confusing.
+
+Course: CSC345 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: Tough grader, Participation matters, Beware of pop quizzes
+Review: Took 337, so harsh on his grading style and do not bother asking for a regrade request since it will be shut down. Sits in a js playground the whole time during class shows off code and says "hit me with questions" then does a pop quiz on material he never goes over. Don't take him.
+
+Course: CSC252 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Amazing lectures, Lots of homework, Hilarious
+Review: Russ Lewis clearly has a passion for teaching and an incredible knowledge of low-level computer architecture/programming. His lectures are extremely interesting and exciting, I highly recommend.
+
+Course: CSC252 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Get ready to read, Clear grading criteria, Caring
+Review: Russell gets more criticism than he probably deserves. If you want to actually learn the material, he is a great professor. His projects are often convoluted and difficult, but not unreasonably so and result in an intimate understanding of the subject material. If you want a lightweight/easy class, you probably won't have a good experience.
+
+Course: CSC252 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Hilarious, Accessible outside class
+Review: The lectures were well done and recorded, the programming assignments were time consuming and at times frustrating but push you to grow. The exams were very stressful as you don't have much time to think things through, otherwise you won't finish in time. Put in the time and you will do well, but they should add more time to the exams.
+
+Course: CSC252 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Amazing lectures, Lots of homework, Lecture heavy
+Review: Russ is a very passionate professor and loves teaching and the material. There are six exams that are 10 min, which is a tight window but it is reasonable if you know the material. The assembly projects are pretty easy, but the the simulations can be very difficult. If you skip lecture, you will not do well in this class, even with the free 10%
+
+Course: CSC452 | Quality: 3.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: The lectures were usually interesting, making the content reasonable. The biggest fault however were the phases/projects, which took anywhere from 20-40hr week to complete (just the projects, not including lectures, Zybooks, etc). Unfortunately, Russ believes these phases are helpful, and they were not, usually forcing me to write quick/bad code.
+
+Course: CSC252 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Lots of homework, Caring, Accessible outside class
+Review: Yes, the course is difficult, but I learned so much due to how much Russ cares about teaching. He's an exciting professor for once and understands if students need extensions. Extremely caring professor, just make sure to use OH and the TA's and you'll do great! I felt like my tuition was finally being used for good with this professor lol.
+
+Course: CSC452 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Get ready to read, Lots of homework
+Review: His specs are just unreasonably long, and they don't even help. Avoid this professor for any classes. His style of teaching just sucks away any fun you could possibly have in Computer Science.
+
+Course: CSC252 | Quality: 3.0/5 | Difficulty: 4/5
+Tags: Tough grader, Lots of homework
+Review: The exams are the most difficult part as there is little time and sometimes there are surprises. If you go to office hours and ask questions you can certainly succeed in this course.
+
+Course: CSC252 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Lots of homework, Lecture heavy, Test heavy
+Review: Professor Lewis is a wonderful professor, absolutely brilliant and extremely encouraging of questions. The TAs for this semester were wonderful too and everyone is extremely quick to answer questions on Discord as well. The class is extremely lecture heavy, test heavy, and homework heavy. Definitely don't procrastinate and utilize their resources!
+
+Course: CSC252 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Lots of homework, Lecture heavy, Test heavy
+Review: Knows almost too much and will dig a bit deeper than necessary sometimes but dang does this man know his stuff. I probably learned the most important CS concepts in this class. 6 exams and so many grueling projects but it's totally doable if you have the time.
+
+Course: CSC452 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Group projects
+Review: Russ is obviously a gifted programmer, but his teaching ability is subpar to say the least. He attempts to make up for this by offering (limited) office hours and detailed program descriptions - both of which fail to make up for his instructional shortcomings. I asked for additional help outside of office hours and was ignored by Russ and the TAs
+
+Course: CSC452 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Group projects, Caring, Respected
+Review: Russ has high standards, but he was an amazing professor. No one in the UA CS department understands low-level systems coding like Russ. He will help you work through problems in office hours and cares deeply. He wants you to be the best coder you could be, and that takes lots of work. Give him a chance with Principles of OS, it was a great class.
+
+Course: CSC452 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Graded by few things
+Review: Worst CS professor at UofA. He doesn't care about all students understanding his projects and writes long, convoluted specs to demonstrate how smart he is. If students have questions, he "punts" questions to office hours, which include long wait queues because so many students need clarification on his poor explanation of the projects.
+
+Course: CS120 | Quality: 5.0/5 | Difficulty: 2/5
+Tags: Amazing lectures, Clear grading criteria, Caring
+Review: explains content really well and cool guy
+
+Course: CSC252 | Quality: 4.0/5 | Difficulty: 3/5
+Tags: Caring
+Review: Very helpful and knowledgable. Also he's quite a reasonable guy. Do all your assignments and review the slides before exams and you'll be fine.
+
+Course: CSC452 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Group projects, Caring, Respected
+Review: Russ has really grown on me. Although his lecture style of "let students ask questions, then I'll ramble and see where we end up" doesn't work for me, the specs are extremely detailed, he promptly answers student questions in the discord, and clearly cares about the success of his students. Start early on the projects and the class will be a breeze
+
+Course: CSC252 | Quality: 5.0/5 | Difficulty: 1/5
+Tags: (none)
+Review: Exams with Russ are always very easy, and deadlines for projects were extended consistently. Goes into detail with everything and answers any questions. Willing to meet outside of class time to answer questions students may have and is really nice about everything
+
+Course: CSC252 | Quality: 4.0/5 | Difficulty: 3/5
+Tags: Test heavy, Accessible outside class, Online Savvy
+Review: The class content seems hard and overwhelming at first, but once you get the hang of how to write assembly and follow cpu datapaths, it became rather easy. Russ was great at teaching it too. The time crunch on the 25 minute exams was a bit brutal and the ASMs can be frustrating but overall, one of my favorite CS classes ive ever taken.
+
+Course: CSC120 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Tough grader, Caring
+Review: Russ is a dope guy. Had to drop CSC 252 but that was mostly due to my procrastination causing me to not get projects done in time. 120 was a breeze because he took his time with going over new material, making it easy to understand, as long as you put in effort. 252 is just crazy hard, so not his fault for my failure in it
+
+Course: CSC452 | Quality: 5.0/5 | Difficulty: 5/5
+Tags: Group projects, Lots of homework, Caring
+Review: CSC 452 is the single most difficult class in a Computer Science major's route to graduation. Russ taught it for the first time in Fall '22. It did not go smoothly, but Russ compensated for that because he cares a lot. It was totally possible to get an A, it was just a LOT of hours on the 5 projects. Probably ~ 30-60 hours / project. Use VSCode!!!
+
+Course: CSC452 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Group projects, Lots of homework, Respected
+Review: This course is already difficult, which he understands, and Russ has taken measures to make things better. Projects are very rough and lecture topics aren't always clear, but Russ explains things well and takes time out of his day to help any student online. Ask plenty of questions and you'll do well. Hard course, but he teaches well.
+
+Course: CS120 | Quality: 4.0/5 | Difficulty: 5/5
+Tags: Inspirational, Lots of homework, Respected
+Review: Took this course in Fall 2019, when Russ had first taught this class and had notoriously difficult assignments. Russ as a lecturer truly invites you to be curious and question the code you're making, but isn't the most organized lecturer since he often goes off into tangents. Knowing the difficulty, he's very understanding and dropped assignments.
+
+Course: CSC452 | Quality: 2.0/5 | Difficulty: 5/5
+Tags: Group projects, Lots of homework
+Review: CSC 452 is a notoriously hard class. Russ does not make it easier. You'll learn a lot in class, but then the first major assignment feels like you're getting dropped in the ocean. The spec is long and obtuse, and it alone will still not be enough. You are not alone in your confusion. Russ is a great, lovable guy - not a good teacher. Good luck.
+
+Course: CS120 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Participation matters, Gives good feedback, Accessible outside class
+Review: Russ was helpful and friendly. Get valuable feedback from projects. Class material is compact and well-organized in summer. I feel like I learned a lot.
+
+Course: CSC120 | Quality: 4.0/5 | Difficulty: 3/5
+Tags: Amazing lectures, Clear grading criteria, Test heavy
+Review: I really liked Prof. Lewis - his lectures were easy to follow with good examples. The only negative is that the tests had much to get done in the time given, which made it more like a speed coding test, rather than testing what I know.
+
+Course: CS120 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough grader, Lots of homework, Test heavy
+Review: If you wanna study CS, just do it yourself. Do not rely on him. The course can be easy but he makes it very hard. Never would I ever take it if there were other options (professors).
+
+Course: CS120 | Quality: 2.0/5 | Difficulty: 4/5
+Tags: Get ready to read, Lots of homework
+Review: Beware: This is a weed-out class. The assignment specs are designed so that you have to follow them to such a precise degree. This level of detail combined with the hidden test cases used to grade assignments makes it almost impossible to do as well as you should on the assignments. I will say, both Russ and the TAs are helpful and available.
+
+Course: CS120 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Tough grader, Lecture heavy, Accessible outside class
+Review: Russ is a good professor, he has great passion and knowledge of computer science. So having him teach this course is good. However, he makes it tough and forces you to learn. He must be doing this for a reason so I have been pushing through and actually been learning. TAs, office hours, and any help I can get has been the key. You HAVE to work.
+
+Course: CS120 | Quality: 2.0/5 | Difficulty: 5/5
+Tags: Tough grader, Lots of homework, Test heavy
+Review: The assignments are convoluted, difficult, and terribly explained. Going to class is a waste of time because you learn everything from lectures he posts before class. The study guides are a poor reflection of the test. I will say he explains everything very well in the videos but it felt like the workload of this class took up way too much time.
+
+Course: CS120 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough grader
+Review: Requires lecture to be watched before lecture, assigns a ridiculous amount of work, is way to complicated with his explanations and when asked about the exam… he says it is free game. Review guides are meant to prepare the student, he gave us one made by other people who haven’t seen the exam. Not good wouldn’t recommend at all.
+
+Course: CSC120 | Quality: 3.0/5 | Difficulty: 4/5
+Tags: Lots of homework, Accessible outside class, Get ready to read
+Review: Professor Lewis is a good professor. Is always willing to help during office hours and will give you hints towards reaching the solution. The class is a lot of work and notes, but starting early does help a tremendous amount. TA's are also helpful during office hours. Class is tough, but not impossible. Be prepared to spend a bunch of time on PAs
+
+Course: CSC120 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: Get ready to read, Lecture heavy
+Review: Does not care about student input. Assigns 5 projects a week. Assigns mandatory videos for every day so that his youtube channel can get monetized. Rude and has attitude. Assignments are due 5pm and doesn't ever accept late work. Got sick for 3 weeks so class had to move to zoom, and I didn't learn anything. The worst instructor I've had. no .
+
+Course: CSC120 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Lots of homework, Tough grader
+Review: Lewis is a nice guy, and he will help you out when in office hours. But, specs are poorly written, which makes writing the code for the assignments harder than it should be. Doesn't teach anything relative to the programming assignments. Pretty much, you have to figure out 90% of the assignment out for yourself. I like individual work, but c'mon.
+
+Course: CSC120 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Gives good feedback, Respected, Skip class? You won't pass.
+Review: Professor Lewis is a nice person, and incredibly smart. The way he structures the class requires A LOT of independent work, effort, and time. I reached out to him a bit into the course about my struggles, he responded immediately giving me advice and feedback. Always attend office hours (his specifically or your TA's) and your grades will be okay!
+
+Course: CSC120 | Quality: 1.0/5 | Difficulty: 1/5
+Tags: (none)
+Review: This class is so hard, I never thought I would want to leave CS but this class is making me consider it
+
+Course: CSC120 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Test heavy, Lots of homework, Tough grader
+Review: Whoever commented below me. I agree sadly. Its two weeks in and we have not learned ANYTHING. Class is group assignments and tues/thurs projects due and we havent learned anything in class. So how do u expect us to get these assignments done. I pay tuition to get taught. Not to learn from google or YouTube videos disappointed and want to cry.:(
+
+Course: CSC120 | Quality: 3.0/5 | Difficulty: 2/5
+Tags: (none)
+Review: Hes okay at teaching, he teaches through recorded lectures and then you can ask questions in class. Hes knowledgeable and overall a decent, but nothing more, teacher.
+
+Course: CSC120 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Lots of homework, Skip class? You won't pass., Test heavy
+Review: There are a lot of tasks in this course. It's very unfriendly to people like me who are new to python. His homework will have a hidden test case if you fail in this part, the project grade will be dead. The first and second exams were acceptable. The difficulty of the final exam will be monster level.
+
+Course: CSC120 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: Lots of homework, Tough grader
+Review: Literally the worst class Ive taken all semester. HORRIBLE assignment instructions. EONS pass before you get a response and the concept of invisible test cases are just ridiculous. Prepare for none of his instruction to make sense, literally half of the instructions is just him rambling on and never getting to the point of the assignments.
+
+Course: CS120 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Lots of homework, Tough grader
+Review: Two projects due every week that will consume every minute of your life which have terrible instructions. Its almost impossible to get help due to long wait times. It takes weeks to get feedback on past assignments. If you aren't a CS Major don't take this class and if you are a CS Major you'll most likely want to change majors a month into class.
+
+Course: CSC120 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Lots of homework, Skip class? You won't pass., Tough grader
+Review: Such a hard class. If you want to spend absolutely every spare hour of your Thursday-Tuesday coding and/or in office hours, then this class for you. Poor instruction that is hardly ever related to the projects. Good luck getting responses back from anyone or knowing what your grade is at any point. ��
+
+Course: CSC252 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Lots of homework, Clear grading criteria, Lecture heavy
+Review: Didn't love his 120 course, but 252 with Russ over the summer was actually fantastic. The class was very well organized, the tests were pretty easy, and the projects were fairly painless (and even pretty fun at times). I went into this class thinking I was going to hate it, but it was much better than I expected. Would highly recommend.
+
+Course: CS120 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Lots of homework, Tough grader
+Review: One point for being a nice guy in class. Outside of class, he intentionally tries to weed out students through unclear assignment specs, hidden testcases, no elaboration on abstract concepts into syntax, disorganization, and brutal exams. Doesn't know how to work his own grading system, so there was no feedback until the end of the semester.
+
+Course: CSC120 | Quality: 2.0/5 | Difficulty: 3/5
+Tags: (none)
+Review: Takes forever to get grades back. Assignments are to hard for an intro class.
+
+Course: CS120 | Quality: 2.0/5 | Difficulty: 4/5
+Tags: Lots of homework, Tough grader
+Review: This class is more work than CS 110. For people who have little to no experience with programming, this class will be challenging. There are 2 projects due every week 1 long project and 1 short project. This class makes you question the CS department. The exams and specs were terribly written. Start projects early and the TA's are your only hope.
+
+Course: CSC120 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Lots of homework, Skip class? You won't pass., Clear grading criteria
+Review: Russ tries his best to explain difficult topics like recursion, complexity etc( and is successful in doing so), therefore I really don't understand why certain reviews here claim that he is a "terrible teacher". Yes, his PAs can be tough as they are meant to make students think, but they really aint impossible to complete if you start a bit early.
+
+Course: CSC120 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Lots of homework, Accessible outside class, Participation matters
+Review: Don't be intimidated, just be prepared to work harder than you did in 110. Conceptually, this class is easy. Start PAs early if you love yourself. Don't just rely on the study guides for exam prep. Scope out good TAs for OH. Did this class make me question if I want to keep doing CS multiple times? Yes. I came out on top though & so will you :)
+
+Course: CSC120 | Quality: 3.0/5 | Difficulty: 4/5
+Tags: Lots of homework, Accessible outside class, Participation matters
+Review: The class is tough and tries to wear students out but that's to be expected from a weed out class in stem. There were a few disconnections from understanding that students were struggling and assigning difficult projects. The specs were difficult but there were videos explanations that helped. Online office hours were difficult to get into.
+
+Course: CSC120 | Quality: 4.0/5 | Difficulty: 3/5
+Tags: Gives good feedback, Lots of homework, Accessible outside class
+Review: I believe that Russ is a really good teacher. I personally didn't have a hard time in his class, due to a slight programming background. He did a good job explaining concepts such as linked lists that I didn't understand in previous classes. He truly cares about feedback and works hard to improve if he makes a mistake. His projects are also fun.
+
+Course: CSC120 | Quality: 2.0/5 | Difficulty: 5/5
+Tags: Lots of homework, Skip class? You won't pass.
+Review: Russ is a nice person, but an awful professor. His TA range from great to clueless, Ive waited over 10 hours in his office hours line. His exams are just corporate bs prep pretty much. If you enjoy gaming his projects are bearable, but if that not youre tying youll just find them tedious. Be prepared for spend minimum 10 hours with course work.
+
+Course: CSC120 | Quality: 2.0/5 | Difficulty: 4/5
+Tags: Lots of homework, Test heavy, Tough grader
+Review: As another review stated, Russ mostly teaches abstractly with little syntax/programming & does not connect the two, making it difficult to apply new concepts to assignments. Feedback for HW is non-existent since Gradescope "truncates" long testcases & worse yet, we aren't told how to improve. The exams are worth a lot but there is no prep for them.
+
+Course: CSC120 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: Skip class? You won't pass., Test heavy, Tough grader
+Review: 120 was ROUGH. This is a difficult class. Russ is horrible at teaching. Projects are super hard and aren't really relevant to what we learn in class that week. Good luck getting help in OH. Project specs and exam questions are very confusing. Russ tends to contradict himself a lot and pretends to care about his students. Avoid this class if posibl
+
+Course: CS120 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Gives good feedback, Accessible outside class, Tough grader
+Review: Russ is a really good person and tries hard to help you learn. His online course was able to be interactive and involving so that you would learn through engagement. The class is very difficult so I would recommend taking this with focus but if you do put in the effort and time you can succeed. I would take the tests slowly and reach each question.
+
+Course: CSC120 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Lots of homework, Caring, Tough grader
+Review: Russ is a nice guy, but goodness was this a step up from Bens 110. The specs arent very clearly written, and often times, youll have to use newly learned concepts for a long PA that you dont get any practice for until the next short PA. Tests were super difficult, and he uses invisible test cases on gradescope which make it hard to get a 100 w a PA
+
+Course: CSC120 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Lots of homework, Accessible outside class, Tough grader
+Review: Lewis is a very knowledgeable professor, however, he expects a lot out of his students. If you put in the effort during class and outside of class, you will succeed. There are lots of different resources to ask for help either from Lewis, the TA's, or other students. If you understand the material, you will do well on the tests.
+
+Course: CSC120 | Quality: 2.0/5 | Difficulty: 5/5
+Tags: Tough grader
+Review: Multiple Project specs per week, the grading is really harsh. This class is insanely difficult for an intro CS class. He is a nice guy, average at teaching I'd say, but the project specs take 12+ hours per week, with no guarantee that you will make a good grade on it. The tests are graded very hardly, and very little partial credit is ever given.
+
+Course: CSC120 | Quality: 2.0/5 | Difficulty: 3/5
+Tags: Test heavy
+Review: Russ is nice, but his lectures are god awful. He can't explain things very well and takes too much time answering student questions that don't even matter. I didn't pay attention most of the time. That being said, the assignments and tests are not that hard, just require you to think a little bit more, which I liked.
+
+Course: CSC120 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Gives good feedback, Respected, Accessible outside class
+Review: Russell is a really nice instructor. I think most of the negative reviews came more from the nature of the course than the instructor himself. As an instructor, Russell is extremely helpful and stays about 30 minutes beyond each class to answer the questions. He is always there to answer questions on Piazza. Quality of TAs is questionable though.
+
+Course: CSC120 | Quality: 3.0/5 | Difficulty: 4/5
+Tags: Lots of homework, Accessible outside class
+Review: Lots of assignments, but your two lowest in each category were dropped so it wasn't too bad. Lectures generally were only useful for gaining intuition for the material, he spends too much time answering questions rather than actually teaching, but they were recorded so that was nice. Tests have a mix of oddly specific questions and very easy ones.
+
+Course: CSC120 | Quality: 4.0/5 | Difficulty: 3/5
+Tags: Lots of homework, Skip class? You won't pass., Tough grader
+Review: His tests are a bit hard, but I find CSC tests in general to be hard so in comparison, not much harder. In class lectures relate to the final, projects can be done without really attending lectures after the 5th week. He will get distracted, and he will grade hard on tests.
+
+Course: CSC120 | Quality: 3.0/5 | Difficulty: 4/5
+Tags: Lots of homework, Lecture heavy, Tough grader
+Review: Dr. Lewis is a good professor. This class can be hard to teach as many students, like me, skip 110 because of high school credits. You definitely have to pay attention, review the slides, and work hard on the projects. The tests are not too difficult if you study for them. He can go on tangents when a lot of students ask unnecessary questions.
+
+Course: CSC120 | Quality: 3.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: Russ Lewis is a good person and sometimes a good instructor. Exams were not so difficult. Don't procrastinate on the homework!!! The assignments were a pain in the ass and they took a long time to complete. If you study a lot for the exams and do the homework ahead of time, you'll do fine. Also, go to office hours. OH were REALLY helpful.
+
+Course: CSC120 | Quality: 3.0/5 | Difficulty: 5/5
+Tags: Lots of homework, Caring, Tough grader
+Review: Russ is a smart guy and stays after lectures to answer questions, but the homework assignments are way to much. He has two projects due every week a short one and a long one, but the short one is just as long as the long project. This class will take up a lot of time and lectures don't really help you complete the assignments.
+
+Course: CSC120 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Lots of homework, Skip class? You won't pass., Tough grader
+Review: I was originally a CS major who got a 97% in Ben's CSc 110 class. Russell has completely drained my desire to pursue CS through his lack of teaching and incredibly difficult grading. PA's take multiple days and I average over 5 hours just in office hours when they are assigned (2 every week). Don't get me started on the tests. Don't recommend.
+
+Course: CSC120 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Lots of homework, Test heavy, Tough grader
+Review: Two coding projects expected per week, one "short" that's usually just as long as the long project. Russ' lectures are extremely abstract and conceptual, but do not help when it comes to the projects and tests. Project specs are overly complicated with useless information and vague. THIS IS SUPPOSE TO BE A BEGINNGER'S COURSE. Don't take w/ Russ.
+
+Course: CSC120 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Lots of homework, Lecture heavy
+Review: He worked hard to record videos for everyone to explain the homework, and he patiently responded to student questions after class. But his class is difficult to understand, many things are very vague, and there is lots of homework. It is difficult to adapt to the workload of this class.
+
+Course: CSC120 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: He is the worst teacher ever! If I could rate him a 0, I would.
+
+Course: CSC120 | Quality: 2.0/5 | Difficulty: 5/5
+Tags: Lots of homework, Test heavy
+Review: Russ is a super nice person but struggles to understand the student's experience. Usually the weekly homework would take over 17 hours. Also, the tests are very specific and graded harshly. Russ gets side tracked pretty easily which makes it tough to know which content is important. I learned a lot but the class was a challenge to get through.
+
+Course: CSC120 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: Lots of homework, Skip class? You won't pass., Tough grader
+Review: The lectures were very disorganized as Russ tended to get sidetracked and the assignments often had nothing to do with the lectures and took an absurd amount of time to complete. The specs had overly complex wording and were difficult to understand and while Russ is aware of his shortcomings, he refused to make a positive change. DO NOT take.
+
+Course: CSC120 | Quality: 2.0/5 | Difficulty: 5/5
+Tags: Lots of homework, Test heavy
+Review: The class is a continuation of 110, and the content isn't uninteresting, it's just Russ is hard to listen to. His specs are hard to read, and he recognizes his problem, but doesn't change it. I spent most of the semester trying to understand what he wanted me to do, and the remaining time trying to figure out how to test, since that is also unclear
+
+Course: CSC120 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Gives good feedback, Accessible outside class, Inspirational
+Review: The technical learning part of the class occurs with the detailed specs which outline what topics the projects are going to use. Russ has experience from ibm. lectures are more about how to think of meaningful approaches to solving problems. Poor ratings are from students who expected to be spoon fed the information. He teaches us to think
+
+Course: CSC120 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: Tough grader
+Review: I have been disappointed with this class. Russ is very disorganized (This becomes very apparent during lectures i.e. he just rambles on during a lecture and gets sidetracked very easy). His homework specs are poorly written. The output does not match the spec at all. I think he cares, but he is too stuck in his ways to make meaningful changes.
+
+Course: CSC120 | Quality: 4.0/5 | Difficulty: 5/5
+Tags: Gives good feedback, Respected, Lots of homework
+Review: The class is very difficult and the assignments take a lot of work but that has nothing to do with his ability as a teacher. The assignments are often different from what is talked about in class but that's just because there is so much content to cover. Russ is careful to provide many methods of asking questions and getting help.
+
+Course: CSC120 | Quality: 2.0/5 | Difficulty: 4/5
+Tags: Accessible outside class, Tough grader
+Review: Lectures rarely have relevance to the assignments. Specs are extremely long while simultaneously not telling you much. Gradescope is terrible; you could be 95% there, or just missing a space in your print & you will get 0%. Often getting Gradescope to comply with your code that runs test cases perfectly in your editor is half the battle. Just bad
+
+Course: CSC120 | Quality: 2.0/5 | Difficulty: 5/5
+Tags: Lots of homework
+Review: He gives way too many assignments that are very time consuming and not enough time to finish them. The lectures have nothing to do with assignments and stuff we learned in lecture a while back doesn't apply until recently.
+
+Course: CSC120 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Lots of homework, Accessible outside class, Beware of pop quizzes
+Review: The worst class I have ever taken. The disconnect between lectures and assignments is real. His lectures have nothing to do with the assignments. In lecture h has covered almost nothing from the assignments, which are a very large portion of your grade, and expects them to be perfect, so you are stuck teaching it to yourself. Why pay for this?
+
+Course: CSC120 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Accessible outside class, Amazing lectures, Caring
+Review: Russ cares. He is patient and addresses every question with precision and depth. Each topic he walks through thoroughly. If people give Russ a bad grade its because the class is difficult. The concepts are a serious step up from CSC110.
+
+Course: CSC120 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Lots of homework, Beware of pop quizzes, Tough grader
+Review: Prof is a true believer, meaning he thinks by turning a freshman 4 unit class to a work load of a 8 unit class you will miraculously output perfect code. He teaches 85% abstract, and 15% syntax, w/ no transition from abstract to syntax. This class is for students that have coded for only 1 semester, not since they were 13. Skip this guy if you can!
+
+Course: CSC120 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Lots of homework, Tough grader
+Review: do not take him whatever you do.
+
+Course: CSC120 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Lots of homework
+Review: If you want to draw pictures and learn about trains, take this class. If you want to be taught coding syntax you'll have to learn that online. He refuses to teach the basic code needed to complete homework. His idea of short programming assignment is 7 separate programs. Disorganized and assumes his class is your only class. Take CIS 131 @ Pima CC
+
+Course: CSC120 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: Horrible teacher. Wanted to cry every time I walked into his class. Spent hours in office hours and even some of the TAs had no idea what to do for the PAs.
+
+Course: CSC120 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Lots of homework, Accessible outside class, Tough grader
+Review: After taking a class on c++ and c, I expected this python class to be relatively easy. Nope, 10-20 hours of homework per week for a 4 unit class, an autograder that only gives you credit if your code operates EXACTLY according to how he wants it. The specs are unclear, and you often have to spend hours formatting according to gradescope's output.
+
+Course: CSC120 | Quality: 4.0/5 | Difficulty: 5/5
+Tags: Respected, Lots of homework, Lecture heavy
+Review: He class is good, just be prepared pay a lot of time to finish his assignment
+
+Course: CSC120 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Lots of homework, Participation matters, Tough grader
+Review: Russ claims that he cares about your mental health, but his assignments prove otherwise.
+
+Course: CSC120 | Quality: 5.0/5 | Difficulty: 5/5
+Tags: Lots of homework, Hilarious, Amazing lectures
+Review: This course had the hardest coding assignments I've ever had, and there was a huge difficulty gap between lectures/ICAs and the assignments. The lectures were amazingly performed, and Russ' humor and life experience added a lot to them. Assignments are a bit draconian; finishing 90% of your program may only get you 50% of the points. TAs clutch.
+
+Course: CSC120 | Quality: 5.0/5 | Difficulty: 2/5
+Tags: Lots of homework, Amazing lectures, Caring
+Review: Great professor, CS is a tough subject and I think that's why people say his difficulty is high (might also be because of his really long specs) but if you pay attention in class and start your assignments early this class will feel really easy!
+
+Course: CSC120 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: Lots of homework
+Review: Order of learning was crap (linked lists before OOP, 2 weeks of completely trivial review, etc), poorly written assignments (HW didn't relate to lectures, assignment specs terribly written), and the occasional required use of instructor code makes some assignments more difficult than they needed to be. OK explainer, but again, structure was crap.
+
+Course: CSC252 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Lots of homework, Accessible outside class, Test heavy
+Review: His 25 minute cumulative tests (there are 6 of them in the semester) always feel like a race to write SOMETHING down for each problem. It is essential to know the material like the back of your hand prior to the test. Simulation projects were a huge plus as they help show low-level concepts done at a higher-level. Great content but tests are rough!
+
+Course: CSC252 | Quality: 3.0/5 | Difficulty: 4/5
+Tags: LOTS OF HOMEWORK, TEST HEAVY, Amazing lectures
+Review: His lectures were useful, well-structured, and recorded online - but oftentimes, the assignments and tests are on material that isn't directly discussed in lecture. Instead, the lecture covers the general idea, and then you have to apply it on the tests and assignments. This is difficult. Also, very useful to know C beforehand, or be in 352.
+
+Course: CSC252 | Quality: 1.0/5 | Difficulty: 3/5
+Tags: TEST HEAVY
+Review: Exam every two weeks, 6 exams in total, not including the final. Exams are 20 minutes. He does not give enough time for the exams.
+
+Course: CS345 | Quality: 2.0/5 | Difficulty: 4/5
+Tags: Tough Grader, LOTS OF HOMEWORK, TEST HEAVY
+Review: Russ is a great lecturer for interesting classes, however that's all overlooked by his horrible projects and even harder exams. It's like he doesn't want the majority to pass. His solutions are often littered w bugs and his projects are often posted late. Russ makes me hate programming and my life. But he's the only one teaching this class so...
+
+Course: CSC252 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Respected, Hilarious, Amazing lectures
+Review: Russ cares and it shows. He answers Piazza on weekend nights and would stay after hours to help you. He looks for the knowledge gap you have to accommodate your question/misunderstanding. Students who don't like his teaching style are the whiney/spoiled type who will have a hard time adjusting to the workforce. Take him if you care about learning.
+
+Course: CSC252 | Quality: 5.0/5 | Difficulty: 2/5
+Tags: Amazing lectures
+Review: not sure why people are complaining about this class being unrealistic/unreasonable. asm4 is assigned 7 days before its due date, all my other cs classes have something due on the same day so i dont see the issue the time on the second test is tight but all others are reasonable. I certainly had 400 level classes that are much much harder
+
+Course: CSC252 | Quality: 2.0/5 | Difficulty: 3/5
+Tags: Get ready to read, Skip class? You won't pass., LOTS OF HOMEWORK
+Review: His problem is setting unrealistic expectation. There are 4 Asm assignments, each of which is worth 10% of the grade. The final asm project is assigned 5 days and due 1-2 days before the Final. That is quite bad. Assignment grades should have been distributed evenly for both sim and asm, to give students breathing rooms.
+
+Course: CSC252 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough Grader, LOTS OF HOMEWORK, TEST HEAVY
+Review: Truly awful experience for both 252/345. Incredibly difficult, convoluted, buggy projects. Tests every other week in 252 that are insanely long for 20 mins. Readings/hmwks/projects due right before or on test days. Pop quizzes in 345. Says things are simple and makes you feel bad for not understanding/asking questions. Expects mercy, shows none.
+
+Course: CSC127A | Quality: 1.0/5 | Difficulty: 4/5
+Tags: Tough Grader, LOTS OF HOMEWORK, TEST HEAVY
+Review: Very unfair. His CSC252 class should be a 5 credit course instead of 3, takes more work than all 3 of my other classes combined. 25 minute test every other week which are unfair. Project every single week, none dropped. Homeworks, projects, and readings all the same week as tests. Talks down on students. Expects more effort from us than he puts in.
+
+Course: CSC252 | Quality: 2.0/5 | Difficulty: 4/5
+Tags: Tough Grader, LOTS OF HOMEWORK, TEST HEAVY
+Review: Fast and brutal. 25 minute, full length tests every 2 weeks. Average lectures, sometimes delays homework based on class needs. Unfair testing practices and buggy solutions to some projects. You will learn how to get good at racing though a test in order to visit every problem in this class.
+
+Course: CSC252 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: Tough Grader, LOTS OF HOMEWORK, TEST HEAVY
+Review: Currently in lewis's CSC 252 and 345. If you have to take Russ take one of his classes at a time. He has no sympathy for people who are enrolled in both. Double projects due a day apart, written homework and mandatory reading every week regardless if there is a test that week. Tests are 6 questions with 5 parts you have 25 minutes. STAY AWAY
+
+Course: CSC252 | Quality: 3.0/5 | Difficulty: 3/5
+Tags: Gives good feedback, Respected
+Review: Best lecturer in the dept, given the fact that other lecturers are simply not qualified for teaching. Assignments are time-consuming, but compared to a similar course in U of Rochester, it's very easy. Systems programming are mandatory, otherwise you're no different from those CC graduates. Good luck, you're on your own
+
+Course: CSC252 | Quality: 3.0/5 | Difficulty: 3/5
+Tags: BEWARE OF POP QUIZZES, Hilarious, TEST HEAVY
+Review: To be honest, best lecturer in CS dept, given the fact that all the other lecturers are simply not qualified to teach and should be fired. Assignments are doable, but not time-efficient approach to learn Comp. Org. It takes more time to "suit my code his code" than actually get down to serious thinking and coding.
+
+Course: CSC252 | Quality: 5.0/5 | Difficulty: 5/5
+Tags: LOTS OF HOMEWORK, Clear grading criteria, Hilarious
+Review: Russ is probably the best programmer I've ever met. He knows a lot about everything, not just Assembly language. Make sure not to use your dropped assignment until last few weeks, since they're much more difficult. I just want to clip a little piece of his beard, put it in a locket, and hold on to it to have 7 years of bug-free code.
+
+Course: CSC252 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough Grader, LOTS OF HOMEWORK, TEST HEAVY
+Review: Russ is a good programmer but really not a good professor. His test and homework get harder and harder.
+
+Course: CSC345 | Quality: 5.0/5 | Difficulty: 5/5
+Tags: Tough Grader, Amazing lectures, Caring
+Review: Russell is an amazing professor. His assignments are notoriously difficult, and require a LOT of investment and debugging. Assignments are graded using a grading script, so you have to match his output exactly. I learned a lot though.
+
+Course: CS352 | Quality: 2.0/5 | Difficulty: 5/5
+Tags: LOTS OF HOMEWORK, Tests are tough
+Review: Russ is a decent lecturer but can be confusing at times. Homeworks are very difficult and extremely time consuming, on top of having a very strict grading script. C programming is hard as is, but this class makes it harder. Tests are difficult and lengthy, although final was ok. Easily the hardest programming class I've taken. Good luck!
+
+Course: CSC252 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Skip class? You won't pass., Tests are tough
+Review: Russ does a pretty good job at explaining the complexities of computer architecture. If you participate in class and pay attention to lectures, chances are you'll get a good grade. Computer architecture is tough, so missing a lecture can be catastrophic to understanding. The 6 tests are also pretty hard, you don't have the time to make mistakes.
+
+Course: CSC352 | Quality: 1.0/5 | Difficulty: 2/5
+Tags: (none)
+Review: You can tell that Russ doesn't put very much time into planning out his lectures. He uses another professor's slide deck and it seems like he doesn't look over the contents of it beforehand. He also has assigned seating that rotates tables randomly every week. More often than not, he posts assignments late and gets off topic during lecture.
+
+Course: CSC252 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Gives good feedback, ACCESSIBLE OUTSIDE CLASS, Clear grading criteria
+Review: This course is very doable, and you will likely get an A if you have the time to chip away at the assignments. Russ provides grading scripts that are very very nice, and he focuses on you leaving with a basic understanding of computer hardware functionality. I wish this course had a lab, but that is a departmental issue.
+
+Course: CSC127A | Quality: 5.0/5 | Difficulty: 4/5
+Tags: BEWARE OF POP QUIZZES, Clear grading criteria
+Review: This course was my first exposure to programming, and I absolutely loved every minute of it! This is a tough course for someone like me without a background in programming, but if you go to office hours, do the coding bats and push yourself, this is a really fun course.
+
+Course: CS352 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: LOTS OF HOMEWORK, BEWARE OF POP QUIZZES
+Review: Russ is a decent professor and I think a lot of the criticism here isn't entirely accurate. Yes, 352 is a very challenging course but that is the case with any instructor. People are complaining about his tests and rough programming assignments but again these are a part of CS 352 as a whole. He's a good programmer but can hard to follow sometimes.
+
+Course: CSC352 | Quality: 3.0/5 | Difficulty: 5/5
+Tags: LOTS OF HOMEWORK, BEWARE OF POP QUIZZES
+Review: Russ is a nice guy. But as others have pointed out, he is a fantastic programmer who fills the lectures with debugging stunts that go way over your head. I spent many hours on the programming projects and went over the lecture slides on my own, which I found to work better than watching his miraculous C skills.
+
+Course: CSC352 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough Grader, LOTS OF HOMEWORK, BEWARE OF POP QUIZZES
+Review: Russ is a nice person, but he's a downright awful professor. Instead of teaching the class vital material, he entertains students who are avid coders by doing live bug-infested code demos by the seat of his pants. His projects take ungodly amounts of time and his tests are impossible to prepare for. This course made me want to swallow broken glass.
+
+Course: CSC252 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough Grader, Get ready to read, LOTS OF HOMEWORK
+Review: Russell is a nice person, however a terrible professor. His test gets harder and harder exponentially as well as his programs. For a 3 unit course, this class took much more effort than any of my 4 unit courses due to his programming homework. He does not understand student perspective that his class isn't the only class we take with the workload.
+
+Course: CSC352 | Quality: 2.0/5 | Difficulty: 4/5
+Tags: LOTS OF HOMEWORK
+Review: The issue with Russ is he cannot relate to the students sometimes. His level is so high compared to the students that he assigned harder than needed programs. This disconnect is the thing that makes Russ hard. He needs to tone it to the students level more to be a better lecturer. Use department resources and T.A.'s given to you to succeed.
+
+Course: CSC352 | Quality: 2.0/5 | Difficulty: 5/5
+Tags: Tough Grader, LOTS OF HOMEWORK, BEWARE OF POP QUIZZES
+Review: A great programmer who wants to share a lot of knowledge to students through excessively difficult projects. The disconnection between him and his students ultimately makes him a bad professor.
+
+Course: CS352 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough Grader, LOTS OF HOMEWORK
+Review: Russ seems like a fairly nice guy. I have had him for two classes (127a & 352). It was a bad idea both times. He panders to skilled coders, he doesn't teach what's necessary for projects, and I truly believe that the CS classes in general are abusive of student time and effort. Weedouts left and right, obscene amounts of work. Run away. Stay sane.
+
+Course: CSC127A | Quality: 3.0/5 | Difficulty: 4/5
+Tags: Skip class? You won't pass., ACCESSIBLE OUTSIDE CLASS, LECTURE HEAVY
+Review: Russ is very kind and goes at a pace for beginners most of the time. End of the semester was a rush, very difficult. Tests were usually hard and hardly resembled the study guides. Labs mandatory for credit, lecture had weekly participation points. Assignments were challenging and time consuming. Stay on top of the material or you will fall behind
+
+Course: CSC127A | Quality: 1.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: Interesting to see how my rating was deleted and now the total rating has gone up. If you have never programmed before stay away from this class. You literately have no support system. There is the illusion of help but most of the tutoring is driven by pretentious kids who demoralize you for not knowing where to even begin. Don't waste your $$
+
+Course: CSC127A | Quality: 3.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: Russ's exams tend to be fair, however programs aren't. He expects a lot out of you to be a beginner in programming. You MUST ATTEND LECTURE he gives you assignments and pop quizzes randomly which do count towards your grade. Drills are also given and graded they are very helpful.
+
+Course: CSC127A | Quality: 2.0/5 | Difficulty: 3/5
+Tags: (none)
+Review: He is all over the place. You have one project a week and they are no where near correlated with the material that is taught throughout lecture or section. The exams are far harder than the reviews and cover nothing of the review. I learned much more from my SL than I did him. So, if you like disorganization and teaching yourself, you'll like him.
+
+Course: CSC127A | Quality: 5.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: If you haven't programmed before taking this class, it might be tough for you (like me), and I'll admit I was confused during lectures at times, but if you put in the work daily and do the coding bats (I would also do the java coding bats online as much as you can, it helps so much!) then you're going to be fine. Show up to class for pop-quizzes!
+
+Course: CSC127A | Quality: 2.5/5 | Difficulty: 5/5
+Tags: (none)
+Review: A great teacher for advance programers but he makes the class very hard for beginners.
+
+Course: CSC127A | Quality: 2.5/5 | Difficulty: 5/5
+Tags: (none)
+Review: Projects are pretty difficult and huge gate between what he tough on the lecture and the project.
+
+Course: CSC345 | Quality: 3.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: Russ is a new instructor so it's expected that not everything would be refined. He makes up for it though, in our semester he gave a very hard first test and threw us softballs to make up for it later. He's a nice guy and is reasonable about grades.
+
+Course: CSC127A | Quality: 2.5/5 | Difficulty: 4/5
+Tags: (none)
+Review: His lectures don't really help you learn anything and if you've never written code before, you're pretty much screwed. He talks to everybody like they've been coding for years. There's a project every week and they're really hard. It's hard to get actual help with anything in this class.
+
+Course: CSC127A | Quality: 2.5/5 | Difficulty: 4/5
+Tags: (none)
+Review: He doesn't make no sense, I'm confused all the time as a new coder.
+
+Course: CSC127A | Quality: 2.5/5 | Difficulty: 5/5
+Tags: (none)
+Review: dont take the class
+
+Course: CSC127A | Quality: 3.5/5 | Difficulty: 5/5
+Tags: (none)
+Review: You will have to do more for this class then any other. You will have a weekly project which will take a full day ( you will need to go to section hours), then everyday you will have practices which will take anywhere from 15 min to 1 hour, the section which is a 2 hour project, then the class which is 1 hour which includes a pop quiz every week.
+
+Course: CSC127A | Quality: 4.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: Do your work. Don't miss anything. You need to be serious. His tests are tough.
+
+Course: CSC127A | Quality: 4.5/5 | Difficulty: 3/5
+Tags: (none)
+Review: Russ did a great job. He worked with me whenever I needed him and explained most subjects very clearly. Some people who never showed up to class complained that the class was too hard, but if you show up and put some time into it, the class is not bad at all. I had never programmed before and got an A.
+
+Course: CSC127A | Quality: 2.5/5 | Difficulty: 4/5
+Tags: (none)
+Review: He seems like a really nice person, and may be a good teacher for advanced students, but his intro class was just plain discouraging. He asks for and seems receptive to feedback from the students, but doesn't make any changes based on that feedback. The weekly projects are painful and frustrating.
+
+Course: CSC127A | Quality: 2.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: As a math major transitioning into Comp Sci, I found him very confusing. He spends too much time in lecture conversing with students who already know how to code, he presents simple material as if it is profound and difficult, he gives assignments through the last week of class, and his spontaneous ICA's are non-useful and disciplinarian.
+
+Course: CSC127A | Quality: 4.5/5 | Difficulty: 2/5
+Tags: (none)
+Review: For a basic Comp-Sci class, Lewis is really good at delivering a clear, concise and strong. The class is a simple lecture hall presentation with limited class participation, but Lewis is really good at leading a clear lecture. He does assign pop quizzes but any understanding of the topic will make it possible.
+
+Course: 127A | Quality: 2.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: I am certain I would enjoy this instructor in a future class - he's knowledgeable and a nice guy -but found this intro class to be ridiculously difficult.
+
+Course: 127A | Quality: 3.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: This class with him will make you crazy for real
+
+Course: 127A | Quality: 3.5/5 | Difficulty: 2/5
+Tags: (none)
+Review: He is a good instructor, his lectures are very clear, and projects makes concepts even more clear. He would stick to the syllabus, and deadlines. Beware of ICAs (attendance is not mandatory but there can be surprise ICAs)
+
+Course: CSC127A | Quality: 5.0/5 | Difficulty: 3/5
+Tags: (none)
+Review: New coder? Not a bad intro teacher. Class is based on quizzes(lecture), projects, drills, and exams. Quizzes are easy (group), projects every week and take time, drills start off easy but get tougher, practice drills and listen to lectures for exams. Sections led by TA's who are very helpful. Online help always available (very responsive). gluck!
+
+Course: CSC127A | Quality: 5.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: great guy, awesome beard, and loves to teach from how i have seen. His way of teaching keeps you awake haha! But great teacher and very unique.
+
+Course: CSC127A | Quality: 5.0/5 | Difficulty: 3/5
+Tags: (none)
+Review: Russ is a really nice and funny guy. He's new to teaching, but he does his best and is always looking to improve. If you go to class, and put an honest amount of work in, it is easy to learn from him and do well. Ask plenty of questions! He loves helping students. I would definitely recommend him to beginners in programming who want to learn.

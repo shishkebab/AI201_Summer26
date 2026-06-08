@@ -1,0 +1,172 @@
+Professor: Jonathan Misurda
+Department: Computer Science — University of Arizona
+Overall quality: 1.8/5 | Difficulty: 4/5 | Would take again: 21.4% | Ratings: 42
+Courses: CS252, CS335, CSC252, CSC335, CSC335CSC352, CSC352, CSC452
+
+Course: CS335 | Quality: 1.0/5 | Difficulty: 3/5
+Tags: Tough grader, Lecture heavy
+Review: Dude is so passive aggressive and gets annoyed at people asking questions. He just yaps and yaps for lectures and the test content is really hard to study for. I wish the class was more interactive.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough grader, Group projects
+Review: Does not have empathy. The tests were quite difficult to study for, and the lectures were quite full of information. The group project was marked down based on invisible requirements that we had never heard of or seen from our stakeholders (tas)
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough grader
+Review: In lectures he just wants to hear himself talk and it's clear. Projects are not bad but exams are brutal he gives no study guide or help and he lies. Final included so much about a topic he said he would not go in depth for. Averages for exams are really low but he refuses to give a curve. Really bad and doesn't seem to care if you do well.
+
+Course: CSC452 | Quality: 2.0/5 | Difficulty: 5/5
+Tags: Tough grader, Lecture heavy
+Review: Redditor professor. Everything is bad about him except the lectures- he's clearly experienced. But maybe he should make youtube videos, because there is NO interaction at all, and NOTHING supplied for out of class study. Projects are hard, but I'd say they are reasonable for this level of CS. Tests are just cruel: unclear and brutally graded.
+
+Course: CS335 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: Lecture heavy, Test heavy
+Review: Project descriptions are terrible, unclear requirements sometimes and you're given the bare minimum information. It's not hard to get an A on the projects, but his exams are horrible. Midterm was a vocab test and the final was unfair as he made half the exam on a topic that he said he wouldn't go in depth on. Lectures are meh.
+
+Course: CS335 | Quality: 2.0/5 | Difficulty: 4/5
+Tags: Group projects, Lecture heavy, Graded by few things
+Review: He's fine but has very boring lectures and provides no incentive to come. Only 2 exams and gives no study material for them aside from slides he goes over in class. The projects are difficult at times but are pretty interesting to complete. 4 person group project as the last assignment which seems daunting but if you get a good group its not bad.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Skip class? You won't pass.
+Review: i found it very difficult to learn from dr. misurda. the classroom was kind of hostile and I found it hard to relate or interact with him. his teaching style is also extremely difficult to learn from and very different from other instructors. i would advise students to avoid if possible - even taking the course at another branch
+
+Course: CSC335 | Quality: 2.0/5 | Difficulty: 3/5
+Tags: (none)
+Review: 335 teaches you very pragmatic things, but Misurda's lectures are kind of useless and the guy takes forever to go over trivial things, while not taking enough time to go over harder material. The group aspect of this class is ok and executed well; exam questions often ask for code (e.g. JUnit and JavaFX from scratch)and are graded strictly.
+
+Course: CSC335 | Quality: 3.0/5 | Difficulty: 3/5
+Tags: Test heavy, Group projects, Lecture heavy
+Review: Misurda is really boring. It's fine because he is very knowledgable and passionate about what he's lecturing on, but the guy can literally talk for 75 minutes straight without taking a breath. This is the first class in the Computer Science sequence with group projects and it is very beneficial. Group work and agile development are real world.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 3/5
+Tags: (none)
+Review: Boring speaker, monotone, with no passion. I have Aspergers and have difficulty with social situations. He did not accommodate my disability, just scoffed. Group projects would have been much better if there was a discussion board, forum, or chatsomething to get to know classmates and discuss problems. If I could ask for a refund I would
+
+Course: CSC252 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Skip class? You won't pass., Amazing lectures, Lecture heavy
+Review: Not understanding the negativity in other reviews. Dude's really enthusiastic about his field and knows what he's teaching backwards and forwards. Classes are very lecture-heavy, but I found that alright because he's a very good speaker. Take good notes and get a good mental model of the material, because it's hard to fake it on his tests/projects
+
+Course: CS335 | Quality: 2.0/5 | Difficulty: 4/5
+Tags: Skip class? You won't pass., Graded by few things, Lecture heavy
+Review: I was really disappointed after taking this class. Dr. Misruda makes this class unnecessarily difficult for no reason. There's absolutely no rubric for assignments. He talks the whole lecture time without any participation, so it's really hard to pay attention. He will cover a needed topic one or two days before an assignment is due.
+
+Course: CS252 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Skip class? You won't pass., Graded by few things, Lecture heavy
+Review: Dr. Mirsurda is really passionate about the material, but I don't think he relates it to the students. He doesn't give a lot of homework so I you don't do well there isn't much of a buffer. He often speaks the whole lecture, so it's hard to follow for 75 minutes. He often gives snarky responses to the students when they ask questions.
+
+Course: CSC352 | Quality: 3.0/5 | Difficulty: 4/5
+Tags: Participation matters, Tough grader
+Review: Took two classes (335 and 352) with him and I respect him quite a bit. He got a PhD in JUnit testing, what a mad lad. He's very knowledgeable about programming and is capable of engaging in good discussions about the material. Sometimes, it seems like he's condescending, yeah, but I feel like that's because he thinks this is easier material
+
+Course: CSC252 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Lecture heavy, Tough grader
+Review: I avoid Misurda at every chance I get, you will not find me willingly taking his class. All his lectures are monotoned, without use of examples or direction. Projects are extremely hard, no structure to the course and lack of examples in class. TA's are more helpful at explaining concepts then the teacher. No piazza even tho class is online.
+
+Course: CSC252 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: Misurda is easily the worst computer science professor in the department. Lectures are monotonous, no online discussion board for help, and seems to not care about feedback regarding his course. I have a high B in this course and have had to do all studying outside of the lecture. Avoid all of his classes if possible
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 3/5
+Tags: Participation matters, Group projects, Tough grader
+Review: The class wasn't all that difficult and it is my fault for slacking off towards the end. But he was easily the worst CS professor I have ever had. I'm not sure if it was just me but the way he taught the class and interacted with students made me feel very unmotivated to participate. I would avoid taking a class with him at all costs.
+
+Course: CSC252 | Quality: 3.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: He is nice professor but he really need to change his teach style. He is a kind of professor who hope students to go to his office hour. If you go to, he love talking with you and answer clearly. And his exam has many works. So, good luck on it.
+
+Course: CSC252 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Skip class? You won't pass., Lecture heavy, Tough grader
+Review: This teacher is not transparent to his students. Does not use piazza, barely uses D2L. Extremely lazy when posting information about hw and exams. Does not post announcements at all. Joke of a professor at an academic institution.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 3/5
+Tags: Skip class? You won't pass., Clear grading criteria, Lecture heavy
+Review: Teacher that does not like students despite what he himself thinks. Overall, the class was uncomfortable with an almost hostile feeling to it. He also does not understand modern approaches to software projects. Class also does not have a lot of resources. You will be punished for using internet for help (not code copying). Also no piazza.
+
+Course: CSC335CSC352 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: Skip class? You won't pass.
+Review: Garbage! Should be thrown out of teaching entirely. No piazza, no slides, nothing but his snide, long-winded lectures and demeaning jokes about any student that asks a question. I'm disgusted that I had to pay to take this guys class. He thinks he's god gift to man, constantly preening himself, but he never actually provides any value to my degree
+
+Course: CSC352 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Group projects, Amazing lectures, Lecture heavy
+Review: Dr. Misurda gets a lot of hate, some of which I think is justifiable, but Dr. Misurda is definitely one of the best systems professors in CS. His 352 class is difficult, but you'll be thankful when you take OS (452). Once you've taken one of his exams, you know what to expect. Working hard in his classes will prepare you more than the alternatives.
+
+Course: CSC335 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Accessible outside class, Amazing lectures, Lecture heavy
+Review: I really dont understand all the negative reviews for Dr. Misurda. His lectures are amazing and he is passionate about the subject material. If you dont wanna learn, dont take his course. If you do wanna learn, hes the professor for you. He goes very deep into the material. Outside of class his email response time is the quickest I've ever seen.
+
+Course: CSC352 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Skip class? You won't pass., Lecture heavy, Tough grader
+Review: Bruh, dark souls but no bonfires. Doesn't try to change the direction of the class to help the students but rather just to get on and get paid. Try to avoid at all cost.
+
+Course: CSC352 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Test heavy, Lecture heavy, Tough grader
+Review: Misurda has the style of teaching being, "You're on your own". His lectures are very dry and hard to convey sometimes. For 5 weeks he did his 'slides' on a piece of paper where students would follow and copy notes. Come exam time, he doesn't have them. The class average for that exam was a 60 and our second midterm exam average was a 58. Dont recco
+
+Course: CSC335 | Quality: 2.0/5 | Difficulty: 3/5
+Tags: Lecture heavy
+Review: Not the worst teacher in the world, at least compared to what I've heard about last semesters. But holy cow I don't understand the point of this class, everything he's gone over has already been taught in previous CS classes, so you just sit there while he over explains things that other teachers taught in four minutes that takes him an hour.
+
+Course: CSC352 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Get ready to read, Lecture heavy, Tough grader
+Review: The worest Teacher on this planet 100% sure of it. Can not get any worse. Doesnt help students, makes fun of students. He gives us projects to do and we have not even completed the lecture on what we need to complete the projects.
+
+Course: CSC352 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough grader
+Review: One of the least caring professors I have ever encountered. He. Does. Not. Care. He is downright rude to students. I once mistakenly addressed him as Mr. instead of Dr. and he replied very rudely. AVOID!
+
+Course: CSC352 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Lots of homework
+Review: For almost all the assignments, he would assign them 2-3 weeks in advance so you'd think you have plenty of time to work on it, but in reality, he doesn't cover the topic until there is less than a week left to turn it in. Sometimes, information that would have helped for assignments aren't taught until after the due date. Makes no sense.
+
+Course: CSC352 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Lots of homework, Get ready to read, Lecture heavy
+Review: Lecture heavy course. Assignments are incredibly time consuming. Teaching style is to have a slide of some bull-points on a topic, then talk about it for 30 minutes and those 30 minutes are what he bases his exam questions on. No interactivity in the lectures. Hard course to study for as his exam questions are hard to plan/prepare for. Beware...
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: Get ready to read, Lecture heavy
+Review: AVOID THIS MAN! Piazza? Nah. Interactive lectures? Not a chance. Daily dose of condescending interactions with students? You bet! The first 4 assignments are built on the same pointless program and were a waste of time that could be much better spent on the final team project, which is actually cool, if he would only provide adequate time for it.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: Lecture heavy
+Review: Avoid taking any class with him at all costs. Everyone in class didnt even listen to him at the end of the semester. He could careless about what you learn. Youll learn more reading a text book. I feel saddened that I have wasted so much time studying for this class. I couldve learned so much more without him. You have been warned.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: Group projects, Lecture heavy
+Review: Clearly a very smart guy, but a HORRIBLE teacher, if you can even call him a teacher. Gives zero indication of how things are graded and takes off for whatever he feels like. Also takes about 3-4 weeks to get your grades. Will show you the absolute basics on subjects in class, and then expects you to magically know all aspects of it for projects,
+
+Course: CSC452 | Quality: 4.0/5 | Difficulty: 3/5
+Tags: Skip class? You won't pass.
+Review: Slides only contain pictures of graphs. If you don't show up and pay attention in class you will fail all the tests. You will have to take notes or you will forget every thing he says.
+
+Course: CSC352 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Skip class? You won't pass., Test heavy, Lecture heavy
+Review: Going into his 352 class for the first two weeks was not bad it was horrible. He lectures for the entire class time and does not provide examples on he said. Also, this was to be an introduction to C programming well it's not. DO NOT take this class if you didn't take 252. Not taking 252 in a class, not about 252 left me at a complete disadvantage.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 3/5
+Tags: Lecture heavy
+Review: Terrible. Doesn't allow piazza which keeps students in the dark and goes against the principles of CS which is collaboration. Beyond that, doesn't have slides for Systems (CSC 352) and doesn't allow pictures which is a pain. Also is far too lecture heavy and doesn't incorporate interactive learning making this a strange and near useless CS class.
+
+Course: CSC335 | Quality: 2.0/5 | Difficulty: 5/5
+Tags: Skip class? You won't pass., Group projects, Lecture heavy
+Review: Projects especially the final project are fun (depending on your group)... That's about all you can look forward to. Tests are hard. Lectures non-stop, rarely pausing to demonstrate anything or show code in action. Slides are ok but lacking (especially networking). Lack of a Piazza for a class like this was frustrating. Take at UA South if possible
+
+Course: CSC452 | Quality: 3.0/5 | Difficulty: 4/5
+Tags: Lots of homework, Get ready to read, Lecture heavy
+Review: Doesn't use a lot of slides so it can be difficult to take super precise notes while he speeds through lecture material. Booming lectures. Tests and projects were fair, but very hard and he doesn't use Piazza which doesn't make it any easier to get assistance. Doesn't obsess about testcases though which is good in light of other instructors who do.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 3/5
+Tags: Group projects, Lecture heavy, Tough grader
+Review: This has been by far the worst CS class I've ever taken, which is really unfortunate because I was looking forward to taking OOP. Lectures were extremely dry, and I didn't agree with how he structured the exams. He posts lecture slides but they're useless for studying, you have to take really precise notes on everything he says. Avoid if you can.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 3/5
+Tags: Lots of homework, Group projects, Lecture heavy
+Review: 4 solo projects, 2 duo projects, 1 4 person final project (37% of grade). Projects built on each other and we did not get the grade back on previous ones before next one was due. Fair tests with a range of question formats. Some times mocked students in lecture. Extensive use of voice inflection in lecture. Delayed grading of projects. Unfriendly.
+
+Course: CSC335 | Quality: 4.0/5 | Difficulty: 2/5
+Tags: (none)
+Review: fun final project, the quizzes happen before exams so make sure you attend these classes. Probably one of the easiest cs classes i've taken other than web programming. final project could be time consuming if your teammates don't want to do their parts.
+
+Course: CS335 | Quality: 4.0/5 | Difficulty: 3/5
+Tags: Respected, GROUP PROJECTS
+Review: First time teaching 335. Misurda is a seasoned professional from Pitt and it shines through in his lectures, which can get wordy and lengthy at times but good nonetheless. Projects aren't difficult w/ the exception of 1 or 2, but tests can be tricky. Great teacher nonetheless and fun course overall. Final project is a fun group project!

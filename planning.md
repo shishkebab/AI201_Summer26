@@ -106,7 +106,7 @@ of different professors withouth having to read the entire reviews of each profe
 
 ```text
 +-------------+----------------------------+
-| 1. Ingestion                              |
+| 1. Raw_data (document) collection         |
 | Tool: Python, BeautifulSoup               |
 | Source: Rate My Professors                |
 | Remove HTML tags, navigation, buttons     |
@@ -115,7 +115,7 @@ of different professors withouth having to read the entire reviews of each profe
               |
               v
 +-----------------------------+
-| 2. Chunking                  |
+| 2. Ingestion & Chunking      |
 | Tool: Claude, Python         |
 | Chunk size: 500 characters   |
 | Overlap: 75 characters       |

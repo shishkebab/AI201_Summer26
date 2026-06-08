@@ -1,0 +1,468 @@
+Professor: Melanie Lotz
+Department: Computer Science — University of Arizona
+Overall quality: 2.3/5 | Difficulty: 3.8/5 | Would take again: 37.9% | Ratings: 116
+Courses: CS245, CSC144, CSC245, CSC335, CSC345, CSC372, CSC445
+
+Course: CSC144 | Quality: 1.0/5 | Difficulty: 3/5
+Tags: (none)
+Review: This class is not taught. The lecturer comes into the classroom clutching worksheets to work on. She shrieks at the class for a second and then it is a race to complete the worksheet in now less than 50 minutes. They claim that they are graded for completeness and a few answers. No. Expect the whole thing to be graded. I have so much more to say.
+
+Course: CSC144 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Participation matters, Gives good feedback, Online Savvy
+Review: Amazing prof with some of the best TAs ever! Super helpful, always have office hours etc. Class was a flipped classroom style but the videos were great and helped me learn a lot, tests were exactly what we practice in class! Would recommend, made this hard class one of my favorites because I actually understoof the concepts.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 3/5
+Tags: Tough grader, Lots of homework, Lecture heavy
+Review: This was my least favorite class I have ever taken at UofA. Uninspired lectures and a mean teacher.
+
+Course: CSC445 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Respected, Test heavy, Graded by few things
+Review: Compared to CSC335 or CSC144, Ms. Lotz teaches CSC445 the best. The classes were extremely chill as most students were seniors, leading to more 'informal' lectures. Her teaching methods are fine, and the homework is doable by using the slides and external resources. The exams are a bit complicated, so study a lot for them. Overall, cool professor.
+
+Course: CSC144 | Quality: 3.0/5 | Difficulty: 4/5
+Tags: Clear grading criteria, Test heavy
+Review: this class is hard but prof lotz provides decent lectures and lecture notes. she sometimes seemed super triggered in class but besides that, you just have to pull your own weight in order to do well. big step up in terms of difficulty in comparison to calc1 or csc110. be prepared to study and work hard
+
+Course: CSC445 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Amazing lectures, Caring, Accessible outside class
+Review: Personally one of my favorite professors in the department. Lectures are clear and easy to understand. There are plenty of makeup opportunities for homework and quizzes. Helpful OH. Honestly, the exams are doable as long as you care about the class and make a genuine effort to understand the material. I wish I had taken more classes with Melanie.
+
+Course: CSC335 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Group projects, Amazing lectures, Clear grading criteria
+Review: I took this class in Spring 2025 and Melanie is the best professor I've had in the CSC department. Her tests are by far the best in the dept, and the projects were really fun. Short Assignments and Quizzes were very reasonable. If you know the material and go to lecture, you're good.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: Tough grader, Get ready to read, Lots of homework
+Review: I took this class with Lotz a couple semesters ago, and I remember the lectures being super boring and the homework taking so much time (not because it was difficult, it was just tedious).
+
+Course: CSC372 | Quality: 4.0/5 | Difficulty: 2/5
+Tags: Clear grading criteria, Online Savvy
+Review: Professor Lotz is one of the few CS professors who actually has a coherent and useful online course. She comes from a linguistics background so she is very good at explaining things within this course (syntax heavy coding) and had short/useful lectures. VERY WELL ORGANIZED, easy to speak with. Use your brain instead of gpt and you will do fine.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: Tough grader, Group projects, Lots of homework
+Review: The group projects were incredibly time consuming, and did not count for very many points despite that in the end. Every homework assignment was a chore, it was the CS equivalent of busywork fr.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough grader, Get ready to read, Lots of homework
+Review: I literally fell asleep during class one time, and the homework was unreasonably time consuming, mostly due to needing to decipher her writing.
+
+Course: CSC335 | Quality: 3.0/5 | Difficulty: 4/5
+Tags: EXTRA CREDIT, Group projects, Graded by few things
+Review: The class was overall just so-so. Professor offered extra credit, but it still felt hard to sit through...
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: Tough grader, Get ready to read, Lots of homework
+Review: The specs were extremely long and convoluted, and her teaching was boring and uninspired
+
+Course: CSC335 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Participation matters, Group projects, Graded by few things
+Review: This isn't her best class. She taught CS144, 244, and 345 really well. CS355 feels repetitive since much of it overlaps with CS210. Some bad reviews seem to come from one upset person posting repeatedly. You can notice a pattern in the reviews. Overall, she offers extra credit, but CS355 just isn't a very engaging course.
+
+Course: CSC335 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Tough grader, Group projects, Clear grading criteria
+Review: I fear Lotz is overhated. While the class is not that interesting, I felt she did everything she could to minimize the damage (new curriculum - emphasis on group projects). A lot of group projects and a lot of regrade requests, but the material was decent and there are many opportunities to retry and learn properly. She also gives extra credit.
+
+Course: CSC335 | Quality: 3.0/5 | Difficulty: 2/5
+Tags: Tough grader, Group projects
+Review: Class is boring if you've taken any OOP class before. Lotz doesn't seem passionate about it. Stopped going the last 2 months of class: she just read from the slides anyways. The first month is hard with quizzes, but gets easy after. Exams and final were easy, but they constantly took points off for correct answers and I had to get many regrades.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough grader, Group projects, Lots of homework
+Review: Boring lectures and confusing specs
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 3/5
+Tags: Tough grader, Get ready to read, EXTRA CREDIT
+Review: This course made me quit CS. Probably the rudest and most useless professor I've met at the uofa-not only that, this course is just a repeat of 210,except there's a lot more term memorization that you have to do. If you want to hate CS, this is the professor for you. A fifth grader would explain more concisely than her. Please go work at mcdonalds.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough grader
+Review: She should consider a different profession
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough grader, Group projects, Lots of homework
+Review: I thought that 210 with Mercer was bad, until I took this class. 100x worse than my other bad CS experiences, this professor is a gatekeeper that uses the English language to trip students up.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 1/5
+Tags: Tough grader
+Review: This felt like a horrible English class, where the professor marks zeroes on questions because they personally don't like your wording on a free-response. All exams and quizzes are free response btw. I received several C's (and one F) on written tests, for content I knew well and could demonstrate in projects.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough grader, Group projects, Lots of homework
+Review: This was the most boring CS class I have ever taken, and the professors monotone lecturing did not help. She also is genuinely rude to some students but not others its weird
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough grader, Group projects, Lots of homework
+Review: This class and professor honestly ruined CS for me. She grades based on buzzwords instead of conceptual understanding, writes purposefully confusing specs, and is rude to students who don't suck up to her.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough grader, Group projects, Lots of homework
+Review: The most confusingly worded project specs I have ever read, along with a lecturer who is boring/monotone and rude.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Get ready to read, Group projects, Lots of homework
+Review: She is very specific about wanting you to answer questions exactly as they are worded on slides, whether or not you actually understand the content is irrelevant. Also she is pretty rude, and does not seem to like teaching.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Get ready to read, Group projects, Lots of homework
+Review: Its so weird, it seems like she would rather catch a student not following confusingly crafted phrases exactly, than actually care about whether they understand the overarching concepts.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Group projects, Lots of homework, Beware of pop quizzes
+Review: She almost seems annoyed at you for asking her clarifying questions, and her answers to your questions are almost always unhelpful or vague and cryptic.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: Tough grader, Get ready to read, Lots of homework
+Review: I can barely keep my eyes open during lectures, and I have to roleplay as an English major to understand the project specs.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: Get ready to read, Group projects, Lots of homework
+Review: Poorly worded project specs and boring lectures.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough grader, Get ready to read, Lots of homework
+Review: I have to spend probably about half the time of doing my homework trying to decipher her convoluted wording. She is also just not very nice to be around and speak with, somewhat rude and demeaning.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Get ready to read, Group projects, Lots of homework
+Review: There is so much overlap with 210 (and what I already learned in HS), that I didn't start actually learning anything new until about the last 1/4th of the class. Additionally, as others have pointed out, she overcomplicates things through wording them weirdly, and is a bit rude when approached.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough grader, Group projects, Lots of homework
+Review: Is not clear at all about what she expects specifically for projects, and is rude when asked for clarification.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Get ready to read, Group projects, Lots of homework
+Review: Very confusing for me, being someone who doesnt speak English as my first language. She words things so confusingly.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Group projects, Lots of homework, Beware of pop quizzes
+Review: The questions on exams are literally consciously written with confusing and convoluted wording, and the project specs are written intentionally vaguely. Someone earlier said something about English comprehension skills being the most relevant here, and I agree. Terrible, stay away.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 3/5
+Tags: Tough grader, Group projects, Lots of homework
+Review: The most uninteresting and rude lecturer I have taken at UofA. Also writes very unorganized specs.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: Get ready to read, Group projects, Lots of homework
+Review: She has a noticeable lack of enthusiasm for teaching, the lectures are very difficult to not fall asleep during. Also, she has a habit of giving the least helpful possible answers to questions.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Get ready to read, Group projects, Lots of homework
+Review: The specs are very lengthy, and yet, tell you almost nothing. That is actually a good analogy for this class: lots of words, very little meaning.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Get ready to read, Group projects, Lots of homework
+Review: She gives the least clear instructions out of any professor I have ever had. Not an engaging lecturer either, its like she has no passion for CS.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough grader, Group projects, Lots of homework
+Review: The class was not organized well and the teacher was rude. It might have been a bit better if there was an actual textbook. Like everyone else has been saying too, the project specs are abysmal.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: Tough grader, Lots of homework, Beware of pop quizzes
+Review: She basically goes out of her way to give unhelpful "answers" to students questions, I really don't get it. Just give simple, straightforward answers and don't be rude.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough grader, Group projects, Lots of homework
+Review: Not engaging as a lecturer, rude when approached, and gives vague project specs.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: Get ready to read, Group projects, Lots of homework
+Review: You need to have incredible English reading comprehension skills in order to decipher what is expected from the specs. I feel really bad for any students who don't speak English as their first language. Also, there is basically no reason to ask questions, because she will answer them in the most unhelpful and vague ways possible.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Get ready to read, Beware of pop quizzes, Lecture heavy
+Review: I'm not sure why this is a CS course in the first place, because the professor and TA'S are so stingy and exact on the wordings used in answers - DESPITE the fact that they themselves are worded terribly. Get ready to do everything by yourself, because lotz will not help you - and neither will the TA'S.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 3/5
+Tags: Tough grader, Group projects, Lots of homework
+Review: She gives very unclear instructions and the class is disorganized. It is also very difficult to not fall asleep during lectures.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Get ready to read, Group projects, Lots of homework
+Review: When students ask questions (either on Piazza or in-person), she gives super unhelpful answers and is rude for no reason. It does not seem like she enjoys her job teaching either, and she doesn't seem to be very passionate about software.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Get ready to read, Group projects, Lots of homework
+Review: I have learned a very minimal amount, and yet have had to do the most amount of work of all my classes by far in this class. She is a professor who values busywork and reading comprehension above all else.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough grader, Group projects, Beware of pop quizzes
+Review: The class wouldn't be so bad if there wasn't an unreasonable amount of work for the projects. Each project is seriously more work than all of the homework for other classes (210 or 337) combined. On top of that, the specs are written so badly that you have to clarify something about every sentence, and her answers to questions are vague and rude.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: Get ready to read, Group projects, Lots of homework
+Review: It has been like 3 months of review of stuff I learned in high school up until this point, and even though I already know most of this stuff, the deliberately confusing wording on quizes, exams, project specs, etc. makes it difficult to get an A in anything. You really need to be an English analyst in order to do well in this class.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 3/5
+Tags: Group projects, Lots of homework, Beware of pop quizzes
+Review: The most boring lectures I have ever attended, try not to fall asleep challenge (impossible). Additionally, asks for wayyyyy too many random features to implement in project specs and does not explain how they are supposed to work well enough. Students are constantly trying to clarify what she meant in the specs on Piazza, and she is rarely helpful
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Group projects, Lots of homework, Beware of pop quizzes
+Review: This is genuinely the worst class I ever ever taken due to terribly lengthy and poorly written project specs, and a professor who is very unapproachable and rude.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: Tough grader, Group projects, Lots of homework
+Review: These projects are really, really, really large and badly described. The professor is also avoidant of questions and answers them very vaguely.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: Get ready to read, Group projects, Lots of homework
+Review: A lot of busywork. The most I have ever seen. It isn't difficult stuff, but her poor explanations and weirdly phrased specs make it difficult. Also rude, as many others have mentioned.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Get ready to read, Lots of homework
+Review: This class should be named "reading comprehension" with the amount of time you need to spend interpreting lengthy and poorly worded specs. I feel genuinely bad for anyone who English is not their second language, who has the misfortune of taking this class with Lotz.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Get ready to read, Group projects, Beware of pop quizzes
+Review: The specs for the programming projects are extremely lengthy and vague, and it is almost not worth it to ask questions in Piazza, as the TAs and professor go out of their way to not give you straight up answers.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 3/5
+Tags: Get ready to read, Group projects, Lots of homework
+Review: The assignments are very unorganized. It seems there are communication issues between the TAs and the professor, as every TA has a different idea about how things should be graded, and different TAs interpret the specs in completely different ways, which just goes to show how badly the specs are written.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: Tough grader, Get ready to read, Group projects
+Review: She is condescending to students when they are simply asking for clarification, and it seems she has some sort of superiority complex. Additionally, she writes the worst specs I have ever seen in my entire academic career.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: Group projects, Lots of homework, Beware of pop quizzes
+Review: The content in this class is not difficult, but is made difficult by confusing and vague wording in specs and slides. It almost seems as if this is by design, as if the professor wants to make things seem complicated when they are in reality super simple.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Get ready to read, Group projects, Lots of homework
+Review: I already learned all of this content in highschool, but with the way that the specs are written and things are explained super vaguely it is difficult to do well. The teacher is very monotone during lectures and as others have mentioned, rude to students who just want help.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 2/5
+Tags: Tough grader, Group projects, Test heavy
+Review: We literally have to write in English, not code, describing very basic things that we already learned in 210. She is not approachable also, and has a bad attitude it seems.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 3/5
+Tags: Tough grader, Group projects, Lots of homework
+Review: The first of the long assignments was like 10 times more work than the literal final for 337. In addition to this, we also had to make a 20 minute long video (it was difficult not making it much much longer) showcasing the project and pretty much every single edgecase that could happen.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: Get ready to read, Group projects, Lots of homework
+Review: The long assignments are unreasonably extensive, and you have to make a 20 minute long video explaining what could be easily checked by graders by just looking through your code base. As others have said too, she is just plain rude to students who just want help or clarification.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: Get ready to read, Group projects, Lots of homework
+Review: Genuinely the worst project specs I have ever read. Very vague and lots of room for misunderstandings. Additionally a boring lecturer. Stay away.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Get ready to read, Group projects, Lots of homework
+Review: The specs for projects seem purposefully confusing and disorganized , her lectures are monotone and boring, and she is not a very nice person. It does not seem as though she enjoys teaching, so what is the point of being a lecturer if that is the case?
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 2/5
+Tags: Tough grader, Lecture heavy, Test heavy
+Review: Very standoffish for absolutely no reason, and a boring lecturer. Not much new content different from 210 either.
+
+Course: CSC335 | Quality: 4.0/5 | Difficulty: 3/5
+Tags: Group projects, Caring, Accessible outside class
+Review: Melanie was a decent lecturer. She may seem monotone and blunt, but she is extremely chill. She let us know in advance when "pop" quizzes would occur and what topics would be on tests/quizzes. Generous grader. Only complaint was group projects. I understand why they are important, but do yourself a favor and take this class with a competent friend.
+
+Course: CSC335 | Quality: 1.0/5 | Difficulty: 3/5
+Tags: Tough grader, Beware of pop quizzes, Test heavy
+Review: It does not seem like she enjoys teaching; very rude to her students. Additionally, does not write specs explicitly with a clear rubric.
+
+Course: CSC335 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Tough grader, Group projects, Amazing lectures
+Review: Best class I've taken at UA for actually learning a programming language and how to use it in the real world. Melanie is an awesome teacher and her lectures are great, but she's a tough grader. Quizzes are random, but sometimes she'll announce them beforehand. Exams can be tricky since there's so much material to study.
+
+Course: CSC335 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Group projects, Beware of pop quizzes, Respected
+Review: Great professor. Her lectures are some of the best I've had at the CS department. 2 pair projects and 1 group project so you will learn how to collaborate. Projects were not hard. Exams were not hard if you put in the time to study. Grading was nitpicky at times, they want you to use the terminology. My second class with Lotz, she is great.
+
+Course: CSC372 | Quality: 5.0/5 | Difficulty: 2/5
+Tags: Group projects, Clear grading criteria, Lots of homework
+Review: Lots of lecture from slides where she works through problems, making them very simple. Also does some ICAs to help you work through things. The hardest part of this class was making a programming language as she didn't give enough information. Read up on lexers! Great course to take after 453, though not required.
+
+Course: CSC345 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: EXTRA CREDIT
+Review: CSC 345 is a pretty difficult course and I think Melanie did a great job teaching it. She took extra time to do review sessions where she would answer any questions and recorded them for people who couldn't make it. There are lots of extra credit opportunities, anyone who puts any real effort in will do well in the class. Lectures were good too.
+
+Course: CSC345 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: EXTRA CREDIT, Group projects, Amazing lectures
+Review: Lotz is a great professor despite what her rating is. Any patriation was extra credit, the exams are very reasonable, the group project is very easy assuming your group works on it, and the homework isn't too bad. The PAs however, can be hit or miss, especially the 10 sorting algos one. Her lectures include a ton of examples done by hand.
+
+Course: CSC345 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Get ready to read, Clear grading criteria, Test heavy
+Review: I have taken several classes with professor Lotz, and she always makes it very possible to do well in her courses- even if you fumble a few things. She is kind and funny, but teaches difficult material and does not have a ton of patience for struggling students. If you seek to truly understand the core concepts, you will do well in her classes.
+
+Course: CSC372 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Group projects, Beware of pop quizzes, Accessible outside class
+Review: Professor Lotz really wants you to learn in all of her classess, they are definetely not "easy" classess but she sets up the grading to give you extra credit so that her classess are not easy to fail. you will have to put in the work for her classes. make sure to get good group partners, start home work early-ish, many OH options , helpful in OH
+
+Course: CSC372 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Participation matters, Gives good feedback, Accessible outside class
+Review: I've had Professor Lotz for 4 courses and her classes have consistently been my favorites. The classes are definitely difficult but that is the material not her. She wants people to learn and not just get a passing grade. It's easy to get into contact with her and she really is there to help.
+
+Course: CSC372 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: EXTRA CREDIT, Group projects
+Review: Far from my first time having Lotz. She is incredibly knowledgeable and thorough and is easily accessible outside of class. 372 was a super fun course. Her "learning should not be easy" philosophy has made me a better student for sure. Her classes are great, but don't expect to coast through, you need to put in the effort.
+
+Course: CSC144 | Quality: 1.0/5 | Difficulty: 3/5
+Tags: Tough grader, Lots of homework, Test heavy
+Review: Awful professor, super bad attitude, not approachable at all
+
+Course: CSC345 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough grader
+Review: She speaks down to her students and quote said "many of you have a lot of work to do before the final exam", after giving an exam which the majority of the class recieved a low score. She should consider a new profession.
+
+Course: CSC372 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Participation matters, Lots of homework, Accessible outside class
+Review: I have had Lotz a couple semesters now, and I will say while she is definitely one of the most challenging profs I have had, she is also the most thorough in her teaching, and provides a lot of content (for better or worse) Her teaching style is learning should not be easy, and I feel the challenge left me understanding the content well.
+
+Course: CSC345 | Quality: 4.0/5 | Difficulty: 3/5
+Tags: EXTRA CREDIT
+Review: As a former CS student, I think she is a very nice teacher in computer science class. Tough CSC 345 is not an easy class but it provides a lot of extra credits, and sometimes she will offer due extension. If you're not doing will just catch all extra credits you still can do good.
+
+Course: CSC372 | Quality: 2.0/5 | Difficulty: 3/5
+Tags: Participation matters, Group projects, Lots of homework
+Review: For a class that sounds fun and simple she managed to make it complicated and boring. Sometimes we had a project, homework, and programming assignment due in the same week. She's a nice person and cares for her students. I just can't get with that teaching style. She makes you learn 3 old languages to teach her concepts and one more as a project.
+
+Course: CSC345 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: EXTRA CREDIT, Amazing lectures, Caring
+Review: Very clear lectures and even though the class was very difficult, the professor was always willing to give extra credit if you worked for it and sit down with you during office hours or SI sessions to really drive home important concepts. Super patient, straight to the point, and great learning experience overall
+
+Course: CSC345 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Participation matters, EXTRA CREDIT, Amazing lectures
+Review: You won't do well in her class if you don't put in the work, but she definitely provides everything you need to get a good grade, this class has been particularly hard but I don't think I would've learned as much as I did if it wasn't for Lotz. She is the best instructor in the CS department.
+
+Course: CSC345 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Participation matters, Caring, Lecture heavy
+Review: Professor Lotz was by far the best instructor within the Computer Science Department. Her class is a lot of work and contains difficult material, but she is willing to help and work with her students every step of the way. This course was one of the most complex I have taken but I also feel it is one where I learned the most. Melanie is fantastic.
+
+Course: CSC345 | Quality: 4.0/5 | Difficulty: 2/5
+Tags: EXTRA CREDIT, Beware of pop quizzes, Respected
+Review: It is hard to not get a good grade with Lotz with the amount of extra-credit she gives. If you put in the time and effort, you will do well in her class. She is also super helpful overall with both class and career stuff.
+
+Course: CSC144 | Quality: 5.0/5 | Difficulty: 2/5
+Tags: Clear grading criteria, Caring, Respected
+Review: Melanie is the best professor as a freshman. She gives you everything you need to succeed: lecture slides with notes, in-class runover of the information, supplemental instruction two days of the week, and lots of office hours available. Stay on top of things. Do your homework The first part of this semester is hard. Go to supplemental instruction.
+
+Course: CSC144 | Quality: 2.0/5 | Difficulty: 4/5
+Tags: Beware of pop quizzes, Lecture heavy
+Review: Does an okay job of explaining the material and drops your lowest hw/quizzes. Unfortunately she has about the worst attitude you'll ever find in a professor, often getting weirdly angry and offended for no apparent reason when students simply ask questions about the material. There's a fairly heavy curve for the class though so that's nice.
+
+Course: CSC345 | Quality: 4.0/5 | Difficulty: 2/5
+Tags: EXTRA CREDIT, Beware of pop quizzes
+Review: 345 is a doable A because of all the EC opportunities. She has some skewed ideas of what is & isn't difficult (the only time she said a project had easy implementations turned out to be for the hardest one by far) & her dry tone might put off some. Still, she teaches the content & answers questions well, & rewards both effort & participation.
+
+Course: CSC345 | Quality: 4.0/5 | Difficulty: 2/5
+Tags: Participation matters, EXTRA CREDIT
+Review: The number of extra credit she hands out is insane - use it to your fullest advantage! Explains concepts to a proper depth, but goes over the main idea a bit too quickly, though the class prep mitigates that. If you show up to her OH, at least try to go over the content yourself first. Doesn't always follow good coding practices.
+
+Course: CSC345 | Quality: 2.0/5 | Difficulty: 4/5
+Tags: Tough grader, Beware of pop quizzes, Test heavy
+Review: Lotz is a good lecturer and all, but very impersonal and rather condescending to students who ask questions in lecture or piazza. The specs had a lot of mistakes, and the homework problems are hard, and dont reinforce what we have learned in class, making them useless as study material. Lots of applied math, and memorizing algos and data structures
+
+Course: CSC144 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Beware of pop quizzes
+Review: Dropping this class cleared my skin. Mean teacher, she should consider a new profession if she obviously can't stand speaking to students.
+
+Course: CSC144 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Tough grader, Beware of pop quizzes, Lecture heavy
+Review: I'll start by saying that you ABSOLUTELY have to pull your own weight in her class, if you don't try there will be little empathy when you do poorly. As long as you make an honest effort, take notes and go to SI or OH, she is pretty understanding if you aren't understanding and will do her best to help you understand the material
+
+Course: CSC144 | Quality: 3.0/5 | Difficulty: 2/5
+Tags: Lots of homework, Beware of pop quizzes, Lecture heavy
+Review: Professor Lotz is teaching an complex course and could definitely improve her attitude toward struggling students. That being said, you really have to pull your own weight in this class, and Lotz provides a lot of resources and opportunities for help. She can be a bit standoffish but if you show effort her attitude changes. I would take her again.
+
+Course: CSC144 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Amazing lectures, Gives good feedback, Caring
+Review: Professor Lotz is great at teaching and she cares about students a lot. That being said, get ready to buckle up because this class is very difficult. You must be incredibly thorough in all of your work, and the course content is challenging often. If you go to office hours and review material, you will be fine.
+
+Course: CSC345 | Quality: 1.0/5 | Difficulty: 1/5
+Tags: Tough grader, Beware of pop quizzes
+Review: Her lectures are very thorough and she does a wonderful job explaining the material. However, don't bother going to her office hours or reaching out to her. She's extremely rude and impersonal.
+
+Course: CS245 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: Genuinely haven't ever had such a horrible class, a course meant for freshmen is getting abysmal test averages and she probably does not see a problem with how bad of a teacher she is despite it being plainly obvious.
+
+Course: CSC345 | Quality: 2.0/5 | Difficulty: 3/5
+Tags: Lots of homework, Beware of pop quizzes, Lecture heavy
+Review: She doesn't really explain things that well so you're kind of left in the dark a lot of the times. She also spreads Catholicism in class which is a bit weird.
+
+Course: CSC345 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: She is an awful teacher that does not provide real and meaningful examples. Do not take her class at all.
+
+Course: CSC345 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Amazing lectures, Clear grading criteria, Gives good feedback
+Review: Dr. Lotz is one of the best lecturers in the department. Although her attitude may not seem great at times during class, she is very cool an will help you every time. I felt the concepts were difficult already but she always explained them very well. Would highly recommend any of her classes.
+
+Course: CS245 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough grader
+Review: Overall, not a bad teacher, her tests (online) are extremely hard but not because of the material, it's the time limit she gives for them. Overall doesn't seem like she really enjoys her job, when asked questions she sounds almost angry that you asked them. Do not recommend taking her for any class if she acts that way all the time.
+
+Course: CSC372 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: EXTRA CREDIT, Group projects, Caring
+Review: Second time I took a course with her, and she's great. Tons of extra credit opportunities. Has course policies that allow for flexibility (late days, etc.). Showed up at 8am not just for the in class extra credit, but because her lectures were great, and concise. The class is a lot of work, but was fun, different, and I learned a lot from her
+
+Course: CSC245 | Quality: 5.0/5 | Difficulty: 2/5
+Tags: Clear grading criteria, Caring, Respected
+Review: I enjoyed the class. She has a straightforward way of teaching and interacting which make it very easy to learn
+
+Course: CSC345 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Clear grading criteria, Caring, Respected
+Review: She's a great professor. I take her.
+
+Course: CSC345 | Quality: 4.0/5 | Difficulty: 3/5
+Tags: Participation matters, EXTRA CREDIT, Clear grading criteria
+Review: She taught this semester very well. Her lectures are clear, and the homework/projects have infinite tries (before a deadline), which makes them *really* implant the lecture materials in your brain. In many cases, the exams became easy because of them. There's also a lot of extra credit opportunities in almost everything, even class participation.
+
+Course: CSC345 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Tough grader, EXTRA CREDIT, Clear grading criteria
+Review: Had by far the best grading system in any class I've ever taken: There are 1000 points, with them being split into projects, exams, and homework. Very easy to calculate grade. Cool material and lectures, but was very rushed I think due to the amount. Some topics feel like they are necessary as a core concept, but she brushes through them.
+
+Course: CSC345 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Clear grading criteria
+Review: Enjoyed her lecture, organized and detailed. Material is difficult but it felt like she masters them super well and it's all very easy and clear to her and I admire that
+
+Course: CSC345 | Quality: 2.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: Had Lotz for Fall of '20. Loved McCanns 245, hated Lotz 345. Lectures are eclectic and didn't feel like I actually learned material rigorously; few to no examples. The material was made overly complicated and YouTube lessons were a much better use of time. Time crunch on exams is tough, but curve for the class is nuts.
+
+Course: CSC345 | Quality: 4.0/5 | Difficulty: 2/5
+Tags: Accessible outside class, Clear grading criteria, EXTRA CREDIT
+Review: Lotz catches heat because people aren't ready for her classes, or they don't put in the effort it requires. She gives tons of opportunities for extra credit. Her Piazza is well monitored and she teaches clearly. If she makes a mistake, she will make up for it. She even shows grace when you make little mistakes.
+
+Course: CSC372 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: Test heavy
+Review: Content of the class was simple but somehow she managed to make it difficult. All I will say is she said exam 2 would be shorter than exam 1 and it was twice as long lmfao.
+
+Course: CSC345 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Lots of homework, Skip class? You won't pass., EXTRA CREDIT
+Review: Dr. Lotz has a very blunt, direct teaching style, which I appreciated. The material is difficult, and the homework is very labor intensive, so be ready. In general, there is a crazy amount of material to learn, but its interesting stuff and I thought she covered it all very well. She also built a ton of extra credit into the grading scheme :)
+
+Course: CS245 | Quality: 3.0/5 | Difficulty: 4/5
+Tags: Lots of homework, Clear grading criteria
+Review: CS 245 is a difficult class. I can't imagine that there is a way to make this class easier. Lotz knows the curriculum thoroughly and will give you many good tools for solving problems. She goes quick in lecture so you can't always write down everything on the lecture slides. She's sometimes a little uninviting, but ask your questions anyway.
+
+Course: CSC345 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Lots of homework, Lecture heavy, Tough grader
+Review: The worst teacher already teaching a hard class is a bad mix. If you can avoid taking her you should. Weird grading scale, which may seem good but it is to counter balance the unreasonable amount of hw. Lotz is uncaring, seems bugged by the students, huffs when students ask questions/ask for clarification. Barely answers/vague on piazza.
+
+Course: CSC345 | Quality: 5.0/5 | Difficulty: 5/5
+Tags: Lots of homework, Amazing lectures, EXTRA CREDIT
+Review: I have taken both 345 and 245 and here is the thing, Professor Lotz is an AMAZING instructor (very thorough/clear in lectures) however often times she is blamed for the being a "bad" professor because of the difficulty of the course work (which no professor can prevent). She starts you off with 180 bonus points out of 850 and you have late days!
+
+Course: CSC245 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: Skip class? You won't pass., Tough grader
+Review: It was difficult to tell exactly how she wanted solutions to be formatted, and would grade impossible. The TA's couldn't even really answer questions. Student would ask questions on our classroom site, and wouldn't get answered until sometimes a couple of days after they were asked. She didn't put a lot of time into the course or seem to care.
+
+Course: CSC245 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough grader, Lots of homework, Test heavy
+Review: Her style does not match this course. She will "teach" you something "basic", but then on the quizzes or homework, she gives questions that she has really didn't cover. I spend hours trying to find what she did not teach us. I dread her class. She is sorta nice, but be prepared for bull crap questions. She is the worse teacher I have ever had.
+
+Course: CSC245 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: Lots of homework, Test heavy, Tough grader
+Review: So much work! Even though I had research and 400 level math classes, this was easily the toughest just because of the sheer volume of work. Abover qeverything else, she expect students to type the math problems which sucks real bad. I think she doesn't realize that students are taking classes other than CSC 245 too, we can't devote all our time!!!
+
+Course: CSC245 | Quality: 2.0/5 | Difficulty: 4/5
+Tags: Lots of homework, Skip class? You won't pass., Test heavy
+Review: This is one of the hardest classes I have taken thus far. There are no breaks over the weekend, you are expected to complete HW and quizzes(3/week). Every week, you are given homework that you cannot work ahead on because it is based on the lectures. Chpt tests every couple weeks(over weekends). Gives 1 example and expects you to apply to many.

@@ -1,0 +1,152 @@
+Professor: Abu Ahmed
+Department: Computer Science — University of Arizona
+Overall quality: 3.5/5 | Difficulty: 2.5/5 | Would take again: 64.9% | Ratings: 37
+Courses: 144, CSC110, CSC120, CSC244, CSC337, CSC345
+
+Course: CSC337 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Inspirational, Caring, Respected
+Review: I'm a big fan of Ahmed. Had him for 120, 244, and I wish I had him for 144. He is straightforward and focused on the course material as well as respectful towards students. No drama or digressions. I find his lectures and competence inspiring as a CS student. Looking forward to more courses with him.
+
+Course: CSC337 | Quality: 2.0/5 | Difficulty: 2/5
+Tags: Inspirational, Hilarious, Online Savvy
+Review: Lets-a-start...so uh...yeah
+
+Course: CSC337 | Quality: 5.0/5 | Difficulty: 2/5
+Tags: EXTRA CREDIT, Group projects
+Review: He posts his lectures online as well as the codes, so those are helpful for when you do projects. Study guides resemble the test almost perfectly. His assignments are also nice, and actually enjoyable to do because you can make whatever you want, as long as you follow the instructions. He made this class enjoyable for me.
+
+Course: 144 | Quality: 4.0/5 | Difficulty: 3/5
+Tags: Caring, Respected, Lecture heavy
+Review: Dr. Ahmed is a great discrete math professor. He is willing to answer any questions that you may have and his slide shows are very helpful! There are ICAs and homework's each week. Discrete math can be tough at first but be sure to ask questions so you do not get lost! Overall discrete math is not hard but can be tricky so study and attend classes!
+
+Course: CSC244 | Quality: 5.0/5 | Difficulty: 2/5
+Tags: Caring, Lecture heavy, Accessible outside class
+Review: Dr. Ahmed is a very good professor and same with his slide decks. He is very willing to answer questions. Homework's once a week, 15 problems each. Quizzes once a week but they is 1 problem and you have a whole day to do them. He also may give the answer within the lecture as well. The exams are very similar to the homework's which are very nice!
+
+Course: CSC244 | Quality: 5.0/5 | Difficulty: 2/5
+Tags: EXTRA CREDIT
+Review: If you can do all the HW & quiz questions, the exams are quite similar. Office hours are encouraged, and you get extra credit every time you go (it does cap out eventually). Prof. wants everyone to do well. If you make an effort to do well you will do good. Everyone I know who goes to class has an mid A or high B. Go to class, it truly does help.
+
+Course: CSC110 | Quality: 2.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: This professor was really confusing and hard to communicate with. I was often unsure on what he meant whenever I communicated with him, which caused a lot of friction in my understanding of the work. Also, his primary method of communication was discord, which seemed very unpractical because important messages were often buried in the chat.
+
+Course: CSC244 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Caring, Respected
+Review: He's a good person and a good professor as well, he cares about students and their success in his course. Discrete Maths is just hard and you gotta put in the work. Just go to office hours and ensure you use all the materials he provides and you will be fine.
+
+Course: CSC345 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: (none)
+Review: This was for CSC 337, Prof Ahmed is one of the most genuinely caring and supportive professors I've ever had. He truly wants every single student to succeed not just in his class, but beyond it as well. Take him if you get the chance; he's the kind of professor who makes college feel worth it.
+
+Course: CSC345 | Quality: 5.0/5 | Difficulty: 2/5
+Tags: EXTRA CREDIT, Caring, Respected
+Review: He truly cares about his students and will help you succeed and get the course grade you desire. He is a good lecturer and I have loved having him as professor. If you see him teaching any other course you require, don't think twice just take it!
+
+Course: CSC120 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: EXTRA CREDIT, Caring, Respected
+Review: he is a truly awesome professor, the people complaining are just lazy and didn't put in the effort. he is a good lecturer and helps you prepare well for the exams. i loved him and his teaching style.
+
+Course: CSC345 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Caring, Respected
+Review: He's awesome!
+
+Course: 144 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Clear grading criteria, Gives good feedback, Online Savvy
+Review: There is nothing really that you can find to complain about Professor Abu Reyan. Other feedback probably would be people who were lazy and/or incompetent to complete the course to their liking. He is a great all around professor. Very fair and understanding, clear and concise, and answers any question and provides help whenever possible. He's great
+
+Course: CSC345 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Clear grading criteria, Caring
+Review: He's a good professor overall, and you can do well if you study well!
+
+Course: CSC244 | Quality: 2.0/5 | Difficulty: 2/5
+Tags: Lecture heavy
+Review: Unclear lectures but lenient grader
+
+Course: CSC120 | Quality: 1.0/5 | Difficulty: 2/5
+Tags: (none)
+Review: Just awful
+
+Course: CSC345 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: (none)
+Review: Want to specify this was for 337, Web Programming. Honestly I think in other classes he was just inexperienced as a professor. He's only been doing it for a few years. Engaging with the way he teaches, good projects, fair homework and exams. Honestly made me realize I want to do web development as a career.
+
+Course: CSC244 | Quality: 5.0/5 | Difficulty: 2/5
+Tags: EXTRA CREDIT, Accessible outside class
+Review: Not sure why everyone's reviews on him are so bad I found him super understanding and genuinely wants everyone to succeed in the class which for some reason people are complaining about? His lectures are boring but I think its just a boring subject. Study the homework as the exams are mostly copy and pasted from there.
+
+Course: CSC244 | Quality: 3.0/5 | Difficulty: 1/5
+Tags: EXTRA CREDIT, Lecture heavy
+Review: Like everyone else has said, his lectures are insanely boring and hard to sit through but it balances out as the exams are very straightforward. Extra credit is way too generous in my opinion, but that's a good thing for us. A lot of content is review from 144 and really not hard. Exam questions are basically copied from homeworks.
+
+Course: CSC244 | Quality: 4.0/5 | Difficulty: 1/5
+Tags: EXTRA CREDIT, Clear grading criteria, Caring
+Review: Amazing class content, Ahmed cares to resolve students problems, homework dynamics are fun and clear enough to understand key concepts, the exams are derived directly from the homeworks. However, lecture dynamics are slow and make it very easy to space out, this is obviously a problem when a math class is imparted in person to a class of hundreds.
+
+Course: CSC244 | Quality: 3.0/5 | Difficulty: 2/5
+Tags: (none)
+Review: As a lecturer, he is very boring and almost no one pays attention. However his exams are easy and lots of extra credit. Be sure to self-study. He records his lectures which is good because when you rewatch them to understand specific topics, it actually makes sense. Listening to his lectures in real time suck but his recordings are good.
+
+Course: CSC244 | Quality: 1.0/5 | Difficulty: 1/5
+Tags: EXTRA CREDIT, Caring, Accessible outside class
+Review: Dr. Ahmed's class is very weird. Lectures are dreadfully boring as he reads off the slides and doesn't give examples. However, the coursework is very easy, with generous extra credit on exams (up to 16% midterms, 10% final). The instructor and TAs are also responsive on discord for questions! TL;DR: professor boring and bad, class extremely easy.
+
+Course: CSC120 | Quality: 3.0/5 | Difficulty: 4/5
+Tags: Accessible outside class
+Review: Honestly, if you don't mind reading off the slides then you will be fine. His accent is hard to understand and his lectures aren't the most interesting but he is very fair with regrades and is fast to respond to emails.
+
+Course: CSC244 | Quality: 3.0/5 | Difficulty: 1/5
+Tags: EXTRA CREDIT, Clear grading criteria, Accessible outside class
+Review: I would say 244's content is more difficult than 144, but it was much more accessible thanks to this professor. Lots of extra credit, and tests/homework are easy and not nearly as harshly graded as McCann's. Lectures are definitely a step down however. Easy A if you keep up, but does not push you to master the content at all.
+
+Course: CSC244 | Quality: 3.0/5 | Difficulty: 1/5
+Tags: (none)
+Review: Offered so much extra credit I technically got over 100 in the class. Decent at explaining, but has difficult homework. He is useful during office hours and will explain things very well. Tests were just recycled homework questions. Class was a pushover, but I think I didn't learn it as well as I could have if the class was more difficult.
+
+Course: CSC120 | Quality: 2.0/5 | Difficulty: 4/5
+Tags: Lecture heavy
+Review: This class is a weed out class. The main thing that was difficult for me was that there was no teaching really done in class. Abu reads off slides in an accent that makes things very hard to understand, and I don't think I ever watched him write a single line of code in class. You're going to have to put in a good amount of effort outside of class.
+
+Course: CSC120 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: EXTRA CREDIT, Caring, Accessible outside class
+Review: Awful TA but he is very smart.
+
+Course: CSC120 | Quality: 2.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: He seems real nice, but he isn't a good lecturer at all. He ends up being the quietest person in a room of 100s of people and it's clear no one is paying attention and he don't know what he's teaching. You won't learn anything during his class so be ready to spend a lot of times outside of class and in OH because the TA's really carry this class.
+
+Course: CSC244 | Quality: 2.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: He is very much the opposite of engaging. He is somehow the quietest person in a classroom with hundreds of students and feels like he's talking but doesn't know what he's saying. You won't learn much during his class so get ready to study outside of class and go to office hours because the TA's are the best part of the class. He's nice though.
+
+Course: CSC244 | Quality: 1.0/5 | Difficulty: 1/5
+Tags: (none)
+Review: Lenient and nice guy, but by far WORST lecturer I've ever had. Easy A, as tests are homework questions, BUT without self-study from the textbook or youtube, you will not learn anything and fail future classes that extend on the concepts from this class. Never shows any math by hand, but just has it pre-typed on the slides, which he speeds through.
+
+Course: CSC244 | Quality: 1.0/5 | Difficulty: 3/5
+Tags: Tough grader, EXTRA CREDIT
+Review: I had a friend who TA'd for the class, and they didn't even know what the professor was talking about. Boring lectures with slides that are sometimes hard to read during class. The later exams were pretty easy, but the first one was brutal. At least exams would have 1 extra credit question.
+
+Course: CSC244 | Quality: 5.0/5 | Difficulty: 1/5
+Tags: EXTRA CREDIT, Caring, Online Savvy
+Review: I received an extremely failing grade on the first midterm because the TA's were so harsh, but I had the exact answers from the notes. I asked the professor about this and he completely changed my grade after seeing I was correct. His lectures are boring for sure, but if you read the slides and study, this class will be cake. The professor cares!!
+
+Course: CSC244 | Quality: 4.0/5 | Difficulty: 2/5
+Tags: EXTRA CREDIT
+Review: Very easy grader. Extra credit opportunities on homework and every exam. Exams given were 7 questions where each question were worth 16.6 points. What this means is if you get full points on every question you get a 116% on the exam. Or if you got full points on 5 questions and half credit on 2 questions you get a 100%. Hard not to get an A lowk.
+
+Course: CSC244 | Quality: 1.0/5 | Difficulty: 2/5
+Tags: Lots of homework
+Review: I stopped coming to class because I fell asleep. His slideshows are disorganized and his homeworks are busywork. Quizzes and tests are literally homework problem rerolls. Fascinating subject. Deadbeat prof and boring class.
+
+Course: CSC244 | Quality: 5.0/5 | Difficulty: 2/5
+Tags: Tough grader, Gives good feedback, Inspirational
+Review: Everything was good, he actually knows what he teaches.
+
+Course: CSC244 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: The class lectures felt very disorganized and hard to follow. Class overall seemed rushed to setup in terms of class website, lectures, etc. If you plan on taking this professor for 244 be sure you are able to teach yourself the class content; the slides are very hard to follow. Relatively lenient grading but not always clear in what is expected.
+
+Course: CSC345 | Quality: 4.0/5 | Difficulty: 2/5
+Tags: Graded by few things, Test heavy, Caring
+Review: Super nice, lenient, and great grading structure. Homework is the majority of the grade, and the problems on the exams are usually pulled from the homework. Lectures were disorganized at times, and a lot of the content was just review from previous courses, but overall he's a very solid choice for 345, especially if you want to get a good grade.
