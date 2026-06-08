@@ -1,0 +1,632 @@
+Professor: Lester McCann
+Department: Computer Science — University of Arizona
+Overall quality: 3.5/5 | Difficulty: 4.2/5 | Would take again: 61.2% | Ratings: 157
+Courses: 127A, 245, C245, CS127A, CS245, CS345, CSC 127A, CSC127A, CSC127B, CSC144, CSC225, CSC227, CSC245, CSC345, CSC352, CSC372, CSC460
+
+Course: CSC144 | Quality: 4.0/5 | Difficulty: 5/5
+Tags: Tough grader, Lots of homework, Lecture heavy
+Review: He's the best lecturer I've ever had at the UOA. Extremely passionate. However, I will note that his exams are insanely difficult. At one point, I had a 61% on the exams and was above the class average. Ended up failing and retaking with a different professor, where the lectures were much more boring, but the exams were easy. I got an A.
+
+Course: CSC460 | Quality: 5.0/5 | Difficulty: 2/5
+Tags: Group projects, Amazing lectures, Test heavy
+Review: 460 is a pretty interesting class. Leniently graded HWs .Get started early on projects because they take time and 5 late days. Lectures are engaging and the professor is very quick to respond to piazza questions. Go to office hours often as he's very helpful with doubts. Refer to tb for HW's. Highly recommend this class as you truly learn so much!
+
+Course: CSC345 | Quality: 2.0/5 | Difficulty: 5/5
+Tags: Beware of pop quizzes, Lecture heavy, Test heavy
+Review: Questions on tests are niche compared to what he covered in lecture. Homeworks don't really correlate to the tests. Coding assignments are long. Also does not like or respect his students. Never felt so inconsequential in class in my college career than in his.Roll with that punches and do the best you can, that's all you can really do in his class
+
+Course: CSC345 | Quality: 2.0/5 | Difficulty: 5/5
+Tags: Get ready to read, Amazing lectures, Lecture heavy
+Review: McCann is very good at explaining concepts in his lectures. His grading is fair and his tests are general more than in depth, despite the lectures being in depth. Check piazza and try your very best in his class. Good Luck!!
+
+Course: CSC345 | Quality: 2.0/5 | Difficulty: 4/5
+Tags: Tough grader, Amazing lectures, Beware of pop quizzes
+Review: McCann is a really good teacher in terms of lectures however he is as unlenient as a professor could get. He drops only pop quizzes and nothing else. His tests feel like they test you on obscure details and he doesnt exactly prepare you well for homeworks and projects.
+
+Course: CS345 | Quality: 3.0/5 | Difficulty: 5/5
+Tags: Tough grader, Beware of pop quizzes, Test heavy
+Review: Don't take him unless you have absolutely no choice. He actively works against students in imo. He has great lectures, but the difficulty of his tests in my opinion just got to a point that its ridiculous. No matter how much I studied for them,I was never fully prepared. You need to work hard the whole semester. He does not believe in curves or ec.
+
+Course: CS345 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: Tough grader, Get ready to read, Lecture heavy
+Review: this guy is seriously not worth it, considering how much he belittles other students. Please don't take him.
+
+Course: CS345 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough grader, Participation matters, Beware of pop quizzes
+Review: What was taught in class was not the same as the content of his exams and quizzes. Some challenging questions were set for the exams. To get a high score, you must first be someone who is highly proficient in computers.
+
+Course: CSC345 | Quality: 3.0/5 | Difficulty: 5/5
+Tags: Tough grader, Lots of homework
+Review: Dr. McCann gives great lectures, but his class is made miserable by the extreme expectations and harsh grading. Exams focus on niche details perhaps mentioned once in a lecture, and style guidelines take up more lines then the actual code does. He occasionally belittles students asking questions, which is often deserved and hilarious.
+
+Course: CSC345 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Amazing lectures, Beware of pop quizzes, Respected
+Review: I've had him 3 times already and will have him twice next semester for a total of 5 times while at UofA. He is an excellent professor; the lectures are the most useful things ever. The slides are great, and he explains things well. There are random quizzes once a week for attendance, while 2-3 are normally dropped. He has done this for 144 and 345.
+
+Course: CS345 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough grader, Lecture heavy, Test heavy
+Review: Right. This guy. For one, he will openly berate you. He is not helpful at all in that aspect. Compared to other professors who teach this, this guy is probably the best - but that isn't saying a lot. If you want to hate life (and computers.) for a while, this'll definitely do it to you!
+
+Course: CSC144 | Quality: 3.0/5 | Difficulty: 5/5
+Tags: Tough grader, Beware of pop quizzes, Lecture heavy
+Review: While McCann is a "pretty good" lecturer (not spectacular), I would NOT recommend taking his 144 section. I'm on my second attempt of the course, and despite acing homework and quizzes, there's a quality of his exams that completely destroys most good students, including me. All exams in both of my attempts had class averages less than 60 percent
+
+Course: CSC144 | Quality: 3.0/5 | Difficulty: 5/5
+Tags: Tough grader, Beware of pop quizzes, Lecture heavy
+Review: While McCann is a "pretty good" lecturer (not spectacular), I would NOT recommend taking his 144 section. I'm on my second attempt of the course, and despite acing homework and quizzes, there's a quality of his exams that completely destroys most good students, including me. All three exams in both of my attempts had class averages
+
+Course: CSC144 | Quality: 5.0/5 | Difficulty: 5/5
+Tags: Tough grader, Amazing lectures, Respected
+Review: Dr. McCann is a wonderful professor. His classes are difficult but extremely fair. You put in the work with the resources McCann provides, and you will succeed.
+
+Course: CSC144 | Quality: 2.0/5 | Difficulty: 5/5
+Tags: Lots of homework, Beware of pop quizzes, Lecture heavy
+Review: Mccann is a pretty good lecturer... but this is a weedout class, and he makes sure of that. Unlike his 345 class this one barely has any actually relevant information for CS, a weakness of the department. I noticed he treats the older students much better than the young ones. I wouldn't recommend him at all until at least year 3.
+
+Course: CSC345 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Amazing lectures, Clear grading criteria, Beware of pop quizzes
+Review: Had him in 144 and 345. Amazing lecturer, no other CS prof rivals him in that. Dr. M's classes are difficult, but are extremely fair and straight forward. You will never encounter something on a homework, quiz, or test that you haven't been adequately taught how to do. Want an easy A, don't take him. Want to actually learn, take him. Simple as that
+
+Course: CSC144 | Quality: 5.0/5 | Difficulty: 2/5
+Tags: Amazing lectures, Clear grading criteria, Beware of pop quizzes
+Review: Dr. McCann's class is straightforward. I could understand why people have a hard time with discrete math, but I found his teaching style entertaining, as Dr. McCann is knowledgeable. The syllabus has everything you need to know, including the pop quizzes and the overall rubric. The exams and homework are long but fair. Review before class!
+
+Course: CSC345 | Quality: 4.0/5 | Difficulty: 3/5
+Tags: Tough grader, Amazing lectures, Beware of pop quizzes
+Review: I had McCann in 144 and left a positive review. 345 was much easier than 144. He tries to expand the knowledge and give plenty of examples. One homework was absurd, the rest (including PAs) were easy. He grades tough (less so than 144) but he is extremely knowledgeable and great lecturer. Overall fairly enjoyable class with interesting content.
+
+Course: CS345 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough grader, Beware of pop quizzes
+Review: Mcann certainly knows the content that he is teaching. However the way in which he conveys this knowledge is terrible. Prepare to be bombarded with complex definitions and made to feel a fool for asking questions. Also it should be noted he has one of if not the worst style guides I have ever come across in any computer science class.
+
+Course: CSC144 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Tough grader, Amazing lectures, Beware of pop quizzes
+Review: Simply the goat. Very engaging lectures in my opinion. Some of the material is hard the first time around but as you wrap your mind around it it's not bad. There are some pop quizzes to keep you on your toes, but they are fairly often that its less pop and more of a weakly quiz instead. Weakly in both sense of the word. Yeah I might be the Kendrick
+
+Course: CSC144 | Quality: 5.0/5 | Difficulty: 2/5
+Tags: Amazing lectures, Caring, Respected
+Review: Best professor I've had at Uofa. Very funny and engaging lecture, and just a nice guy. Taught the content well so it was easy to perform well on exams if you just show up to class and do the classwork. Just one weekly homework, doesn't take too long. Overall a very easy class if you do your part which isn't that much.
+
+Course: CSC144 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: Professor McCann's Discrete Math class is challenging but rewarding. His lectures are engaging, and he makes complex topics comprehensible. Study aids like unstuck ai, alongside the textbook, can help manage the heavy memorization. Mandatory attendance and pop quizzes keep you on track.
+
+Course: CSC144 | Quality: 3.0/5 | Difficulty: 5/5
+Tags: Tough grader, Beware of pop quizzes, Test heavy
+Review: McCann isn't a bad professor himself, but the class is dumb hard. He's very good at lecturing and does a good job explaining most things, but the class is just designed poorly. The homework is graded very harshly like a math class, and exams are worth so much of the grade. The class itself is just hard, but McCann is probably the better professor.
+
+Course: CSC144 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Beware of pop quizzes
+Review: Hahaha, dropped cs major because of this class, not 120 unlike most people. The quizzes in this class are definition memorization heavy and barely quiz you on actual methodology. Felt like I was taking English class instead of something cs related. Mccann himself is a good lecturer, however the class is just not that great overall.
+
+Course: CSC345 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough grader, Beware of pop quizzes
+Review: You can feel obvious oppression in his class. The oppression comes from every part of grade including Random quiz with no announcement for both time and background. Very difficult homework which need you learn and write very much beyond the lecture. Program which have stress greading and, EXAM WITH NO PRACTICE PROBLEM. I will never take his course.
+
+Course: CSC345 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: Beware of pop quizzes, Graded by few things
+Review: McCann actively works against students and their learning. Assignments are different from the content in class, and directions and grading are very unclear. Tests are far too difficult, which shows in low class averages that McCann blames on students. McCann actively gets angry at students for asking questions during lecture. Worst Prof in CS.
+
+Course: CS345 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough grader, Lots of homework, Beware of pop quizzes
+Review: Dr. McCann excels in lecturing but his homework assignments and tests are poorly aligned with the lecture material, causing confusion and making assignments extremely difficult as you have to teach yourself. The class had a very low test average, but instead of curving the difficult test, he blamed the students for being poorly equipped.
+
+Course: CS345 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough grader, Lots of homework, Beware of pop quizzes
+Review: I used to think McCann was a great lecturer for a tough subject. But after visiting these topics in other classes, I've realized he is the problem. He is a master at taking an easy concept and shoving in a convoluted, jargon-heavy definition that stops you from understanding it. My advice after 2 of his classes is to avoid him at all costs.
+
+Course: CSC460 | Quality: 3.0/5 | Difficulty: 4/5
+Tags: Lots of homework, Lecture heavy, Test heavy
+Review: McCann is a good lecturer and is extremely knowledgeable about the course material. The class has some intense and long assignments, and exams are a total of 60% of your grade, making studying and reviewing the material consistently key to success. He encourages participation but can be a bit intimidating, definitely not a bad class.
+
+Course: CSC460 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Get ready to read, Group projects, Test heavy
+Review: Assignments are challenging in the first few weeks but become easier over time. Homework isn't too difficult because he provides many examples on the lecture slides. The midterm exam is quite comprehensive, requiring memorization of material from the slides and class discussions. The professor is good and grades fairly.
+
+Course: CSC144 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Amazing lectures, Beware of pop quizzes, Lecture heavy
+Review: Discrete math is a tough subject to learn, it was tough on me the first few lectures due to language; and yes, pop quizzes are challenging. But the class is extremely interesting, McCann puts care and effort into his lectures and content; getting the hang of logic is very rewarding and the way he connects it to real life with examples is very fun!
+
+Course: CSC144 | Quality: 5.0/5 | Difficulty: 5/5
+Tags: Tough grader, Amazing lectures, Beware of pop quizzes
+Review: The course content is extremely difficult, but I felt as though Dr. McCann gave the opportunities to succeed in the class. He has the best lectures I have ever had. The homework was much harder than the exams and even though attendance isn't mandatory, there are pop quizzes. All of the quizzes were simple, and helped outline what to study.
+
+Course: CSC144 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Tough grader, Lots of homework, Caring
+Review: Discrete Math is an extremely difficult concept to learn. But McCann puts so much effort into his lectures, and he really loves teaching. Even though he was a tough grader, it's a hard class, and I didn't even get a good grade, he taught you a lot. I fully believe the only reason I got an A in Discrete Math II was because he taught so well.
+
+Course: CSC144 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Amazing lectures, Hilarious, Beware of pop quizzes
+Review: Don't hate the professor. Hate the course. Many reviews seem to be getting that wrong. Discrete is not an easy course, but Dr. McCann is easily the best DM teacher at UA. Very fair and forgiving grading policy - it takes effort to fail. Review lessons and get help from the TAs (they were great) & SI sesh. Don't memorize definitions; understand them
+
+Course: CSC144 | Quality: 3.0/5 | Difficulty: 5/5
+Tags: Tough grader, Beware of pop quizzes, Test heavy
+Review: You'll find a common consensus when seeing reviews on McCann, he's an experienced teacher, but his class is incredibly hard. Most people do not have the time or energy to memorize several pages of definitions. CS majors, please avoid his class and aim for the alternate teacher, if he's not available work the hardest you can.
+
+Course: CSC144 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Tough grader, Amazing lectures, Beware of pop quizzes
+Review: Lester McCanns class was my favorite that I've taken so far at the University of Arizona, his lectures are well prepared and you can tell he cares. This class is very memorization heavy and grading is tough but sort of fair at the same time. Don't skip class, even though slides are posted you can get lost if you dont keep up, there are pop quizzes.
+
+Course: CSC144 | Quality: 3.0/5 | Difficulty: 5/5
+Tags: Tough grader, Beware of pop quizzes, Lecture heavy
+Review: Funny guy. You can tell he loves teaching and that he loves his subject. Unfortunately, he teaches ~400 students at once, I didn't like the way he lectured, and he tested on memorization as much as comprehension. I got a high B in the class which made me pretty depressed, because I just did not feel supported through the class.
+
+Course: CSC144 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Tough grader, Amazing lectures, Beware of pop quizzes
+Review: This professor is a very tough grader but is an amazing lecturer. The homework consists of mostly textbook questions, which can be very difficult. Questions on quizzes and exams tend to be much easier than the homework. Also, there were 12 quizzes that can be given out in any class session except on exam weeks.
+
+Course: CSC144 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Amazing lectures, Beware of pop quizzes, Respected
+Review: Mccann is amazing at educating and his lectures are extremely entertaining and informative. Although the class was difficult, doing the work was exciting and if you put in the effort, you will get what you want out of the class. I highly recommend anyone to take this professor as your love for the concepts will grow.
+
+Course: CSC144 | Quality: 5.0/5 | Difficulty: 5/5
+Tags: Get ready to read, Amazing lectures, Accessible outside class
+Review: Got a review for my teacher, you gotta hear me, Got a C, but don't you worry 'bout me, Learned so much, and that's the key! My teacher's tough, but he's also fair, Pushed me hard, made me go the extra square, Never let me slack, always had me on my toes, Now I'm smarter, thanks to him, innit bruv, it shows!
+
+Course: CSC460 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Amazing lectures, Clear grading criteria, Caring
+Review: Lester is the best professor I have ever had at the University of Arizona. He knows exactly how to teach what he is going over and really cares about his students. He also has very entertaining lectures and made it fun to learn. This does not mean the class was a breeze but if you pay attention do the work and take notes anyone can do well
+
+Course: CSC144 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: Content was taught in an incredibly poor way and was not explained very well. Weekly pop quizzes. Exams are not terrible but are difficult. It felt like class was just telling you what to learn outside of class.
+
+Course: CSC144 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: If you pay attention to the class, you will do great. He teaches VERY VERY GOOD, it is undeniable. He has plan for everything and has well-prepared slides. There are unannounced quizzes, which makes you to follow the lectures and you'll do fine with HWs and Exam,
+
+Course: CSC245 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Caring, Lecture heavy
+Review: Show up, pay attention, do your work, and you'll do fine in this class.
+
+Course: 245 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: Covers way to much content way too quickly. Not enough practice given for exams and they are very difficult to finish on time. The Homework is weighted heavily and the homework questions are very poorly written and hard to understand. On top of that, he is a tough grader on homework so getting good grades on homeworks are near impossible.
+
+Course: CSC460 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Amazing lectures
+Review: Controversies aside, I can't deny that Dr. McCann is VERY good at teaching this material. In fact, he's probably the best fit for this course. He told us early in the semester that this is his favorite course to teach, and it really shows in his enthusiasm and depth of knowledge. Tho I wasn't really a fan of the memorization-heavy exams.
+
+Course: CSC460 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: McCann forced our class to "detour" around an active school shooter to come to our midterm exam with threat of failure if we do not show up. I felt unsafe the rest of the time I was in his class.
+
+Course: CS245 | Quality: 2.0/5 | Difficulty: 5/5
+Tags: Tough grader, Beware of pop quizzes, Test heavy
+Review: The lectures were pretty good. Homework and tests are graded extremely hard. Pop quizzes at least once per week. Two things that made this a nightmare class - the enormous amount of material that was covered, and the final being near impossible to complete on time.
+
+Course: CSC245 | Quality: 5.0/5 | Difficulty: 5/5
+Tags: Clear grading criteria, Lecture heavy, Graded by few things
+Review: McCann is a good, knowledgeable lecturer. His TAs and him also grade fairly. The class isnt hard, but there is SO much content you are expected to remember, that it makes it very difficult to do well on exams. Im glad this course is being replaced by a two course sequence, because this is the class that prevents people from making it into the major
+
+Course: CSC460 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Lots of homework, Lecture heavy, Test heavy
+Review: Dr. McCann is super knowledgable and thorough. He's pretty awkward, but its fine. He front-loads the class so that the hardest assignments are the first 3 and the next 5 are about half as much work. For exams, you literally have to memorize the lecture slides cause this dude will test you on everything he's ever said. He is very clear and fair.
+
+Course: CSC460 | Quality: 3.0/5 | Difficulty: 5/5
+Tags: Lots of homework
+Review: Took McCann's 245 as a freshman and enjoyed the class/his teaching style. 460 is an entirely different ballgame. The programming HWs are brutal and back to back, and EXTREMELY strict on style points: required to write 500 words of comments per assignment for >50%. Assignments generally also have little to do with lecture content. Exams are rough.
+
+Course: CSC245 | Quality: 4.0/5 | Difficulty: 2/5
+Tags: Lots of homework, Amazing lectures, Lecture heavy
+Review: I enjoyed this class. McCann is a great lecturer and the content is very well structured and organized. There is quite a lot of material, but the class is pretty easy if you have a math background. Regardless, he explains things really well and offers plenty of opportunities to get help if you need it.
+
+Course: CSC245 | Quality: 4.0/5 | Difficulty: 5/5
+Tags: Accessible outside class, Skip class? You won't pass., Beware of pop quizzes
+Review: Mccann is a great lecturer, but this class sucks solely because of the INSANE amount of content that is covered. The topics themselves arent too difficult to grasp but you have to remember so so much in order to get a good grade. Thank goodness future pre-cs ppl will get to take 144 and 244 instead, since the department is getting rid of this class
+
+Course: CSC245 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Gives good feedback, Beware of pop quizzes, Amazing lectures
+Review: Superb lecturer for a well-structured, organized class. Often scoffs at questions (and once berated a student for believing modulo could be distributed) but is otherwise upbeat and enthusiastic. Exams are a good accumulation of the coursework, but are needlessly long (they're fair, but why assess speediness rather than solely course concepts?).
+
+Course: CS245 | Quality: 2.0/5 | Difficulty: 5/5
+Tags: Lots of homework, Beware of pop quizzes, Tough grader
+Review: This is an excellent class if you have the photographic memory and/or mental fortitude to memorize 100 or so definitions by the end of the semester. A strong understanding in math is also required. If you have neither, like me, you'll spend an absurd amount of time on the material for a 3 credit hour class. I did enjoy McCann's lectures, however.
+
+Course: CSC245 | Quality: 4.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: Dr. McCann is a good professor. He has been teaching this class for more than a decade. He cares about your learning and will answer Piazza questions at like 10pm. But it is a VERY hard class and you will need to work hard for it. If you're not gifted in math like me, you will need to study a lot.
+
+Course: CSC245 | Quality: 4.0/5 | Difficulty: 5/5
+Tags: Skip class? You won't pass., Test heavy, Tough grader
+Review: This class is what stands between you and getting into the major. McCann is a good lecturer but this is by far one of the hardest classes I have ever taken. If this class were split up into two parts, it would be much more manageable because there is SO much content you have to memorize. Homework, quizzes, and tests are also graded very harshly.
+
+Course: CSC245 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Respected, Lots of homework, Amazing lectures
+Review: Amazing teacher, with excellent lectures. CSC245 is essentially a logic & proofs class. If you're good at math you'll do fine. Unfortunately, we don't do many applications in this class, so I find it rather boring. He's friendly, and gives fair (but fairly hard) tests. You actually need to study though, because he's a stickler for definitions.
+
+Course: CSC245 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Gives good feedback, Lots of homework, Beware of pop quizzes
+Review: He has been my favorite CSc professor so far. His class is not exactly easy, but he does give you all the tools to be successful. If you are good at math, this class shouldn't be too hard. His teaching is straightforward. You do need to memorize a lot of definitions and rules because they will show up on quizzes and exams.
+
+Course: CSC245 | Quality: 4.0/5 | Difficulty: 5/5
+Tags: Gives good feedback, Lots of homework, Clear grading criteria
+Review: I won't sugar coat this, McCann is the professor standing between you and admission into the major. This is a glorified math class, so be prepared for math and proofs. I liked his lectures, but his sense of humor is definitely not for everyone. He gives you many opportunities for getting help. This is not an easy class, but not impossible.
+
+Course: CSC245 | Quality: 3.0/5 | Difficulty: 4/5
+Tags: Graded by few things, Lecture heavy, Tough grader
+Review: Really nice guy, but very difficult to follow the connection between his lectures, to homework, and then to exams. Feels like 3 separate types of problems that you need to prepare for, while only really having the lectures as guidance since his textbook is written by him.
+
+Course: CSC245 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Skip class? You won't pass., Graded by few things, Tough grader
+Review: All I want to say is that this class is actively making me rethink my major choice because of how awful this class is. Just remember each review here is before COVID but during COVID, this class is terrible. Worst class Ive taken at the UofA so far
+
+Course: CSC245 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Lots of homework, Skip class? You won't pass., Beware of pop quizzes
+Review: Took this course Spring 2020 meaning the class switched to online halfway because of COVID. The class is essentially a math class with tons of proofs. If you're good at math you'll find this class easy. If not you'll struggle. Before this class switched to online there was a pop quiz pretty much every week, so study before every class.
+
+Course: CSC245 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Respected, Lots of homework, Skip class? You won't pass.
+Review: idk about these other guys saying he's fair. Makes the material way harder than it needs to be to weed out students. Other professors roast him for his exams. Take 245 with literally any other teacher and you'll be fine, avoid him like the plague.
+
+Course: CSC245 | Quality: 4.0/5 | Difficulty: 3/5
+Tags: Skip class? You won't pass., Lecture heavy
+Review: Had him during COVID fiasco. His lectures are very good -- easy to digest content with little review. Perhaps overly heavy on examples, but not a bad thing. The first exam was only formally timed exam, but the ones given during COVID were supposed to be similarly in time and all were hard to finish within 50min, but content was definitely fair.
+
+Course: CS245 | Quality: 3.0/5 | Difficulty: 4/5
+Tags: Lots of homework, Skip class? You won't pass., Beware of pop quizzes
+Review: Very organized, experienced, and amusing lecturer. Also a hardass cuz he's done it for so long. Has 1-2 pop quizzes/week, and does not accept Dean's Excuses. Homeworks are harder than the examples he does in class, and sometimes are on content from the book that he doesn't cover. Takes academic integrity REALLY seriously. Decent class overall.
+
+Course: CSC245 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Lots of homework, Skip class? You won't pass., Amazing lectures
+Review: I took McCann for 245 and also for 372, which he doesn't normally teach. Very organized/structured in terms of lecture and assignment style, which I prefer. Is interested in challenging students, but gives the resources to meet those expectations. might come off a bit grumpy to some with his sense of humor, but he really does care. Highly recommend
+
+Course: CSC245 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Test heavy, Beware of pop quizzes, Tough grader
+Review: One of the worst professors in the computer science department. Do not take his 245 in the spring, I found out the hard way he amps up the difficulty to weed out more students. The way he wants you to learn and the amount of material is unrealistic. This is possibly the hardest class I ever have taken. Don't take this class find a substitut for it.
+
+Course: C245 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Skip class? You won't pass., Clear grading criteria, Beware of pop quizzes
+Review: McCann is overall a good a professor. His class is rough, and his awkward humor may come off as mean, but I think it's all in good humor. You will have to work for it, and if you skip class you may miss important lectures or quizzes, but he is fair.
+
+Course: CSC245 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Lots of homework, Clear grading criteria, Beware of pop quizzes
+Review: Starts out super easy, last 3 topics are by far the hardest. Try to save your questions for piazza, too many in class questions about the relatively easy material resulted in having to rush through the hardest stuff at the end. Liked his teaching style. Fill out the note outlines he gives you. Not as funny as he thinks he is but thats ok :)
+
+Course: CSC245 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Respected, Beware of pop quizzes, Lecture heavy
+Review: McCann has been teaching this class for over 10 years, so he knows his stuff. Good teacher but material and lectures can get boring at times. Class is very difficult, be prepared for random quizzes (4 get dropped) and the tests are very difficult. Know your math review for easy points! Supplementary Instruction sessions were helpful, go to them!
+
+Course: CSC245 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Gives good feedback, Respected, Beware of pop quizzes
+Review: Lots of people on here give Dr. Mccann a hard time. I went into this class with an open mind and ignored all of the negative reviews that others had given him. This is definitely not an easy class, however, if you put in the work and time every week & go to lectures AND pay attention you will do fine. Make sure to study for quizzes and attend SI.
+
+Course: CSC245 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Skip class? You won't pass., Beware of pop quizzes, Lecture heavy
+Review: He's a great professor who's passionate about Discrete Math... but I'm a student who's not! Regardless of my poor liking of the subject, he is a great professor. His lectures might've become boring if he didn't add his humors in. He does give extra points in tests and drops 4 quiz out of 12. Because of his pop quiz, you kinda study every day also.
+
+Course: CS345 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Get ready to read, Test heavy, Tough grader
+Review: I had a really poor experience with this instructor. It seemed like he was more concerned with belittling students than actually teaching them. His methods and material are obsolete, much like the rest of the program.
+
+Course: CSC245 | Quality: 5.0/5 | Difficulty: 1/5
+Tags: Gives good feedback, Inspirational, EXTRA CREDIT
+Review: This was probably the easiest class I've ever taken in my life. I'm not sure exactly what you would have to do to get lower than an A tbh. Dr McCann is such a great professor who somehow manages to run an easy class while still helping you to learn a lot. Gives plenty of extra credit and the midterms/final is laughably easy. Almost guaranteed an A.
+
+Course: CSC245 | Quality: 4.0/5 | Difficulty: 3/5
+Tags: Tough Grader, Gives good feedback, Skip class? You won't pass.
+Review: Discreet math was an awesome class I would look forward to attending. Lester is hilarious and really knows the topics well. There are pop quizzes, about one per week, that are a breeze. A lot of people complain about this class but probably because they are deplorable. He drops 3 quizzes and one midterm. The section leaders are awesome too! Free A!
+
+Course: CS245 | Quality: 5.0/5 | Difficulty: 1/5
+Tags: Inspirational, Amazing lectures, EXTRA CREDIT
+Review: Easy A. Might be the easiest classes I've ever taken. If you pay the slightest amount of attention in class you'll ace the midterms, and the final is basically a freebie. Not only that, but the class itself is extremely interesting and his lectures are amazing. He even drops 4 (!!!) quizzes and a midterm. ONE OF THE BEST CLASSES AT UA!
+
+Course: CSC245 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough Grader, Skip class? You won't pass., BEWARE OF POP QUIZZES
+Review: The section leaders grading your work do not know the material. Expect to have to spend double your time reviewing all graded material and resubmitting it. He thinks he's funnier than he actually is. Pop quizzes like there is no tomorrow. He believes it's his job to keep people out of the computer science major. Avoid him if you can help it.
+
+Course: CS245 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough Grader
+Review: Do you enjoy memorizing definitions and being tested on material that's not covered? Then he may be for you, but if you actually want to learn and see your hard work pay off, then go somewhere else. This class is designed to weed out anybody who doesn't love math.
+
+Course: CSC245 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough Grader, BEWARE OF POP QUIZZES, TEST HEAVY
+Review: Very difficult course, with an excessively difficult professor. Grading criteria was clearly defined, however pop quizzes are extremely random, exams are excessively difficult, and lectures and definitions are unnecessarily complex. If math is not your specialty, I recommend trying to take this course with another professor or through the math dept
+
+Course: CS245 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough Grader, BEWARE OF POP QUIZZES, TEST HEAVY
+Review: His teaching style really didn't work for me. He just presents basic definitions, but expects you to know the entire subject like the back of your hand. If you ask what you should focus studying on, he just says "know everything". If it weren't for pop quizzes there would be no reason to attend lecture. He's not there to help you succeed.
+
+Course: C245 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Skip class? You won't pass., BEWARE OF POP QUIZZES, Hilarious
+Review: I loved Dr. McCann. He is a really funny dude and is knowledgeable of the course. The lectures are very useful as you can ask questions, which he will respond too. CSC 245 is a lot of work and McCann is more than willing to help you the entire way.
+
+Course: CS245 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough Grader, Skip class? You won't pass., BEWARE OF POP QUIZZES
+Review: Instructor prides himself on failing students. The majority of the class gets a D or below, and many students in the class are retaking it. I'm guessing if they were taken out of the equation, the average would be lower. I worked harder than I have ever worked for a class, and barely scratched by. Smug academic with no real world experience.
+
+Course: CSC460 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Skip class? You won't pass., Clear grading criteria, Tests are tough
+Review: Dr. McCann runs a pretty tough class. The projects are tough. The tests are tough. However, the class is structured incredibly well and if you learn the material then it is manageable and you learn a lot
+
+Course: CSC372 | Quality: 3.0/5 | Difficulty: 3/5
+Tags: Tough Grader, Clear grading criteria, TEST HEAVY
+Review: I love Lester's teaching style and the types of assignments he gives, but the only thing I hate are the tests. I get 100's on all my assignments, but the tests are incredibly hard. That one first mid term was the only thing keeping me from being a B student. For future students, study at least a week or two in advance!!!
+
+Course: CSC460 | Quality: 3.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: McCann is known for being not so nice. I think he had it rough in school, so he makes sure to return the favor. Tests are very hard, tho final not as bad. Constant, back-to-back assignments with no break. He often will make a student regret asking a question. Absolutely no extra credit. Slides uploaded daily. Okay lecturer.
+
+Course: CSC245 | Quality: 4.5/5 | Difficulty: 4/5
+Tags: (none)
+Review: I've had Mccann for three straight semesters (127A, 127B, and 245). For 245, he basically knows everything because he's been doing the same material for 22 of the past 23 semesters. You know that you're learning a lot. Homework isn't that hard, but tests are. He's a tough grader and only gave 6 people A's my semester. Still one of my favorites
+
+Course: CSC245 | Quality: 5.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: The material taught in the class is really simple. However, once you get to the homework and the tests, McCann expects you to use that knowledge critically and be creative to get the correct answer. Expect to memorize definitions and for pop quizzes every week. McCann offers no xtra credit, but if you do better on the final it'll replace a midterm.
+
+Course: CSC245 | Quality: 4.5/5 | Difficulty: 5/5
+Tags: (none)
+Review: This class is pretty rough. Overall, the prior reviews of Dr. McCann mirror my experience for CSC245. He is the best lecturer I've ever had, however the tests are brutal. The average for the final exam was a 64.6% out of the 86 students who took it. Final grades: 64% received a letter grade of C and below, 29% received Bs and 7% received As.
+
+Course: CSC227 | Quality: 3.5/5 | Difficulty: 3/5
+Tags: (none)
+Review: Dr. McCann definitely knows the material which he is discussing; he is a good lecturer and keeps the classes moving. However, he has never held a real industry job outside of academia, so some of his advice to new students is really bad because it's completely unrealistic in today's market, and assignment grading seems to be totally subjective.
+
+Course: CSC127B | Quality: 3.5/5 | Difficulty: 3/5
+Tags: (none)
+Review: Mccann is a pretty good professor. He goes into A LOT of detail and is really thorough. His tests are tough and long--expect to be tested on every little thing that's taught in lecture. There isn't a textbook for CSC127B as he teaches it. My advice is take good notes, pay attention, and do all the in-class activities.
+
+Course: CSC127B | Quality: 5.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: Tough tests, and you would miss a lot of crucial information without going to the class.
+
+Course: CSC127B | Quality: 4.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: I took 127A with McCann and it was really easy. I didn't work very hard in 127B, and I procrastinated a lot because I thought I could get by like I did in 127A. Do not do this. If you slack off in this class or wait till last minute to do your programs, then you'll probably only end up with a B or lower. Overall though, it's a fair class.
+
+Course: CSC 127A | Quality: 4.5/5 | Difficulty: 3/5
+Tags: (none)
+Review: McCann gets a bad rap for being really tough. This class will force you to decide if computer science is for you. I really liked his teaching style. If you're new to programming, the learning curve can be steep, but hang in there! I really enjoyed class and attending lecture. There are a lot of resources that he provides. Take advantage of these!
+
+Course: CSC127A | Quality: 3.5/5 | Difficulty: 5/5
+Tags: (none)
+Review: Good teacher! DO NOT PROCRASTINATE ON PROGRAMS! They tend to get longer and more difficult the more you learn. Use the 5 free late days wisely! The tests are ridiculous! Must know how to write code on paper because you have to for the tests. The SL's and McCann grade the tests and act like they're Java! Stay on Piazza and ask a lot of questions!!!
+
+Course: CSC245 | Quality: 3.5/5 | Difficulty: 3/5
+Tags: (none)
+Review: Attending class is a MUST. I missed 1 day and that was hard enough to bear. There are pop quizzes that he warns you about in the beginning. To pass the quizzes and tests, you must do the homework and study. The material has to be thoroughly known beforehand to finish the each exam in 50min. It's almost impossible to get an A if you slack off.
+
+Course: CSC127A | Quality: 5.0/5 | Difficulty: 3/5
+Tags: (none)
+Review: The class was made of mainly homework programs (31%) every week and tests(15% each). Reading the homework completely is ESSENTIAL to getting full points. You will most likely do well on the test if you understand the homework and section. The sections and in class quizzes were pretty simple, so as long as you show up and try, you'll get credit.
+
+Course: CSC127A | Quality: 5.0/5 | Difficulty: 2/5
+Tags: (none)
+Review: Programs are worth 40% of total grade; tests about 10-15% each, with the possibility of the final exam being optional and replacing your lowest exam grade. The tests are long but fairly graded; be sure to read the ENTIRE question or else you'll lose points. Follow syntax and do your programming assignments, and you should be fine. Great teacher!
+
+Course: CSC245 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: McCann is great lecturer and is very clear about his expectations. He gives long tests and sometimes may gauge difficulty incorrectly, though I had plenty of time for all but one. He expects you to and you HAVE to keep up with the weekly material by studying for quizzes and making sure you understand everything (HW, section problems, lecture, etc.)
+
+Course: 245 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: Dr. McCann genuinely loves teaching this course, and it shows. His lectures are very informative and he always pauses to see if anyone has any questions. If you ask him to clear things up, he will. Quizzes every week which count for 16% of grade in total, so going to class is a must. His tests are very difficult, so study long and hard.
+
+Course: CSC245 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: Dr. McCann genuinely loves teaching this class, and it shows. His lectures are very informative and he always pauses to see if anyone has any questions. If you ask him to clear things up, he will. Quizzes every week which count for 16% of grade in total, so going to class is a must. His tests are very difficult, so study long and hard.
+
+Course: 245 | Quality: 3.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: Yaken two McCann courses and have had plenty of time to digest his teaching methods. He is a man of routine, and classes follow his syllabus to the T. Mom in hospital and can't make exam? The syllabus says the final may make up the lowest test score, so no retakes. 60-70% averages are "where he wants them" Test 2 average was "high" at 73%
+
+Course: CS127A | Quality: 4.5/5 | Difficulty: 4/5
+Tags: (none)
+Review: This guy can teach and wants to teach. One of the best teachers I've had here (3 years at U of A), not the easiest but suck it up most classes are a joke. Oh yeah, knows the material like a genius.
+
+Course: 245 | Quality: 3.5/5 | Difficulty: 5/5
+Tags: (none)
+Review: Easy Class, Amazingly hard Exam. Average grade around C (Be careful)
+
+Course: CSC245 | Quality: 4.0/5 | Difficulty: 3/5
+Tags: (none)
+Review: Lester McCann is (in my opinion) one of the best teachers I've ever had at the UofA. He's a short-and-to-the-point kind of guy. He's been teaching this course for many many years, and knows what students are confused about before we even know it. His tests are jam packed with questions, so be ready for that, but overall great guy and fun class
+
+Course: CS127A | Quality: 4.5/5 | Difficulty: 2/5
+Tags: (none)
+Review: Dr. McCann goes very in depth on the lectures. I loved the course because I love coding. Dr. McCann was a pretty good professor; sometimes funny and pretty helpful overall. He uses piazza for answers to quick questions. Doesn't use the textbook much. The tests are not pre-scheduled in the syllabus. They are very long, but okay if you study.
+
+Course: CSC245 | Quality: 2.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: Lectures are boring. Homeworks are way too much work. His tests are the hardest things I ever took. Did not enjoy the class. But yet after taking 345 and the teacher being worse, I have to say I sort of miss this class.
+
+Course: 127A | Quality: 4.5/5 | Difficulty: 4/5
+Tags: (none)
+Review: I'm fresh off of finishing my first test for the class so this not a full review. First, assingments. Assignments in this class get hard really quickly. The first two are easy and the third is hard. McCann during lecture is clear and helpful at least in 127A. He will go out of his way to help but can be a bit smart if you ask overly dumb questions.
+
+Course: CSC127A | Quality: 2.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: If you want to be turned off to CS than take his class.
+
+Course: CSC245 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: (none)
+Review: McCann is a fantastic lecturer. He explains the concepts very clearly and in ways that keep you interested. He has a structure of 'approximately' one pop quiz a week, which is helpful in keeping you diligent throughout the semester. Go into this class with intent to learn the material. If you try and slack off for an easy A, you'll soon reconsider
+
+Course: CSC245 | Quality: 2.5/5 | Difficulty: 5/5
+Tags: (none)
+Review: This guy has excruciatingly tough tests. 50 minutes to regurgitate all your logic and proofs.... LIKE A CHAMP! This is not a problem for some, however those non math minded people beware! Oh, he has this humor that is especially off-putting, and annoying. I recommend the class equivalent at pima!
+
+Course: CSC225 | Quality: 2.5/5 | Difficulty: 5/5
+Tags: (none)
+Review: I am not geared towards CS, maybe you will have better luck, but I am switching majors!
+
+Course: CSC245 | Quality: 4.5/5 | Difficulty: 5/5
+Tags: (none)
+Review: Definitely the best teacher I've had at the UofA. He has a definite method to his teaching, but was able to answer any question asked quickly and seemed to understand the student's questions/confusions better than any other professor I've had. Every lecture felt like an epiphany. Definitely go in ready to work hard though.
+
+Course: CSC227 | Quality: 3.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: Tough professor, very strict on commenting in particular. I love to program, but this class was pretty hard
+
+Course: CSC245 | Quality: 3.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: McCann is one of those professors that tries to make their course a "weed-out", when taking the course, it was not uncommon to see numerous people retaking it for the second time. He seems to enjoy screwing with the students, claiming there will be a quiz on Friday, then giving the quiz that current day instead, and also on Friday. Would avoid him.
+
+Course: CSC245 | Quality: 3.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: McCann's class is extremely difficult. He says he gives enough time to take the tests, but it was never enough. 90% of the class is still working on the test when they take them away. Homework questions are never as challenging as the tests, but still time consuming. Go to reviews before the tests if you want to manage at least a C.
+
+Course: CSC245 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: McCann is known for his extremely difficult exams. Know that going into the class. Know the material and you'll have little trouble in his classes. He knows the subjects inside and out and is willing to explain them to you until you fully understand. He is an outstanding lecturer and if you like a little bit of sarcasm you'll truly enjoy his class
+
+Course: CSC245 | Quality: 2.5/5 | Difficulty: 5/5
+Tags: (none)
+Review: McCann is a good lecturer. He explains the concepts well using simple problems. However, the tests are magnitudes harder than anything you will see in lecture or homework. If you know EVERY concept off the top of your head, then you will be fine, otherwise, the tests will hurt. A lot.
+
+Course: CSC245 | Quality: 4.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: If you're not mathematically minded, this class WILL be challenging. Go to class and take notes and go over your notes at the end of the day. Do as many practice problems as you can, try not to wait until the night before homework, and attend sections. McCann is a very good and clear teacher but you NEED to be well prepared for tests to do well.
+
+Course: CSC245 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: Lectures notes are online and the readings and homework he assigns are extremely helpful. Also, if you do the section problems you are golden in this class. His tests are a bit long, but they are easy if you understand the material. I only got a B in the class, but could have gotten a A if I put a little more effort.
+
+Course: CSC245 | Quality: 2.5/5 | Difficulty: 4/5
+Tags: (none)
+Review: He's a great teacher with interesting lectures- but somebody teach this guy how to write a test! No time to think, you must do discrete mathematics like a time bomb is about to go off. I was lucky because I had a great lab instructor. If you must take this class, be prepared for a lot of long homework and impossible tests.
+
+Course: CSC352 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: I've had him for 4 different classes: CSC 352, 345, 245, and ISTA 130. He is the best teacher I've had within the computer science department. He is a very interesting and thorough lecturer, but his classes tend to be harder than average. If you spend the time to learn the material then you have nothing to worry about.
+
+Course: CSC245 | Quality: 4.5/5 | Difficulty: 4/5
+Tags: (none)
+Review: His notes are online to preprint and he fills them in during class. He's easy to understand and teaches clearly but is a stickler when grading. Very sarcastic when asked dumb questions.
+
+Course: CS245 | Quality: 3.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: The tests are long, but I wouldn't exactly call them fair. If you expect to have any time to reason things out on the exams, you will be disappointed. Also, half of the TA's didn't know what they were doing when I took the class, which made it even more confusing. McCann is a pretty good lecturer, but it's not worth it. He is also kind of rude.
+
+Course: CSC345 | Quality: 4.5/5 | Difficulty: 5/5
+Tags: (none)
+Review: This professor gets a bad rep because you have to work very hard at getting a good grade. But I have never had a professor explain such complicated material so well. He is one of the best professors out there in my opinion. Study, study, study and you will succeed. My only complaint is that he takes no part in the grading, which can lead to issues.
+
+Course: CSC345 | Quality: 5.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: Best professor I've ever had. Extremely difficult though.
+
+Course: CSC245 | Quality: 3.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: homeworks, tests & quizzes are extremely hard, you have to put a lot of time into completing just those. He gives pop quizzes, so lecture attendance is mandatory. He also grades very strict. Yes, the material covered in that class relates to CS, but by no means should it ALL be covered in a semester, jumping from one advanced topic to the next.
+
+Course: CSC245 | Quality: 4.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: He is a funny professor and definitely loves teaching logic. There is a lot of homework and the tests are hard, but the class is worth it.
+
+Course: CS345 | Quality: 5.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: McCann is a great teacher period. He is clear, well organized and knows what he's talking about. I will admit his classes are difficult and challenging, but I definitely feel I've learned a lot (more than most classes). I definitely feel that if you didn't do well in this class, it was not because of McCann.
+
+Course: CSC345 | Quality: 4.5/5 | Difficulty: 4/5
+Tags: (none)
+Review: I've actually had 3 courses with Dr. McCann, but figured I'd comment on this one. Following the first one, my review might have been less fair. But I've found him to be the best lecturer in the department. If you can get through his tests, you'll do well. Do NOT take 345 from anyone else. Especially if you plan to go on to take 445.
+
+Course: CSC345 | Quality: 4.5/5 | Difficulty: 4/5
+Tags: (none)
+Review: Had him for 245 and 345. Best teacher Ive had in college. Really challenges you with his tests, programs, and homework. His lectures were so clear and precise. Though the course was difficult, I feel like I really know the material well. Sleepless nights on some assignments, but I recommend taking this professor if you want to learn something
+
+Course: CS345 | Quality: 4.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: Makes you work for your grade. Odds are you've already heard plenty about McCann if you're in the major. Good teacher, but expect to put lots of work in.
+
+Course: CSC245 | Quality: 5.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: Very good teacher, but his homework and tests are very hard. You must attend every class, and study his notes very carefully. Still, i really enjoyed his class.
+
+Course: CSC345 | Quality: 2.5/5 | Difficulty: 5/5
+Tags: (none)
+Review: Take CSC 345 from someone else if you can. His assignments are excessive and brutal. Fully completing one of his homeworks takes at least several hours, and sometimes ridiculously long amounts of time. The final programming assignment is also pure evil.
+
+Course: CSC245 | Quality: 1.5/5 | Difficulty: 2/5
+Tags: (none)
+Review: Really does take forever to go over the most trivial topics, then rapidly skims through topics such as "Algorithms" and "Recurrence Relations" in 2 lectures at the end of the semester. 245 isn't hard if you know a little math and logic, but McCann is certainly not a fun teacher.
+
+Course: CSC245 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: Worst professor at the University. As stated before covers complicated material up to the day before the test and then as if it is a joke expects you to expand upon it on a test where you literally have only 3 minutes to a problem. Poorest Teacher of my career. Doubt he would last 2min in industry.
+
+Course: CSC245 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: Takes forever to get through easy topics, then a week before the test presents complicated material which is hard to understand and makes at least half the test based on that without giving enough time to study for it and making the test questions not representative of what was covered either in the class or in the book.
+
+Course: CSC245 | Quality: 4.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: The guy gives great lectures. But his tests are brutal and you need to study before every class because of quizes that can come out of nowhere. My advice, only take him if you have to and get ready to kill yourself!
+
+Course: CSC245 | Quality: 3.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: McCann is an overall good teacher and the class is presented in an easily understood format. However the tests are too long and he writes them himself in his CS speak so this makes them difficult to understand. He is not approachable in general and I thought he had a condescending tone. I would not recommend him unless you like to struggle.
+
+Course: CS245 | Quality: 4.5/5 | Difficulty: 5/5
+Tags: (none)
+Review: McCann teaches extremely well, is very organized and keeps a light mood in his classroom that is good for learning. His tests are arbitrarily difficult and for new students the test length is very unexpected. Regular students will have to work for a B. The class is good but seems like a vetting process to find students committed to CS.
+
+Course: CSC245 | Quality: 1.5/5 | Difficulty: 5/5
+Tags: (none)
+Review: If you enjoy working hard for hours on an assignment only to get 3-6 out of 50, then by all means get your masochistic rear in McCanns class. McCann, and him alone, is the reason I dropped CS for MIS. I passed his class with a B+, but it was the most excruciating experience I've ever endured. I could not bear to have to suffer yet another semester.
+
+Course: CSC345 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: (none)
+Review: Amazing Teacher one of the best Ive had, I had him for 345 and 245 Both were very interesting you do have to pay attention in class and like everyone else said his test are difficult but fair
+
+Course: CSC345 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: Great prof. Funny, enthusiastic, and fair. His tests aren't hard, they just demand you know why what you're learning is important, instead of just spitting out code that worked on the assignments. Simply put, his class is how college courses should be.
+
+Course: CSC345 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: Yes, he's a tough teacher. But tough doesn't necessarily equate to bad. Grading is always fair: you earn the grade you receive. The content may not be everyone's favorite, but it will definitely come in handy as you take higher classes and enter the field.
+
+Course: CSC345 | Quality: 2.5/5 | Difficulty: 4/5
+Tags: (none)
+Review: I didn't care for the classes much (245 and 345) while taking them but having moved on into other upper division CS courses, I wish that the other profs would teach with as much detail as McCann did. He usually taught all of the material that he expected you to know although, as mentioned by others, the tests seemed arbitrarily difficult.
+
+Course: CSC245 | Quality: 4.5/5 | Difficulty: 4/5
+Tags: (none)
+Review: Great teacher. Restored my faith in CS department after having Mercer. Possibly the most organized prof. I've had so far. 245 is challenging, but good grades are definately possible. Tests are challenging but fair. Attendance is essential b/c of pop quizzes. Honors section is great!
+
+Course: CSC245 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: Great professor, he is extremely organized and tells you exactly what you need to know for the tests. The tests are long....and you need creativity...but it's possible. The lectures move at a nice pace, and the homework load isnt too heavy
+
+Course: CS245 | Quality: 2.5/5 | Difficulty: 5/5
+Tags: (none)
+Review: Class is difficult and you will learn to hate this man. His tests are long and unfair as he expects a 70% test average for the class. Not to mention that he is annoying. Unfortunitly you have no option but to take the class with him. Good luck
+
+Course: CS345 | Quality: 3.5/5 | Difficulty: 5/5
+Tags: (none)
+Review: DON'T DO IT! I worked my butt of in this class and barely pulled out a B. The only reason is because I did well on the programs, which is good because even the smartest person in the class will never get anything above a mid B on the tests, seriously.
+
+Course: CS345 | Quality: 4.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: McCann is an amazing professor. The only people who would give him horrible ratings are those who did not go to class or take effective notes. Throughout the semester, he tells you exactly what he expects of you, and if you deliver, he is very consistant and predictable about grading. Best tenured prof at UA.
+
+Course: CSC345 | Quality: 2.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: This guy shouldn't be allowed to step in front of a class.
+
+Course: CSC245 | Quality: 2.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: this guy just sucks at teaching and the worst part he is happy about everything all the time and makes stupid jokes that only he laughs about.
+
+Course: CSC127B | Quality: 2.5/5 | Difficulty: 4/5
+Tags: (none)
+Review: Fairly effective teacher, with a little work you can understand the material. Makes lectures too complicated at times. Puts material on the tests that either we've never gone over or is irrelevant to the concepts at hand. Doesn't realize students' poor grades are a result of poorly written tests.
+
+Course: CSC245 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: If you enjoy hunting for points and having your work criticized to the fullest extent McCann is for you! He totally cannot teach and does not realize he is teaching a COLLEGE class. Also, reasoning is useless if you dont understand the material which makes no sense.
+
+Course: CSC245 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: A great instructor, all around. He makes my current professors look like idiots. The only thing that annoyed me was that it took him so long to quit listening to "lame question guy."
+
+Course: C245 | Quality: 2.5/5 | Difficulty: 3/5
+Tags: (none)
+Review: McCann personally struck me as a real****head the few times I spoke to him one on one. Professionally I thought his lectures were poorly done, and generally useless. Most of his TAs seemed to have a better grasp of the material then he did. I got an A, but I still wish I hadn't met him.
+
+Course: CSC245 | Quality: 4.5/5 | Difficulty: 4/5
+Tags: (none)
+Review: His lectures are great and you get a lot out of them. You do have to show up for class though, because he does the quiz thing. His tests can be tough, especially as far as time goes but he's fair. Mainly you just have to keep up and do all of the assigned homework, and don't fail any tests =D

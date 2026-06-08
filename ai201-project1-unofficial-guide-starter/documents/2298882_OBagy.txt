@@ -1,0 +1,360 @@
+Professor: Janalee O'Bagy
+Department: Computer Science — University of Arizona
+Overall quality: 3.2/5 | Difficulty: 3.8/5 | Would take again: 59.6% | Ratings: 89
+Courses: CS120, CSC101, CSC120, CSC210
+
+Course: CSC120 | Quality: 2.0/5 | Difficulty: 3/5
+Tags: Lecture heavy
+Review: O'Bagy is fine, and that's really it. She is a mediocre professor. She's nice enough, and she certainly knows what she's talking about, but her lectures are so incredibly boring that it's hard to get through class. The workload isn't too bad, but compared to CSC110, there's way more assignments. I'd take this class with someone else if I could.
+
+Course: CSC120 | Quality: 2.0/5 | Difficulty: 4/5
+Tags: Tough grader, Lots of homework
+Review: This class is honestly just a weed-out. Instead of testing if we actually understand the material, they just try to trip us up with petty BS. It's so discouraging when memorizing random technicalities matters more than actual problem-solving.
+
+Course: CSC120 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: Tough grader, Lots of homework
+Review: 30%exam is rote definitions. Gradescope docks for HIDDEN requirements NOT in prompt. Prof's rubrics are absurdly nitpicky; TAs do all grading & labs while she only shows for 50m lectures as a Prof of Practice. 90+ is impossible unless you waste time on trifles -- actual skill doesn't matter. She doesn't take students or their work seriously. Avoid.
+
+Course: CSC120 | Quality: 3.0/5 | Difficulty: 3/5
+Tags: (none)
+Review: Class was OK. The tests do NOT, NOT test knowledge. They are a speed run - nothing more. Since she cannot get through a class without screwing something up and having to repeat it, I wonder if the expectation is a bit unrealistic. Most of the students are in other classes together. The amount of complaining about test length was impressive.
+
+Course: CSC210 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Tough grader, Lots of homework, Online Savvy
+Review: Attendance is tied to ICAs, though you can still get 50% credit if you do them outside of class. Her lack of enthusiasm makes lectures feel a bit dry and easy to tune out. Small annoyance is you can lose a decent amount of points for small stylistic errors even if you tried to follow the guide. Enough to drop a project almost 2 letter grades.
+
+Course: CSC120 | Quality: 3.0/5 | Difficulty: 5/5
+Tags: Participation matters, Online Savvy
+Review: o'bagy is really kind and great at explaining concepts. however, she's boring. class time is boring. always has the same tone, you know? every class feels the same. and the class is really difficult too.
+
+Course: CSC120 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Participation matters, EXTRA CREDIT, Gives good feedback
+Review: She's excellent, clear teaching and wants you to succeed. CSC120 is more challenging than CSC110, but if you show up to class, do the ICAs (please do them!) and genuinly pay attention, this class is a breeze. We were also given extra credit towards the end which was great!
+
+Course: CSC120 | Quality: 5.0/5 | Difficulty: 2/5
+Tags: Amazing lectures, Gives good feedback, Accessible outside class
+Review: great prof. very kind attitude and always willing to help. the TAs are also amazing, theyre all very knowledgeable and willing to help. the only situation i see where you dont do well in this class is if you never show up to lectures. also please do NOT use ai, you will get caught, just go to office hours of ask for help. excited for 210!
+
+Course: CS120 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: EXTRA CREDIT, Lots of homework
+Review: She was a very good Professor! She explains things clearly and created a great environment to practice Python skills. She teaches in a very interactive way by having you work out exercises frequently. She is quick to catch small errors in code and is very helpful in fixing them.
+
+Course: CS120 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Lots of homework, Caring, Respected
+Review: Dr O'Bagy is an excellent professor. She is willing to answer any questions that you may have! There are short code problems, ICAs and coding projects each week.
+
+Course: CSC210 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Amazing lectures, Caring, Respected
+Review: Dr. O'Bagy is a very helpful professor. Willing to answer any questions. I would not recommend skipping class. If you go to class, study and do your programming projects well. You will do good in this class.
+
+Course: CSC120 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough grader, Lecture heavy, Test heavy
+Review: pick anyone else!
+
+Course: CSC210 | Quality: 3.0/5 | Difficulty: 2/5
+Tags: (none)
+Review: This class was pretty easy. Knowing java beforehand definitely helps as I wouldn't say she was great at explaining concepts. Tests are pretty easy with three in the semester. Projects aren't that long. Annoying thing was she would change the project requirements a few days before it was due which would mean rewriting lots of code at times.
+
+Course: CSC120 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: EXTRA CREDIT, Lots of homework, Test heavy
+Review: I really enjoyed Dr. O'Bagy for 120. Her expectations for all projects were very clearly outlined and I don't think the course load was crazy. A lot of study materials were given and the TAs were awesome. As long as you put in the work and set aside enough time to study for the tests and to do the projects, it's an easy A.
+
+Course: CSC120 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Participation matters, Amazing lectures, Inspirational
+Review: I've taken this professor for CSC 101, 120, and 210. She's always been caring and responsive, even with 100+ students. Her lectures are clear and easy to follow. CSC 120 requires focus—if you want to learn Python, you will, but you need put in effort. Start projects early, you have time to ask questions. Class activities help engrain new material.
+
+Course: CSC210 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Respected, Lecture heavy, Test heavy
+Review: In depth lectures that you can access and the class is built around active learning. No study guides for exams, but ICAs and Quizzes(3% of your grade btw) help a lot, along with mock midterm. Assignments vary in difficulty, but are not insane. TAs have been great too. Labs are annoying at times. Sometimes helpful other times not at all.
+
+Course: CSC120 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Amazing lectures, Clear grading criteria, Gives good feedback
+Review: She is very in-depth in her explanations and gives lots of examples in class. Definitely a lot better than most other CS professors I have taken.
+
+Course: CS120 | Quality: 5.0/5 | Difficulty: 2/5
+Tags: Amazing lectures, Clear grading criteria, Gives good feedback
+Review: I took 120 with her a few semesters ago, and she was absolutely fantastic. I believe that a lot of the bad reviews are just due to the fact that she teaches a lot of entry level classes, and non-CS people can't wrap their heads around coding.
+
+Course: CS120 | Quality: 1.0/5 | Difficulty: 3/5
+Tags: (none)
+Review: Janalee O'Bagy has good intentions. However, her effort to reduce cheating and ensure student understanding is somewhat ridiculous and harmful to students who have programmed before. Using any outside content, even the most elementary, is banned and will result in a grade decrease. This is absurd as many students take other programming courses.
+
+Course: CSC120 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Clear grading criteria, Lots of homework, Test heavy
+Review: Don't let the bad reviews sway you into taking any other professor. O'Bagy really knows what she is teaching and is way better at teaching than Ahmed (the other 120 professor). 120 is a weed out class hence it's difficulty. Tests and midterms are weighed very heavily so beware of that. Attend OH and get help from the TAs on the long assignments.
+
+Course: CSC120 | Quality: 5.0/5 | Difficulty: 5/5
+Tags: Participation matters, Lots of homework, Test heavy
+Review: I think O'bagy is a great professor, its the content that is very hard. This makes assignments quite difficult. She builds her lectures around active learning which I credit to my current grade in this class. She always pops by my table at least once per class. Exams are hard and long, but she gives practice tests and study guides that help.
+
+Course: CSC120 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Tough grader, Amazing lectures, Lots of homework
+Review: 120 is a notoriously difficult class. You're going to spend a lot of time programming and in office hours if it takes a while for you to understand the concepts. O'Bagy is a very good lecturer and from the many times I went in for office hours, very helpful and caring. IA lot of reviews are about the class, not her. Work hard and you'll do great!
+
+Course: CS120 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Participation matters, Clear grading criteria, Lots of homework
+Review: Dr. O'Bagy is very caring and informative. The course is designed to push your knowledge and “weed” you out if you can't keep up. The weighting could be better as it focuses too much on big HW assignments and tests. But, if a quick learner, the homeworks can be completed in an hour or two. Many resources are available for review.
+
+Course: CS120 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Tough grader, Lots of homework, Test heavy
+Review: O'bagy isn't a bad professor, but the class it very hard. Long problems take a long time and are harshly graded. Exam are too long, I barely finished mine in time. And the class is test heavy. Attendance is basically mandatory. I don't think she was bad, but the class itself is just dumb hard. Make sure to start projects early!
+
+Course: CS120 | Quality: 2.0/5 | Difficulty: 4/5
+Tags: Tough grader, Participation matters, Lots of homework
+Review: Definitely one of the weaker lecturers in the CS department. Content is manageable. But some of the long assignment requirements are ridiculous. Programming guidelines are super strict and can easily knock a great program from an A to a C. Tests are mainly coding on paper... and yes, you will get points deducted for syntax and guideline errors.
+
+Course: CSC120 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Tough grader, Gives good feedback, Test heavy
+Review: Honestly, she was the best but I think the class itself was hard, even as a person who has been coding for 3 years. When I did get help during office hours, she was really good at explaining the material step by step, and debugging. But I wouldn't have gotten an A if she didn't drop the midterm (if you did better on the final than the midterm).
+
+Course: CS120 | Quality: 4.0/5 | Difficulty: 3/5
+Tags: Lots of homework, Caring, Test heavy
+Review: This is a weed out course, therefore we need to focus more. Tests may have been easier. Long projects take too long, so start early and attend TA office hours. Doctor O'bagy is kind and explains well, thus I highly recommend her office hours.
+
+Course: CS120 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Clear grading criteria, Lots of homework, Caring
+Review: Dr. O'Bagy is a great instructor. I personally think her lectures are very good. The class is very homework heavy and difficult, sure, but that doesn't mean she's a bad professor. That's just how 120 is supposed to be. The exams are heavily weighted now because of ChatGPT, so that's something to keep in mind.
+
+Course: CS120 | Quality: 5.0/5 | Difficulty: 2/5
+Tags: Participation matters, Clear grading criteria, Gives good feedback
+Review: O'Bagy is a very good lecturer. Her class is on topic and covers important information. Would reccomend to anyone interested in computer science.
+
+Course: CSC120 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Participation matters, Clear grading criteria, Test heavy
+Review: O'Bagy is very good at explaining in detail algorithmic processes every step of the way, which really helped me in this class. She is approachable and very helpful if you have any questions. I would absolutely take another class with her if there was any.
+
+Course: CS120 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: Amazing CS professor, this class is a perfect follow up to an intro level Python course. The concepts are presented in an intuitive way, and assignments all tie in very well with the lecture. First programming course I took at the U of A, and it left a very good impression on me.
+
+Course: CS120 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Amazing lectures, Clear grading criteria
+Review: O'Bagy is very engaging and knows what she is talking about. I went to her office hours multiple times and she was extremely helpful and happy to help. 10/10 from me.
+
+Course: CSC120 | Quality: 2.0/5 | Difficulty: 4/5
+Tags: Tough grader, Participation matters, Lots of homework
+Review: This class is difficult if you do not have a clear understanding of python beforehand. TA's can sometimes be really helpful if you get the right ones. She is not a terrible teacher the class is just fairly difficult. The long problems are the hardest part start them super early and get TA help often and you'll be ok.
+
+Course: CSC120 | Quality: 4.0/5 | Difficulty: 3/5
+Tags: Clear grading criteria, Lots of homework
+Review: Came from ECE 175, first week of python review was really helpful. First PA-Long is meant to be hard, don't get discouraged, they get easier. Start the longs early (at least a couple days) and ask for help (tutoring center!!!) Tests are basically identical to the ICA-s, practice those, attend lecture, and the class will be a breeze. Make friends!!
+
+Course: CSC101 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: Simply awful
+
+Course: CSC120 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough grader, Participation matters, Lots of homework
+Review: I got an 89.765 in the class and she would not round it to an A. Also I was hospitalized during the midterm exam, and she did not let me retake it or even look at the content on the exam to know what to study for. Our programming assignments were so hard that the TAs could usually not help me even after hours of working on it ahead of time.
+
+Course: CSC120 | Quality: 2.0/5 | Difficulty: 4/5
+Tags: Tough grader, Lots of homework, Test heavy
+Review: This class is hard don't get me wrong but do not get discouraged by the first programming assignment or your peers who have been programming since the womb. Dr. O'Bagy is very into class activities that do count as part of the attendance grade, be sure to study them for the exams. Do NOT procrastinate the programming assignments
+
+Course: CS120 | Quality: 5.0/5 | Difficulty: 2/5
+Tags: Participation matters, Clear grading criteria, Accessible outside class
+Review: Keep up with work, do ICAs regularly and check answer-key posted. No curveballs in exams, everything from slides, and ICAs. Start long PA early and get hints bcz specs can be unclear at times. Only drawback is limited discussion on individual's code makes it hard to improve code efficiency. Helpful TAs & professor. Learnt alot from this class!
+
+Course: CS120 | Quality: 2.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: You will have to teach yourself almost everything. The exams are pretty difficult but manageable. The assignments are unorganized and difficult to understand. You will spend a LOT of time on trying to complete long assignments. But they aren't graded harshly (depending on your TA) so do good on assignments to leave room for bad exams.
+
+Course: CSC120 | Quality: 2.0/5 | Difficulty: 5/5
+Tags: Tough grader, Participation matters, Lots of homework
+Review: Do yourself a favor and don't take this class with her! I don't feel like I learnt something during class, the professor quickly reads her lecture slides and then the rest of the class is ICA. Taking this class is like doing a lot of self-study with pressure of assignments and exams. She is not good at teaching!
+
+Course: CSC120 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough grader, Lots of homework, Online Savvy
+Review: The Professor was very cold and confrontational. There is no direct way to study for the exams. The Professor has said that this class is "weeding out class" even though this is supposed to be only the second class of Computer Science that teaches you how to code. Feedback meetings are useless because no change had happened to improve the class.
+
+Course: CSC101 | Quality: 2.0/5 | Difficulty: 4/5
+Tags: Tough grader, Lots of homework, Lecture heavy
+Review: TLDR: Okay, but disappointing. Instructor is okay; knowledgeable but very confrontational and cold. TAs are mostly awful (for this term at least); condescending and unhelpful. Grading criteria for homework is not straightforward. Lectures DO NOT directly apply to the homework which offloads effort to the students, inappropriate for CS teaching.
+
+Course: CSC120 | Quality: 2.0/5 | Difficulty: 5/5
+Tags: Get ready to read, Lots of homework
+Review: I recommend taking this class with another professor if possible. The weekly long programming problems are explained with pages upon pages of confusing English that could be condensed into a single paragraph in most cases; not very accessible for students who don't speak English as their first language. Poorly organized class, unhelpful lectures.
+
+Course: CS120 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Tough grader, EXTRA CREDIT, Lots of homework
+Review: Don't be intimidated by the bad reviews, this is a weed out class so people will whine. Dr. O'Bagy is a great professor but be ready work to pass. She is extremely helpful during her office hours and listens to her students when they have issues. The assignments will definitely challenge you and the difficulty of her exams are all over the place.
+
+Course: CSC120 | Quality: 2.0/5 | Difficulty: 5/5
+Tags: Tough grader, Accessible outside class
+Review: Dr. O'Bagy loves to teach and cares about her students. Be ready to do linked lists. Take another professor if you are a self-directed learner, she makes you hold her hand through it. I could not get over the horrible written tests. Also, attendance grades made the difference between getting an A and a B for me. I got a B. That was depressing.
+
+Course: CSC120 | Quality: 4.0/5 | Difficulty: 5/5
+Tags: Participation matters, Lots of homework, Lecture heavy
+Review: This is a weed-out class. It is fast-paced, and there is at least 1 long problem every week. The lectures are good, and working in groups helps for understanding the material. I would have struggled more if I had not talked to other students. As the programs you write can get complicated, fixing errors is a lot harder and more time-consuming.
+
+Course: CSC120 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Lots of homework, Lecture heavy, Test heavy
+Review: The worst class I have taking so far, harsh grader, heavy workload, barely sleep during the year
+
+Course: CS120 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Lots of homework, Lecture heavy, Test heavy
+Review: The course is very difficult and unorganized
+
+Course: CSC120 | Quality: 1.0/5 | Difficulty: 3/5
+Tags: Clear grading criteria, Lots of homework, Online Savvy
+Review: Obagy is just simply not great at teaching. Every class was 20% of her teaching us by quickly reading off her presentation slides and the other 80% was in class activities that feel like a waste of time because, well, it's class time. She's very monotone and everyone pretty much just socializes for the whole class. HW is a lot of the grade tho.
+
+Course: CS120 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough grader, Lecture heavy, Test heavy
+Review: If you can, choose another professor. She is very nice but as a student talking about my teacher, she is totally not good in teaching.
+
+Course: CSC120 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough grader, Participation matters, Test heavy
+Review: She is very nice person but her test is crazily difficult. The class lesson is too disorganized.
+
+Course: CSC120 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: (none)
+Review: Professor O'bagy is a very good professor, she is good at teaching subjects and making some of the more difficult subjects understandable. Class was setup in such a way that although there was a daily attendance it was not due until 11 which meant that students who may already understand what is being covered are able to skip. Exams were difficult.
+
+Course: CS120 | Quality: 3.0/5 | Difficulty: 4/5
+Tags: Participation matters, Lots of homework
+Review: The class was not necessarily boring, but she did not know how to distribute time throughout the class, so she left us with way too much time for some activities and not enough for others. However, she is aware of how difficult her exams can be, so she was willing to give extra credit on a problem that almost no one can answer, which I appreciated.
+
+Course: CSC120 | Quality: 2.0/5 | Difficulty: 5/5
+Tags: Lots of homework, Hilarious, Test heavy
+Review: She needs to realize we do have other classes at the same time, be ready to dedicate 40 hours a week just for this class if you want just a B
+
+Course: CSC120 | Quality: 4.0/5 | Difficulty: 3/5
+Tags: Gives good feedback, Caring, Respected
+Review: If you like programming, this course won't be an obstacle to you, specially Dr. O'bagee is so caring about her students, she tries her best to make sure everyone has learned the material. You will have one short programming assignment and one long for a week, which seems to be fair. The only bad thing is that no exam will be dropped.
+
+Course: CSC120 | Quality: 5.0/5 | Difficulty: 5/5
+Tags: Caring, Test heavy
+Review: It's a real shame that she teaches ~400 students. She cares about her students a lot and does her absolute best to make time for everyone. It is truly impressive what she manages to do. Lots of respect to her. To any honors students, I highly recommend asking her for an honors contract. I didn't and I was bored and uninspired for most of the sem.
+
+Course: CSC120 | Quality: 2.0/5 | Difficulty: 5/5
+Tags: So many papers, Lecture heavy, Test heavy
+Review: Imagining you had to do so many works even you are in a spring break
+
+Course: CSC120 | Quality: 2.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: they grade everything so harsh
+
+Course: CSC120 | Quality: 2.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: I love how friendly she is, but her lecture and slides are quite difficult to understand, besides, you have to put more than half of your time just for this class only, if you don't put more than just enough, you won't even able to get B
+
+Course: CSC120 | Quality: 3.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: Professor is great, but this class is so damn difficult, 40+ hours a week just for assignments
+
+Course: CSC101 | Quality: 2.0/5 | Difficulty: 1/5
+Tags: Beware of pop quizzes, Lecture heavy
+Review: The professor was okay at best. She didn't really come across like she knew the content well. The course is organized abysmally. The only thing on D2L was a link to her website and neither the due dates, nor the actual assignments are published at the beginning of the course. Could be entirely online if not for the graded in class items.
+
+Course: CSC120 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: (none)
+Review: Very good
+
+Course: CSC120 | Quality: 4.0/5 | Difficulty: 1/5
+Tags: Participation matters, Clear grading criteria, Lecture heavy
+Review: Janalee has clear lectures that are content heavy with In-Class Activities, so attendance is practically mandatory; however, the lectures are recorded The short assignments provide some code that can be used for long assignments This class expects you to be able to program already The TAs are a hit or miss for feedback meetings. Kapua, Bennett good
+
+Course: CSC120 | Quality: 4.0/5 | Difficulty: 3/5
+Tags: Clear grading criteria, Lots of homework
+Review: Dr. O'Bagy is a clear lecturer and I always felt that I understood what was going on in 120, however, I felt that the difficulty curve varied wildly throughout the semester. Homework guidelines were clear and the workload didn't feel like too much, but I didn't appreciate that we frequently had assignments due on Saturday at 7 PM.
+
+Course: CSC120 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Participation matters, Accessible outside class
+Review: Her lectures can be rather long-winded at times but not bad to follow along with, and the homework difficulty curve is really random at times, but she is nice and helpful during class and office hours as long as you ask questions.
+
+Course: CS120 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Amazing lectures, Lots of homework, Caring
+Review: Professor O'bagy is a very caring professor and is interested in her students' work/life. This class is not easy at all, however, if you take advantage of office hours you will be just fine. You definitely should know some Python already. If you come from ISTA or ECE it will be more difficult than if you came from 110
+
+Course: CSC120 | Quality: 2.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: tbh shes not the best teacher and i genuinely left her class more confused than when i entered it which is obviously not a good thing, but she is very helpful with her office hours
+
+Course: CSC120 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough grader, Lots of homework
+Review: I'm an A student with a great work ethic, but I couldn't handle this class. Don't take it unless you're willing to put 40+ hours of work into a single class every week, completely self-teaching yourself the material that should be covered in class, but isn't, and abandon all hobbies and self-care. This should be unacceptable for a Python 2 class.
+
+Course: CSC120 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough grader
+Review: Barely been in the class for a week and I already hate my life. Bad professor, doesn't teach just reads from slides and assigns projects that make no sense. Hope she finds a new calling
+
+Course: CS120 | Quality: 3.0/5 | Difficulty: 4/5
+Tags: Lots of homework, Accessible outside class
+Review: Good at teaching data structures, projects can be a bit tough at the beginning of the semester.
+
+Course: CSC120 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Lots of homework, Accessible outside class, Get ready to read
+Review: For this being a computer science course, you have to work for it. I understand sometimes her lectures are confusing and sometimes seemingly useless, though like a real computer scientist you need to be more independent. O'bagy gives you the tools to form the outline but encourages you to be more of an independent, object-oriented programmer.
+
+Course: CSC120 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Lots of homework, Clear grading criteria, EXTRA CREDIT
+Review: Very friendly teacher. Very good programmer and knows her stuff! Lots of coding homework but this is a pre-req to get into the major so, not sure what everyone else who complained about that was expecting. Gave extra credit at the end which was worth a lot and helped bump up your grade!
+
+Course: CSC120 | Quality: 3.0/5 | Difficulty: 4/5
+Tags: Lots of homework, Clear grading criteria, Tough grader
+Review: She definitely is an amazing programmer, but not a teacher. Her lectures won't help you get 100% on your assignments, so you have to search internet for more. Also, her lecture is really boring, because she just reads what's on her power point. There were people who skipped class and was fine because looking at her power points were enough.
+
+Course: CSC120 | Quality: 3.0/5 | Difficulty: 5/5
+Tags: Lots of homework, Graded by few things, Test heavy
+Review: You want to go back to csc110 with ben cause he actually has clear specs. The specs for each assignment is like dark souls but no bonfires or when you're in spanish class and the instructions aren't in English.
+
+Course: CSC120 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Lots of homework, Accessible outside class, Caring
+Review: Dr. O'Bagy is honestly such an amazing Professor. Especially in office hours, if you take the time to go, she will bend over back wards to help you out. For how accomplished she is, this woman has 0 ego and will be quick to correct any and all mistakes in terms of grading, explanations, etc without trying to cover up for it. Put in the effort!
+
+Course: CSC120 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Lots of homework, Test heavy, Tough grader
+Review: nice person, but not fit to be a teacher. doesn't teach, makes the coding assignments way too difficult and assigns them over break. Unbelievably hard grading style
+
+Course: CSC120 | Quality: 2.0/5 | Difficulty: 4/5
+Tags: Lots of homework, Graded by few things, Tough grader
+Review: She is a nice teacher and has never been rude to me. However, her lectures do not prepare you for the assignments that come every week. It would be nice if she could recommend some additional reading. Tutoring is a waste of time with many of the helpers. Find out who is familiar with what you're working on otherwise their help isn't of much use.
+
+Course: CSC120 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: BEWARE OF POP QUIZZES, GRADED BY FEW THINGS, EXTRA CREDIT
+Review: Good teacher! She made some good slides and was helpful during her Office Hours. There are some really abstract concepts in this course that may be confusing at first, but reading through the slides, going to the lab, and office hours helped me understand them. Make sure to go to class because you might miss graded In Class Activities (ICAs)
+
+Course: CSC101 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough Grader, LOTS OF HOMEWORK, TEST HEAVY
+Review: Extremely petty. Homework on topics not covered in class. Expects you to know everything she does. Test are extremely difficult and do not reflect study guide. DO NOT TAKE THIS CLASS!!
+
+Course: CSC101 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: Tough Grader, LOTS OF HOMEWORK, LECTURE HEAVY
+Review: Most of what she says is not in the lectures you attend, she thinks you know how to do all the homework and doesn't provide much help, have fun searching google for hours on end to not even find code to get the homework done, all of her reviews are material that's not the exams, she's hard to contact through email, overall don't take this class!!!
+
+Course: CSC120 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Inspirational, Hilarious, TEST HEAVY
+Review: Amazing women; go to office hours; get a bond with her; and she WILL help you out if you do. Otherwise, fall in the hole and be like everyone else and struggle with the class then end up blaming the teacher.. She is one of the nicest professors on this campus HANDS DOWN. I love Prof O'Bagy, super sweet and always stayed late to help me!
+
+Course: CSC120 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Gives good feedback, Skip class? You won't pass., ACCESSIBLE OUTSIDE CLASS
+Review: Dr.O'Bagy is an amazing teacher! She is very helpful if you have a genuine interest in the subject material and she will bend over backward to help you. I think she has an excellent way of explaining complex problems and her office hours are VERY helpful.
+
+Course: CSC120 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough Grader, LOTS OF HOMEWORK, TEST HEAVY
+Review: Horrible class. Tests are heavy. She is not good at teaching. Tough grade. They never gave me 100 % on homework, even though I passed all the test. she is very petty
+
+Course: CSC120 | Quality: 1.0/5 | Difficulty: 3/5
+Tags: LOTS OF HOMEWORK, Clear grading criteria, TEST HEAVY
+Review: She is VERY petty. She often made a big deal of people leaving 2-3 minutes early in class making it more of a distraction than otherwise. Her phone range THREE times during the final while she talked on her way out, made an excuse to save face. Class is manageable, it's coding after all, so study use the testers and go to class. She get's an F.
+
+Course: CSC120 | Quality: 4.0/5 | Difficulty: 1/5
+Tags: LOTS OF HOMEWORK
+Review: She's pretty cool
+
+Course: CSC120 | Quality: 4.0/5 | Difficulty: 3/5
+Tags: LOTS OF HOMEWORK, Clear grading criteria, TEST HEAVY
+Review: Lectures are not mandatory but are very helpful. Exams are curved and she only takes your best 10 grades out of the 13 programming assignments. Assignments can seem intimidating at first but end up not usually being too bad as long as you give yourself enough time. Overall not extremely difficult and your coding skills will greatly improve.
+
+Course: CS120 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough Grader, LOTS OF HOMEWORK, LECTURE HEAVY
+Review: Do not take unless you code for fun
+
+Course: CS120 | Quality: 3.0/5 | Difficulty: 5/5
+Tags: Tough Grader, LOTS OF HOMEWORK, Tests are tough
+Review: The instructor is decent. The majority of your grade rests on how you do on the exams, and they are brutal. The exams aren't conceptually difficult, but hand writing complex code that's bug free with a ticking clock and not enough time is nearly impossible, and for some reason the exams are always way more tricky that what's glossed over in class.
+
+Course: CSC120 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Tough Grader, Gives good feedback, LOTS OF HOMEWORK
+Review: Like any computer science course, you're going to have to pump out weekly programs. While lectures attendance is not mandatory, I highly recommend it. Professor O'Bagy does a good lecturing and adds tips here and there that really help you understand concepts. She is also a great help during her office hours.

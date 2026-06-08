@@ -1,0 +1,100 @@
+Professor: Christian Collberg
+Department: Computer Science — University of Arizona
+Overall quality: 4.1/5 | Difficulty: 2.9/5 | Would take again: 100% | Ratings: 24
+Courses: CS101, CS520, CSC372, CSC372CSC52, CSC465, CSC466, CSC499, CSC520, MANYCSCOURSES
+
+Course: CSC465 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Amazing lectures
+Review: Of all the CS classes I have taken, Prof. Collberg is the best professor I have had. He makes amazing animated lecture videos that explain everything you need to know. He structured this class so you go into every homework very prepared. Exams are extremely fair and if you participated, you will learn everything in his course thoroughly.
+
+Course: CSC466 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Lots of homework, Inspirational, Amazing lectures
+Review: Lectures include fresh homemade memes, tests are fair, assignments are challenging but very interesting.
+
+Course: CSC372 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Accessible outside class, Group projects, Amazing lectures
+Review: He is awesome! His lecture is always interesting, and everyone is involved. Homework is not bad, get help from the TAs. Then earning an A is easy!
+
+Course: CSC466 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: LOTS OF HOMEWORK, Tests? Not many, Tests are tough
+Review: This class was definitely not the easiest, because you have a ton of written homework, projects, a poster and the tests. Overall the class wasn't that stressful, but the tests kind of were. So study hard for the tests!
+
+Course: CSC499 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Participation matters, ACCESSIBLE OUTSIDE CLASS, Amazing lectures
+Review: Lectures are informative with excellent slides to study. The capstone poster assignment is a little vague, so start early and try to use extra office hours time before getting overly committed to a version. Sometimes lots of work is due at once, so be careful!
+
+Course: CS101 | Quality: 4.0/5 | Difficulty: 1/5
+Tags: (none)
+Review: Very impressive lectures!
+
+Course: CSC520 | Quality: 3.5/5 | Difficulty: 1/5
+Tags: (none)
+Review: Course is not hard enough for graduate level. Does not test concepts well enough and professor does not illustrate them with very good examples. One thing I did not like at all was that he changed the grading system midway through the course.
+
+Course: CSC520 | Quality: 4.5/5 | Difficulty: 3/5
+Tags: (none)
+Review: Very available for help.
+
+Course: CSC520 | Quality: 3.5/5 | Difficulty: 4/5
+Tags: (none)
+Review: Pretty nice
+
+Course: CS520 | Quality: 3.5/5 | Difficulty: 1/5
+Tags: (none)
+Review: A good prof, who keeps things clear and explains well. But sometimes gets confused with answers. But your projects very gr8 , made me really to understand things in programming languages.
+
+Course: CSC520 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: Not serious about his teaching. Doesnt come prepared to class. No proper weightage on the toughest and the easiest assignments. Only good thing is the comprehensive slides and the garbage collector assignment.
+
+Course: CSC520 | Quality: 4.5/5 | Difficulty: 4/5
+Tags: (none)
+Review: One of the best teachers at the UoA. Keeps the class involved with discussions. Most of the classes were useful, except for the ones which involved demos, which i thought were a waste of time.
+
+Course: CSC520 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: You have made the class very interesting. The programming assignments are challenging in a good way, and your comic notes on the lectures are hilarious. I'm looking forward to get other classes where you teach.
+
+Course: CSC520 | Quality: 4.5/5 | Difficulty: 4/5
+Tags: (none)
+Review: You create a good atmosphere in the class and introduce some cool programming tricks. I feel comfortable in asking you my doubts. I know you may not like C/C++, but they are the languages we use for all other programming assignments. Sometimes you get confused in explanations and that breaks my train of thought.
+
+Course: CS520 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: (none)
+Review: Extremely Cool professor. Great sense of humor. Excellent course design. Assignments very helpful. Exam pattern changed for the benefit of students. Open door policy is great. One of the best professors I have had in my academics
+
+Course: CSC520 | Quality: 4.5/5 | Difficulty: 1/5
+Tags: (none)
+Review: Interesting class, he makes attending class fun, assignments are hard and require a lot of work but are useful.
+
+Course: CSC520 | Quality: 4.0/5 | Difficulty: 1/5
+Tags: (none)
+Review: One of the best professors I've ever had! He handles the class well, explains clearly, and even makes us laugh! Superbly innovative -- the Final Exam idea was too good! And how we all love it when he says "Okay, I don't know!" or "Blah blah..."!
+
+Course: CSC520 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: Overall great lectures - usually keeps us interested in the topic. The assignment requires using code that is difficult to interact with. :( We could focus more on the material if some better interfaces to the compiler output were provided. CAR and CDR just don't cut it.
+
+Course: CSC520 | Quality: 4.5/5 | Difficulty: 3/5
+Tags: (none)
+Review: The examples in the class help me a lot to understand the underlying concepts. I found the assignments interesting, especially the one on garbage collection.
+
+Course: CSC520 | Quality: 5.0/5 | Difficulty: 2/5
+Tags: (none)
+Review: Programing assignments that make you learn. Excellent lecture notes for understanding. Covers wide variety of things. If you want to learn then this is the class for you. I hope he gives good grade to everyone.
+
+Course: CS520 | Quality: 3.5/5 | Difficulty: 3/5
+Tags: (none)
+Review: cool
+
+Course: CSC372 | Quality: 4.0/5 | Difficulty: 3/5
+Tags: (none)
+Review: Definitely on of the better UofA CS profs since he: speaks clear English;doesn't rely on one long powerpoint presentation for his lectures - yes, he actually teaches; makes a great effort to keep a dull subject from putting the class to sleep; doesn't expect you to figure out stuff he hasn't come close to explaining in class. Recommended.
+
+Course: MANYCSCOURSES | Quality: 4.0/5 | Difficulty: 3/5
+Tags: (none)
+Review: Dr. Collberg is great. He is harsh but is an expert in his field. Great guy outside of the classroom.
+
+Course: CSC372CSC52 | Quality: 1.5/5 | Difficulty: 2/5
+Tags: (none)
+Review: Waste of time. Class is trivial but he grades harsh for no good reason.

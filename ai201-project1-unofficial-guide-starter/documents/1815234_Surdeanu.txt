@@ -1,0 +1,92 @@
+Professor: Mihai Surdeanu
+Department: Computer Science — University of Arizona
+Overall quality: 4.1/5 | Difficulty: 3.2/5 | Would take again: 72.7% | Ratings: 22
+Courses: 116, CS483, CSC396, CSC483, CSC583, ISTA116, ISTA455
+
+Course: CSC396 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Amazing lectures, Graded by few things, Accessible outside class
+Review: Dr. Surdeanu reignited my passion for AI. His lectures are very informative and actually show you both the inside and the outside of ML/NLP. The homework as alright, the final project was nice, and the exams were difficult (cheat sheet used). Overall, I can't wait to take his class next semester, as he is an overall chill person and kind professor.
+
+Course: CSC483 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Amazing lectures, Inspirational, Accessible outside class
+Review: As an undergraduate student, I found Dr. Surdeanu to be one of the most approachable and inspiring professors in the department. His lectures were always engaging and insightful, and he consistently offered valuable guidance during office hours. I look forward to taking more of his classes before I graduate--can't recommend him enough!
+
+Course: CSC483 | Quality: 1.0/5 | Difficulty: 1/5
+Tags: Amazing lectures
+Review: Lectures are amazing and you'd be all set for jobs with the lecture materials and assignments. For undergrad advising, if you decide to change his advsiorship, professor does not make it easy for you so you need to bring in others to smoothly change advisor.
+
+Course: CSC583 | Quality: 5.0/5 | Difficulty: 5/5
+Tags: Participation matters, Amazing lectures, Hilarious
+Review: Great lectures, I put in double the hard work & practice and revised the lecture materials. I enrolled in this class in Spring 2023 but I faced extremely unexpected events from 2 others within the class, still, I got an A - because I had to put in double the hard work and in Jan 2025, I can explain each one of these topics, closed-book!!
+
+Course: CSC483 | Quality: 5.0/5 | Difficulty: 5/5
+Tags: Amazing lectures, Lots of homework, Respected
+Review: Great lectures!
+
+Course: CSC483 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Participation matters, Group projects, Lecture heavy
+Review: Prof. Surdeanu is very knowledgeable. His class talks a bit about ChatGPT, which is pretty fun. His class covers a lot of material. There is some math, but most of the class is based on theory. We had four homework assignments and a lot of time to work on them. 1 group project, graded fairly He gave us cheatsheets for the test, which saved me.
+
+Course: CSC483 | Quality: 5.0/5 | Difficulty: 2/5
+Tags: EXTRA CREDIT, Hilarious, Graded by few things
+Review: Very pleasant course. Lectures were fun and tied into relevant current topics (lots of chat gpt talk). Very few homeworks and they were all pretty easy, and the final project was also pretty fun. The course covers a ton of content, but isn't very demanding. Mihai is also super charismatic and cares about the success of his students.
+
+Course: CSC583 | Quality: 1.0/5 | Difficulty: 3/5
+Tags: Lots of homework, Accessible outside class
+Review: I found their communication and behavior in the classroom to be less than satisfactory. I would not recommend seeking mentorship from this individual and suggest caution when taking their classes. I hope that any issues will be addressed and improvements will be made for the benefit of future students.
+
+Course: CSC483 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: EXTRA CREDIT, Clear grading criteria, Respected
+Review: Great professor
+
+Course: CSC583 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Respected, Clear grading criteria, Amazing lectures
+Review: Recommended
+
+Course: CS483 | Quality: 4.0/5 | Difficulty: 2/5
+Tags: Accessible outside class, Skip class? You won't pass., Graded by few things
+Review: Amazing how interesting Mihai made the material despite how truly dry the subject matter was. Frequently humorous and I felt he (or his TA) was a very generous grader. Encourages participation. I wish he would have dedicated more time to explaining Maven and Lucene, though. Both factored heavily into projects and I didn't understand either one.
+
+Course: CSC483 | Quality: 4.0/5 | Difficulty: 2/5
+Tags: (none)
+Review: Good lecturer. There's not a clear way to set up your programming submissions. Mentions using build tools which are never taught. Luckily, I've used them on the side, but if there's an issue with your submission, then you won't find out for 3 weeks when the TA gives you a 20% on it. The written part of the homework isn't too bad. Take notes.
+
+Course: CSC583 | Quality: 5.0/5 | Difficulty: 1/5
+Tags: (none)
+Review: He is SIMPLY AMAZING !!!! Best course i have ever taken, he is clear in what he teaches. Gives ample time for assignments. Exams, Assignments are related to what is taught in class. He has an open door policy and is ALWAYS THERE for his students
+
+Course: ISTA455 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: Mihai is a master of his craft and a helpful instructor to boot. This class wasn't easy but the material is incredibly interesting and Mihai really shows his enthusiasm for it.
+
+Course: ISTA116 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: (none)
+Review: This class is not hard if you are interested in Statistics and are willing to study and try to understand the basic concepts. Instructor was great, knowledgeable and approachable. I strongly recommend this class for anyone that wants to learn statistics AND computer language R
+
+Course: 116 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: Class is very, VERY HARD. You will be challenged in every aspect. Math, Science, Programming, etc. all bases are covered and all are hard. Mihai is an -awesome- person and has tons of office hours so students who need help can get it. You will fail if you don't go to class. Let me repeat, YOU WILL FAIL if you don't go to class.
+
+Course: ISTA116 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: Class is SUPER hard!! Do not take this class if its not required! Professor is cool but doesn't really help you at all! TAs are not useful they grade really hard! This class requires more work than any science class, this tells you everything! I cried!
+
+Course: ISTA116 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: Mihai is an excellent professor who knows his stuff. The class is very difficult, I would not recommend it if you are not good at math. If you need help, he offers a lot of office hours. You MUST go to class in order to get a good grade in the class, even though he doesn't take attendance. The lab sessions were hit or miss, sometimes were useful.
+
+Course: ISTA116 | Quality: 4.0/5 | Difficulty: 2/5
+Tags: (none)
+Review: Stats was fun! This class can be rough for those not used to programming concepts, as much of the homework is in R programming language, using R Studio. Mihai's lectures aren't super exciting, but his office hours are extremely useful (hint, hint) so use them. I'd highly recommend this class if you want to learn some stats and a little programming.
+
+Course: ISTA116 | Quality: 4.5/5 | Difficulty: 4/5
+Tags: (none)
+Review: The course is challenging and requires work. Seeking help in office hours is important for getting through assignments but he gives lots of opportunities to boost your overall grade and was very flexible with submission dates.
+
+Course: ISTA116 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: The class can seem overwhelming at first, but Dr. Surdeanu excels at changing how the curriculum flows based on class performance. Do not be afraid to ask questions, and always start the assignments right away because it is easy to fall behind in this class. If Dr. Surdeanu feels that a deadline is unreasonable he may adjust the date accordingly.
+
+Course: ISTA116 | Quality: 2.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: Horrible. GET OUT NOW.

@@ -1,0 +1,340 @@
+Professor: Eric Anson
+Department: Computer Science — University of Arizona
+Overall quality: 4/5 | Difficulty: 3.7/5 | Would take again: 81.1% | Ratings: 83
+Courses: CS345, CS352, CSC144, CSC244, CSC245, CSC345, CSC352, CSC473, CSS101
+
+Course: CSC352 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Amazing lectures, Clear grading criteria, Hilarious
+Review: Without a doubt the greatest professor I have never had. He is the absolute goat of the CS department, definitely take his class if you can because even though this class was relatively hard it was still the most enjoyable class I've ever taken.
+
+Course: CSC473 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough grader, Lots of homework, Lecture heavy
+Review: Horrific class. Had Anson for 352 and though it wasn't bad. He has no slides, disjointed lectures, and the homework is very difficult. A participation every class, so skipping is not recommended. Especially with no slides, you miss an entire lesson. Its my first non-A in a CS class, and I'm a senior with many 400 lvl courses taken.
+
+Course: CS352 | Quality: 5.0/5 | Difficulty: 5/5
+Tags: Tough grader
+Review: the prof is nice. we covered so much(it's insane to expect students to know that all from memory for the exams), and the exams were extremely hard. It took me long to learn to submit assignments to lectura and test there. This class should have been at least a 400-level class to be this difficult. This class humbles everyone, so be prepared!
+
+Course: CSC352 | Quality: 5.0/5 | Difficulty: 5/5
+Tags: Tough grader, Lots of homework, Beware of pop quizzes
+Review: Anson is a good professor, but this class is insanely difficult. Projects are turned in on the UofA linux machine, Lectura, and it doesn't tell you if you pass any test cases until after the project is due. There's learning to test your code, and there is this. There's no reason we couldn't at least see if our code passes test cases.
+
+Course: CS352 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Tough grader, Lots of homework, Hilarious
+Review: The amount of time it takes to do the homework is insane, my friend said that his 452 homework takes less time....
+
+Course: CS352 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Lots of homework, Beware of pop quizzes, Lecture heavy
+Review: The class is hard but Anson is great. He genuinely cares and wants you to succeed. Class itself has lots of assignments, none of which are super difficult but there may or may not be a learning curve with C depending on the person. Exams are hard but he offers great SCS rewards if the class fills it out.
+
+Course: CS352 | Quality: 2.0/5 | Difficulty: 5/5
+Tags: Tough grader, Lots of homework, Caring
+Review: He's a very nice professor and a cool person, but the homework is so incredibly tedious, involving way too much input validation. It's difficult to actually get to the point where you are creating the important data structures when there is so much input validation to do beforehand. The homework should be less time intensive, and less of the grade.
+
+Course: CSC352 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: EXTRA CREDIT, Amazing lectures, Hilarious
+Review: Eric Anson is a great professor. I learned so much about C and Unix in this class, and Dr. Anson was an excellent instructor for this course. Incredibly knowledgeable about the topics, and really just wants to help students learn the material better. 10/10 and I will be taking more courses with him my senior year.
+
+Course: CS352 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Clear grading criteria, Beware of pop quizzes, Caring
+Review: Dr. Anson is one of my favorite professors. He cares about his students and wants to see them succeed. 352 was a difficult class because C is a weird language to learn that's very unforgiving, but it's just the way things are.
+
+Course: CSC473 | Quality: 2.0/5 | Difficulty: 5/5
+Tags: Respected, Lecture heavy, Test heavy
+Review: Lectures were sometimes confusing, but he taught side by side with the textbook used in class. Early chapters were covered slowly, but the rest felt rushed. There were no lecture slides, everything was written on the board, which made studying harder. Tests were hard and heavily weighted with very strict grading. He did offer study sessions
+
+Course: CSC473 | Quality: 5.0/5 | Difficulty: 5/5
+Tags: Amazing lectures, Lots of homework, Lecture heavy
+Review: This class is pretty easy at the start and then gets really brutal once TMs are introduced. Reduction is confusing, its a must to study that extensively before the final, both in Anson's posted lectures and Sipser's (book author) lectures online. Went to office hours frequently which really helped. Anson loves teaching this class and it shows.
+
+Course: CS352 | Quality: 5.0/5 | Difficulty: 1/5
+Tags: Amazing lectures, Beware of pop quizzes, Accessible outside class
+Review: This class is straight forward and fairly easy coming off of programming mips in 252.The later assignments get difficult, but lots of the information taught in lectures is really useful even if you never program C again. Anson is amazing, super helpful outside of class, and is really passionate and knowledgeable about C. Exams were really easy.
+
+Course: CSC473 | Quality: 3.0/5 | Difficulty: 5/5
+Tags: Tough grader, Participation matters, Test heavy
+Review: Tough class. Homework and participation didn't help much on the midterm, it was fast-paced and required deeper thinking than lectures or HW prepared for. Final is also hard, so study beyond the given material. The professor is great and funny, but don't rely on curves or dropped HW. One of the hardest classes I've taken.
+
+Course: CS352 | Quality: 2.0/5 | Difficulty: 4/5
+Tags: Lots of homework, Hilarious, Test heavy
+Review: I want to like this guy so bad. He's a great, entertaining lecturer, actually feels like a human (rare in this CS department...). But his homework programs are mind-numbingly frustrating and repetitive, and take forever due to the lack of testcases and very exhaustive input validation. I hope you LOVE linked lists, because this class only that.
+
+Course: CS352 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Tough grader, Beware of pop quizzes, Accessible outside class
+Review: CS 352 is a very hard class, especially since C is a very weird and hard language. Lots of micromanaging and no test cases provided so writing excellent test cases is a must. Quizzes are random and no study resources are given for the exam, however the exams are easy if you are decent at C. Learn how to use valgrind and bash testing scripts early
+
+Course: CS352 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Tough grader, Beware of pop quizzes, Caring
+Review: Anson is an awesome person. I didn't love this class but that had nothing to do with how he taught it. Projects were usually easy but got pretty difficult towards the end. The tests were a little difficult but manageable. Pop quizzes but they are easy. He is really nice and understanding and one of the better professors at the university.
+
+Course: CSC144 | Quality: 5.0/5 | Difficulty: 5/5
+Tags: Amazing lectures, Hilarious, Beware of pop quizzes
+Review: Super nice teacher. He tries to make class entertaining, posts the slides to class all the time, makes exams exactly like the homework. Definitely take this class if you are willing to pay attention to the basics during class and do pop quizzes.
+
+Course: CSC144 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Amazing lectures, Hilarious, Beware of pop quizzes
+Review: Amazing teacher, and a genuinely nice guy. Take his class!!
+
+Course: CSC144 | Quality: 4.0/5 | Difficulty: 3/5
+Tags: Beware of pop quizzes, Test heavy
+Review: Great dude, average lecturer. His class is way easier than Mccanns. His pop quizes are pretty easy, and mc as well. He makes it obvious about what may be on the quiz that day. Homework is easy as well, graded fairly too. No midterm study guides is annoying, but studying homework will do you fine. Midterms fair too, curves depending on class average
+
+Course: CSC144 | Quality: 5.0/5 | Difficulty: 1/5
+Tags: Amazing lectures, Clear grading criteria, Beware of pop quizzes
+Review: He is amazing. I would definitely take this again and would recommend him to others too. Beware of pop quizzes though, we had them in almost every class. But the quizzes and the exams are the questions from the homework itself, so pay GOOD focus to all the homework.Start atleast 2-3 days prior the deadline so you have enough time in understanding.
+
+Course: CSC144 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Beware of pop quizzes, Caring, Lecture heavy
+Review: Dr. Anson is a good instructor. I personally think his lectures are very fast, but his exams are easy so that makes up for it. He writes his exams based on the homework, so the best way to study is review the homework. He absolutely loves quizzes, and there's one almost every class, but they're pretty easy as well and nothing to stress about.
+
+Course: CSC244 | Quality: 5.0/5 | Difficulty: 5/5
+Tags: Amazing lectures, Lots of homework, Hilarious
+Review: Both 144 and 244 proved to be the most difficult classes I have ever taken. However, I genuinely enjoyed learning the subject matter because of Professor Anson. He really does care about his students and wants them to succeed. Lectures are always interesting with him teaching them regardless of how uninteresting the topic might be. Recommended!
+
+Course: CSC244 | Quality: 4.0/5 | Difficulty: 3/5
+Tags: Clear grading criteria, Hilarious, Accessible outside class
+Review: Dr. Anson is a pretty good professor. The first few weeks of lectures were somewhat rough around the edges, however by the end of the semester they were really solid. Lots of "pop" quizzes, but also he dropped 25% of them. The tests are almost the same as the homework, and the homework load is fair. He's a nice guy, and teaches pretty well.
+
+Course: CSC244 | Quality: 5.0/5 | Difficulty: 2/5
+Tags: Clear grading criteria, Hilarious, Accessible outside class
+Review: Great professor! Straightforward lectures, hws, quizzes, and tests.
+
+Course: CSC244 | Quality: 4.0/5 | Difficulty: 3/5
+Tags: (none)
+Review: He's super nice and you can tell he cares about students. Drops generous # of quizzes and hw. Half of hw questions have in book solutions. Exam questions are base don the hw if not from the hw. Fair amount of lecture slide mistakes but nothing major. I wish I could take him for the next class. If you took 144 w/him, its the same setup.
+
+Course: CSC244 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Participation matters, Clear grading criteria, Hilarious
+Review: ...
+
+Course: CSC144 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: Super nice/funny professor, and great lecturer. Workload is relatively heavy but it is almost exactly like the midterm which is nice. He gives short pop quizzes almost every day, which means attendance matters. Some concepts in the class are very difficult, but if you got to TA office hours you will be fine. I heavily recommend him for CSC 144.
+
+Course: CSC244 | Quality: 5.0/5 | Difficulty: 5/5
+Tags: Lots of homework, Caring, Respected
+Review: I thoroughly enjoyed coming to class due to the engaging and somewhat humorous lecturing style Anson has. You can quite easily tell that he deeply cares for his students and wants everyone to exceed; a rare occurrence at this university indeed. I 100% recommend any of his classes to any students.
+
+Course: CSC144 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: (none)
+Review: My favorite professor so far. He isn't the best prof but he's really welcoming and cares about his students. If you put in a decent amount of work you can get an A in the class. I wish I could take him for 244, if you can take hi mat all I would definitely take him.
+
+Course: CSC144 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: (none)
+Review: He's an amazing professor. He is the best professor I've had so far. Although he isn't the best at teaching, he does pretty well for a fast paced class and his exams are similar to homeworks. He is very engaging and welcoming which makes the class more fun. I recommend him a lot more than the other choice.
+
+Course: CSC244 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Amazing lectures, Clear grading criteria, Lots of homework
+Review: Professor Anson is the best professor I have taken a class from at the UofA. Discrete math is exceedingly difficult, but if you need to take 144/244, and you can take it with Anson, do it.
+
+Course: CSC144 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: (none)
+Review: Incredible professor, passionate about his class and the subject he teaches. Hard class, but if you are willing to put in a little legwork and keep an open mind it'll be a fun experience
+
+Course: CSC144 | Quality: 5.0/5 | Difficulty: 5/5
+Tags: Get ready to read, Amazing lectures, Clear grading criteria
+Review: The content is extremely difficult, but Anson makes the class worth it. He is engaging, understanding, and cares about his students a lot. You can tell that he loves teaching, and he is very experienced in both academia and industry.
+
+Course: CSC144 | Quality: 2.0/5 | Difficulty: 5/5
+Tags: Participation matters, Beware of pop quizzes, Test heavy
+Review: He is nice as a person but he doesn't care about students, he just ignores the emails. No study guiedes for exams, and exams were always so hard that he had to curve the exams because the class average was too low.
+
+Course: CSC144 | Quality: 4.0/5 | Difficulty: 3/5
+Tags: Lots of homework, Beware of pop quizzes, Lecture heavy
+Review: Dr. Anson zooms through content be prepared to study lots outside of class. Pop quizzes very often and sometimes were on content we learned that day so pay attention in class, he will often drop hints when to pay attention. Cool guy though would recommend taking him over others.
+
+Course: CSC144 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: Beware of pop quizzes
+Review: There is no planning that goes into his teaching. Mistakes in textbook, homework and slides. Do your best and be prepared to be frustrated. Exams are somewhat manageable and based off homework but start early to find mistakes he's not aware of. Study from slides and homework .He's approachable and drops a good number of quizzes.
+
+Course: CSC144 | Quality: 3.0/5 | Difficulty: 5/5
+Tags: Beware of pop quizzes
+Review: The lectures were amazing in the beginning but it started getting so boring that it made me fall asleep during class. Too much content covered in little time, so be ready to do a lot of studying. Exams are hard, and class averages were always very low that he had to curve the midterms to lift up class average.
+
+Course: CS352 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Lots of homework, Beware of pop quizzes, Caring
+Review: Anson is honestly awesome. But this is probably the most uninteresting, boring cs class at the uofa. It is a requirement so, you'll just have to push through the sludge.
+
+Course: CS352 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Participation matters, Gives good feedback, Lots of homework
+Review: I took 144/244/352 with Dr. Anson. At times, the lectures can be a bit boring, but he is great at giving feedback, helping students and grading homework on time.
+
+Course: CSC144 | Quality: 5.0/5 | Difficulty: 5/5
+Tags: Beware of pop quizzes, Caring, Test heavy
+Review: Fantastic professor, really cares about his students. This class is very difficult due to the amount of content covered in a short period of time, but if you are able to take it with Anson, do it.
+
+Course: CSC473 | Quality: 4.0/5 | Difficulty: 3/5
+Tags: Clear grading criteria
+Review: I love Anson's lectures and he explains concepts so well, and with a good sense of humor. My only wish was that he would record all of his lectures because I definitely felt like if I missed one or 2 classes I would be so lost. Overall really good class and I'm glad I chose it for my theory/writing CSC requirement.
+
+Course: CSC473 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Amazing lectures, Test heavy, Graded by few things
+Review: Chapter's 1 and 2 are difficult, but Dr. Anson makes the concepts easily digestible. Chapter 3 and onwards make zero sense. Dr. Anson said that they are more difficult, but he teaches them well. Turing machines and decidability will never make sense to me. The exams are worth a lot, but if you study you'll do fine. The final is brutal though.
+
+Course: CSC473 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Amazing lectures, Test heavy, Graded by few things
+Review: Easily my favorite professor in the computer science department and it isn't close. Lectures were super interesting and clear, homeworks were difficult but had tons of extra credit, and exams were honestly pretty easy if you went to the review sessions and did practice problems. The course was super fun and I genuinely enjoyed coming to class.
+
+Course: CSC473 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Caring, Lecture heavy, Test heavy
+Review: This class's content is a difficult subject to grasp. but Dr. Anson holds OH for students who need help or clarification, and he genuinely cares about students' grasping the concepts, especially moving into undecidability. We the Sipser book, which is somewhat painful, but everything taught in class can be learned by reading the book as well.
+
+Course: CSS101 | Quality: 5.0/5 | Difficulty: 1/5
+Tags: Amazing lectures, Caring, Respected
+Review: Dr. Anson an incredible prof that gives outstanding lectures, but also a person that truly understands the needs of his students. I could not put a single teacher on a higher pedestal than Dr. Anson. The word count on this review is the only thing stopping me from writing an essay on why you should take all of his classes.
+
+Course: CSC473 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: Participation matters, EXTRA CREDIT, Amazing lectures
+Review: Dr. Anson is really good at teaching. There were some flaws in his teaching style I wasn't a fan of (where some YT video explained a complex topic far more clearly), but overall, just being in class and paying attention is sufficient for acing this course! Although, man Turing Machines are sooo difficult to understand, and it isn't even his fault.
+
+Course: CSC244 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Amazing lectures, Clear grading criteria, Beware of pop quizzes
+Review: Dr Anson is such an amazing lecturer. Probably the best at the university. 244 was the most fun and enjoyable class I have taken so far. You can only hope maybe you'll end up back in Dr Ansons class once you leave later in your academic career :')
+
+Course: CSC473 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: EXTRA CREDIT, Caring, Test heavy
+Review: Dr. Anson is approachable for questions and passionate about the material. The homework was reasonably assigned and I always felt like I was prepared to tackle them. However, I was a bit disappointed that the final exam did not reflect the class content in the same way the midterms did. There is A LOT of material to go over its goes fast at the end
+
+Course: CSC244 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Amazing lectures
+Review: Dr. Anson is an amazing professor. He really cares about his students and wants them to succeed. All the exam questions are based on the practice questions in the textbook so if you study those questions, then you will be able to succeed.
+
+Course: CSC244 | Quality: 5.0/5 | Difficulty: 1/5
+Tags: Amazing lectures, Beware of pop quizzes, Accessible outside class
+Review: This course is tough even if you have a really good professor and you work a lot. So don't blame the professor if you got B or lower. It is either you are not working hard enough or it is something that you are not good at.
+
+Course: CSC244 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Clear grading criteria, Hilarious, Beware of pop quizzes
+Review: Doctor Anson is a very smart understanding guy. I would definitely take his class again! Beware he does have pop quizzes that can be difficult however if you study for all of the tests you will do good on them.
+
+Course: CSC144 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Lecture heavy, Accessible outside class
+Review: 144 is difficult, currently taking 244 and it is much easier. Tests are fair. If you do well on the homework, you will do well on the tests. Dr. Anson genuinely cares about his students and has office hours and answers questions on piazza all the time. Would take him for 345 if I had the option.
+
+Course: CSC473 | Quality: 3.0/5 | Difficulty: 5/5
+Tags: Tough grader, Test heavy, Graded by few things
+Review: Anson is a great professor and wonderful person. However 72% of your grade is made up from tests which is fine, but the thing is that I do not think the tests reflect your knowledge of the material. I tried so hard and learned so much I gained an understanding that I could almost teach people, but the tests were brutal. Easy D but impossible B or A
+
+Course: CSC144 | Quality: 5.0/5 | Difficulty: 5/5
+Tags: Clear grading criteria, Respected, Caring
+Review: I had Anson for 144 which was the first time its ever been taught. He is such a caring and sweet guy. The textbook will help you out a lot, but his lectures are exactly what was in the textbook. Some concepts are very hard to understand and most people did not do well on exams, averages were very low. Overall though Id take a class of his again.
+
+Course: CSC473 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Participation matters, Hilarious, Caring
+Review: Dr. Anson is the best in the CS department. As long as he teaches CSC473, no one should ever take the other Theory and Writing option CSC445. 1 homework a week, participation assignments for every lecture, and 2 big midterms. Dr. Anson is considerate, passionate, clear, funny and he cares more than any other professor. Class content is really fun.
+
+Course: CSC473 | Quality: 4.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: 473 is a very difficult class, but Anson is a good professor who cares A TON about his students. Exam averages are in the 60s, but he structures them so you can guarantee a 75-80% almost by memorization. The remainder requires you to thoroughly understand material and make some generous logical leaps. but he does his best to prepare you.
+
+Course: CSC473 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Respected, Inspirational, Caring
+Review: Professor Anson is easily one of the best professors in the department. He will go out of his way and go above and beyond to do everything he can for you to succeed. The class itself is difficult and professor Anson understands that and does his best to help the students with it. He's a very fair grader as well.
+
+Course: CSC473 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Accessible outside class, Get ready to read, Caring
+Review: Anson just wants his students to have a good time and learn the material. There is so much extra credit given for the homeworks, and the quiz answers are given in class. The material is taught well enough. The tests are too long and are worth a lot of the grade, if you are having a bad day and blunder on one of them you are basically screwed.
+
+Course: CSC352 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Lots of homework, Hilarious
+Review: Anson is hilarious. He respects students and intently listens to all questions and input. He's one of the most knowledgable professors at UA, mostly because of his age. His lectures are actually helpful, and assignments are really hard at first and then taper off in difficulty. It was my hardest class yet, but definitely enjoyable.
+
+Course: CSC352 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Respected, Graded by few things, Caring
+Review: Dr. Anson was an amazing teaching, with clear lectures and a kind teaching style. He dedicated a solid amount of class time to explaining problems people were having with their projects, so that we could fix our programs before the due date. I found C much harder than other programming languages, but the whole class generally did very well.
+
+Course: CSC352 | Quality: 4.0/5 | Difficulty: 3/5
+Tags: Respected, Clear grading criteria, Caring
+Review: Dr Anson is a great guy who cares a ton about his students -- definitely the most of any CS prof I've had. He knows his stuff, and the demos after lecture are very relevant to assignments. Assignments can be a little long, but he teaches you everything you need well and they're not overly difficult. Would definitely take again.
+
+Course: CSC345 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: Respected, Lecture heavy, Caring
+Review: Professor Anson is the hardest working professor I have had at U of A. He is always there to help you excel. He answers all the questions and only tests on content he covered. Be ready for difficult homework, but don't worry he is always happy to help.
+
+Course: CSC345 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: (none)
+Review: One of the few enjoyable prof in the department. Great at abstracting the complexities of some of topics covered and walks through them from varying perspectives, like doing pseudocode logic vs. visual walk through of what the algorithm is doing. Exam prep is straight forward as questions are pulled variations from the HW or quizzes.
+
+Course: CSC345 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Skip class? You won't pass.
+Review: Attend class and you will do fine. He's fun and nice to everyone and does a good job answering questions. Test questions are straight forward and are usually a simplified version of questions on homework.
+
+Course: CSS101 | Quality: 3.0/5 | Difficulty: 3/5
+Tags: Accessible outside class, Skip class? You won't pass., Lecture heavy
+Review: He knows his stuff. He gets off track now and then. Not the best lecturer, but keeps the class moving. Tries to make sure that you understand the material. Weekly homework projects, and at the end of each class, there would be an in-class activity/ quiz, it's easy if you pay attention in class. Along as you understand the material you will do well.
+
+Course: CS345 | Quality: 5.0/5 | Difficulty: 4/5
+Tags: Accessible outside class, Inspirational, Caring
+Review: I really liked taking classes with Anson this semester. He is very reasonable, enforces the important material, takes the time to answer questions, and works hard to help his students succeed. His lectures can be hard to follow at times, but the material itself is hard to follow, and he presents it better than any other CS prof I've had.
+
+Course: CSC345 | Quality: 3.0/5 | Difficulty: 3/5
+Tags: Get ready to read, Beware of pop quizzes
+Review: Anson is super nice, caring, and sometimes funny, but his lectures are not overly engaging. It's definitely hard to pay attention enough to completely grasp concepts. Again, he's really nice but not a great lecturer. Homework level was fair, and it does seem like he wants to be fair and for everyone to do well.
+
+Course: CSC352 | Quality: 4.0/5 | Difficulty: 3/5
+Tags: LOTS OF HOMEWORK, BEWARE OF POP QUIZZES
+Review: Unlike some other reviews here, I had a good experience with this class and professor (I've even made an effort to take his section of another class). Programming assignments are typical for CS classes, but his lectures are useful and engaging, and he'll often provide help directly related to the assignments every week.
+
+Course: CSC352 | Quality: 2.0/5 | Difficulty: 2/5
+Tags: Gives good feedback, Respected, LOTS OF HOMEWORK
+Review: I think you guys all get wrong on a critical point. Anson's a lecturer, not a professor. As a lecturer, what you need is the ability to express things well. I think Anson's kind of fail on this. For advanced students, his style is much too boring. For those fresh fish, it's difficult to catch up.
+
+Course: CSC352 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: Dr. Anson is a really cool guy and doesn't make the class any more difficult than it needs to be. Everyone likes to complain about 352 but I don't think it's nearly as hard as people make it out to be. Like with any CS class, give yourself time to do the assignments and take the time to test your code thoroughly and you'll be fine.
+
+Course: CS352 | Quality: 5.0/5 | Difficulty: 3/5
+Tags: (none)
+Review: Personally, I really like this professor and his class. Prof. Anson is an easy-going professor. Though some say that his teaching is bad, I can just understand what he talks about. The best part that I like in his course is that 60% of grades are given by projects. i.e. as long as you work hard, it's really not hard to get an A.
+
+Course: CSC352 | Quality: 1.0/5 | Difficulty: 3/5
+Tags: LOTS OF HOMEWORK
+Review: Apparently he doesn't know how to teach. The assignments are quite outdated, and what he said in class is totally of no use to the assignments, which is weird. I highly recommend you to take 352 in the summer, since even fresh phd teaches better than he does.
+
+Course: CSC352 | Quality: 2.0/5 | Difficulty: 4/5
+Tags: LOTS OF HOMEWORK, ACCESSIBLE OUTSIDE CLASS, Caring
+Review: This is my second time in a class with Anson, all I have to say is he's not a bad teacher what so ever, but the grading in his class is what killed me. I wasn't really use to C programming when I first started so a few of the beginning projects dragged my grade down. All I can say is if you take this class be prepared to use Piazza lol.
+
+Course: CSC352 | Quality: 4.0/5 | Difficulty: 5/5
+Tags: Gives good feedback, LOTS OF HOMEWORK, LECTURE HEAVY
+Review: Dr. Anson is a smart guy, and he has character. His lectures aren't particularly interesting, but they aren't mind numbingly boring either. The most notable part of this class is the homework: there's a lot, and it's hard. However, if you manage your time, you should come out as a pretty solid C programmer.
+
+Course: CS352 | Quality: 4.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: Have seen a lot of comments saying Mr. Anson is not good here but they are not true. Went to his office hour and that was really helpful. He was not in charge of assignments, so all the blame about Mr, Anson because of assignments are not fair. By the way, C programming itself is hard. Prepare for it if you only took 127A/B.
+
+Course: CSC352 | Quality: 1.0/5 | Difficulty: 5/5
+Tags: (none)
+Review: This is the worst course that I took in the UofA. The instructor himself knows the materials good, but he really doesn't know how to teach. If the course is not required, then don't take it. If the course is required, then you should prepare for learning all of the materials by yourself!
+
+Course: CSC352 | Quality: 3.5/5 | Difficulty: 4/5
+Tags: (none)
+Review: Despite him being new to teaching, he did a good job of teaching th class. Ver helpful and respects all the students. He explains things very well and tries to help with homework to get people thinking and going with say any of the answers. He is a teacher with real world experince.
+
+Course: CSC352 | Quality: 4.5/5 | Difficulty: 3/5
+Tags: (none)
+Review: Dr. Anson is a great lecturer and he cares about the students learning the material. I learned a lot in his class and I think the students who find him boring generally lack interest in the subject.
+
+Course: CSC352 | Quality: 3.5/5 | Difficulty: 3/5
+Tags: (none)
+Review: Dr. Anson is one of the nicest Professors I've ever had. Unfortunately he's coupled up with Dubrey who really makes the structure of the class. I feel like if Dr. Anson was able to run the class, it'd be easier to understand and less of a headache. I had him for 245 and he was great, a really nice and understanding professor.
+
+Course: CSC473 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: You will learn nothing from lecture unless you're very interested in the topic and OK w/ professors making mistakes in confusing proofs/examples. Otherwise, even if you try to pay attention you will constantly space out whether you want to or not. The homework will not fully prepare you for exams, + has no feedback b/c they take too long to grade.
+
+Course: CSC473 | Quality: 1.0/5 | Difficulty: 4/5
+Tags: (none)
+Review: Worst lecturer I've ever had. He has no structure, has side conversations with more advanced students, drops using slides halfway through the semester. Lied about how easy tests are going to be and how generous of a curve he gives. His transitions to the whiteboard don't make sense and is unclear about what the proofs are about.
+
+Course: CSC352 | Quality: 1.5/5 | Difficulty: 3/5
+Tags: (none)
+Review: He seems like a nice guy, but a horrendous teacher. Half the time it seems like he's never read the slides he's lecturing from. He doesn't write or grade the assignments, so he's no help there. His lectures are so boring and he does really terrible examples for the class. Overall, it seems like he doesn't even care about the class or students.
+
+Course: CSC352 | Quality: 2.5/5 | Difficulty: 4/5
+Tags: (none)
+Review: I can't tell if Dr. Anson just isn't the best at teaching a programming class or if he just doesn't enjoy it. I feel that if he were solely in charge of this class, it would be a good class, but the fact that it is combined with Dr. Debray's class, he doesn't have much jurisdiction over how the class is ran which is sad because Dr. Anson is fair.
+
+Course: CSC245 | Quality: 3.5/5 | Difficulty: 2/5
+Tags: (none)
+Review: Dr. Anson is ridiculously smart in the field of computer science. He is great at teaching discrete math because he really cares that you are learning the information and the exam only covers what you have learned in class. Tests are based off the practice problems and homework. His final was tough though.

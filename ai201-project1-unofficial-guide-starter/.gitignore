@@ -1,0 +1,42 @@
+<<<<<<< HEAD
+# Environment
+.env
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# ChromaDB — delete this folder to force re-ingestion
+chroma_db/
+
+=======
+# API keys — never commit these
+.env
+
+>>>>>>> ai201-project1-unofficial-guide-starter/main
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+<<<<<<< HEAD
+.eggs/
+
+# OS
+.DS_Store
+Thumbs.db
+=======
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# ChromaDB local storage
+chroma_db/
+chroma/
+
+# macOS
+.DS_Store
+>>>>>>> ai201-project1-unofficial-guide-starter/main
