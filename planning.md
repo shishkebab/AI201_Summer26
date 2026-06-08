@@ -79,8 +79,7 @@ of different professors withouth having to read the entire reviews of each profe
 | 2 | Is \<professor name\> a good choice for clear lectures and reasonable exams? | [\<professor name\>: \<overall rating\>] Yes, based on the reviews. Students describe him as straightforward, respectful, and focused on course material. |
 | 3 | Which professor has especially negative reviews about CSC335? | [\<professor name\>: \<overall rating\>] Reviews mention difficult exams, unclear project requirements, lecture-heavy classes, and tough grading. |
 | 4 | Who teaches AI or ML/NLP classes? |[\<professor name\>: \<overall rating\>] (additional [\<professor name\>: \<overall rating\>] if multiple) \<professor name(s)> teach \<course name/number>|
-| 5 | who has the better rating than \<professor name> for <course name/number>? |[\<professor name\>: \<overall rating\>] <professor name> has a better rating with <rating>.|
-| 6 | Which professor seems to have the highest difficulty for <class name/number> and why? |[\<professor name\>: \<overall rating\>] <professor name> appears to have the highest difficulty rating at about <rating>. Reviews mention test-heavy courses, many slides to study, weekly quizzes, and limited guidance for exams.  |
+| 5 | Which professor seems to have the highest difficulty for <class name/number> and why? |[\<professor name\>: \<overall rating\>] <professor name> appears to have the highest difficulty rating at about <rating>. Reviews mention test-heavy courses, many slides to study, weekly quizzes, and limited guidance for exams.  |
 
 ---
 

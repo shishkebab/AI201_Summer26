@@ -112,8 +112,68 @@ I used the following system and citation prompt to guide the model to answer the
 
 ---
 
-## Evaluation Report
+## Example Responses 
+<!-- at least 2 responses with source attribution visible in the output text, plus one out-of-scope query showing the system's refusal response -->
 
+**Response 1** 
+Question: Who teaches AI or ML/NLP classes?
+Answer: 
+```text
+Dr. Surdeanu teaches AI or ML/NLP classes.
+Sources:
+    Mihai Surdeanu | 1815234_Surdeanu.txt | 1815234_surdeanu_1 | distance=0.8175
+```
+
+**Response 2** 
+Question: Which professor has especially negative reviews about CSC335?
+Answer: 
+```text
+Answer: The professor for CSC252 with the highest difficulty is not explicitly stated in terms of comparison across professors, but Jonathan Misurda's class is described as having extremely hard projects, lacking structure, and a monotoned lecture style, with a difficulty rating of 5/5. Russell Lewis also mentions that CSC252 is "just crazy hard" but attributes this to the course itself rather than the professor.
+
+Sources:
+    Jonathan Misurda (2430005_Misurda.txt, 2430005_misurda_20)
+    Russell Lewis (2004717_Lewis.txt, 2004717_lewis_59)
+
+```
+
+**Out-of-scope query** 
+Question: Which professor teaches music101 class?
+Answer: 
+```text
+Answer: The answer is not found in the retrieved context.
+
+Sources: None
+```
+
+
+---
+
+## Query Interface 
+<!-- a description of the input and output fields, and a sample interaction transcript showing one complete query and response -->
+
+Quesry interface is implemented using Gradio web UI (gradio>=6.9.0) as recommended in the proejct specification.
+The LLM used is llama-3.3-70b-versatile thorugh Groq API.
+
+**Sample interaction**
+Input field: What is the level of difficulty for professor Russell Lewis?
+Output field: 
+```text
+Answer: The level of difficulty for professor Russell Lewis varies by course, with reported difficulties including: Difficulty: 4/5 for an unspecified course, Difficulty: 3/5 for CSC337, Difficulty: 4/5 for CSC120, Difficulty: 3/5 for another instance of CSC120, and Difficulty: 2/5 for CSC252. Additionally, his overall difficulty rating is 4/5.
+
+Sources:
+    Russell Lewis (2004717_Lewis.txt, 2004717_lewis_117)
+    Russell Lewis (2004717_Lewis.txt, 2004717_lewis_28)
+    Russell Lewis (2004717_Lewis.txt, 2004717_lewis_37)
+    Russell Lewis (2004717_Lewis.txt, 2004717_lewis_107)
+    Russell Lewis (2004717_Lewis.txt, 2004717_lewis_0)
+
+```
+
+
+---
+
+## Evaluation Report
+ 
 <!-- Run your 5 test questions from planning.md through your system and record the results.
      Be honest — a partially accurate or inaccurate result that you explain well is more
      valuable than a suspiciously perfect result. -->
@@ -145,12 +205,17 @@ I used the following system and citation prompt to guide the model to answer the
      results from an unrelated review" is an explanation. -->
 
 **Question that failed:**
+Question: What do students say about Abu Ahmed's teaching style and exam difficulty?
 
 **What the system returned:**
+Only partially correct answer (half of the review said the teaching style was straightfoward but the other half said boring.) by saying the students said "boring" because the reviews had mixed ratings.
 
 **Root cause (tied to a specific pipeline stage):**
+The LLM chooses the most relevant answers from the retrieved chunks. In other words, it cannot summarize the overall reviews because it only uses the chunks that are the most relevant to the question.
 
-**What you would change to fix it:**
+**What you would change to fix it:** 
+I would change the retrieval step so that when a question names a specific professor or class, the system filters or strongly boosts chunks with that metadata before sending context to the LLM. 
+In this case, the question was specifically about Abu Ahmed, so retrieval should prioritize Abu Ahmed chunks instead of relying only on semantic similarity. I would also retrieve a few more chunks for summary questions so the model can summarize the overall pattern across reviews, rather than over-weighting one representative chunk.
 
 ---
 
@@ -160,8 +225,14 @@ I used the following system and citation prompt to guide the model to answer the
      Answer both questions with at least 2–3 sentences each. -->
 
 **One way the spec helped you during implementation:**
+I did not have to repetitively write the same prompts for the Claude when I implemented differen stages of the pipeline.
+For example, I had to give the Claude the "Architecture" section acorss all stages because it specifies the required tools (models and libraries) and the input and output.
 
 **One way your implementation diverged from the spec, and why:**
+After processing the raw text, the LLM tried to chunk the text in a different way.
+Because the raw text comments are formatted in a specific way, the LLM tried to chunk each review comments separately regardless of the give chunk size.
+This was an interesting deviation because I think it would generate more accurate answers.
+However, it is chunking based on the structure of the raw text and cannot be used if other raw data in different formats is included.
 
 ---
 
@@ -178,12 +249,20 @@ I used the following system and citation prompt to guide the model to answer the
 
 **Instance 1**
 
-- *What I gave the AI:*
-- *What it produced:*
-- *What I changed or overrode:*
+- *What I gave the AI:* I gave Claude my "Chunking Strategy" section from planning.md and asked it to implement chunk.py with my specified chunk size and overlap.
+- *What it produced:* Instead of the specified chunk size, it wrote a function that separated the text using its structure (chunk based on how each review is separated by new line character).
+- *What I changed or overrode:* I explicitly give a prompt not to use different way of chunking but the one using the specified chunk size and overlap.
 
 **Instance 2**
 
-- *What I gave the AI:*
-- *What it produced:*
-- *What I changed or overrode:*
+- *What I gave the AI:* I gave Claude my "Architecture" section from planning.md and "Grounded Generation" section from README.md, along with the following prompt to implement the generat function and chat interface.
+  ```text
+  Now I want to connect to an LLM and generate the generation and interface code as defined in "## Architecture" section in "planning.md". Also, refer to the "## Grounded Generation" section in "README.md" for the system grounding requirement (answers from retrieved context only, with source attribution), the output format (answer + source list). For the query interface, use Gradio web UI (gradio>=6.9.0).  I should be able to run everything (from processing the raw documents, ingestion, chunking, retrieval, and generate LLM answers on Gradio UI through chat).
+
+  ```
+- *What it produced:* It did not create a separate app.py file, but instead, it tried to create all the functions and web UI implementation in the same file. It was not a major issue, but it created a messy code.
+
+- *What I changed or overrode:* I added the following prompt at the end to specify it should be run in the separate main script by calling all the functions implemented in the previous milestones. I also gave Claude the in-class lab code as a sample: 
+     ```text
+     ... using python app.py. Refer to the example code (example_app.py).
+     ```
