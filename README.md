@@ -1,1 +1,1 @@
-# AI201_Summer26
+# Codepath AI 201 Summer 2026
