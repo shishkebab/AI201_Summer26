@@ -193,8 +193,8 @@ By following these guidelines, you should be able to provide your calathea with 
 
 **What happens when you ask about a plant that isn't in the database?**
 
-  → Tool call: lookup_plant({'plant_name': 'zz'})
-  ← Result: {"found": false, "name": "zz", "message": "No plant matching 'zz' was found in the database. The database co...
+  → Tool call: lookup_plant({'plant_name': 'zozo'})
+  ← Result: {"found": false, "name": "zozo", "message": "No plant matching 'zozo' was found in the database. The database co...
 
 **One thing about the tool call API that surprised you:**
 

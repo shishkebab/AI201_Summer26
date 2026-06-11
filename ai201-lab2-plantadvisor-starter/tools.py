@@ -70,9 +70,15 @@ def lookup_plant(plant_name: str) -> dict:
         "name": normalized,
         "message": (
             f"No plant matching '{normalized}' was found in the database. "
+            # "If you could not find anything in the database, Do not use any information outside the database. "
             "The database contains common houseplants by slug key, display name, and aliases. "
             "Ask the user to check their spelling or try a common name, scientific name, or alternate alias."
         ),
+        # "message": (
+        #     f"No plant matching '{normalized}' was found in the database. "
+        #     "Ask the user to check their spelling or try a common name, scientific name, or alternate alias."
+        #     "Also, find the closest match in the database and ask the user if they meant it. Do not use the data outside the database."
+        # ),
     }
 
 
