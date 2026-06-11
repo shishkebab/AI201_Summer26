@@ -128,4 +128,64 @@ def run_agent(user_message: str, history: list) -> str:
 
     Before writing code, complete specs/agent-loop-spec.md.
     """
-    return "🌱 Agent not yet implemented. Complete Milestone 2 to activate the Plant Advisor."
+    messages = [{"role": "system", "content": SYSTEM_PROMPT}]
+    for msg in history:
+        if isinstance(msg, dict):
+            role = msg.get("role")
+            content = msg.get("content")
+            if role in {"user", "assistant"} and content:
+                messages.append({"role": role, "content": content})
+        elif isinstance(msg, (list, tuple)) and len(msg) == 2:
+            user_msg, assistant_msg = msg
+            if user_msg:
+                messages.append({"role": "user", "content": user_msg})
+            if assistant_msg:
+                messages.append({"role": "assistant", "content": assistant_msg})
+    messages.append({"role": "user", "content": user_message})
+
+    for _ in range(MAX_TOOL_ROUNDS):
+        try:
+            response = _client.chat.completions.create(
+                model=LLM_MODEL,
+                messages=messages,
+                tools=TOOL_DEFINITIONS,
+                tool_choice="auto",
+            )
+        except Exception as exc:
+            print(f"LLM call failed: {exc}")
+            return "Sorry, I couldn't reach the plant advisor model. Please try again."
+
+        if not response.choices:
+            return "Sorry, I couldn't get a response from the model. Please try again."
+        assistant_message = response.choices[0].message
+
+        if not assistant_message.tool_calls:
+            break
+
+        messages.append(assistant_message)
+        for tool_call in assistant_message.tool_calls:
+            tool_name = tool_call.function.name
+            try:
+                tool_args = json.loads(tool_call.function.arguments or "{}")
+            except json.JSONDecodeError:
+                tool_args = {}
+            if not isinstance(tool_args, dict):
+                tool_args = {}
+
+            try:
+                tool_result = dispatch_tool(tool_name, tool_args)
+            except Exception as exc:
+                print(f"Tool call failed: {tool_name}({tool_args}): {exc}")
+                tool_result = json.dumps({
+                    "error": f"Tool call failed for {tool_name}.",
+                    "message": "The tool could not be completed with the provided arguments.",
+                })
+            messages.append({
+                "role": "tool",
+                "tool_call_id": tool_call.id,
+                "content": tool_result,
+            })
+    else:
+        return "I reached the maximum number of tool-calling steps. Please try rephrasing."
+
+    return response.choices[0].message.content or "Sorry, I couldn't generate a response."

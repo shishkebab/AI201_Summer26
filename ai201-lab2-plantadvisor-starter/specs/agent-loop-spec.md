@@ -122,7 +122,18 @@ for tool_call in assistant_message.tool_calls:
 *The loop should stop when: (a) the LLM returns a response with no tool calls, OR (b) the MAX_TOOL_ROUNDS limit is reached. Describe how you will detect each condition and what you will return in each case.*
 
 ```
-[your answer here]
+The loop runs with a counter bounded by MAX_TOOL_ROUNDS (set to 5 in config.py).
+
+(a) No tool calls — after each LLM call, check assistant_message.tool_calls.
+    If it's falsy (None or empty), the LLM is done calling tools. Break out of
+    the loop and fall through to extract the final text response.
+
+(b) MAX_TOOL_ROUNDS reached — use `for round_num in range(MAX_TOOL_ROUNDS):`
+    as the loop structure. If all MAX_TOOL_ROUNDS iterations are exhausted
+    without hitting condition (a), the for-loop completes without a break.
+    At that point there is no clean text response, so return a user-readable
+    fallback string such as:
+    "I reached the maximum number of tool-calling steps. Please try rephrasing."
 ```
 
 ---
@@ -132,7 +143,24 @@ for tool_call in assistant_message.tool_calls:
 *Once the loop exits because there are no more tool calls, how do you extract the text content from the response object? What field holds the string you should return?*
 
 ```
-[your answer here]
+When the loop exits via condition (a) — no tool calls — the last `response`
+object from client.chat.completions.create() holds the final answer.
+
+Extract it with:
+    response.choices[0].message.content
+
+`choices[0]` is the first (and only) candidate response. `.message.content`
+is the plain string the LLM produced. That string is what run_agent() returns.
+
+Edge case: .content can be None. The Groq API sets content to None (not an
+empty string) whenever the message contains tool_calls. On the final loop
+iteration this should not happen, but it can occur if the LLM returns an
+empty text response. Guard against it:
+
+    return response.choices[0].message.content or "Sorry, I couldn't generate a response."
+
+This satisfies the output contract: run_agent() should never return None or
+an empty string.
 ```
 
 ---
@@ -145,16 +173,28 @@ for tool_call in assistant_message.tool_calls:
 
 ```
 Query: "How should I care for my calathea?"
-Round 1 tool call: [tool name, args]
-Round 2 tool call: [tool name, args] (if any)
-Final response: [brief description]
+  → Tool call: lookup_plant({'plant_name': 'calathea'})
+  ← Result: {"found": true, "plant": {"display_name": "Calathea", "scientific_name": "Calathea ornata", "aliases": ["prayer plant", ...
+  → Tool call: get_seasonal_conditions({})
+  ← Result: {"name": "Summer", "months": ["June", "July", "August"], "description": "Peak growing season. Most houseplants are at th...
+  
+  Final response: According to the care data for your calathea, it requires low to medium indirect light, and it's best to avoid direct sunlight as it can destroy the decorative leaf patterns. The plant also prefers high humidity (50%+), so using a humidifier, misting frequently, or grouping it with other plants can help.
+
+In terms of watering, it's essential to keep the soil consistently moist but not soggy. Calatheas are sensitive to minerals in tap water, so it's recommended to use filtered, distilled, or rainwater to prevent brown edges. Letting the water sit overnight can also help if you're using tap water.
+
+As for fertilizing, you can fertilize your calathea monthly during the growing season with a diluted balanced fertilizer.
+
+Given that it's currently summer, it's the peak growing season for most houseplants, including your calathea. You may need to water it more frequently, checking the soil every few days. Continue regular fertilizing on schedule, but avoid over-fertilizing. Also, be mindful of direct afternoon sun through windows, which can be intense enough to burn leaves.
+
+Lastly, keep an eye out for pests like spider mites and fungus gnats, which thrive in hot, dry conditions. Check your plant weekly, and isolate it immediately if you notice any signs of infection.
+
+By following these guidelines, you should be able to provide your calathea with the care it needs to thrive.
 ```
 
 **What happens when you ask about a plant that isn't in the database?**
 
-```
-[describe the behavior you observed]
-```
+  → Tool call: lookup_plant({'plant_name': 'zz'})
+  ← Result: {"found": false, "name": "zz", "message": "No plant matching 'zz' was found in the database. The database co...
 
 **One thing about the tool call API that surprised you:**
 
