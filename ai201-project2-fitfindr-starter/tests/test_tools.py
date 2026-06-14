@@ -1,5 +1,10 @@
 import tools
-from tools import create_fit_card, search_listings, suggest_outfit
+from tools import (
+    create_fit_card,
+    estimate_price_fairness,
+    search_listings,
+    suggest_outfit,
+)
 from utils.data_loader import get_empty_wardrobe, get_example_wardrobe
 
 
@@ -131,3 +136,98 @@ def test_create_fit_card_empty_outfit_returns_error(monkeypatch):
 
     assert isinstance(result, str)
     assert "outfit suggestion was empty" in result
+
+
+def test_estimate_price_fairness_returns_expected_shape():
+    new_item = search_listings("vintage graphic tee", size=None, max_price=50)[0]
+
+    result = estimate_price_fairness(new_item)
+
+    assert set(result) == {
+        "item_id",
+        "item_price",
+        "comparison_count",
+        "average_comparable_price",
+        "price_range",
+        "verdict",
+        "reasoning",
+    }
+    assert result["item_id"] == new_item["id"]
+    assert result["item_price"] == new_item["price"]
+    assert result["comparison_count"] >= 2
+    assert result["verdict"] in {
+        "good deal",
+        "fair price",
+        "priced high",
+        "not enough data",
+    }
+    assert isinstance(result["reasoning"], str)
+    assert result["reasoning"]
+
+
+def test_estimate_price_fairness_missing_price_returns_not_enough_data():
+    item = {
+        "id": "test_missing_price",
+        "title": "Test Tee",
+        "category": "tops",
+    }
+
+    result = estimate_price_fairness(item)
+
+    assert result["verdict"] == "not enough data"
+    assert result["item_price"] is None
+    assert result["comparison_count"] == 0
+    assert "price" in result["reasoning"]
+
+
+def test_estimate_price_fairness_missing_category_returns_not_enough_data():
+    item = {
+        "id": "test_missing_category",
+        "title": "Test Tee",
+        "price": 20,
+    }
+
+    result = estimate_price_fairness(item)
+
+    assert result["verdict"] == "not enough data"
+    assert result["item_price"] == 20
+    assert result["comparison_count"] == 0
+    assert "category" in result["reasoning"]
+
+
+def test_estimate_price_fairness_no_comparable_listings():
+    item = {
+        "id": "test_no_comps",
+        "title": "Rare Hat",
+        "category": "hats",
+        "price": 20,
+        "style_tags": ["rare"],
+        "colors": ["silver"],
+        "brand": "Test Brand",
+        "platform": "depop",
+    }
+
+    result = estimate_price_fairness(item)
+
+    assert result["verdict"] == "not enough data"
+    assert result["comparison_count"] == 0
+    assert "avoid making a price claim" in result["reasoning"]
+
+
+def test_estimate_price_fairness_weak_comparisons_are_low_confidence():
+    item = {
+        "id": "test_weak_comps",
+        "title": "Plain Belt",
+        "category": "accessories",
+        "price": 10,
+        "style_tags": ["plain"],
+        "colors": ["magenta"],
+        "brand": "No Match Brand",
+        "platform": "depop",
+    }
+
+    result = estimate_price_fairness(item)
+
+    assert result["verdict"] in {"good deal", "fair price", "priced high"}
+    assert result["comparison_count"] >= 2
+    assert "Low confidence" in result["reasoning"]

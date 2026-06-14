@@ -358,3 +358,185 @@ Caption requirements:
         "I couldn't create the fit card because the caption model returned an empty response. "
         f"Plain-text fallback: style {item_title} with this outfit: {outfit.strip()}"
     )
+
+
+def estimate_price_fairness(item: dict) -> dict:
+    """
+    Estimate whether a selected listing's price is fair using local listings.
+
+    Args:
+        item: The selected listing dict, usually session["selected_item"].
+
+    Returns:
+        A dict with item_id, item_price, comparison_count,
+        average_comparable_price, price_range, verdict, and reasoning.
+        The verdict is one of "good deal", "fair price", "priced high", or
+        "not enough data". This function never raises for expected bad inputs.
+    """
+    def parse_price(value: object) -> float | None:
+        try:
+            if value is None or value == "":
+                return None
+            return float(value)
+        except (TypeError, ValueError):
+            return None
+
+    def normalize_set(value: object) -> set[str]:
+        if value is None:
+            return set()
+        if isinstance(value, (list, tuple, set)):
+            values = value
+        else:
+            values = [value]
+        return {
+            str(raw).strip().lower()
+            for raw in values
+            if str(raw).strip()
+        }
+
+    def result(
+        *,
+        item_id: object = None,
+        item_price: float | None = None,
+        comparison_count: int = 0,
+        average_comparable_price: float | None = None,
+        price_min: float | None = None,
+        price_max: float | None = None,
+        verdict: str = "not enough data",
+        reasoning: str,
+    ) -> dict:
+        return {
+            "item_id": item_id,
+            "item_price": item_price,
+            "comparison_count": comparison_count,
+            "average_comparable_price": average_comparable_price,
+            "price_range": {"min": price_min, "max": price_max},
+            "verdict": verdict,
+            "reasoning": reasoning,
+        }
+
+    if not isinstance(item, dict):
+        return result(
+            reasoning="Cannot estimate price fairness because the item is not a listing dictionary."
+        )
+
+    item_id = item.get("id")
+    item_price = parse_price(item.get("price"))
+    category = str(item.get("category") or "").strip().lower()
+
+    missing = []
+    if item_price is None:
+        missing.append("price")
+    if not category:
+        missing.append("category")
+    if missing:
+        return result(
+            item_id=item_id,
+            item_price=item_price,
+            reasoning=(
+                "Cannot estimate price fairness because the selected item is "
+                f"missing or has an invalid {', '.join(missing)}."
+            ),
+        )
+
+    item_tags = normalize_set(item.get("style_tags"))
+    item_colors = normalize_set(item.get("colors"))
+    item_brand = str(item.get("brand") or "").strip().lower()
+
+    try:
+        listings = load_listings()
+    except Exception:
+        return result(
+            item_id=item_id,
+            item_price=item_price,
+            reasoning=(
+                "Could not load comparable listings, so the agent should avoid "
+                "making a price claim."
+            ),
+        )
+    if not isinstance(listings, list):
+        return result(
+            item_id=item_id,
+            item_price=item_price,
+            reasoning=(
+                "Comparable listings were not available in the expected list "
+                "format, so the agent should avoid making a price claim."
+            ),
+        )
+
+    comparable: list[tuple[int, dict, float]] = []
+    for listing in listings:
+        if not isinstance(listing, dict):
+            continue
+        if item_id is not None and listing.get("id") == item_id:
+            continue
+        if str(listing.get("category") or "").strip().lower() != category:
+            continue
+
+        listing_price = parse_price(listing.get("price"))
+        if listing_price is None:
+            continue
+
+        tag_overlap = item_tags & normalize_set(listing.get("style_tags"))
+        color_overlap = item_colors & normalize_set(listing.get("colors"))
+        listing_brand = str(listing.get("brand") or "").strip().lower()
+        brand_match = bool(item_brand and listing_brand and item_brand == listing_brand)
+
+        score = (2 * len(tag_overlap)) + len(color_overlap)
+        if brand_match:
+            score += 3
+        comparable.append((score, listing, listing_price))
+
+    strong_comparable = [entry for entry in comparable if entry[0] > 0]
+    if len(strong_comparable) >= 2:
+        chosen = strong_comparable
+        confidence_note = ""
+    else:
+        chosen = comparable
+        confidence_note = (
+            " Low confidence: this uses category matches because fewer than "
+            "two listings shared tags, colors, or brand."
+        )
+
+    if len(chosen) < 2:
+        return result(
+            item_id=item_id,
+            item_price=item_price,
+            comparison_count=len(chosen),
+            reasoning=(
+                "Not enough comparable listings were available in the dataset, "
+                "so the agent should avoid making a price claim."
+            ),
+        )
+
+    prices = [entry[2] for entry in chosen]
+    average_price = round(sum(prices) / len(prices), 2)
+    price_min = min(prices)
+    price_max = max(prices)
+
+    if item_price <= average_price * 0.85:
+        verdict = "good deal"
+    elif item_price >= average_price * 1.15:
+        verdict = "priced high"
+    else:
+        verdict = "fair price"
+
+    example_titles = [entry[1].get("title", "untitled listing") for entry in chosen[:3]]
+    reasoning = (
+        f"Compared this {category} item against {len(chosen)} other listing(s), "
+        f"including {', '.join(example_titles)}. Comparable prices ranged from "
+        f"${price_min:g} to ${price_max:g}, with an average of ${average_price:g}; "
+        f"the selected item is ${item_price:g}."
+        f"{confidence_note}"
+    )
+
+    return result(
+        item_id=item_id,
+        item_price=item_price,
+        comparison_count=len(chosen),
+        average_comparable_price=average_price,
+        price_min=price_min,
+        price_max=price_max,
+        verdict=verdict,
+        reasoning=reasoning,
+    )

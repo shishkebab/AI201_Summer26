@@ -1,7 +1,7 @@
 """
 agent.py
 
-The FitFindr planning loop. Orchestrates the three tools in response to a
+The FitFindr planning loop. Orchestrates the FitFindr tools in response to a
 natural language user query, passing state between them via a session dict.
 
 Complete tools.py and test each tool in isolation before implementing this file.
@@ -23,6 +23,7 @@ import re
 from tools import (
     _get_groq_client,
     create_fit_card,
+    estimate_price_fairness,
     search_listings,
     suggest_outfit,
 )
@@ -46,6 +47,7 @@ def _new_session(query: str, wardrobe: dict) -> dict:
         "search_results": [],        # list of matching listing dicts
         "selected_item": None,       # top result, passed into suggest_outfit
         "wardrobe": wardrobe,        # user's wardrobe dict
+        "price_fairness": None,      # dict returned by estimate_price_fairness
         "outfit_suggestion": None,   # string returned by suggest_outfit
         "fit_card": None,            # string returned by create_fit_card
         "error": None,               # set if the interaction ended early
@@ -151,7 +153,7 @@ Write a short helpful response to the user. It should:
                 {"role": "user", "content": prompt},
             ],
             temperature=0.4,
-            max_tokens=180,
+            # max_tokens=180,
         )
         message = response.choices[0].message.content.strip()
         if message:
@@ -196,13 +198,17 @@ def run_agent(query: str, wardrobe: dict) -> dict:
         Step 4: Select the item to use (e.g., the top result).
                 Store it in session["selected_item"].
 
-        Step 5: Call suggest_outfit() with the selected item and wardrobe.
+        Step 5: Call estimate_price_fairness() with the selected item.
+                Store the result in session["price_fairness"]. This should not
+                stop the flow if the verdict is "not enough data".
+
+        Step 6: Call suggest_outfit() with the selected item and wardrobe.
                 Store the result in session["outfit_suggestion"].
 
-        Step 6: Call create_fit_card() with the outfit suggestion and selected item.
+        Step 7: Call create_fit_card() with the outfit suggestion and selected item.
                 Store the result in session["fit_card"].
 
-        Step 7: Return the session.
+        Step 8: Return the session.
 
     Before writing code, complete the Planning Loop and State Management sections
     of planning.md — your implementation should match what you described there.
@@ -227,6 +233,7 @@ def run_agent(query: str, wardrobe: dict) -> dict:
     if not session["search_results"]:
         print("[BRANCH] search_listings returned no results")
         print("[TOOL CALL] _generate_no_results_message")
+        print("[SKIP] estimate_price_fairness")
         print("[SKIP] suggest_outfit")
         print("[SKIP] create_fit_card")
         session["error"] = _generate_no_results_message(session["parsed"])
@@ -235,7 +242,33 @@ def run_agent(query: str, wardrobe: dict) -> dict:
     session["selected_item"] = session["search_results"][0]
     print("[DEBUG] selected_item stored in session:")
     print(session["selected_item"])
-    print("[DEBUG] selected_item id before suggest_outfit:", id(session["selected_item"]))
+    print("[DEBUG] selected_item id before estimate_price_fairness:", id(session["selected_item"]))
+
+    print("[TOOL CALL] estimate_price_fairness")
+    print("[DEBUG] selected_item passed into estimate_price_fairness:")
+    print(session["selected_item"])
+    try:
+        session["price_fairness"] = estimate_price_fairness(session["selected_item"])
+    except Exception as exc:
+        selected_item = (
+            session["selected_item"]
+            if isinstance(session["selected_item"], dict)
+            else {}
+        )
+        session["price_fairness"] = {
+            "item_id": selected_item.get("id"),
+            "item_price": selected_item.get("price"),
+            "comparison_count": 0,
+            "average_comparable_price": None,
+            "price_range": {"min": None, "max": None},
+            "verdict": "not enough data",
+            "reasoning": (
+                "Could not estimate price fairness because the price tool failed "
+                f"unexpectedly: {exc}"
+            ),
+        }
+    print("[DEBUG] price_fairness stored in session:")
+    print(session["price_fairness"])
 
     print("[TOOL CALL] suggest_outfit")
     print("wardrobe item count:", len(session["wardrobe"].get("items", [])))

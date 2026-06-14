@@ -20,6 +20,21 @@ from utils.data_loader import get_example_wardrobe, get_empty_wardrobe
 
 # ── query handler ─────────────────────────────────────────────────────────────
 
+def _format_price_fairness(price_fairness: dict | None) -> str:
+    """Format the optional price fairness result for the listing panel."""
+    if not isinstance(price_fairness, dict):
+        return (
+            "Price check: not enough data - I can't confidently judge this "
+            "price from the dataset."
+        )
+
+    verdict = price_fairness.get("verdict") or "not enough data"
+    reasoning = price_fairness.get("reasoning") or (
+        "I can't confidently judge this price from the dataset."
+    )
+    return f"Price check: {verdict} - {reasoning}"
+
+
 def handle_query(user_query: str, wardrobe_choice: str) -> tuple[str, str, str]:
     """
     Called by Gradio when the user submits a query.
@@ -59,6 +74,7 @@ def handle_query(user_query: str, wardrobe_choice: str) -> tuple[str, str, str]:
     brand = item.get("brand") or "Unknown brand"
     colors = ", ".join(item.get("colors", []))
     tags = ", ".join(item.get("style_tags", []))
+    price_check = _format_price_fairness(session.get("price_fairness"))
     listing_text = (
         f"{item['title']}\n"
         f"Price: ${item['price']:.2f}\n"
@@ -69,6 +85,7 @@ def handle_query(user_query: str, wardrobe_choice: str) -> tuple[str, str, str]:
         f"Category: {item['category']}\n"
         f"Colors: {colors}\n"
         f"Style tags: {tags}\n\n"
+        f"{price_check}\n\n"
         f"{item['description']}"
     )
 
