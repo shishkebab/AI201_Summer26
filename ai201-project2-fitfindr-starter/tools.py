@@ -13,6 +13,7 @@ Tools:
 """
 
 import os
+import re
 
 from dotenv import load_dotenv
 from groq import Groq
@@ -69,8 +70,60 @@ def search_listings(
 
     Before writing code, fill in the Tool 1 section of planning.md.
     """
-    # Replace this with your implementation
-    return []
+    def tokenize(value: object) -> set[str]:
+        return set(re.findall(r"[a-z0-9]+", str(value).lower()))
+
+    def field_text(listing: dict, field: str) -> str:
+        value = listing.get(field)
+        if value is None:
+            return ""
+        if isinstance(value, list):
+            return " ".join(str(item) for item in value)
+        return str(value)
+
+    query_tokens = tokenize(description)
+    if not query_tokens:
+        return []
+
+    normalized_size = (size or "").strip().lower()
+    should_filter_size = normalized_size not in {"", "any"}
+    scored_listings: list[tuple[int, dict]] = []
+
+    for listing in load_listings():
+        if max_price is not None and listing.get("price", 0) > max_price:
+            continue
+
+        listing_size = str(listing.get("size", "")).lower()
+        if should_filter_size and normalized_size not in listing_size:
+            continue
+
+        title_tokens = tokenize(field_text(listing, "title"))
+        description_tokens = tokenize(field_text(listing, "description"))
+        category_tokens = tokenize(field_text(listing, "category"))
+        tag_tokens = tokenize(field_text(listing, "style_tags"))
+        color_tokens = tokenize(field_text(listing, "colors"))
+        brand_tokens = tokenize(field_text(listing, "brand"))
+
+        score = 0
+        score += 3 * len(query_tokens & title_tokens)
+        score += 3 * len(query_tokens & tag_tokens)
+        score += 2 * len(query_tokens & category_tokens)
+        score += 2 * len(query_tokens & color_tokens)
+        score += 2 * len(query_tokens & brand_tokens)
+        score += len(query_tokens & description_tokens)
+
+        if score > 0:
+            scored_listings.append((score, listing))
+
+    scored_listings.sort(
+        key=lambda item: (
+            item[0],
+            -float(item[1].get("price", 0)),
+            item[1].get("title", ""),
+        ),
+        reverse=True,
+    )
+    return [listing for _, listing in scored_listings]
 
 
 # ── Tool 2: suggest_outfit ────────────────────────────────────────────────────
