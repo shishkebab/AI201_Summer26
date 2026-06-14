@@ -153,8 +153,111 @@ def suggest_outfit(new_item: dict, wardrobe: dict) -> str:
 
     Before writing code, fill in the Tool 2 section of planning.md.
     """
-    # Replace this with your implementation
-    return ""
+    def format_item(item: dict) -> str:
+        colors = ", ".join(item.get("colors", []) or ["unknown colors"])
+        tags = ", ".join(item.get("style_tags", []) or ["no style tags"])
+        notes = item.get("notes") or item.get("description") or "no extra notes"
+        return (
+            f"- {item.get('name') or item.get('title', 'Unnamed item')} "
+            f"({item.get('category', 'unknown category')}; "
+            f"colors: {colors}; style tags: {tags}; notes: {notes})"
+        )
+
+    item_colors = ", ".join(new_item.get("colors", []) or ["unknown colors"])
+    item_tags = ", ".join(new_item.get("style_tags", []) or ["no style tags"])
+    item_summary = (
+        f"{new_item.get('title', 'Selected thrifted item')}\n"
+        f"- category: {new_item.get('category', 'unknown')}\n"
+        f"- size: {new_item.get('size', 'unknown')}\n"
+        f"- condition: {new_item.get('condition', 'unknown')}\n"
+        f"- price/platform: ${new_item.get('price', 'unknown')} on "
+        f"{new_item.get('platform', 'unknown platform')}\n"
+        f"- colors: {item_colors}\n"
+        f"- style tags: {item_tags}\n"
+        f"- description: {new_item.get('description', 'No description provided.')}"
+    )
+
+    wardrobe_items = wardrobe.get("items", []) if isinstance(wardrobe, dict) else []
+    has_wardrobe = bool(wardrobe_items)
+
+    if has_wardrobe:
+        wardrobe_text = "\n".join(format_item(item) for item in wardrobe_items)
+        user_prompt = f"""
+Suggest 1-2 complete outfits using this thrifted item and named pieces from the user's wardrobe.
+
+Thrifted item:
+{item_summary}
+
+User wardrobe:
+{wardrobe_text}
+
+Requirements:
+- Mention the thrifted item by name.
+- Use specific wardrobe item names when possible.
+- Explain briefly why the colors, categories, or style tags work together.
+- Keep it concise and practical.
+""".strip()
+    else:
+        user_prompt = f"""
+The user's wardrobe is empty, so suggest general styling ideas for this thrifted item.
+
+Thrifted item:
+{item_summary}
+
+Requirements:
+- Do not say you can see closet items.
+- Give 1-2 complete outfit ideas using general pieces someone might own.
+- Mention that a more personal outfit is possible once wardrobe items are added.
+- Explain briefly what vibe the item suits.
+- Keep it concise and practical.
+""".strip()
+
+    try:
+        client = _get_groq_client()
+        response = client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[
+                {
+                    "role": "system",
+                    "content": (
+                        "You are FitFindr, a concise secondhand fashion stylist. "
+                        "Give useful outfit advice with specific pieces, colors, "
+                        "and style reasoning. Avoid generic filler."
+                    ),
+                },
+                {"role": "user", "content": user_prompt},
+            ],
+            temperature=0.7,
+            max_tokens=450,
+        )
+        outfit = response.choices[0].message.content.strip()
+        if outfit:
+            return outfit
+    except Exception:
+        if has_wardrobe:
+            return (
+                "I could not reach the styling model, but this item should work "
+                f"well with pieces from your wardrobe. Try {new_item.get('title', 'the thrifted item')} "
+                f"with {wardrobe_items[0].get('name', 'a favorite closet piece')} and choose shoes "
+                "or accessories that repeat one of the item's colors or style tags."
+            )
+        return (
+            "I could not reach the styling model, but this item can still be styled "
+            f"generally. Try {new_item.get('title', 'the thrifted item')} with a balanced basic, "
+            "a complementary layer, and shoes that match its overall vibe."
+        )
+
+    if has_wardrobe:
+        return (
+            f"Try styling {new_item.get('title', 'the thrifted item')} with "
+            f"{wardrobe_items[0].get('name', 'one of your wardrobe pieces')}. "
+            "Use matching colors or shared style tags to choose shoes and accessories."
+        )
+    return (
+        f"Try styling {new_item.get('title', 'the thrifted item')} with baggy jeans, "
+        "chunky sneakers, and a denim or leather jacket. Add wardrobe items later "
+        "for a more personal outfit suggestion."
+    )
 
 
 # ── Tool 3: create_fit_card ───────────────────────────────────────────────────
@@ -186,5 +289,72 @@ def create_fit_card(outfit: str, new_item: dict) -> str:
 
     Before writing code, fill in the Tool 3 section of planning.md.
     """
-    # Replace this with your implementation
-    return ""
+    if not outfit or not outfit.strip():
+        return (
+            "I couldn't create a fit card because the outfit suggestion was empty. "
+            "Please generate an outfit suggestion first, then try creating the fit card again."
+        )
+
+    item_title = new_item.get("title", "the thrifted item")
+    item_price = new_item.get("price", "unknown price")
+    item_platform = new_item.get("platform", "unknown platform")
+    item_colors = ", ".join(new_item.get("colors", []) or ["unknown colors"])
+    item_tags = ", ".join(new_item.get("style_tags", []) or ["no style tags"])
+
+    prompt = f"""
+Write a short, shareable outfit caption for this thrifted find.
+
+Thrifted item:
+- title: {item_title}
+- price: ${item_price}
+- platform: {item_platform}
+- category: {new_item.get('category', 'unknown')}
+- size: {new_item.get('size', 'unknown')}
+- condition: {new_item.get('condition', 'unknown')}
+- colors: {item_colors}
+- style tags: {item_tags}
+- description: {new_item.get('description', 'No description provided.')}
+
+Outfit suggestion:
+{outfit.strip()}
+
+Caption requirements:
+- Write 2-3 sentences.
+- Sound casual and authentic, like a real OOTD post.
+- Mention the item name, price, and platform naturally exactly once each.
+- Capture the outfit vibe with specific style language.
+- Do not sound like a product listing or a formal ad.
+""".strip()
+
+    try:
+        client = _get_groq_client()
+        response = client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[
+                {
+                    "role": "system",
+                    "content": (
+                        "You write concise, natural outfit captions for "
+                        "secondhand fashion finds. Keep the tone casual, "
+                        "specific, and social-media ready."
+                    ),
+                },
+                {"role": "user", "content": prompt},
+            ],
+            temperature=0.9,
+            max_tokens=180,
+        )
+        caption = response.choices[0].message.content.strip()
+        if caption:
+            return caption
+    except Exception:
+        return (
+            "I couldn't create the fit card because the caption model was unavailable. "
+            f"Plain-text fallback: style {item_title} from {item_platform} with this outfit: "
+            f"{outfit.strip()}"
+        )
+
+    return (
+        "I couldn't create the fit card because the caption model returned an empty response. "
+        f"Plain-text fallback: style {item_title} with this outfit: {outfit.strip()}"
+    )
