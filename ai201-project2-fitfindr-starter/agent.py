@@ -20,7 +20,12 @@ Usage (once implemented):
 
 import re
 
-from tools import search_listings, suggest_outfit, create_fit_card
+from tools import (
+    _get_groq_client,
+    create_fit_card,
+    search_listings,
+    suggest_outfit,
+)
 
 
 # ── session state ─────────────────────────────────────────────────────────────
@@ -94,6 +99,69 @@ def _parse_query(query: str) -> dict:
     }
 
 
+def _fallback_no_results_message(parsed: dict) -> str:
+    """Return a deterministic no-results message if the LLM is unavailable."""
+    description = parsed.get("description") or "that item"
+    size = parsed.get("size")
+    max_price = parsed.get("max_price")
+
+    filters = []
+    if size:
+        filters.append(f"size {size}")
+    if max_price is not None:
+        filters.append(f"under ${max_price:g}")
+    filter_text = f" with {' and '.join(filters)}" if filters else ""
+
+    return (
+        f"I couldn't find any listings for '{description}'{filter_text}. "
+        # "Try broadening the item description, removing the size filter, or raising the max price."
+    )
+
+
+def _generate_no_results_message(parsed: dict) -> str:
+    """Ask the LLM to explain the failed search and suggest next steps."""
+    fallback = _fallback_no_results_message(parsed)
+    prompt = f"""
+The user searched for a secondhand clothing item, but no listings matched.
+
+Parsed search:
+- description: {parsed.get("description")}
+- size: {parsed.get("size")}
+- max_price: {parsed.get("max_price")}
+
+Write a short helpful response to the user. It should:
+- say what failed
+- mention the filters that may have been too restrictive
+- suggest 2-3 concrete ways to adjust the search
+- not pretend there are matching listings
+""".strip()
+
+    try:
+        client = _get_groq_client()
+        response = client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[
+                {
+                    "role": "system",
+                    "content": (
+                        "You help users refine secondhand clothing searches. "
+                        "Be concise, specific, and honest about no-result searches."
+                    ),
+                },
+                {"role": "user", "content": prompt},
+            ],
+            temperature=0.4,
+            max_tokens=180,
+        )
+        message = response.choices[0].message.content.strip()
+        if message:
+            return message
+    except Exception:
+        pass
+
+    return fallback
+
+
 def run_agent(query: str, wardrobe: dict) -> dict:
     """
     Main agent entry point. Runs the FitFindr planning loop for a single
@@ -147,16 +215,21 @@ def run_agent(query: str, wardrobe: dict) -> dict:
 
     session["parsed"] = _parse_query(query)
 
+    print("[TOOL CALL] search_listings")
+    print("description:", session["parsed"]["description"])
+    print("size:", session["parsed"]["size"])
+    print("max_price:", session["parsed"]["max_price"])
     session["search_results"] = search_listings(
         description=session["parsed"]["description"],
         size=session["parsed"]["size"],
         max_price=session["parsed"]["max_price"],
     )
     if not session["search_results"]:
-        session["error"] = (
-            "I couldn't find any listings that match that item, size, and budget. "
-            "Try raising the max price, leaving size blank, or broadening the description."
-        )
+        print("[BRANCH] search_listings returned no results")
+        print("[TOOL CALL] _generate_no_results_message")
+        print("[SKIP] suggest_outfit")
+        print("[SKIP] create_fit_card")
+        session["error"] = _generate_no_results_message(session["parsed"])
         return session
 
     session["selected_item"] = session["search_results"][0]
@@ -164,6 +237,8 @@ def run_agent(query: str, wardrobe: dict) -> dict:
     print(session["selected_item"])
     print("[DEBUG] selected_item id before suggest_outfit:", id(session["selected_item"]))
 
+    print("[TOOL CALL] suggest_outfit")
+    print("wardrobe item count:", len(session["wardrobe"].get("items", [])))
     print("[DEBUG] selected_item passed into suggest_outfit:")
     print(session["selected_item"])
     session["outfit_suggestion"] = suggest_outfit(
@@ -176,8 +251,10 @@ def run_agent(query: str, wardrobe: dict) -> dict:
         session["error"] = (
             "I found a listing, but couldn't create an outfit suggestion for it."
         )
+        print("[SKIP] create_fit_card")
         return session
 
+    print("[TOOL CALL] create_fit_card")
     print("[DEBUG] outfit_suggestion passed into create_fit_card:")
     print(session["outfit_suggestion"])
     print("[DEBUG] selected_item passed into create_fit_card:")

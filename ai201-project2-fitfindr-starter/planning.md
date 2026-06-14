@@ -77,7 +77,7 @@ The agent starts by calling `_new_session(query, wardrobe)`, then parses the use
 
 The parser extracts `max_price` from patterns like `"under $30"` or `"$30"`, extracts `size` from patterns like `"size M"`, `"US 8"`, or waist sizes like `"W30"`, and builds `description` by removing the extracted price/size phrases from the original query. If the user does not provide a size, set `size = None`; if the user does not provide a maximum price, set `max_price = None`. Store these values in `session["parsed"]`.
 
-First, call `search_listings(description=session["parsed"]["description"], size=session["parsed"]["size"], max_price=session["parsed"]["max_price"])` and store the return value as `session["search_results"]`. After `search_listings` runs, check whether `search_results` is empty. If it is empty, set `session["error"]` to a helpful no-results message that suggests relaxing the budget, size, or style terms, then return the session early without calling `suggest_outfit` or `create_fit_card`.
+First, call `search_listings(description=session["parsed"]["description"], size=session["parsed"]["size"], max_price=session["parsed"]["max_price"])` and store the return value as `session["search_results"]`. After `search_listings` runs, check whether `search_results` is empty. If it is empty, call an LLM-backed no-results message helper with `session["parsed"]`, store the returned message in `session["error"]`, then return the session early without calling `suggest_outfit` or `create_fit_card`. If the LLM message helper fails, use a deterministic fallback that mentions the parsed description, size, max price, and concrete ways to broaden the search.
 
 If `search_results` is not empty, set `session["selected_item"] = search_results[0]` because results are already sorted strongest to weakest match. Use the `wardrobe` argument already stored in `session["wardrobe"]`; do not load a separate wardrobe inside `run_agent`. Call `suggest_outfit(new_item=session["selected_item"], wardrobe=session["wardrobe"])` and store the returned string as `session["outfit_suggestion"]`.
 
@@ -92,7 +92,7 @@ Next, call `create_fit_card(outfit=session["outfit_suggestion"], new_item=sessio
 **How does information from one tool get passed to the next?**
 `run_agent(query, wardrobe)` creates one session dict with `_new_session(query, wardrobe)` and uses that dict as the single source of truth for the whole interaction. The session starts with `query`, `parsed = {}`, `search_results = []`, `selected_item = None`, `wardrobe`, `outfit_suggestion = None`, `fit_card = None`, and `error = None`.
 
-After parsing, the agent stores `session["parsed"] = {"description": description, "size": size, "max_price": max_price}`. Those parsed values are passed directly into `search_listings`, and the returned list is stored in `session["search_results"]`. If the list is empty, the agent sets `session["error"]` and returns the session immediately, leaving `selected_item`, `outfit_suggestion`, and `fit_card` as `None`.
+After parsing, the agent stores `session["parsed"] = {"description": description, "size": size, "max_price": max_price}`. Those parsed values are passed directly into `search_listings`, and the returned list is stored in `session["search_results"]`. If the list is empty, the agent uses the parsed values to generate `session["error"]` with an LLM-backed no-results helper, then returns the session immediately, leaving `selected_item`, `outfit_suggestion`, and `fit_card` as `None`.
 
 If search succeeds, the agent stores the top result as `session["selected_item"] = session["search_results"][0]`. That selected listing and `session["wardrobe"]` are passed into `suggest_outfit`, and the returned string is stored as `session["outfit_suggestion"]`. If that string is empty, the agent sets `session["error"]` and returns early with the selected item still available in the session.
 
@@ -106,7 +106,7 @@ For each tool, describe the specific failure mode you're handling and what the a
 
 | Tool | Failure mode | Agent response |
 |------|-------------|----------------|
-| search_listings | No listings match the user's `description`, `size`, and `max_price` filters, so the tool returns `[]`. | Set `session["error"] = "I couldn't find any listings that match that item, size, and budget. Try raising the max price, leaving size blank, or broadening the description."` and return early without calling `suggest_outfit` or `create_fit_card`. |
+| search_listings | No listings match the user's `description`, `size`, and `max_price` filters, so the tool returns `[]`. | Call the no-results message helper with `session["parsed"]`, store the returned user-facing message in `session["error"]`, and return early without calling `suggest_outfit` or `create_fit_card`. The helper asks the LLM to explain what failed and suggest concrete search adjustments; if the LLM is unavailable, it falls back to a deterministic message that mentions the parsed filters and suggests broadening the description, removing the size filter, or raising the max price. |
 | suggest_outfit | The wardrobe is empty, such as when the agent receives `get_empty_wardrobe()` with `items: []`. | Do not treat this as a fatal error. Keep `session["selected_item"]`, call `suggest_outfit` with the empty wardrobe, and store the returned general styling advice string in `session["outfit_suggestion"]`. The advice should tell the user that the agent found a listing but does not have closet items to pair it with yet, then offer a generic styling idea and invite the user to add wardrobe items for a more personal outfit. |
 | create_fit_card | The outfit input is empty or whitespace-only, or the LLM cannot create a caption. | If `session["outfit_suggestion"]` is empty before calling the tool, set `session["error"]` and return early. If `create_fit_card` returns a fallback/error string, store that string in `session["fit_card"]` so the user still gets the selected listing and outfit suggestion in plain text. |
 
@@ -141,11 +141,16 @@ search_listings(description, size, max_price)
     +-- results = []
     |       |
     |       v
-    |   [ERROR]
-    |   session.error = "No matching listings were found..."
+    |   generate_no_results_message(parsed)
+    |       |
+    |       +-- LLM succeeds:
+    |       |   session.error = helpful search-refinement message
+    |       |
+    |       +-- LLM fails:
+    |           session.error = deterministic fallback message
     |       |
     |       v
-    |   Return session early with suggestions to relax budget, size, or style terms
+    |   Return session early without calling suggest_outfit or create_fit_card
     |
     +-- results = [listing_1, listing_2, ...]
             |
@@ -221,11 +226,11 @@ For `create_fit_card`, I will give Claude the `Tool 3: create_fit_card` block an
 After Claude generates the three functions, I will use Claude to integrate them into the project files and review them against the Tools section. Claude should make the code consistent with the existing project structure, import helper functions from `utils/data_loader.py`, and avoid changing unrelated files. I will verify the milestone by running focused tests or manual function calls for successful search, no-results search, example wardrobe styling, empty wardrobe styling, complete fit card creation, and incomplete outfit fallback.
 
 **Milestone 4 - Planning loop and state management:**
-I will give Claude the completed `Planning Loop`, `State Management` once completed, `Error Handling`, `Architecture` ASCII diagram, and `A Complete Interaction` sections from `planning.md`. I expect Claude to produce the agent control flow that parses a user query into `description`, `size`, and `max_price`, stores those values in `session["parsed"]`, calls `search_listings`, branches early on empty results, stores `selected_item = results[0]`, uses the wardrobe passed into `run_agent`, calls `suggest_outfit`, stores the returned string in `session["outfit_suggestion"]`, calls `create_fit_card(session["outfit_suggestion"], session["selected_item"])`, and returns the completed session.
+I will give Claude the completed `Planning Loop`, `State Management` once completed, `Error Handling`, `Architecture` ASCII diagram, and `A Complete Interaction` sections from `planning.md`. I expect Claude to produce the agent control flow that parses a user query into `description`, `size`, and `max_price`, stores those values in `session["parsed"]`, calls `search_listings`, branches early on empty results with an LLM-generated no-results message plus deterministic fallback, stores `selected_item = results[0]`, uses the wardrobe passed into `run_agent`, calls `suggest_outfit`, stores the returned string in `session["outfit_suggestion"]`, calls `create_fit_card(session["outfit_suggestion"], session["selected_item"])`, and returns the completed session.
 
 I will use Claude as a reviewer for Milestone 4 by giving it the same `Planning Loop` section and `Architecture` diagram plus the generated planning-loop code. I will ask Claude to identify any missing branch, incorrect state key, or mismatch with the documented tool return shapes. Before trusting the implementation, I will manually trace the code against the `A Complete Interaction` example and verify that the session contains `parsed`, `search_results`, `selected_item`, `wardrobe`, `outfit_suggestion`, `fit_card`, and `error` at the correct points.
 
-To verify the final planning loop, I will run three end-to-end scenarios: the example vintage graphic tee query should return listings plus a fit card; a query with no matching listings should return early with the no-results message and should not call outfit or fit-card logic; and a run with `get_empty_wardrobe()` should still return the selected listing with general styling notes in `session["outfit_suggestion"]`.
+To verify the final planning loop, I will run three end-to-end scenarios: the example vintage graphic tee query should return listings plus a fit card; a query with no matching listings should return early with an error message that explains the failed parsed filters and suggests concrete search adjustments, and should not call outfit or fit-card logic; and a run with `get_empty_wardrobe()` should still return the selected listing with general styling notes in `session["outfit_suggestion"]`.
 
 ---
 
@@ -235,10 +240,10 @@ Write out what a full user interaction looks like from start to finish ??tool ca
 
 **Example user query:** "I'm looking for a vintage graphic tee under $30. I mostly wear baggy jeans and chunky sneakers. What's out there and how would I style it?"
 
-FitFindr searches secondhand clothing listings, picks the best item for the user's request, then styles it with the wardrobe passed into `run_agent()` so the user gets both shopping options and an outfit idea. For the example query, the request triggers `search_listings(description="vintage graphic tee", size=None, max_price=30)`, a selected listing triggers `suggest_outfit(new_item=<chosen listing>, wardrobe=<passed-in wardrobe>)`, and the completed outfit suggestion triggers `create_fit_card(outfit=<outfit suggestion string>, new_item=<chosen listing>)`. If search finds nothing, FitFindr should set `session["error"]` and suggest relaxing the query; if the wardrobe is empty from `get_empty_wardrobe()`, it should still show the listing with a general styling suggestion string; if the fit card cannot be created, it should return a descriptive fallback string rather than crashing.
+FitFindr searches secondhand clothing listings, picks the best item for the user's request, then styles it with the wardrobe passed into `run_agent()` so the user gets both shopping options and an outfit idea. For the example query, the request triggers `search_listings(description="vintage graphic tee", size=None, max_price=30)`, a selected listing triggers `suggest_outfit(new_item=<chosen listing>, wardrobe=<passed-in wardrobe>)`, and the completed outfit suggestion triggers `create_fit_card(outfit=<outfit suggestion string>, new_item=<chosen listing>)`. If search finds nothing, FitFindr should set `session["error"]` to an LLM-generated message that explains the failed filters and suggests what to try next, with a deterministic fallback if the LLM is unavailable; if the wardrobe is empty from `get_empty_wardrobe()`, it should still show the listing with a general styling suggestion string; if the fit card cannot be created, it should return a descriptive fallback string rather than crashing.
 
 **Step 1:**
-The agent reads the user query and identifies three search constraints: item description = "vintage graphic tee", size = `None` because the user did not specify a size, and max price = 30. It stores those values in `session["parsed"]`, calls `search_listings(description="vintage graphic tee", size=None, max_price=30)`, and that tool uses `load_listings()` from `utils/data_loader.py` to search the mock secondhand listings. The tool returns matching listings such as the black 2003 tour bootleg-style graphic tee for $24 and the faded grey vintage band tee for $19; if it returns no matches, the agent sets `session["error"]`, stops the tool chain, and suggests relaxing the budget, style terms, or size.
+The agent reads the user query and identifies three search constraints: item description = "vintage graphic tee", size = `None` because the user did not specify a size, and max price = 30. It stores those values in `session["parsed"]`, calls `search_listings(description="vintage graphic tee", size=None, max_price=30)`, and that tool uses `load_listings()` from `utils/data_loader.py` to search the mock secondhand listings. The tool returns matching listings such as the black 2003 tour bootleg-style graphic tee for $24 and the faded grey vintage band tee for $19; if it returns no matches, the agent generates a helpful no-results message from `session["parsed"]`, stores it in `session["error"]`, and stops the tool chain.
 
 **Step 2:**
 The agent chooses the strongest match from Step 1, likely the black "Graphic Tee - 2003 Tour Bootleg Style" because it is a vintage-style graphic tee under $30 and fits the user's baggy jeans/chunky sneakers style. It uses the wardrobe passed into `run_agent()` and calls `suggest_outfit(new_item=<chosen listing>, wardrobe=session["wardrobe"])`. The tool returns an outfit suggestion string using the new tee with wardrobe pieces like baggy straight-leg jeans, chunky white sneakers, a vintage black denim jacket, and a black crossbody bag; if the wardrobe is empty from `get_empty_wardrobe()`, the string gives general styling advice instead of wardrobe-specific pairings.
