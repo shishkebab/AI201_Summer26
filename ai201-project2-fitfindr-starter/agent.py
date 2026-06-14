@@ -18,6 +18,8 @@ Usage (once implemented):
     print(result["error"])   # None on success
 """
 
+import re
+
 from tools import search_listings, suggest_outfit, create_fit_card
 
 
@@ -46,6 +48,51 @@ def _new_session(query: str, wardrobe: dict) -> dict:
 
 
 # ── planning loop ─────────────────────────────────────────────────────────────
+
+def _parse_query(query: str) -> dict:
+    """Extract description, size, and max_price from a simple user query."""
+    description = query.strip()
+
+    price_match = re.search(
+        r"(?:under|below|less than|max(?:imum)?|up to)\s*\$?\s*(\d+(?:\.\d+)?)",
+        description,
+        flags=re.IGNORECASE,
+    )
+    if not price_match:
+        price_match = re.search(r"\$\s*(\d+(?:\.\d+)?)", description)
+    max_price = float(price_match.group(1)) if price_match else None
+
+    size = None
+    for pattern in [
+        r"\bsize\s+([a-z]{1,3}\b|us\s*\d+(?:\.\d+)?|w\d{2}(?:\s*l\d{2})?|\d+(?:\.\d+)?)",
+        r"\b(us\s*\d+(?:\.\d+)?)\b",
+        r"\b(w\d{2}(?:\s*l\d{2})?)\b",
+    ]:
+        size_match = re.search(pattern, description, flags=re.IGNORECASE)
+        if size_match:
+            size = re.sub(r"\s+", " ", size_match.group(1).upper()).strip()
+            break
+
+    for pattern in [
+        r"(?:under|below|less than|max(?:imum)?|up to)\s*\$?\s*\d+(?:\.\d+)?",
+        r"\$\s*\d+(?:\.\d+)?",
+        r"\bsize\s+(?:[a-z]{1,3}\b|us\s*\d+(?:\.\d+)?|w\d{2}(?:\s*l\d{2})?|\d+(?:\.\d+)?)",
+        r"\bus\s*\d+(?:\.\d+)?\b",
+        r"\bw\d{2}(?:\s*l\d{2})?\b",
+        r"\b(?:i'?m|i am|looking for|want|need|find me|show me)\b",
+        r"\b(?:what'?s out there|how would i style it)\b",
+    ]:
+        description = re.sub(pattern, " ", description, flags=re.IGNORECASE)
+
+    description = re.sub(r"[?.,!]", " ", description)
+    description = re.sub(r"\s+", " ", description).strip()
+
+    return {
+        "description": description or query.strip(),
+        "size": size,
+        "max_price": max_price,
+    }
+
 
 def run_agent(query: str, wardrobe: dict) -> dict:
     """
@@ -92,9 +139,59 @@ def run_agent(query: str, wardrobe: dict) -> dict:
     Before writing code, complete the Planning Loop and State Management sections
     of planning.md — your implementation should match what you described there.
     """
-    # TODO: implement the planning loop
     session = _new_session(query, wardrobe)
-    session["error"] = "Planning loop not yet implemented."
+
+    if not query or not query.strip():
+        session["error"] = "Please enter what kind of item you want to find."
+        return session
+
+    session["parsed"] = _parse_query(query)
+
+    session["search_results"] = search_listings(
+        description=session["parsed"]["description"],
+        size=session["parsed"]["size"],
+        max_price=session["parsed"]["max_price"],
+    )
+    if not session["search_results"]:
+        session["error"] = (
+            "I couldn't find any listings that match that item, size, and budget. "
+            "Try raising the max price, leaving size blank, or broadening the description."
+        )
+        return session
+
+    session["selected_item"] = session["search_results"][0]
+    print("[DEBUG] selected_item stored in session:")
+    print(session["selected_item"])
+    print("[DEBUG] selected_item id before suggest_outfit:", id(session["selected_item"]))
+
+    print("[DEBUG] selected_item passed into suggest_outfit:")
+    print(session["selected_item"])
+    session["outfit_suggestion"] = suggest_outfit(
+        new_item=session["selected_item"],
+        wardrobe=session["wardrobe"],
+    )
+    print("[DEBUG] outfit_suggestion stored in session:")
+    print(session["outfit_suggestion"])
+    if not session["outfit_suggestion"] or not session["outfit_suggestion"].strip():
+        session["error"] = (
+            "I found a listing, but couldn't create an outfit suggestion for it."
+        )
+        return session
+
+    print("[DEBUG] outfit_suggestion passed into create_fit_card:")
+    print(session["outfit_suggestion"])
+    print("[DEBUG] selected_item passed into create_fit_card:")
+    print(session["selected_item"])
+    print("[DEBUG] selected_item id before create_fit_card:", id(session["selected_item"]))
+    session["fit_card"] = create_fit_card(
+        outfit=session["outfit_suggestion"],
+        new_item=session["selected_item"],
+    )
+    if not session["fit_card"] or not session["fit_card"].strip():
+        session["error"] = (
+            "I created an outfit suggestion, but couldn't create a fit card."
+        )
+
     return session
 
 
