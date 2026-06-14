@@ -1,4 +1,4 @@
-# FitFindr ??planning.md
+# FitFindr - planning.md
 
 > Complete this document before writing any implementation code.
 > Your spec and agent diagram are what you'll use to direct AI tools (Claude, Copilot, etc.) to generate your implementation ??the more specific they are, the more useful the generated code will be.
@@ -66,7 +66,19 @@ If `outfit` is empty or whitespace-only, return a descriptive error message stri
 
 ### Additional Tools (if any)
 
-<!-- Copy the block above for any tools beyond the required three -->
+### Tool 4: estimate_price_fairness
+
+**What it does:**
+Estimates whether a selected secondhand listing is a good deal, fairly priced, or priced high compared with similar listings in the mock dataset. The implementation should call `load_listings()` from `utils/data_loader.py` and compare against listings with the same category first, then use overlapping `style_tags`, `colors`, and `brand` to find stronger comparable items.
+
+**Input parameters:**
+- `item` (dict): The selected listing dictionary, usually `session["selected_item"]`; it should include `id`, `title`, `category`, `price`, `condition`, `style_tags`, `colors`, `brand`, and `platform`.
+
+**What it returns:**
+A price fairness dictionary with `item_id`, `item_price`, `comparison_count`, `average_comparable_price`, `price_range`, `verdict`, and `reasoning`. `price_range` should include the minimum and maximum prices among comparable listings. `verdict` should be one of `"good deal"`, `"fair price"`, `"priced high"`, or `"not enough data"`. `reasoning` should briefly explain which comparable listings were used and why the verdict was chosen.
+
+**What happens if it fails or returns nothing:**
+If `item` is missing required fields like `price` or `category`, return a result with `verdict = "not enough data"` and explain which fields were missing. If there are no comparable listings, return `verdict = "not enough data"` and have the agent avoid making a strong price claim. If there are only weak comparisons, return the best estimate but include low-confidence wording in `reasoning`.
 
 ---
 
@@ -77,26 +89,30 @@ The agent starts by calling `_new_session(query, wardrobe)`, then parses the use
 
 The parser extracts `max_price` from patterns like `"under $30"` or `"$30"`, extracts `size` from patterns like `"size M"`, `"US 8"`, or waist sizes like `"W30"`, and builds `description` by removing the extracted price/size phrases from the original query. If the user does not provide a size, set `size = None`; if the user does not provide a maximum price, set `max_price = None`. Store these values in `session["parsed"]`.
 
-First, call `search_listings(description=session["parsed"]["description"], size=session["parsed"]["size"], max_price=session["parsed"]["max_price"])` and store the return value as `session["search_results"]`. After `search_listings` runs, check whether `search_results` is empty. If it is empty, call an LLM-backed no-results message helper with `session["parsed"]`, store the returned message in `session["error"]`, then return the session early without calling `suggest_outfit` or `create_fit_card`. If the LLM message helper fails, use a deterministic fallback that mentions the parsed description, size, max price, and concrete ways to broaden the search.
+First, call `search_listings(description=session["parsed"]["description"], size=session["parsed"]["size"], max_price=session["parsed"]["max_price"])` and store the return value as `session["search_results"]`. After `search_listings` runs, check whether `search_results` is empty. If it is empty, call an LLM-backed no-results message helper with `session["parsed"]`, store the returned message in `session["error"]`, then return the session early without calling `estimate_price_fairness`, `suggest_outfit`, or `create_fit_card`. If the LLM message helper fails, use a deterministic fallback that mentions the parsed description, size, max price, and concrete ways to broaden the search.
 
-If `search_results` is not empty, set `session["selected_item"] = search_results[0]` because results are already sorted strongest to weakest match. Use the `wardrobe` argument already stored in `session["wardrobe"]`; do not load a separate wardrobe inside `run_agent`. Call `suggest_outfit(new_item=session["selected_item"], wardrobe=session["wardrobe"])` and store the returned string as `session["outfit_suggestion"]`.
+If `search_results` is not empty, set `session["selected_item"] = search_results[0]` because results are already sorted strongest to weakest match. Then call `estimate_price_fairness(item=session["selected_item"])` and store the returned dictionary as `session["price_fairness"]`. This tool is non-fatal: if it returns `verdict = "not enough data"` or low-confidence reasoning, keep that result in the session, avoid making a strong price claim, and continue to outfit generation.
+
+Use the `wardrobe` argument already stored in `session["wardrobe"]`; do not load a separate wardrobe inside `run_agent`. Call `suggest_outfit(new_item=session["selected_item"], wardrobe=session["wardrobe"])` and store the returned string as `session["outfit_suggestion"]`.
 
 After `suggest_outfit` runs, check whether `session["outfit_suggestion"]` is a non-empty string. If it is empty, set `session["error"]` to a helpful message saying the agent found a listing but could not create an outfit suggestion, then return the session early. If the wardrobe is empty, `suggest_outfit` should already return general styling advice, so the agent should continue as long as the string is non-empty.
 
-Next, call `create_fit_card(outfit=session["outfit_suggestion"], new_item=session["selected_item"])` and store the returned string as `session["fit_card"]`. If `fit_card` is empty, set `session["error"]` to a helpful message saying the outfit was created but the fit card could not be generated; otherwise, return the completed session. The loop is done once the agent has either returned the no-results error session, returned an outfit-created-but-no-card error session, or returned a successful session containing `selected_item`, `outfit_suggestion`, and `fit_card`.
+Next, call `create_fit_card(outfit=session["outfit_suggestion"], new_item=session["selected_item"])` and store the returned string as `session["fit_card"]`. If `fit_card` is empty, set `session["error"]` to a helpful message saying the outfit was created but the fit card could not be generated; otherwise, return the completed session. The loop is done once the agent has either returned the no-results error session, returned an outfit-created-but-no-card error session, or returned a successful session containing `selected_item`, `price_fairness`, `outfit_suggestion`, and `fit_card`.
 
 ---
 
 ## State Management
 
 **How does information from one tool get passed to the next?**
-`run_agent(query, wardrobe)` creates one session dict with `_new_session(query, wardrobe)` and uses that dict as the single source of truth for the whole interaction. The session starts with `query`, `parsed = {}`, `search_results = []`, `selected_item = None`, `wardrobe`, `outfit_suggestion = None`, `fit_card = None`, and `error = None`.
+`run_agent(query, wardrobe)` creates one session dict with `_new_session(query, wardrobe)` and uses that dict as the single source of truth for the whole interaction. The session starts with `query`, `parsed = {}`, `search_results = []`, `selected_item = None`, `wardrobe`, `price_fairness = None`, `outfit_suggestion = None`, `fit_card = None`, and `error = None`.
 
-After parsing, the agent stores `session["parsed"] = {"description": description, "size": size, "max_price": max_price}`. Those parsed values are passed directly into `search_listings`, and the returned list is stored in `session["search_results"]`. If the list is empty, the agent uses the parsed values to generate `session["error"]` with an LLM-backed no-results helper, then returns the session immediately, leaving `selected_item`, `outfit_suggestion`, and `fit_card` as `None`.
+After parsing, the agent stores `session["parsed"] = {"description": description, "size": size, "max_price": max_price}`. Those parsed values are passed directly into `search_listings`, and the returned list is stored in `session["search_results"]`. If the list is empty, the agent uses the parsed values to generate `session["error"]` with an LLM-backed no-results helper, then returns the session immediately, leaving `selected_item`, `price_fairness`, `outfit_suggestion`, and `fit_card` as `None`.
 
-If search succeeds, the agent stores the top result as `session["selected_item"] = session["search_results"][0]`. That selected listing and `session["wardrobe"]` are passed into `suggest_outfit`, and the returned string is stored as `session["outfit_suggestion"]`. If that string is empty, the agent sets `session["error"]` and returns early with the selected item still available in the session.
+If search succeeds, the agent stores the top result as `session["selected_item"] = session["search_results"][0]`. That same selected listing is passed into `estimate_price_fairness`, and the returned dictionary is stored as `session["price_fairness"]`. The price fairness result is supporting context only, so even `"not enough data"` stays in the session and the agent continues.
 
-If the outfit suggestion is non-empty, the agent passes `session["outfit_suggestion"]` and `session["selected_item"]` into `create_fit_card`. The returned caption or fallback string is stored in `session["fit_card"]`. On a successful run, `session["error"]` remains `None`, and the final session contains all data needed by the app: the original query, parsed filters, search results, selected listing, wardrobe, outfit suggestion, and fit card.
+The selected listing and `session["wardrobe"]` are passed into `suggest_outfit`, and the returned string is stored as `session["outfit_suggestion"]`. If that string is empty, the agent sets `session["error"]` and returns early with the selected item and price fairness result still available in the session.
+
+If the outfit suggestion is non-empty, the agent passes `session["outfit_suggestion"]` and `session["selected_item"]` into `create_fit_card`. The returned caption or fallback string is stored in `session["fit_card"]`. On a successful run, `session["error"]` remains `None`, and the final session contains all data needed by the app: the original query, parsed filters, search results, selected listing, wardrobe, price fairness result, outfit suggestion, and fit card. Because the app has three output panels, `session["price_fairness"]` should be displayed in the listing/results panel alongside the selected item rather than in a new panel.
 
 ---
 
@@ -106,7 +122,8 @@ For each tool, describe the specific failure mode you're handling and what the a
 
 | Tool | Failure mode | Agent response |
 |------|-------------|----------------|
-| search_listings | No listings match the user's `description`, `size`, and `max_price` filters, so the tool returns `[]`. | Call the no-results message helper with `session["parsed"]`, store the returned user-facing message in `session["error"]`, and return early without calling `suggest_outfit` or `create_fit_card`. The helper asks the LLM to explain what failed and suggest concrete search adjustments; if the LLM is unavailable, it falls back to a deterministic message that mentions the parsed filters and suggests broadening the description, removing the size filter, or raising the max price. |
+| search_listings | No listings match the user's `description`, `size`, and `max_price` filters, so the tool returns `[]`. | Call the no-results message helper with `session["parsed"]`, store the returned user-facing message in `session["error"]`, and return early without calling `estimate_price_fairness`, `suggest_outfit`, or `create_fit_card`. The helper asks the LLM to explain what failed and suggest concrete search adjustments; if the LLM is unavailable, it falls back to a deterministic message that mentions the parsed filters and suggests broadening the description, removing the size filter, or raising the max price. |
+| estimate_price_fairness | The selected item is missing required fields such as `price` or `category`, no comparable listings exist in the dataset, or the only comparable listings are weak matches. | Do not treat this as a fatal error. Store the returned dictionary in `session["price_fairness"]`; if `verdict` is `"not enough data"`, the agent should say it cannot confidently judge whether the price is fair and should avoid phrases like "good deal" or "overpriced." If comparisons are weak, show the best available verdict with low-confidence wording in the listing/results panel and continue to `suggest_outfit`. |
 | suggest_outfit | The wardrobe is empty, such as when the agent receives `get_empty_wardrobe()` with `items: []`. | Do not treat this as a fatal error. Keep `session["selected_item"]`, call `suggest_outfit` with the empty wardrobe, and store the returned general styling advice string in `session["outfit_suggestion"]`. The advice should tell the user that the agent found a listing but does not have closet items to pair it with yet, then offer a generic styling idea and invite the user to add wardrobe items for a more personal outfit. |
 | create_fit_card | The outfit input is empty or whitespace-only, or the LLM cannot create a caption. | If `session["outfit_suggestion"]` is empty before calling the tool, set `session["error"]` and return early. If `create_fit_card` returns a fallback/error string, store that string in `session["fit_card"]` so the user still gets the selected listing and outfit suggestion in plain text. |
 
@@ -150,7 +167,7 @@ search_listings(description, size, max_price)
     |           session.error = deterministic fallback message
     |       |
     |       v
-    |   Return session early without calling suggest_outfit or create_fit_card
+    |   Return session early without calling estimate_price_fairness, suggest_outfit, or create_fit_card
     |
     +-- results = [listing_1, listing_2, ...]
             |
@@ -158,6 +175,36 @@ search_listings(description, size, max_price)
         Session State
         search_results = results
         selected_item = results[0]
+            |
+            | selected_item
+            v
+estimate_price_fairness(selected_item)
+    |
+    | uses load_listings() for comparable listings
+    |
+    +-- verdict = "not enough data"
+    |       |
+    |       v
+    |   Session State
+    |   price_fairness = {
+    |     verdict: "not enough data",
+    |     reasoning: "Cannot confidently judge price fairness."
+    |   }
+    |       |
+    |       v
+    |   continue without making a strong price claim
+    |
+    +-- verdict = "good deal", "fair price", or "priced high"
+            |
+            v
+        Session State
+        price_fairness = {
+          item_price: number,
+          comparison_count: number,
+          average_comparable_price: number,
+          verdict: "...",
+          reasoning: "..."
+        }
             |
             | selected_item + wardrobe
             v
@@ -200,7 +247,7 @@ create_fit_card(outfit_suggestion, selected_item)
     |   session.error = "Created an outfit, but could not create a fit card."
     |       |
     |       v
-    |   Return session with selected_item + outfit_suggestion
+    |   Return session with selected_item + price_fairness + outfit_suggestion
     |
     +-- fit_card = caption or fallback string
             |
@@ -209,7 +256,7 @@ create_fit_card(outfit_suggestion, selected_item)
         fit_card = "..."
             |
             v
-Return final response with selected_item, outfit_suggestion, and fit_card
+Return final response with selected_item, price_fairness, outfit_suggestion, and fit_card
 ```
 
 ---
@@ -223,14 +270,16 @@ For `suggest_outfit`, I will give Claude the `Tool 2: suggest_outfit` block, the
 
 For `create_fit_card`, I will give Claude the `Tool 3: create_fit_card` block and the final output description from `A Complete Interaction`. I expect Claude to produce a Python function that accepts the outfit suggestion string from `suggest_outfit` plus the selected listing as `new_item`, then returns a 2-3 sentence fit card caption string. Before using it, I will verify that the generated code guards against an empty outfit string, preserves listing details like title, price, and platform in the prompt, and returns a clear error or fallback string instead of raising an exception.
 
-After Claude generates the three functions, I will use Claude to integrate them into the project files and review them against the Tools section. Claude should make the code consistent with the existing project structure, import helper functions from `utils/data_loader.py`, and avoid changing unrelated files. I will verify the milestone by running focused tests or manual function calls for successful search, no-results search, example wardrobe styling, empty wardrobe styling, complete fit card creation, and incomplete outfit fallback.
+For `estimate_price_fairness`, I will give Claude the `Tool 4: estimate_price_fairness` block, the `Error Handling` row for `estimate_price_fairness`, and the `data/listings.json` field shape. I expect Claude to produce a Python function that accepts the selected listing dict, calls `load_listings()` from `utils/data_loader.py`, finds comparable listings by category first and then stronger overlaps in style tags, colors, and brand, and returns a dictionary with `item_id`, `item_price`, `comparison_count`, `average_comparable_price`, `price_range`, `verdict`, and `reasoning`. Before using it, I will check that missing `price` or `category` returns `verdict = "not enough data"`, no comparable listings avoids a price claim, and weak comparisons include low-confidence wording.
+
+After Claude generates the four functions, I will use Claude to integrate them into the project files and review them against the Tools section. Claude should make the code consistent with the existing project structure, import helper functions from `utils/data_loader.py`, and avoid changing unrelated files. I will verify the milestone by running focused tests or manual function calls for successful search, no-results search, successful price fairness, missing-field price fairness, no-comparable price fairness, example wardrobe styling, empty wardrobe styling, complete fit card creation, and incomplete outfit fallback.
 
 **Milestone 4 - Planning loop and state management:**
-I will give Claude the completed `Planning Loop`, `State Management` once completed, `Error Handling`, `Architecture` ASCII diagram, and `A Complete Interaction` sections from `planning.md`. I expect Claude to produce the agent control flow that parses a user query into `description`, `size`, and `max_price`, stores those values in `session["parsed"]`, calls `search_listings`, branches early on empty results with an LLM-generated no-results message plus deterministic fallback, stores `selected_item = results[0]`, uses the wardrobe passed into `run_agent`, calls `suggest_outfit`, stores the returned string in `session["outfit_suggestion"]`, calls `create_fit_card(session["outfit_suggestion"], session["selected_item"])`, and returns the completed session.
+I will give Claude the completed `Planning Loop`, `State Management` once completed, `Error Handling`, `Architecture` ASCII diagram, and `A Complete Interaction` sections from `planning.md`. I expect Claude to produce the agent control flow that parses a user query into `description`, `size`, and `max_price`, stores those values in `session["parsed"]`, calls `search_listings`, branches early on empty results with an LLM-generated no-results message plus deterministic fallback, stores `selected_item = results[0]`, calls `estimate_price_fairness(session["selected_item"])`, stores the returned dict in `session["price_fairness"]`, continues even if the verdict is `"not enough data"`, uses the wardrobe passed into `run_agent`, calls `suggest_outfit`, stores the returned string in `session["outfit_suggestion"]`, calls `create_fit_card(session["outfit_suggestion"], session["selected_item"])`, and returns the completed session.
 
-I will use Claude as a reviewer for Milestone 4 by giving it the same `Planning Loop` section and `Architecture` diagram plus the generated planning-loop code. I will ask Claude to identify any missing branch, incorrect state key, or mismatch with the documented tool return shapes. Before trusting the implementation, I will manually trace the code against the `A Complete Interaction` example and verify that the session contains `parsed`, `search_results`, `selected_item`, `wardrobe`, `outfit_suggestion`, `fit_card`, and `error` at the correct points.
+I will use Claude as a reviewer for Milestone 4 by giving it the same `Planning Loop` section and `Architecture` diagram plus the generated planning-loop code. I will ask Claude to identify any missing branch, incorrect state key, or mismatch with the documented tool return shapes. Before trusting the implementation, I will manually trace the code against the `A Complete Interaction` example and verify that the session contains `parsed`, `search_results`, `selected_item`, `wardrobe`, `price_fairness`, `outfit_suggestion`, `fit_card`, and `error` at the correct points.
 
-To verify the final planning loop, I will run three end-to-end scenarios: the example vintage graphic tee query should return listings plus a fit card; a query with no matching listings should return early with an error message that explains the failed parsed filters and suggests concrete search adjustments, and should not call outfit or fit-card logic; and a run with `get_empty_wardrobe()` should still return the selected listing with general styling notes in `session["outfit_suggestion"]`.
+To verify the final planning loop, I will run four end-to-end scenarios: the example vintage graphic tee query should return listings, a price fairness result, outfit advice, and a fit card; a query with no matching listings should return early with an error message that explains the failed parsed filters and suggests concrete search adjustments, and should not call price fairness, outfit, or fit-card logic; a run where `estimate_price_fairness` returns `"not enough data"` should still continue to outfit and fit-card generation while avoiding a strong price claim; and a run with `get_empty_wardrobe()` should still return the selected listing with price context and general styling notes in `session["outfit_suggestion"]`.
 
 ---
 
@@ -240,16 +289,19 @@ Write out what a full user interaction looks like from start to finish ??tool ca
 
 **Example user query:** "I'm looking for a vintage graphic tee under $30. I mostly wear baggy jeans and chunky sneakers. What's out there and how would I style it?"
 
-FitFindr searches secondhand clothing listings, picks the best item for the user's request, then styles it with the wardrobe passed into `run_agent()` so the user gets both shopping options and an outfit idea. For the example query, the request triggers `search_listings(description="vintage graphic tee", size=None, max_price=30)`, a selected listing triggers `suggest_outfit(new_item=<chosen listing>, wardrobe=<passed-in wardrobe>)`, and the completed outfit suggestion triggers `create_fit_card(outfit=<outfit suggestion string>, new_item=<chosen listing>)`. If search finds nothing, FitFindr should set `session["error"]` to an LLM-generated message that explains the failed filters and suggests what to try next, with a deterministic fallback if the LLM is unavailable; if the wardrobe is empty from `get_empty_wardrobe()`, it should still show the listing with a general styling suggestion string; if the fit card cannot be created, it should return a descriptive fallback string rather than crashing.
+FitFindr searches secondhand clothing listings, picks the best item for the user's request, estimates whether that listing's price is fair, then styles it with the wardrobe passed into `run_agent()` so the user gets shopping context and an outfit idea. For the example query, the request triggers `search_listings(description="vintage graphic tee", size=None, max_price=30)`, the selected listing triggers `estimate_price_fairness(item=<chosen listing>)`, the same selected listing triggers `suggest_outfit(new_item=<chosen listing>, wardrobe=<passed-in wardrobe>)`, and the completed outfit suggestion triggers `create_fit_card(outfit=<outfit suggestion string>, new_item=<chosen listing>)`. If search finds nothing, FitFindr should set `session["error"]` to an LLM-generated message that explains the failed filters and suggests what to try next, with a deterministic fallback if the LLM is unavailable; if price fairness has `"not enough data"`, it should avoid a strong price claim and keep going; if the wardrobe is empty from `get_empty_wardrobe()`, it should still show the listing with a general styling suggestion string; if the fit card cannot be created, it should return a descriptive fallback string rather than crashing.
 
 **Step 1:**
 The agent reads the user query and identifies three search constraints: item description = "vintage graphic tee", size = `None` because the user did not specify a size, and max price = 30. It stores those values in `session["parsed"]`, calls `search_listings(description="vintage graphic tee", size=None, max_price=30)`, and that tool uses `load_listings()` from `utils/data_loader.py` to search the mock secondhand listings. The tool returns matching listings such as the black 2003 tour bootleg-style graphic tee for $24 and the faded grey vintage band tee for $19; if it returns no matches, the agent generates a helpful no-results message from `session["parsed"]`, stores it in `session["error"]`, and stops the tool chain.
 
 **Step 2:**
-The agent chooses the strongest match from Step 1, likely the black "Graphic Tee - 2003 Tour Bootleg Style" because it is a vintage-style graphic tee under $30 and fits the user's baggy jeans/chunky sneakers style. It uses the wardrobe passed into `run_agent()` and calls `suggest_outfit(new_item=<chosen listing>, wardrobe=session["wardrobe"])`. The tool returns an outfit suggestion string using the new tee with wardrobe pieces like baggy straight-leg jeans, chunky white sneakers, a vintage black denim jacket, and a black crossbody bag; if the wardrobe is empty from `get_empty_wardrobe()`, the string gives general styling advice instead of wardrobe-specific pairings.
+The agent chooses the strongest match from Step 1, likely the black "Graphic Tee - 2003 Tour Bootleg Style" because it is a vintage-style graphic tee under $30 and fits the user's baggy jeans/chunky sneakers style. It calls `estimate_price_fairness(item=session["selected_item"])` using that exact selected listing and stores the returned dict in `session["price_fairness"]`. If comparable tees in the dataset show that $24 is close to the comparable average, the agent can say the listing looks like a fair price; if the tool returns `"not enough data"`, the agent says it cannot confidently judge the price and continues without making a deal claim.
 
 **Step 3:**
-The agent sends the outfit suggestion from Step 2 and the selected listing to `create_fit_card(outfit=session["outfit_suggestion"], new_item=session["selected_item"])`. This tool formats the chosen listing, price, platform, colors, style tags, and styling notes into a short user-friendly caption string. If the outfit suggestion is empty or the caption model fails, the tool returns a descriptive fallback string so the user still gets a useful answer.
+The agent uses the wardrobe passed into `run_agent()` and calls `suggest_outfit(new_item=session["selected_item"], wardrobe=session["wardrobe"])`. The tool returns an outfit suggestion string using the new tee with wardrobe pieces like baggy straight-leg jeans, chunky white sneakers, a vintage black denim jacket, and a black crossbody bag; if the wardrobe is empty from `get_empty_wardrobe()`, the string gives general styling advice instead of wardrobe-specific pairings.
+
+**Step 4:**
+The agent sends the outfit suggestion from Step 3 and the selected listing to `create_fit_card(outfit=session["outfit_suggestion"], new_item=session["selected_item"])`. This tool formats the chosen listing, price, platform, colors, style tags, and styling notes into a short user-friendly caption string. If the outfit suggestion is empty or the caption model fails, the tool returns a descriptive fallback string so the user still gets a useful answer.
 
 **Final output to user:**
-The user sees a short list of the best matching listings, with the top recommendation highlighted: "Graphic Tee - 2003 Tour Bootleg Style," size L, good condition, $24 on Depop. They also see an outfit suggestion string plus a short fit card caption showing how to style it with their baggy straight-leg jeans, chunky white sneakers, vintage black denim jacket, and black crossbody bag.
+The user sees a short list of the best matching listings, with the top recommendation highlighted: "Graphic Tee - 2003 Tour Bootleg Style," size L, good condition, $24 on Depop. In the same listing/results panel, the user also sees the price fairness result, such as "Price check: fair price - $24 is close to the average comparable tee price in the dataset," or a low-confidence note if there is not enough comparable data. They also see an outfit suggestion string plus a short fit card caption showing how to style it with their baggy straight-leg jeans, chunky white sneakers, vintage black denim jacket, and black crossbody bag.
