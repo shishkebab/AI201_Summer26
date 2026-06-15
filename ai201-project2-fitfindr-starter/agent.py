@@ -1,66 +1,180 @@
 """
 agent.py
 
-The FitFindr planning loop. Orchestrates the FitFindr tools in response to a
-natural language user query, passing state between them via a session dict.
-
-Complete tools.py and test each tool in isolation before implementing this file.
-
-Usage (once implemented):
-    from agent import run_agent
-    from utils.data_loader import get_example_wardrobe
-
-    result = run_agent(
-        query="vintage graphic tee under $30, size M",
-        wardrobe=get_example_wardrobe(),
-    )
-    print(result["fit_card"])
-    print(result["error"])   # None on success
+FitFindr's LLM tool-calling planning loop. The public run_agent() contract stays
+the same: it returns a session dict for the Gradio app to render.
 """
 
+import json
 import re
 
+from config import DEFAULT_USER_ID, LLM_MODEL, MAX_TOOL_ROUNDS
 from tools import (
     _get_groq_client,
     create_fit_card,
     estimate_price_fairness,
     get_live_trend_context,
+    retry_search_with_fallback,
     search_listings,
     style_profile_memory,
     suggest_outfit,
 )
 
 
-# ── session state ─────────────────────────────────────────────────────────────
+SYSTEM_PROMPT = (
+    "You are FitFindr, a secondhand fashion shopping and styling assistant. "
+    "Use the available tools to search listings, retry failed searches, check "
+    "price fairness, get trend context, suggest an outfit, and create a fit card. "
+    "Do not invent listing details, prices, trend signals, or wardrobe items. "
+    "If search_listings returns no results, call retry_search_with_fallback before "
+    "giving up. If retry also fails, explain what was tried and suggest broader "
+    "search terms, removing size, or raising the budget. Keep the final response "
+    "brief because the app displays structured panels from session state."
+)
 
-def _new_session(query: str, wardrobe: dict, user_id: str = "demo_user") -> dict:
-    """
-    Initialize and return a fresh session dict for one user interaction.
 
-    The session dict is the single source of truth for everything that happens
-    during a run — it stores the original query, parsed parameters, tool results,
-    and any error that caused early termination.
+TOOL_DEFINITIONS = [
+    {
+        "type": "function",
+        "function": {
+            "name": "search_listings",
+            "description": (
+                "Search the local secondhand listings dataset. Use first for any "
+                "shopping request."
+            ),
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "description": "Item description keywords, such as vintage graphic tee.",
+                    },
+                    "size": {
+                        "type": "string",
+                        "description": "Optional size filter. Omit for any size.",
+                    },
+                    "max_price": {
+                        "type": "number",
+                        "description": "Optional maximum price. Omit for no price ceiling.",
+                    },
+                },
+                "required": ["description"],
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "retry_search_with_fallback",
+            "description": (
+                "Retry a failed listing search with loosened constraints. Use this "
+                "when search_listings returns no results."
+            ),
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "description": {"type": "string"},
+                    "size": {"type": "string"},
+                    "max_price": {"type": "number"},
+                    "max_attempts": {"type": "integer", "default": 3},
+                },
+                "required": ["description"],
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "estimate_price_fairness",
+            "description": (
+                "Estimate whether the selected listing's price is fair. Use after "
+                "a listing has been selected."
+            ),
+            "parameters": {
+                "type": "object",
+                "properties": {},
+                "required": [],
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "get_live_trend_context",
+            "description": (
+                "Get public fashion trend context for the selected item and size. "
+                "Use before suggesting the outfit."
+            ),
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "platform": {"type": "string", "default": "depop"},
+                    "lookback_days": {"type": "integer", "default": 14},
+                    "max_posts": {"type": "integer", "default": 25},
+                },
+                "required": [],
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "suggest_outfit",
+            "description": (
+                "Suggest an outfit using the selected listing, wardrobe, style "
+                "profile, and trend context. Use after selecting a listing."
+            ),
+            "parameters": {
+                "type": "object",
+                "properties": {},
+                "required": [],
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "create_fit_card",
+            "description": (
+                "Create a short fit-card caption from the outfit suggestion and "
+                "selected listing. Use after suggest_outfit succeeds."
+            ),
+            "parameters": {
+                "type": "object",
+                "properties": {},
+                "required": [],
+            },
+        },
+    },
+]
 
-    You may add fields to this dict as needed for your implementation.
-    """
+
+def _new_session(
+    query: str,
+    wardrobe: dict,
+    user_id: str = DEFAULT_USER_ID,
+) -> dict:
+    """Initialize a fresh session dict for one FitFindr interaction."""
     return {
-        "user_id": user_id,          # stable user identifier for style memory
-        "query": query,              # original user query
-        "parsed": {},                # extracted description / size / max_price
-        "search_results": [],        # list of matching listing dicts
-        "selected_item": None,       # top result, passed into suggest_outfit
-        "wardrobe": wardrobe,        # user's wardrobe dict
-        "style_profile": None,       # remembered style preferences
-        "memory_warning": None,      # non-fatal style memory warning
-        "price_fairness": None,      # dict returned by estimate_price_fairness
-        "trend_context": None,       # dict returned by get_live_trend_context
-        "outfit_suggestion": None,   # string returned by suggest_outfit
-        "fit_card": None,            # string returned by create_fit_card
-        "error": None,               # set if the interaction ended early
+        "user_id": user_id,
+        "query": query,
+        "parsed": {},
+        "search_results": [],
+        "search_retry": None,
+        "search_adjustments": [],
+        "search_retry_message": None,
+        "selected_item": None,
+        "wardrobe": wardrobe,
+        "style_profile": None,
+        "memory_warning": None,
+        "price_fairness": None,
+        "trend_context": None,
+        "outfit_suggestion": None,
+        "fit_card": None,
+        "final_response": None,
+        "error": None,
     }
 
-
-# ── planning loop ─────────────────────────────────────────────────────────────
 
 def _parse_query(query: str) -> dict:
     """Extract description, size, and max_price from a simple user query."""
@@ -241,7 +355,8 @@ def _fallback_no_results_message(parsed: dict) -> str:
 
     return (
         f"I couldn't find any listings for '{description}'{filter_text}. "
-        # "Try broadening the item description, removing the size filter, or raising the max price."
+        "Try broadening the item description, removing the size filter, or "
+        "raising the max price."
     )
 
 
@@ -266,7 +381,7 @@ Write a short helpful response to the user. It should:
     try:
         client = _get_groq_client()
         response = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
+            model=LLM_MODEL,
             messages=[
                 {
                     "role": "system",
@@ -278,7 +393,6 @@ Write a short helpful response to the user. It should:
                 {"role": "user", "content": prompt},
             ],
             temperature=0.4,
-            # max_tokens=180,
         )
         message = response.choices[0].message.content.strip()
         if message:
@@ -289,62 +403,237 @@ Write a short helpful response to the user. It should:
     return fallback
 
 
-def run_agent(query: str, wardrobe: dict, user_id: str = "demo_user") -> dict:
-    """
-    Main agent entry point. Runs the FitFindr planning loop for a single
-    user interaction and returns the completed session dict.
+def _log_tool_call(tool_name: str, tool_args: dict) -> None:
+    """Print a compact tool-call trace for terminal verification."""
+    print(f"[TOOL CALL] {tool_name}({tool_args})")
 
-    Args:
-        query:    Natural language user request
-                  (e.g., "vintage graphic tee under $30, size M")
-        wardrobe: User's wardrobe dict — use get_example_wardrobe() or
-                  get_empty_wardrobe() from utils/data_loader.py
 
-    Returns:
-        The session dict after the interaction completes. Check session["error"]
-        first — if it is not None, the interaction ended early and the other
-        output fields (outfit_suggestion, fit_card) will be None.
+def _log_tool_result(tool_name: str, result: object) -> None:
+    """Print a compact tool result trace for terminal verification."""
+    result_text = json.dumps(result, default=str)
+    suffix = "..." if len(result_text) > 300 else ""
+    print(f"[TOOL RESULT] {tool_name}: {result_text[:300]}{suffix}")
 
-    TODO — implement this function using the planning loop you designed in planning.md:
 
-        Step 1: Initialize the session with _new_session().
+def _log_tool_skip(tool_name: str, reason: str) -> None:
+    """Print a compact skipped-tool trace."""
+    print(f"[TOOL SKIP] {tool_name}: {reason}")
 
-        Step 2: Parse the user's query to extract a description, size, and
-                max_price. You can use regex, string splitting, or ask the LLM
-                to parse it — document your choice in planning.md.
-                Store the result in session["parsed"].
 
-        Step 3: Call search_listings() with the parsed parameters.
-                Store results in session["search_results"].
-                If no results: set session["error"] to a helpful message and
-                return the session early. Do NOT proceed to suggest_outfit
-                with empty input.
+def _json_result(result: object) -> str:
+    """Serialize a tool result for the Groq tool-result message."""
+    return json.dumps(result, default=str)
 
-        Step 4: Select the item to use (e.g., the top result).
-                Store it in session["selected_item"].
 
-        Step 5: Call estimate_price_fairness() with the selected item.
-                Store the result in session["price_fairness"]. This should not
-                stop the flow if the verdict is "not enough data".
+def _coerce_float(value: object) -> float | None:
+    """Convert optional numeric tool args to float."""
+    try:
+        if value is None or value == "":
+            return None
+        return float(value)
+    except (TypeError, ValueError):
+        return None
 
-        Step 6: Call suggest_outfit() with the selected item and wardrobe.
-                Store the result in session["outfit_suggestion"].
 
-        Step 7: Call create_fit_card() with the outfit suggestion and selected item.
-                Store the result in session["fit_card"].
+def _coerce_int(value: object, default: int) -> int:
+    """Convert optional integer tool args to int."""
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return default
 
-        Step 8: Return the session.
 
-    Before writing code, complete the Planning Loop and State Management sections
-    of planning.md — your implementation should match what you described there.
-    """
-    session = _new_session(query, wardrobe, user_id)
+def _safe_tool_args(raw_arguments: object) -> dict:
+    """Parse Groq tool-call arguments into a safe dictionary."""
+    try:
+        parsed = json.loads(raw_arguments or "{}")
+    except (TypeError, json.JSONDecodeError):
+        return {}
+    return parsed if isinstance(parsed, dict) else {}
 
-    if not query or not query.strip():
-        session["error"] = "Please enter what kind of item you want to find."
-        return session
 
-    print("[TOOL CALL] style_profile_memory load")
+def _select_first_result(session: dict) -> None:
+    """Store the top search result as the selected item when available."""
+    if session.get("search_results"):
+        session["selected_item"] = session["search_results"][0]
+
+
+def _default_profile(user_id: str) -> dict:
+    """Return the default shape used when style memory fails to load."""
+    return {
+        "user_id": user_id,
+        "preferred_style_tags": [],
+        "preferred_colors": [],
+        "preferred_silhouettes": [],
+        "preferred_categories": [],
+        "budget_notes": None,
+        "wardrobe_notes": None,
+        "disliked_terms": [],
+        "last_updated": None,
+    }
+
+
+def dispatch_tool(tool_name: str, tool_args: dict, session: dict) -> str:
+    """Route one LLM tool call to the matching Python tool and update session."""
+    tool_args = tool_args if isinstance(tool_args, dict) else {}
+    _log_tool_call(tool_name, tool_args)
+
+    if session.get("error") and tool_name not in {"search_listings", "retry_search_with_fallback"}:
+        result = {"error": "Skipped because the interaction already has an error."}
+        _log_tool_skip(tool_name, result["error"])
+        return _json_result(result)
+
+    try:
+        if tool_name == "search_listings":
+            parsed_defaults = session.get("parsed") or _parse_query(session["query"])
+            description = str(tool_args.get("description") or parsed_defaults["description"])
+            size = tool_args.get("size", parsed_defaults.get("size"))
+            max_price = _coerce_float(tool_args.get("max_price", parsed_defaults.get("max_price")))
+            session["parsed"] = {
+                "description": description,
+                "size": size,
+                "max_price": max_price,
+            }
+            results = search_listings(description=description, size=size, max_price=max_price)
+            session["search_results"] = _rerank_with_style_profile(
+                results,
+                session.get("style_profile"),
+            )
+            _select_first_result(session)
+            result = {
+                "result_count": len(session["search_results"]),
+                "results": session["search_results"][:5],
+                "selected_item": session["selected_item"],
+                "next_step": (
+                    "Call retry_search_with_fallback."
+                    if not session["search_results"]
+                    else "Call estimate_price_fairness."
+                ),
+            }
+
+        elif tool_name == "retry_search_with_fallback":
+            parsed = session.get("parsed") or _parse_query(session["query"])
+            retry_result = retry_search_with_fallback(
+                description=str(tool_args.get("description") or parsed.get("description") or ""),
+                size=tool_args.get("size", parsed.get("size")),
+                max_price=_coerce_float(tool_args.get("max_price", parsed.get("max_price"))),
+                max_attempts=_coerce_int(tool_args.get("max_attempts"), 3),
+            )
+            session["search_retry"] = retry_result
+            session["search_retry_message"] = retry_result.get("message")
+            if retry_result.get("recovered"):
+                session["search_results"] = _rerank_with_style_profile(
+                    retry_result.get("results", []),
+                    session.get("style_profile"),
+                )
+                session["search_adjustments"] = retry_result.get("adjustments", [])
+                _select_first_result(session)
+            else:
+                retry_message = retry_result.get(
+                    "message",
+                    "I tried loosening the search but still found no matches.",
+                )
+                session["error"] = (
+                    f"{retry_message}\n\n{_generate_no_results_message(parsed)}"
+                )
+            result = retry_result
+
+        elif tool_name == "estimate_price_fairness":
+            if not isinstance(session.get("selected_item"), dict):
+                result = {"error": "No selected item is available for price fairness."}
+            else:
+                session["price_fairness"] = estimate_price_fairness(session["selected_item"])
+                result = session["price_fairness"]
+
+        elif tool_name == "get_live_trend_context":
+            if not isinstance(session.get("selected_item"), dict):
+                result = {"error": "No selected item is available for trend lookup."}
+            else:
+                parsed = session.get("parsed") or _parse_query(session["query"])
+                selected_item = session["selected_item"]
+                try:
+                    session["trend_context"] = get_live_trend_context(
+                        description=parsed.get("description") or session["query"],
+                        category=selected_item.get("category"),
+                        size=parsed.get("size") or selected_item.get("size"),
+                        platform=tool_args.get("platform") or selected_item.get("platform", "depop"),
+                        lookback_days=_coerce_int(tool_args.get("lookback_days"), 14),
+                        max_posts=_coerce_int(tool_args.get("max_posts"), 25),
+                    )
+                except Exception as exc:
+                    session["trend_context"] = _fallback_trend_context(
+                        parsed,
+                        selected_item,
+                        f"Live trend lookup failed unexpectedly: {exc}",
+                    )
+                result = session["trend_context"]
+
+        elif tool_name == "suggest_outfit":
+            if not isinstance(session.get("selected_item"), dict):
+                result = {"error": "No selected item is available for outfit suggestion."}
+            else:
+                session["outfit_suggestion"] = suggest_outfit(
+                    new_item=session["selected_item"],
+                    wardrobe=session["wardrobe"],
+                    style_profile=session.get("style_profile"),
+                    trend_context=session.get("trend_context"),
+                )
+                if not session["outfit_suggestion"] or not session["outfit_suggestion"].strip():
+                    session["error"] = (
+                        "I found a listing, but couldn't create an outfit suggestion for it."
+                    )
+                result = {"outfit_suggestion": session["outfit_suggestion"]}
+
+        elif tool_name == "create_fit_card":
+            if not isinstance(session.get("selected_item"), dict):
+                result = {"error": "No selected item is available for fit card creation."}
+            else:
+                session["fit_card"] = create_fit_card(
+                    outfit=session.get("outfit_suggestion") or "",
+                    new_item=session["selected_item"],
+                )
+                if not session["fit_card"] or not session["fit_card"].strip():
+                    session["error"] = (
+                        "I created an outfit suggestion, but couldn't create a fit card."
+                    )
+                result = {"fit_card": session["fit_card"]}
+
+        else:
+            result = {"error": f"Unknown tool: {tool_name}"}
+
+    except Exception as exc:
+        result = {
+            "error": f"Tool call failed for {tool_name}.",
+            "message": str(exc),
+        }
+
+    _log_tool_result(tool_name, result)
+    return _json_result(result)
+
+
+def _build_context_message(session: dict) -> str:
+    """Build a compact context message for the outer planning LLM."""
+    wardrobe_items = []
+    if isinstance(session.get("wardrobe"), dict):
+        wardrobe_items = session["wardrobe"].get("items", []) or []
+    style_profile = session.get("style_profile") or {}
+    parsed = session.get("parsed") or _parse_query(session["query"])
+    return (
+        "Current FitFindr session context:\n"
+        f"- parsed defaults: {json.dumps(parsed, default=str)}\n"
+        f"- wardrobe item count: {len(wardrobe_items)}\n"
+        f"- remembered style tags: {style_profile.get('preferred_style_tags', [])}\n"
+        f"- remembered colors: {style_profile.get('preferred_colors', [])}\n"
+        "Call tools in this expected order unless a tool result requires retry: "
+        "search_listings, retry_search_with_fallback if needed, "
+        "estimate_price_fairness, get_live_trend_context, suggest_outfit, "
+        "create_fit_card."
+    )
+
+
+def _load_style_memory(session: dict) -> None:
+    """Load style memory before the tool-calling loop."""
+    _log_tool_call("style_profile_memory load", {"user_id": session["user_id"]})
     try:
         session["style_profile"] = style_profile_memory(
             user_id=session["user_id"],
@@ -354,141 +643,24 @@ def run_agent(query: str, wardrobe: dict, user_id: str = "demo_user") -> dict:
         if isinstance(session["style_profile"], dict) and session["style_profile"].get("_warning"):
             session["memory_warning"] = session["style_profile"]["_warning"]
     except Exception as exc:
-        session["style_profile"] = {
-            "user_id": session["user_id"],
-            "preferred_style_tags": [],
-            "preferred_colors": [],
-            "preferred_silhouettes": [],
-            "preferred_categories": [],
-            "budget_notes": None,
-            "wardrobe_notes": None,
-            "disliked_terms": [],
-            "last_updated": None,
-        }
+        session["style_profile"] = _default_profile(session["user_id"])
         session["memory_warning"] = (
             "Style memory could not be loaded, so this answer only uses the "
             f"current query. ({exc})"
         )
+    _log_tool_result("style_profile_memory load", session["style_profile"])
 
-    session["parsed"] = _parse_query(query)
 
-    print("[TOOL CALL] search_listings")
-    print("description:", session["parsed"]["description"])
-    print("size:", session["parsed"]["size"])
-    print("max_price:", session["parsed"]["max_price"])
-    session["search_results"] = search_listings(
-        description=session["parsed"]["description"],
-        size=session["parsed"]["size"],
-        max_price=session["parsed"]["max_price"],
-    )
-    session["search_results"] = _rerank_with_style_profile(
-        session["search_results"],
-        session["style_profile"],
-    )
-    if not session["search_results"]:
-        print("[BRANCH] search_listings returned no results")
-        print("[TOOL CALL] _generate_no_results_message")
-        print("[SKIP] estimate_price_fairness")
-        print("[SKIP] get_live_trend_context")
-        print("[SKIP] suggest_outfit")
-        print("[SKIP] create_fit_card")
-        print("[SKIP] style_profile_memory update")
-        session["error"] = _generate_no_results_message(session["parsed"])
-        return session
-
-    session["selected_item"] = session["search_results"][0]
-    print("[DEBUG] selected_item stored in session:")
-    print(session["selected_item"])
-    print("[DEBUG] selected_item id before estimate_price_fairness:", id(session["selected_item"]))
-
-    print("[TOOL CALL] estimate_price_fairness")
-    print("[DEBUG] selected_item passed into estimate_price_fairness:")
-    print(session["selected_item"])
-    try:
-        session["price_fairness"] = estimate_price_fairness(session["selected_item"])
-    except Exception as exc:
-        selected_item = (
-            session["selected_item"]
-            if isinstance(session["selected_item"], dict)
-            else {}
-        )
-        session["price_fairness"] = {
-            "item_id": selected_item.get("id"),
-            "item_price": selected_item.get("price"),
-            "comparison_count": 0,
-            "average_comparable_price": None,
-            "price_range": {"min": None, "max": None},
-            "verdict": "not enough data",
-            "reasoning": (
-                "Could not estimate price fairness because the price tool failed "
-                f"unexpectedly: {exc}"
-            ),
-        }
-    print("[DEBUG] price_fairness stored in session:")
-    print(session["price_fairness"])
-
-    print("[TOOL CALL] get_live_trend_context")
-    try:
-        session["trend_context"] = get_live_trend_context(
-            description=session["parsed"]["description"],
-            category=session["selected_item"].get("category"),
-            size=session["parsed"]["size"] or session["selected_item"].get("size"),
-            platform=session["selected_item"].get("platform", "depop"),
-            lookback_days=14,
-            max_posts=25,
-        )
-    except Exception as exc:
-        session["trend_context"] = _fallback_trend_context(
-            session["parsed"],
-            session["selected_item"],
-            f"Live trend lookup failed unexpectedly: {exc}",
-        )
-    print("[DEBUG] trend_context stored in session:")
-    print(session["trend_context"])
-
-    print("[TOOL CALL] suggest_outfit")
-    print("wardrobe item count:", len(session["wardrobe"].get("items", [])))
-    print("[DEBUG] selected_item passed into suggest_outfit:")
-    print(session["selected_item"])
-    session["outfit_suggestion"] = suggest_outfit(
-        new_item=session["selected_item"],
-        wardrobe=session["wardrobe"],
-        style_profile=session["style_profile"],
-        trend_context=session["trend_context"],
-    )
-    print("[DEBUG] outfit_suggestion stored in session:")
-    print(session["outfit_suggestion"])
-    if not session["outfit_suggestion"] or not session["outfit_suggestion"].strip():
-        session["error"] = (
-            "I found a listing, but couldn't create an outfit suggestion for it."
-        )
-        print("[SKIP] create_fit_card")
-        print("[SKIP] style_profile_memory update")
-        return session
-
-    print("[TOOL CALL] create_fit_card")
-    print("[DEBUG] outfit_suggestion passed into create_fit_card:")
-    print(session["outfit_suggestion"])
-    print("[DEBUG] selected_item passed into create_fit_card:")
-    print(session["selected_item"])
-    print("[DEBUG] selected_item id before create_fit_card:", id(session["selected_item"]))
-    session["fit_card"] = create_fit_card(
-        outfit=session["outfit_suggestion"],
-        new_item=session["selected_item"],
-    )
-    if not session["fit_card"] or not session["fit_card"].strip():
-        session["error"] = (
-            "I created an outfit suggestion, but couldn't create a fit card."
-        )
-        print("[SKIP] style_profile_memory update")
-        return session
-
-    print("[TOOL CALL] style_profile_memory update")
+def _update_style_memory(session: dict) -> None:
+    """Update style memory after a successful fit card."""
+    if not session.get("fit_card") or not isinstance(session.get("selected_item"), dict):
+        return
+    _log_tool_call("style_profile_memory update", {"user_id": session["user_id"]})
     profile_update = _extract_profile_update(
         query=session["query"],
         selected_item=session["selected_item"],
-        outfit_suggestion=session["outfit_suggestion"],
-        trend_context=session["trend_context"],
+        outfit_suggestion=session.get("outfit_suggestion") or "",
+        trend_context=session.get("trend_context"),
     )
     try:
         session["style_profile"] = style_profile_memory(
@@ -503,30 +675,116 @@ def run_agent(query: str, wardrobe: dict, user_id: str = "demo_user") -> dict:
             "This outfit worked, but I could not save your preferences for next "
             f"time. ({exc})"
         )
+    _log_tool_result("style_profile_memory update", session["style_profile"])
 
+
+def _finalize_session(session: dict) -> None:
+    """Make sure app-required state is coherent before returning."""
+    if session.get("error"):
+        return
+    if not isinstance(session.get("selected_item"), dict):
+        session["error"] = _generate_no_results_message(
+            session.get("parsed") or _parse_query(session["query"])
+        )
+        return
+    if not session.get("outfit_suggestion"):
+        session["error"] = "I found a listing, but couldn't create an outfit suggestion for it."
+        return
+    if not session.get("fit_card"):
+        session["error"] = "I created an outfit suggestion, but couldn't create a fit card."
+
+
+def run_agent(
+    query: str,
+    wardrobe: dict,
+    user_id: str = DEFAULT_USER_ID,
+) -> dict:
+    """Run the FitFindr automatic tool-calling agent and return the session."""
+    session = _new_session(query, wardrobe, user_id)
+
+    if not query or not query.strip():
+        session["error"] = "Please enter what kind of item you want to find."
+        return session
+
+    session["parsed"] = _parse_query(query)
+    _load_style_memory(session)
+
+    messages = [
+        {"role": "system", "content": SYSTEM_PROMPT},
+        {"role": "user", "content": _build_context_message(session)},
+        {"role": "user", "content": query},
+    ]
+
+    try:
+        client = _get_groq_client()
+    except Exception as exc:
+        session["error"] = (
+            "I couldn't reach the FitFindr planning model. Please check the "
+            f"Groq API key and try again. ({exc})"
+        )
+        return session
+
+    for _ in range(MAX_TOOL_ROUNDS):
+        try:
+            response = client.chat.completions.create(
+                model=LLM_MODEL,
+                messages=messages,
+                tools=TOOL_DEFINITIONS,
+                tool_choice="auto",
+            )
+        except Exception as exc:
+            session["error"] = (
+                "I couldn't reach the FitFindr planning model. Please try again. "
+                f"({exc})"
+            )
+            return session
+
+        if not response.choices:
+            session["error"] = "The FitFindr planning model returned no choices."
+            return session
+
+        assistant_message = response.choices[0].message
+        tool_calls = getattr(assistant_message, "tool_calls", None)
+        if not tool_calls:
+            session["final_response"] = getattr(assistant_message, "content", None) or ""
+            break
+
+        messages.append(assistant_message)
+        for tool_call in tool_calls:
+            tool_name = tool_call.function.name
+            tool_args = _safe_tool_args(tool_call.function.arguments)
+            tool_result = dispatch_tool(tool_name, tool_args, session)
+            messages.append(
+                {
+                    "role": "tool",
+                    "tool_call_id": tool_call.id,
+                    "content": tool_result,
+                }
+            )
+    else:
+        session["error"] = (
+            "I reached the maximum number of tool-calling steps. Please try "
+            "rephrasing your search."
+        )
+        return session
+
+    _finalize_session(session)
+    if not session.get("error"):
+        _update_style_memory(session)
     return session
 
 
-# ── CLI test ──────────────────────────────────────────────────────────────────
-
 if __name__ == "__main__":
-    from utils.data_loader import get_example_wardrobe, get_empty_wardrobe
+    from utils.data_loader import get_example_wardrobe
 
-    print("=== Happy path: graphic tee ===\n")
-    session = run_agent(
+    print("=== FitFindr tool-calling path ===\n")
+    result = run_agent(
         query="looking for a vintage graphic tee under $30",
         wardrobe=get_example_wardrobe(),
     )
-    if session["error"]:
-        print(f"Error: {session['error']}")
+    if result["error"]:
+        print(f"Error: {result['error']}")
     else:
-        print(f"Found: {session['selected_item']['title']}")
-        print(f"\nOutfit: {session['outfit_suggestion']}")
-        print(f"\nFit card: {session['fit_card']}")
-
-    print("\n\n=== No-results path ===\n")
-    session2 = run_agent(
-        query="designer ballgown size XXS under $5",
-        wardrobe=get_example_wardrobe(),
-    )
-    print(f"Error message: {session2['error']}")
+        print(f"Found: {result['selected_item']['title']}")
+        print(f"\nOutfit: {result['outfit_suggestion']}")
+        print(f"\nFit card: {result['fit_card']}")

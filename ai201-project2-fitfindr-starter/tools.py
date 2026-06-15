@@ -22,6 +22,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from groq import Groq
 
+from config import GROQ_API_KEY, LLM_MODEL
 from utils.data_loader import load_listings
 
 load_dotenv()
@@ -41,7 +42,7 @@ _STYLE_PROFILE_NOTE_FIELDS = ["budget_notes", "wardrobe_notes"]
 
 def _get_groq_client():
     """Initialize and return a Groq client using GROQ_API_KEY from .env."""
-    api_key = os.environ.get("GROQ_API_KEY")
+    api_key = GROQ_API_KEY or os.environ.get("GROQ_API_KEY")
     if not api_key:
         raise ValueError(
             "GROQ_API_KEY not set. Add it to a .env file in the project root."
@@ -138,6 +139,179 @@ def search_listings(
         reverse=True,
     )
     return [listing for _, listing in scored_listings]
+
+
+def retry_search_with_fallback(
+    description: str,
+    size: str | None = None,
+    max_price: float | None = None,
+    max_attempts: int = 3,
+) -> dict:
+    """
+    Retry search_listings with controlled loosened constraints.
+
+    Returns a dict with results, adjustments, attempted_queries, recovered,
+    and message. Expected search failures are recorded instead of raised.
+    """
+    normalized_description = str(description or "").strip()
+    normalized_size = str(size).strip() if size is not None and str(size).strip() else None
+
+    try:
+        normalized_max_price = (
+            float(max_price) if max_price is not None and max_price != "" else None
+        )
+    except (TypeError, ValueError):
+        normalized_max_price = None
+
+    try:
+        attempts_to_run = max(0, int(max_attempts))
+    except (TypeError, ValueError):
+        attempts_to_run = 3
+
+    raised_price = (
+        round(normalized_max_price * 1.25, 2)
+        if normalized_max_price is not None
+        else None
+    )
+    planned_attempts: list[dict] = []
+
+    if normalized_size:
+        planned_attempts.append(
+            {
+                "description": normalized_description,
+                "size": None,
+                "max_price": normalized_max_price,
+                "adjustments": ["removed size filter"],
+            }
+        )
+
+    if normalized_max_price is not None:
+        planned_attempts.append(
+            {
+                "description": normalized_description,
+                "size": normalized_size,
+                "max_price": raised_price,
+                "adjustments": ["raised max price by 25%"],
+            }
+        )
+
+    if normalized_size and normalized_max_price is not None:
+        planned_attempts.append(
+            {
+                "description": normalized_description,
+                "size": None,
+                "max_price": raised_price,
+                "adjustments": ["removed size filter and raised max price by 25%"],
+            }
+        )
+
+    description_words = normalized_description.split()
+    if len(description_words) > 2:
+        planned_attempts.append(
+            {
+                "description": " ".join(description_words[:2]),
+                "size": None,
+                "max_price": raised_price
+                if normalized_max_price is not None
+                else normalized_max_price,
+                "adjustments": ["simplified description"],
+            }
+        )
+
+    attempted_queries: list[dict] = []
+    for attempt in planned_attempts[:attempts_to_run]:
+        attempt_record = {
+            "description": attempt["description"],
+            "size": attempt["size"],
+            "max_price": attempt["max_price"],
+            "adjustments": list(attempt["adjustments"]),
+        }
+        try:
+            results = search_listings(
+                description=attempt["description"],
+                size=attempt["size"],
+                max_price=attempt["max_price"],
+            )
+            attempt_record["result_count"] = len(results)
+        except Exception as exc:
+            attempt_record["error"] = str(exc)
+            attempt_record["result_count"] = 0
+            attempted_queries.append(attempt_record)
+            continue
+
+        attempted_queries.append(attempt_record)
+        if results:
+            adjustments = list(attempt["adjustments"])
+            return {
+                "results": results,
+                "adjustments": adjustments,
+                "attempted_queries": attempted_queries,
+                "recovered": True,
+                "message": _format_retry_message(
+                    adjustments,
+                    attempt["description"],
+                    attempt["size"],
+                    attempt["max_price"],
+                ),
+            }
+
+    adjustment_text = _format_adjustments(
+        [
+            adjustment
+            for attempt in attempted_queries
+            for adjustment in attempt.get("adjustments", [])
+        ]
+    )
+    if adjustment_text:
+        message = (
+            "I could not find exact matches, and I still found no matches after "
+            f"trying to {adjustment_text}. Try a broader item description, a "
+            "different size, or a higher budget."
+        )
+    else:
+        message = (
+            "I could not find exact matches, and there were no fallback searches "
+            "available to try. Try a broader item description, a different size, "
+            "or a higher budget."
+        )
+
+    return {
+        "results": [],
+        "adjustments": [],
+        "attempted_queries": attempted_queries,
+        "recovered": False,
+        "message": message,
+    }
+
+
+def _format_adjustments(adjustments: list[str]) -> str:
+    """Format retry adjustments for a user-facing sentence."""
+    unique_adjustments = _dedupe_strings(adjustments)
+    if not unique_adjustments:
+        return ""
+    if len(unique_adjustments) == 1:
+        return unique_adjustments[0]
+    return ", ".join(unique_adjustments[:-1]) + f", and {unique_adjustments[-1]}"
+
+
+def _format_retry_message(
+    adjustments: list[str],
+    description: str,
+    size: str | None,
+    max_price: float | None,
+) -> str:
+    """Return a concise user-facing explanation for a recovered retry."""
+    adjustment_text = _format_adjustments(adjustments) or "loosened the search"
+    filters = []
+    if size:
+        filters.append(f"size {size}")
+    if max_price is not None:
+        filters.append(f"under ${max_price:g}")
+    filter_text = f" with {' and '.join(filters)}" if filters else ""
+    return (
+        "I did not find an exact match, so I "
+        f"{adjustment_text} and found options for '{description}'{filter_text}."
+    )
 
 
 def _empty_style_profile(user_id: str) -> dict:
@@ -625,7 +799,7 @@ Requirements:
     try:
         client = _get_groq_client()
         response = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
+            model=LLM_MODEL,
             messages=[
                 {
                     "role": "system",
@@ -746,7 +920,7 @@ Caption requirements:
     try:
         client = _get_groq_client()
         response = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
+            model=LLM_MODEL,
             messages=[
                 {
                     "role": "system",

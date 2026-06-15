@@ -92,8 +92,15 @@ def handle_query(user_query: str, wardrobe_choice: str) -> tuple[str, str, str]:
     price_check = _format_price_fairness(session.get("price_fairness"))
     trend_check = _format_trend_context(session.get("trend_context"))
     memory_warning = session.get("memory_warning")
+    retry_message = session.get("search_retry_message")
+    retry_text = f"Search note: {retry_message}\n\n" if retry_message else ""
+    final_response = session.get("final_response")
+    final_response_text = (
+        f"\n\nFitFindr note: {final_response}" if final_response else ""
+    )
     memory_text = f"\n\nMemory note: {memory_warning}" if memory_warning else ""
     listing_text = (
+        f"{retry_text}"
         f"{item['title']}\n"
         f"Price: ${item['price']:.2f}\n"
         f"Platform: {item['platform']}\n"
@@ -106,6 +113,7 @@ def handle_query(user_query: str, wardrobe_choice: str) -> tuple[str, str, str]:
         f"{price_check}\n\n"
         f"{trend_check}\n\n"
         f"{item['description']}"
+        f"{final_response_text}"
         f"{memory_text}"
     )
 
