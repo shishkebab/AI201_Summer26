@@ -1,5 +1,6 @@
 # API keys — never commit these
 .env
+data/style_profiles.json
 
 # Python
 __pycache__/

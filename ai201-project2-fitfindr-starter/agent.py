@@ -25,13 +25,14 @@ from tools import (
     create_fit_card,
     estimate_price_fairness,
     search_listings,
+    style_profile_memory,
     suggest_outfit,
 )
 
 
 # ── session state ─────────────────────────────────────────────────────────────
 
-def _new_session(query: str, wardrobe: dict) -> dict:
+def _new_session(query: str, wardrobe: dict, user_id: str = "demo_user") -> dict:
     """
     Initialize and return a fresh session dict for one user interaction.
 
@@ -42,11 +43,14 @@ def _new_session(query: str, wardrobe: dict) -> dict:
     You may add fields to this dict as needed for your implementation.
     """
     return {
+        "user_id": user_id,          # stable user identifier for style memory
         "query": query,              # original user query
         "parsed": {},                # extracted description / size / max_price
         "search_results": [],        # list of matching listing dicts
         "selected_item": None,       # top result, passed into suggest_outfit
         "wardrobe": wardrobe,        # user's wardrobe dict
+        "style_profile": None,       # remembered style preferences
+        "memory_warning": None,      # non-fatal style memory warning
         "price_fairness": None,      # dict returned by estimate_price_fairness
         "outfit_suggestion": None,   # string returned by suggest_outfit
         "fit_card": None,            # string returned by create_fit_card
@@ -99,6 +103,100 @@ def _parse_query(query: str) -> dict:
         "size": size,
         "max_price": max_price,
     }
+
+
+def _normalize_terms(values: object) -> set[str]:
+    """Normalize string/list values into a lowercase set."""
+    if values is None:
+        return set()
+    if isinstance(values, str):
+        raw_values = [values]
+    elif isinstance(values, (list, tuple, set)):
+        raw_values = values
+    else:
+        raw_values = [values]
+    return {
+        str(value).strip().lower()
+        for value in raw_values
+        if str(value).strip()
+    }
+
+
+def _style_profile_score(listing: dict, style_profile: dict | None) -> int:
+    """Return a small memory-based boost for ranking search results."""
+    if not isinstance(listing, dict) or not isinstance(style_profile, dict):
+        return 0
+
+    listing_tags = _normalize_terms(listing.get("style_tags"))
+    listing_colors = _normalize_terms(listing.get("colors"))
+    listing_category = str(listing.get("category") or "").strip().lower()
+    listing_text = " ".join(
+        str(listing.get(field) or "")
+        for field in ["title", "description", "category", "brand"]
+    ).lower()
+
+    score = 0
+    score += 3 * len(listing_tags & _normalize_terms(style_profile.get("preferred_style_tags")))
+    score += 2 * len(listing_colors & _normalize_terms(style_profile.get("preferred_colors")))
+    if listing_category in _normalize_terms(style_profile.get("preferred_categories")):
+        score += 2
+    for silhouette in _normalize_terms(style_profile.get("preferred_silhouettes")):
+        if silhouette in listing_text or silhouette in listing_tags:
+            score += 1
+    for disliked in _normalize_terms(style_profile.get("disliked_terms")):
+        if disliked in listing_text or disliked in listing_tags or disliked in listing_colors:
+            score -= 4
+    return score
+
+
+def _rerank_with_style_profile(results: list[dict], style_profile: dict | None) -> list[dict]:
+    """Re-rank search results with memory as a boost, never as a hard filter."""
+    if not isinstance(results, list) or not isinstance(style_profile, dict):
+        return results
+    return [
+        listing
+        for _, _, listing in sorted(
+            (
+                (_style_profile_score(listing, style_profile), -index, listing)
+                for index, listing in enumerate(results)
+            ),
+            reverse=True,
+        )
+    ]
+
+
+def _extract_profile_update(query: str, selected_item: dict, outfit_suggestion: str) -> dict:
+    """Build a lightweight style-memory update from the completed interaction."""
+    query_text = (query or "").lower()
+    outfit_text = (outfit_suggestion or "").lower()
+    combined_text = f"{query_text} {outfit_text}"
+
+    keyword_map = {
+        "preferred_silhouettes": ["oversized", "baggy", "chunky sneakers", "minimal"],
+        "preferred_style_tags": ["streetwear", "preppy", "grunge", "cottagecore", "vintage"],
+        "preferred_colors": ["black"],
+    }
+    update = {
+        "preferred_style_tags": list(selected_item.get("style_tags", []) or []),
+        "preferred_colors": list(selected_item.get("colors", []) or []),
+        "preferred_silhouettes": [],
+        "preferred_categories": [],
+        "wardrobe_notes": None,
+    }
+
+    category = selected_item.get("category")
+    if category:
+        update["preferred_categories"].append(category)
+
+    for field, keywords in keyword_map.items():
+        for keyword in keywords:
+            if keyword in combined_text:
+                update.setdefault(field, []).append(keyword)
+
+    if "baggy jeans" in combined_text or "chunky sneakers" in combined_text:
+        update["wardrobe_notes"] = "User likes baggy jeans and chunky sneakers."
+
+    return update
 
 
 def _fallback_no_results_message(parsed: dict) -> str:
@@ -164,7 +262,7 @@ Write a short helpful response to the user. It should:
     return fallback
 
 
-def run_agent(query: str, wardrobe: dict) -> dict:
+def run_agent(query: str, wardrobe: dict, user_id: str = "demo_user") -> dict:
     """
     Main agent entry point. Runs the FitFindr planning loop for a single
     user interaction and returns the completed session dict.
@@ -213,11 +311,37 @@ def run_agent(query: str, wardrobe: dict) -> dict:
     Before writing code, complete the Planning Loop and State Management sections
     of planning.md — your implementation should match what you described there.
     """
-    session = _new_session(query, wardrobe)
+    session = _new_session(query, wardrobe, user_id)
 
     if not query or not query.strip():
         session["error"] = "Please enter what kind of item you want to find."
         return session
+
+    print("[TOOL CALL] style_profile_memory load")
+    try:
+        session["style_profile"] = style_profile_memory(
+            user_id=session["user_id"],
+            action="load",
+            profile_update=None,
+        )
+        if isinstance(session["style_profile"], dict) and session["style_profile"].get("_warning"):
+            session["memory_warning"] = session["style_profile"]["_warning"]
+    except Exception as exc:
+        session["style_profile"] = {
+            "user_id": session["user_id"],
+            "preferred_style_tags": [],
+            "preferred_colors": [],
+            "preferred_silhouettes": [],
+            "preferred_categories": [],
+            "budget_notes": None,
+            "wardrobe_notes": None,
+            "disliked_terms": [],
+            "last_updated": None,
+        }
+        session["memory_warning"] = (
+            "Style memory could not be loaded, so this answer only uses the "
+            f"current query. ({exc})"
+        )
 
     session["parsed"] = _parse_query(query)
 
@@ -230,12 +354,17 @@ def run_agent(query: str, wardrobe: dict) -> dict:
         size=session["parsed"]["size"],
         max_price=session["parsed"]["max_price"],
     )
+    session["search_results"] = _rerank_with_style_profile(
+        session["search_results"],
+        session["style_profile"],
+    )
     if not session["search_results"]:
         print("[BRANCH] search_listings returned no results")
         print("[TOOL CALL] _generate_no_results_message")
         print("[SKIP] estimate_price_fairness")
         print("[SKIP] suggest_outfit")
         print("[SKIP] create_fit_card")
+        print("[SKIP] style_profile_memory update")
         session["error"] = _generate_no_results_message(session["parsed"])
         return session
 
@@ -277,6 +406,7 @@ def run_agent(query: str, wardrobe: dict) -> dict:
     session["outfit_suggestion"] = suggest_outfit(
         new_item=session["selected_item"],
         wardrobe=session["wardrobe"],
+        style_profile=session["style_profile"],
     )
     print("[DEBUG] outfit_suggestion stored in session:")
     print(session["outfit_suggestion"])
@@ -285,6 +415,7 @@ def run_agent(query: str, wardrobe: dict) -> dict:
             "I found a listing, but couldn't create an outfit suggestion for it."
         )
         print("[SKIP] create_fit_card")
+        print("[SKIP] style_profile_memory update")
         return session
 
     print("[TOOL CALL] create_fit_card")
@@ -300,6 +431,28 @@ def run_agent(query: str, wardrobe: dict) -> dict:
     if not session["fit_card"] or not session["fit_card"].strip():
         session["error"] = (
             "I created an outfit suggestion, but couldn't create a fit card."
+        )
+        print("[SKIP] style_profile_memory update")
+        return session
+
+    print("[TOOL CALL] style_profile_memory update")
+    profile_update = _extract_profile_update(
+        query=session["query"],
+        selected_item=session["selected_item"],
+        outfit_suggestion=session["outfit_suggestion"],
+    )
+    try:
+        session["style_profile"] = style_profile_memory(
+            user_id=session["user_id"],
+            action="update",
+            profile_update=profile_update,
+        )
+        if isinstance(session["style_profile"], dict) and session["style_profile"].get("_warning"):
+            session["memory_warning"] = session["style_profile"]["_warning"]
+    except Exception as exc:
+        session["memory_warning"] = (
+            "This outfit worked, but I could not save your preferences for next "
+            f"time. ({exc})"
         )
 
     return session

@@ -12,8 +12,11 @@ Tools:
     create_fit_card(outfit, new_item)               → str
 """
 
+import json
 import os
 import re
+from datetime import datetime, timezone
+from pathlib import Path
 
 from dotenv import load_dotenv
 from groq import Groq
@@ -21,6 +24,16 @@ from groq import Groq
 from utils.data_loader import load_listings
 
 load_dotenv()
+
+_STYLE_PROFILE_PATH = Path(__file__).resolve().parent / "data" / "style_profiles.json"
+_STYLE_PROFILE_LIST_FIELDS = [
+    "preferred_style_tags",
+    "preferred_colors",
+    "preferred_silhouettes",
+    "preferred_categories",
+    "disliked_terms",
+]
+_STYLE_PROFILE_NOTE_FIELDS = ["budget_notes", "wardrobe_notes"]
 
 
 # ── Groq client ───────────────────────────────────────────────────────────────
@@ -126,9 +139,153 @@ def search_listings(
     return [listing for _, listing in scored_listings]
 
 
+def _empty_style_profile(user_id: str) -> dict:
+    """Return the default shape for a user's style profile."""
+    return {
+        "user_id": user_id,
+        "preferred_style_tags": [],
+        "preferred_colors": [],
+        "preferred_silhouettes": [],
+        "preferred_categories": [],
+        "budget_notes": None,
+        "wardrobe_notes": None,
+        "disliked_terms": [],
+        "last_updated": None,
+    }
+
+
+def _dedupe_strings(values: object) -> list[str]:
+    """Normalize a list-like value into unique strings, preserving first casing."""
+    if values is None:
+        return []
+    if isinstance(values, str):
+        raw_values = [values]
+    elif isinstance(values, (list, tuple, set)):
+        raw_values = values
+    else:
+        raw_values = [values]
+
+    seen = set()
+    deduped = []
+    for raw in raw_values:
+        value = str(raw).strip()
+        key = value.lower()
+        if value and key not in seen:
+            seen.add(key)
+            deduped.append(value)
+    return deduped
+
+
+def _merge_style_profile(existing: dict, profile_update: dict | None) -> dict:
+    """Merge a profile update into an existing profile without duplicate lists."""
+    merged = _empty_style_profile(str(existing.get("user_id") or "demo_user"))
+    for key in merged:
+        if key in existing:
+            merged[key] = existing[key]
+
+    update = profile_update if isinstance(profile_update, dict) else {}
+    for field in _STYLE_PROFILE_LIST_FIELDS:
+        merged[field] = _dedupe_strings(
+            _dedupe_strings(merged.get(field)) + _dedupe_strings(update.get(field))
+        )
+
+    for field in _STYLE_PROFILE_NOTE_FIELDS:
+        new_value = update.get(field)
+        if isinstance(new_value, str) and new_value.strip():
+            merged[field] = new_value.strip()
+
+    merged["last_updated"] = datetime.now(timezone.utc).isoformat()
+    return merged
+
+
+def style_profile_memory(
+    user_id: str,
+    action: str,
+    profile_update: dict | None = None,
+) -> dict:
+    """
+    Load or update a local JSON-backed style profile for one user.
+
+    This tool is deterministic and non-LLM. It returns a consistent profile
+    dictionary and includes a private `_warning` key when memory had a
+    recoverable problem. Callers can surface that warning non-fatally.
+    """
+    normalized_user_id = str(user_id or "demo_user").strip() or "demo_user"
+    normalized_action = str(action or "").strip().lower()
+    default_profile = _empty_style_profile(normalized_user_id)
+
+    warning = None
+    try:
+        if _STYLE_PROFILE_PATH.exists():
+            with open(_STYLE_PROFILE_PATH, "r", encoding="utf-8") as f:
+                profiles = json.load(f)
+            if not isinstance(profiles, dict):
+                profiles = {}
+                warning = (
+                    "Style memory was not in the expected format, so this "
+                    "answer only uses the current query."
+                )
+        else:
+            profiles = {}
+    except Exception:
+        profiles = {}
+        warning = (
+            "Style memory could not be loaded, so this answer only uses the "
+            "current query."
+        )
+
+    if normalized_action == "load":
+        saved_profile = profiles.get(normalized_user_id)
+        if not isinstance(saved_profile, dict):
+            saved_profile = default_profile
+            if normalized_user_id in profiles:
+                warning = (
+                    "Style memory was not in the expected format, so this "
+                    "answer only uses the current query."
+                )
+        profile = _empty_style_profile(normalized_user_id)
+        for key in profile:
+            if key in saved_profile:
+                profile[key] = saved_profile[key]
+        for field in _STYLE_PROFILE_LIST_FIELDS:
+            profile[field] = _dedupe_strings(profile.get(field))
+        if warning:
+            profile["_warning"] = warning
+        return profile
+
+    if normalized_action != "update":
+        profile = default_profile
+        profile["_warning"] = f"Unsupported style memory action: {action}."
+        return profile
+
+    existing = profiles.get(normalized_user_id, default_profile)
+    if not isinstance(existing, dict):
+        existing = default_profile
+    existing["user_id"] = normalized_user_id
+    updated_profile = _merge_style_profile(existing, profile_update)
+
+    try:
+        _STYLE_PROFILE_PATH.parent.mkdir(parents=True, exist_ok=True)
+        profiles[normalized_user_id] = updated_profile
+        with open(_STYLE_PROFILE_PATH, "w", encoding="utf-8") as f:
+            json.dump(profiles, f, indent=2, sort_keys=True)
+    except Exception:
+        updated_profile["_warning"] = (
+            "This outfit worked, but I could not save your preferences for next time."
+        )
+
+    if warning and "_warning" not in updated_profile:
+        updated_profile["_warning"] = warning
+    return updated_profile
+
+
 # ── Tool 2: suggest_outfit ────────────────────────────────────────────────────
 
-def suggest_outfit(new_item: dict, wardrobe: dict) -> str:
+def suggest_outfit(
+    new_item: dict,
+    wardrobe: dict,
+    style_profile: dict | None = None,
+) -> str:
     """
     Given a thrifted item and the user's wardrobe, suggest 1–2 complete outfits.
 
@@ -179,6 +336,25 @@ def suggest_outfit(new_item: dict, wardrobe: dict) -> str:
 
     wardrobe_items = wardrobe.get("items", []) if isinstance(wardrobe, dict) else []
     has_wardrobe = bool(wardrobe_items)
+    profile_context = ""
+    if isinstance(style_profile, dict):
+        profile_parts = []
+        for label, field in [
+            ("style tags", "preferred_style_tags"),
+            ("colors", "preferred_colors"),
+            ("silhouettes", "preferred_silhouettes"),
+            ("categories", "preferred_categories"),
+            ("disliked terms", "disliked_terms"),
+        ]:
+            values = style_profile.get(field) or []
+            if values:
+                profile_parts.append(f"- remembered {label}: {', '.join(values)}")
+        if style_profile.get("budget_notes"):
+            profile_parts.append(f"- budget notes: {style_profile['budget_notes']}")
+        if style_profile.get("wardrobe_notes"):
+            profile_parts.append(f"- wardrobe notes: {style_profile['wardrobe_notes']}")
+        if profile_parts:
+            profile_context = "\n\nRemembered style profile:\n" + "\n".join(profile_parts)
 
     if has_wardrobe:
         wardrobe_text = "\n".join(format_item(item) for item in wardrobe_items)
@@ -190,10 +366,13 @@ Thrifted item:
 
 User wardrobe:
 {wardrobe_text}
+{profile_context}
 
 Requirements:
 - Mention the thrifted item by name.
 - Use specific wardrobe item names when possible.
+- If remembered style preferences are provided, use them when they fit this item.
+- Avoid disliked terms or styles if any are provided.
 - Explain briefly why the colors, categories, or style tags work together.
 - Keep it concise and practical.
 """.strip()
@@ -203,10 +382,13 @@ The user's wardrobe is empty, so suggest general styling ideas for this thrifted
 
 Thrifted item:
 {item_summary}
+{profile_context}
 
 Requirements:
 - Do not say you can see closet items.
 - Give 1-2 complete outfit ideas using general pieces someone might own.
+- If remembered style preferences are provided, use them when they fit this item.
+- Avoid disliked terms or styles if any are provided.
 - Mention that a more personal outfit is possible once wardrobe items are added.
 - Explain briefly what vibe the item suits.
 - Keep it concise and practical.

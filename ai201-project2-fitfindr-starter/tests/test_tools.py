@@ -3,6 +3,7 @@ from tools import (
     create_fit_card,
     estimate_price_fairness,
     search_listings,
+    style_profile_memory,
     suggest_outfit,
 )
 from utils.data_loader import get_empty_wardrobe, get_example_wardrobe
@@ -76,6 +77,26 @@ def test_suggest_outfit_with_wardrobe_uses_llm(monkeypatch):
     call = fake_client.chat.completions.calls[0]
     assert call["model"] == "llama-3.3-70b-versatile"
     assert "User wardrobe:" in call["messages"][1]["content"]
+
+
+def test_suggest_outfit_includes_style_profile(monkeypatch):
+    fake_client = FakeGroqClient("Use the remembered streetwear preference.")
+    monkeypatch.setattr(tools, "_get_groq_client", lambda: fake_client)
+    new_item = search_listings("vintage graphic tee", size=None, max_price=50)[0]
+    style_profile = {
+        "preferred_style_tags": ["streetwear"],
+        "preferred_colors": ["black"],
+        "preferred_silhouettes": ["baggy"],
+        "preferred_categories": ["tops"],
+        "disliked_terms": ["preppy"],
+    }
+
+    result = suggest_outfit(new_item, get_example_wardrobe(), style_profile=style_profile)
+
+    assert "streetwear" in result
+    call = fake_client.chat.completions.calls[0]
+    assert "Remembered style profile:" in call["messages"][1]["content"]
+    assert "streetwear" in call["messages"][1]["content"]
 
 
 def test_suggest_outfit_empty_wardrobe_returns_general_advice(monkeypatch):
@@ -231,3 +252,73 @@ def test_estimate_price_fairness_weak_comparisons_are_low_confidence():
     assert result["verdict"] in {"good deal", "fair price", "priced high"}
     assert result["comparison_count"] >= 2
     assert "Low confidence" in result["reasoning"]
+
+
+def test_style_profile_memory_load_missing_file_returns_default(tmp_path, monkeypatch):
+    monkeypatch.setattr(tools, "_STYLE_PROFILE_PATH", tmp_path / "style_profiles.json")
+
+    profile = style_profile_memory("demo_user", "load")
+
+    assert profile["user_id"] == "demo_user"
+    assert profile["preferred_style_tags"] == []
+    assert profile["last_updated"] is None
+
+
+def test_style_profile_memory_update_creates_and_merges_profile(tmp_path, monkeypatch):
+    monkeypatch.setattr(tools, "_STYLE_PROFILE_PATH", tmp_path / "style_profiles.json")
+
+    profile = style_profile_memory(
+        "demo_user",
+        "update",
+        {
+            "preferred_style_tags": ["streetwear", "vintage"],
+            "preferred_colors": ["black"],
+            "preferred_categories": ["tops"],
+            "wardrobe_notes": "User likes baggy jeans.",
+        },
+    )
+    loaded = style_profile_memory("demo_user", "load")
+
+    assert profile["last_updated"]
+    assert loaded["preferred_style_tags"] == ["streetwear", "vintage"]
+    assert loaded["preferred_colors"] == ["black"]
+    assert loaded["preferred_categories"] == ["tops"]
+    assert loaded["wardrobe_notes"] == "User likes baggy jeans."
+
+
+def test_style_profile_memory_repeated_updates_dedupe_values(tmp_path, monkeypatch):
+    monkeypatch.setattr(tools, "_STYLE_PROFILE_PATH", tmp_path / "style_profiles.json")
+
+    style_profile_memory(
+        "demo_user",
+        "update",
+        {"preferred_style_tags": ["Streetwear", "vintage"]},
+    )
+    profile = style_profile_memory(
+        "demo_user",
+        "update",
+        {"preferred_style_tags": ["streetwear", "Vintage", "grunge"]},
+    )
+
+    assert profile["preferred_style_tags"] == ["Streetwear", "vintage", "grunge"]
+
+
+def test_style_profile_memory_malformed_json_returns_safe_default(tmp_path, monkeypatch):
+    memory_path = tmp_path / "style_profiles.json"
+    memory_path.write_text("{bad json", encoding="utf-8")
+    monkeypatch.setattr(tools, "_STYLE_PROFILE_PATH", memory_path)
+
+    profile = style_profile_memory("demo_user", "load")
+
+    assert profile["preferred_style_tags"] == []
+    assert "_warning" in profile
+
+
+def test_style_profile_memory_invalid_action_returns_warning(tmp_path, monkeypatch):
+    monkeypatch.setattr(tools, "_STYLE_PROFILE_PATH", tmp_path / "style_profiles.json")
+
+    profile = style_profile_memory("demo_user", "delete")
+
+    assert profile["user_id"] == "demo_user"
+    assert "_warning" in profile
+    assert "Unsupported" in profile["_warning"]

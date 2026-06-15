@@ -1,4 +1,19 @@
 import agent
+import tools
+
+
+def default_profile(user_id="demo_user"):
+    return {
+        "user_id": user_id,
+        "preferred_style_tags": [],
+        "preferred_colors": [],
+        "preferred_silhouettes": [],
+        "preferred_categories": [],
+        "budget_notes": None,
+        "wardrobe_notes": None,
+        "disliked_terms": [],
+        "last_updated": None,
+    }
 
 
 def test_run_agent_stores_price_fairness(monkeypatch):
@@ -30,7 +45,8 @@ def test_run_agent_stores_price_fairness(monkeypatch):
 
     monkeypatch.setattr(agent, "search_listings", lambda **kwargs: [selected_item])
     monkeypatch.setattr(agent, "estimate_price_fairness", fake_estimate_price_fairness)
-    monkeypatch.setattr(agent, "suggest_outfit", lambda new_item, wardrobe: "Wear it with jeans.")
+    monkeypatch.setattr(agent, "style_profile_memory", lambda user_id, action, profile_update=None: default_profile(user_id))
+    monkeypatch.setattr(agent, "suggest_outfit", lambda new_item, wardrobe, style_profile=None: "Wear it with jeans.")
     monkeypatch.setattr(agent, "create_fit_card", lambda outfit, new_item: "Fit card caption.")
 
     session = agent.run_agent("vintage graphic tee under $30", {"items": []})
@@ -61,8 +77,15 @@ def test_run_agent_no_results_skips_downstream_tools(monkeypatch):
         calls["fit_card"] = True
         return "Should not run."
 
+    memory_actions = []
+
+    def fake_style_profile_memory(user_id, action, profile_update=None):
+        memory_actions.append(action)
+        return default_profile(user_id)
+
     monkeypatch.setattr(agent, "search_listings", lambda **kwargs: [])
     monkeypatch.setattr(agent, "_generate_no_results_message", lambda parsed: "No matches. Try broadening the search.")
+    monkeypatch.setattr(agent, "style_profile_memory", fake_style_profile_memory)
     monkeypatch.setattr(agent, "estimate_price_fairness", fake_estimate_price_fairness)
     monkeypatch.setattr(agent, "suggest_outfit", fake_suggest_outfit)
     monkeypatch.setattr(agent, "create_fit_card", fake_create_fit_card)
@@ -73,6 +96,7 @@ def test_run_agent_no_results_skips_downstream_tools(monkeypatch):
     assert session["price_fairness"] is None
     assert session["outfit_suggestion"] is None
     assert session["fit_card"] is None
+    assert memory_actions == ["load"]
     assert calls == {"price": False, "outfit": False, "fit_card": False}
 
 
@@ -92,6 +116,7 @@ def test_run_agent_price_fairness_not_enough_data_continues(monkeypatch):
     }
 
     monkeypatch.setattr(agent, "search_listings", lambda **kwargs: [selected_item])
+    monkeypatch.setattr(agent, "style_profile_memory", lambda user_id, action, profile_update=None: default_profile(user_id))
     monkeypatch.setattr(
         agent,
         "estimate_price_fairness",
@@ -105,7 +130,7 @@ def test_run_agent_price_fairness_not_enough_data_continues(monkeypatch):
             "reasoning": "Not enough comparable listings.",
         },
     )
-    monkeypatch.setattr(agent, "suggest_outfit", lambda new_item, wardrobe: "Outfit still works.")
+    monkeypatch.setattr(agent, "suggest_outfit", lambda new_item, wardrobe, style_profile=None: "Outfit still works.")
     monkeypatch.setattr(agent, "create_fit_card", lambda outfit, new_item: "Fit card still works.")
 
     session = agent.run_agent("vintage graphic tee under $30", {"items": []})
@@ -114,3 +139,133 @@ def test_run_agent_price_fairness_not_enough_data_continues(monkeypatch):
     assert session["price_fairness"]["verdict"] == "not enough data"
     assert session["outfit_suggestion"] == "Outfit still works."
     assert session["fit_card"] == "Fit card still works."
+
+
+def test_run_agent_two_interactions_reuse_style_memory(tmp_path, monkeypatch):
+    memory_path = tmp_path / "style_profiles.json"
+    monkeypatch.setattr(tools, "_STYLE_PROFILE_PATH", memory_path)
+    selected_tee = {
+        "id": "lst_tee",
+        "title": "Black Graphic Tee",
+        "category": "tops",
+        "price": 24,
+        "size": "L",
+        "condition": "good",
+        "style_tags": ["streetwear", "vintage", "graphic tee"],
+        "colors": ["black"],
+        "brand": None,
+        "platform": "depop",
+        "description": "A test tee.",
+    }
+    selected_jacket = {
+        "id": "lst_jacket",
+        "title": "Black Streetwear Jacket",
+        "category": "outerwear",
+        "price": 45,
+        "size": "M",
+        "condition": "good",
+        "style_tags": ["streetwear", "vintage"],
+        "colors": ["black"],
+        "brand": None,
+        "platform": "depop",
+        "description": "A test jacket.",
+    }
+    seen_profiles = []
+
+    def fake_search(**kwargs):
+        if "jacket" in kwargs["description"].lower():
+            return [selected_jacket]
+        return [selected_tee]
+
+    def fake_suggest_outfit(new_item, wardrobe, style_profile=None):
+        seen_profiles.append(style_profile)
+        return "Use baggy jeans and chunky sneakers."
+
+    monkeypatch.setattr(agent, "search_listings", fake_search)
+    monkeypatch.setattr(agent, "estimate_price_fairness", lambda item: {"verdict": "fair price"})
+    monkeypatch.setattr(agent, "suggest_outfit", fake_suggest_outfit)
+    monkeypatch.setattr(agent, "create_fit_card", lambda outfit, new_item: "Fit card caption.")
+
+    first = agent.run_agent(
+        "I like oversized streetwear, black pieces, baggy jeans, and chunky sneakers. Find me a vintage graphic tee under $30.",
+        {"items": []},
+        user_id="demo_user",
+    )
+    second = agent.run_agent("Find me a jacket under $50.", {"items": []}, user_id="demo_user")
+
+    assert first["memory_warning"] is None
+    assert second["memory_warning"] is None
+    assert "streetwear" in second["style_profile"]["preferred_style_tags"]
+    assert "black" in second["style_profile"]["preferred_colors"]
+    assert seen_profiles[0]["preferred_style_tags"] == []
+    assert "streetwear" in seen_profiles[1]["preferred_style_tags"]
+
+
+def test_run_agent_memory_load_failure_sets_warning_and_continues(monkeypatch):
+    selected_item = {
+        "id": "lst_test",
+        "title": "Test Graphic Tee",
+        "category": "tops",
+        "price": 24,
+        "size": "L",
+        "condition": "good",
+        "style_tags": ["graphic tee", "vintage"],
+        "colors": ["black"],
+        "brand": None,
+        "platform": "depop",
+        "description": "A test tee.",
+    }
+
+    def fake_memory(user_id, action, profile_update=None):
+        if action == "load":
+            raise OSError("cannot read")
+        return default_profile(user_id)
+
+    monkeypatch.setattr(agent, "style_profile_memory", fake_memory)
+    monkeypatch.setattr(agent, "search_listings", lambda **kwargs: [selected_item])
+    monkeypatch.setattr(agent, "estimate_price_fairness", lambda item: {"verdict": "fair price"})
+    monkeypatch.setattr(agent, "suggest_outfit", lambda new_item, wardrobe, style_profile=None: "Outfit works.")
+    monkeypatch.setattr(agent, "create_fit_card", lambda outfit, new_item: "Fit card works.")
+
+    session = agent.run_agent("vintage graphic tee under $30", {"items": []})
+
+    assert session["error"] is None
+    assert session["memory_warning"]
+    assert session["outfit_suggestion"] == "Outfit works."
+    assert session["fit_card"] == "Fit card works."
+
+
+def test_run_agent_memory_save_failure_keeps_final_response(monkeypatch):
+    selected_item = {
+        "id": "lst_test",
+        "title": "Test Graphic Tee",
+        "category": "tops",
+        "price": 24,
+        "size": "L",
+        "condition": "good",
+        "style_tags": ["graphic tee", "vintage"],
+        "colors": ["black"],
+        "brand": None,
+        "platform": "depop",
+        "description": "A test tee.",
+    }
+
+    def fake_memory(user_id, action, profile_update=None):
+        if action == "update":
+            raise OSError("cannot write")
+        return default_profile(user_id)
+
+    monkeypatch.setattr(agent, "style_profile_memory", fake_memory)
+    monkeypatch.setattr(agent, "search_listings", lambda **kwargs: [selected_item])
+    monkeypatch.setattr(agent, "estimate_price_fairness", lambda item: {"verdict": "fair price"})
+    monkeypatch.setattr(agent, "suggest_outfit", lambda new_item, wardrobe, style_profile=None: "Outfit works.")
+    monkeypatch.setattr(agent, "create_fit_card", lambda outfit, new_item: "Fit card works.")
+
+    session = agent.run_agent("vintage graphic tee under $30", {"items": []})
+
+    assert session["error"] is None
+    assert session["memory_warning"]
+    assert session["selected_item"] == selected_item
+    assert session["price_fairness"] == {"verdict": "fair price"}
+    assert session["outfit_suggestion"] == "Outfit works."
+    assert session["fit_card"] == "Fit card works."

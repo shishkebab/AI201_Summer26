@@ -66,7 +66,7 @@ def handle_query(user_query: str, wardrobe_choice: str) -> tuple[str, str, str]:
     else:
         wardrobe = get_example_wardrobe()
 
-    session = run_agent(user_query.strip(), wardrobe)
+    session = run_agent(user_query.strip(), wardrobe, user_id="demo_user")
     if session["error"]:
         return session["error"], "", ""
 
@@ -75,6 +75,8 @@ def handle_query(user_query: str, wardrobe_choice: str) -> tuple[str, str, str]:
     colors = ", ".join(item.get("colors", []))
     tags = ", ".join(item.get("style_tags", []))
     price_check = _format_price_fairness(session.get("price_fairness"))
+    memory_warning = session.get("memory_warning")
+    memory_text = f"\n\nMemory note: {memory_warning}" if memory_warning else ""
     listing_text = (
         f"{item['title']}\n"
         f"Price: ${item['price']:.2f}\n"
@@ -87,6 +89,7 @@ def handle_query(user_query: str, wardrobe_choice: str) -> tuple[str, str, str]:
         f"Style tags: {tags}\n\n"
         f"{price_check}\n\n"
         f"{item['description']}"
+        f"{memory_text}"
     )
 
     return (
