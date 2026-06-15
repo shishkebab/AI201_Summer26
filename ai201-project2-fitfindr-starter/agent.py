@@ -24,6 +24,7 @@ from tools import (
     _get_groq_client,
     create_fit_card,
     estimate_price_fairness,
+    get_live_trend_context,
     search_listings,
     style_profile_memory,
     suggest_outfit,
@@ -52,6 +53,7 @@ def _new_session(query: str, wardrobe: dict, user_id: str = "demo_user") -> dict
         "style_profile": None,       # remembered style preferences
         "memory_warning": None,      # non-fatal style memory warning
         "price_fairness": None,      # dict returned by estimate_price_fairness
+        "trend_context": None,       # dict returned by get_live_trend_context
         "outfit_suggestion": None,   # string returned by suggest_outfit
         "fit_card": None,            # string returned by create_fit_card
         "error": None,               # set if the interaction ended early
@@ -165,7 +167,12 @@ def _rerank_with_style_profile(results: list[dict], style_profile: dict | None) 
     ]
 
 
-def _extract_profile_update(query: str, selected_item: dict, outfit_suggestion: str) -> dict:
+def _extract_profile_update(
+    query: str,
+    selected_item: dict,
+    outfit_suggestion: str,
+    trend_context: dict | None = None,
+) -> dict:
     """Build a lightweight style-memory update from the completed interaction."""
     query_text = (query or "").lower()
     outfit_text = (outfit_suggestion or "").lower()
@@ -193,10 +200,30 @@ def _extract_profile_update(query: str, selected_item: dict, outfit_suggestion: 
             if keyword in combined_text:
                 update.setdefault(field, []).append(keyword)
 
+    if isinstance(trend_context, dict) and trend_context.get("confidence") in {"high", "medium"}:
+        update["preferred_style_tags"].extend(trend_context.get("trending_tags") or [])
+        update["preferred_silhouettes"].extend(trend_context.get("popular_styles") or [])
+
     if "baggy jeans" in combined_text or "chunky sneakers" in combined_text:
         update["wardrobe_notes"] = "User likes baggy jeans and chunky sneakers."
 
     return update
+
+
+def _fallback_trend_context(parsed: dict, selected_item: dict, reason: str) -> dict:
+    """Return a non-fatal trend context when live trend lookup fails."""
+    size = parsed.get("size") or selected_item.get("size")
+    return {
+        "platform": selected_item.get("platform", "depop"),
+        "size_range": size,
+        "sample_count": 0,
+        "trending_tags": [],
+        "popular_styles": [],
+        "styling_cues": [],
+        "confidence": "low",
+        "source_note": "No usable recent public trend signal.",
+        "reasoning": reason,
+    }
 
 
 def _fallback_no_results_message(parsed: dict) -> str:
@@ -362,6 +389,7 @@ def run_agent(query: str, wardrobe: dict, user_id: str = "demo_user") -> dict:
         print("[BRANCH] search_listings returned no results")
         print("[TOOL CALL] _generate_no_results_message")
         print("[SKIP] estimate_price_fairness")
+        print("[SKIP] get_live_trend_context")
         print("[SKIP] suggest_outfit")
         print("[SKIP] create_fit_card")
         print("[SKIP] style_profile_memory update")
@@ -399,6 +427,25 @@ def run_agent(query: str, wardrobe: dict, user_id: str = "demo_user") -> dict:
     print("[DEBUG] price_fairness stored in session:")
     print(session["price_fairness"])
 
+    print("[TOOL CALL] get_live_trend_context")
+    try:
+        session["trend_context"] = get_live_trend_context(
+            description=session["parsed"]["description"],
+            category=session["selected_item"].get("category"),
+            size=session["parsed"]["size"] or session["selected_item"].get("size"),
+            platform=session["selected_item"].get("platform", "depop"),
+            lookback_days=14,
+            max_posts=25,
+        )
+    except Exception as exc:
+        session["trend_context"] = _fallback_trend_context(
+            session["parsed"],
+            session["selected_item"],
+            f"Live trend lookup failed unexpectedly: {exc}",
+        )
+    print("[DEBUG] trend_context stored in session:")
+    print(session["trend_context"])
+
     print("[TOOL CALL] suggest_outfit")
     print("wardrobe item count:", len(session["wardrobe"].get("items", [])))
     print("[DEBUG] selected_item passed into suggest_outfit:")
@@ -407,6 +454,7 @@ def run_agent(query: str, wardrobe: dict, user_id: str = "demo_user") -> dict:
         new_item=session["selected_item"],
         wardrobe=session["wardrobe"],
         style_profile=session["style_profile"],
+        trend_context=session["trend_context"],
     )
     print("[DEBUG] outfit_suggestion stored in session:")
     print(session["outfit_suggestion"])
@@ -440,6 +488,7 @@ def run_agent(query: str, wardrobe: dict, user_id: str = "demo_user") -> dict:
         query=session["query"],
         selected_item=session["selected_item"],
         outfit_suggestion=session["outfit_suggestion"],
+        trend_context=session["trend_context"],
     )
     try:
         session["style_profile"] = style_profile_memory(

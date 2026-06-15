@@ -35,6 +35,21 @@ def _format_price_fairness(price_fairness: dict | None) -> str:
     return f"Price check: {verdict} - {reasoning}"
 
 
+def _format_trend_context(trend_context: dict | None) -> str:
+    """Format trend context for the listing panel."""
+    if not isinstance(trend_context, dict):
+        return "Trend check: unavailable - no trend context was returned."
+
+    source_note = trend_context.get("source_note")
+    confidence = trend_context.get("confidence") or "low"
+    styles = trend_context.get("popular_styles") or []
+    if source_note and styles:
+        return f"{source_note} Popular styles: {', '.join(styles[:3])}."
+    if source_note:
+        return source_note
+    return f"Trend check: {confidence} confidence - live trend context was limited."
+
+
 def handle_query(user_query: str, wardrobe_choice: str) -> tuple[str, str, str]:
     """
     Called by Gradio when the user submits a query.
@@ -75,6 +90,7 @@ def handle_query(user_query: str, wardrobe_choice: str) -> tuple[str, str, str]:
     colors = ", ".join(item.get("colors", []))
     tags = ", ".join(item.get("style_tags", []))
     price_check = _format_price_fairness(session.get("price_fairness"))
+    trend_check = _format_trend_context(session.get("trend_context"))
     memory_warning = session.get("memory_warning")
     memory_text = f"\n\nMemory note: {memory_warning}" if memory_warning else ""
     listing_text = (
@@ -88,6 +104,7 @@ def handle_query(user_query: str, wardrobe_choice: str) -> tuple[str, str, str]:
         f"Colors: {colors}\n"
         f"Style tags: {tags}\n\n"
         f"{price_check}\n\n"
+        f"{trend_check}\n\n"
         f"{item['description']}"
         f"{memory_text}"
     )

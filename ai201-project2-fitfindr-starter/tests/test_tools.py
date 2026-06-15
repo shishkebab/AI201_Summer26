@@ -2,6 +2,7 @@ import tools
 from tools import (
     create_fit_card,
     estimate_price_fairness,
+    get_live_trend_context,
     search_listings,
     style_profile_memory,
     suggest_outfit,
@@ -97,6 +98,26 @@ def test_suggest_outfit_includes_style_profile(monkeypatch):
     call = fake_client.chat.completions.calls[0]
     assert "Remembered style profile:" in call["messages"][1]["content"]
     assert "streetwear" in call["messages"][1]["content"]
+
+
+def test_suggest_outfit_includes_trend_context(monkeypatch):
+    fake_client = FakeGroqClient("Use baggy denim because it is trending.")
+    monkeypatch.setattr(tools, "_get_groq_client", lambda: fake_client)
+    new_item = search_listings("vintage graphic tee", size=None, max_price=50)[0]
+    trend_context = {
+        "confidence": "medium",
+        "trending_tags": ["streetwear", "oversized"],
+        "popular_styles": ["oversized streetwear"],
+        "styling_cues": ["style with baggy denim"],
+        "source_note": "Trend check: medium confidence.",
+    }
+
+    result = suggest_outfit(new_item, get_example_wardrobe(), trend_context=trend_context)
+
+    assert "baggy denim" in result
+    call = fake_client.chat.completions.calls[0]
+    assert "Live trend context:" in call["messages"][1]["content"]
+    assert "style with baggy denim" in call["messages"][1]["content"]
 
 
 def test_suggest_outfit_empty_wardrobe_returns_general_advice(monkeypatch):
@@ -322,3 +343,58 @@ def test_style_profile_memory_invalid_action_returns_warning(tmp_path, monkeypat
     assert profile["user_id"] == "demo_user"
     assert "_warning" in profile
     assert "Unsupported" in profile["_warning"]
+
+
+def test_get_live_trend_context_returns_medium_confidence_for_matching_posts():
+    result = get_live_trend_context(
+        description="vintage graphic tee",
+        category="tops",
+        size="L",
+        platform="depop",
+        lookback_days=14,
+        max_posts=25,
+    )
+
+    assert result["platform"] == "depop"
+    assert result["size_range"] == "L"
+    assert result["sample_count"] >= 3
+    assert result["confidence"] in {"medium", "high"}
+    assert "streetwear" in result["trending_tags"]
+    assert result["styling_cues"]
+
+
+def test_get_live_trend_context_platform_failure_returns_fallback(monkeypatch):
+    def raise_fetch_error(**kwargs):
+        raise TimeoutError("rate limited")
+
+    monkeypatch.setattr(tools, "_fetch_public_trend_posts", raise_fetch_error)
+
+    result = get_live_trend_context("jacket", "outerwear", "M", "depop", 14, 25)
+
+    assert result["confidence"] == "low"
+    assert result["sample_count"] == 0
+    assert result["trending_tags"] == []
+    assert "failed" in result["reasoning"]
+
+
+def test_get_live_trend_context_no_size_match_returns_fallback(monkeypatch):
+    monkeypatch.setattr(
+        tools,
+        "_fetch_public_trend_posts",
+        lambda **kwargs: [
+            {
+                "platform": "depop",
+                "category": "tops",
+                "size": "XXL",
+                "tags": ["streetwear"],
+                "styles": ["oversized streetwear"],
+                "cues": ["style with baggy denim"],
+            }
+        ],
+    )
+
+    result = get_live_trend_context("graphic tee", "tops", "XS", "depop", 14, 25)
+
+    assert result["confidence"] == "low"
+    assert result["sample_count"] == 0
+    assert "size range" in result["reasoning"]

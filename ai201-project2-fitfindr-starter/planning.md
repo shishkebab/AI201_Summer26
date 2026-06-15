@@ -96,6 +96,42 @@ A style profile dictionary with `user_id`, `preferred_style_tags`, `preferred_co
 **What happens if it fails or returns nothing:**
 If no saved profile exists, return the empty default profile and continue. If the memory file cannot be read, return the empty default profile and set a non-fatal warning so the agent can continue without memory. If the memory file cannot be written during an update, keep the current outfit result, set `session["memory_warning"]`, and tell the user that preferences could not be saved for next time.
 
+### Tool 6: get_live_trend_context
+
+**What it does:**
+Checks recent public posts, listings, or tags from a public fashion platform to identify styles currently popular in the user's size range. The implementation should use public or approved platform access only, such as an official API, public search endpoint, or a mockable platform client for testing. This tool should not replace the user's request, wardrobe, or style profile; it should provide current trend context that visibly influences `suggest_outfit`.
+
+**Input parameters:**
+- `description` (str): The parsed item description from `session["parsed"]["description"]`, such as `"vintage graphic tee"` or `"jacket"`.
+- `category` (str | None): The selected listing category, such as `"tops"`, `"outerwear"`, `"bottoms"`, `"shoes"`, or `"accessories"`.
+- `size` (str | None): The user's requested size from `session["parsed"]["size"]`, or the selected listing size if the user did not request a size.
+- `platform` (str): Public fashion platform to check, such as `"depop"` or another supported platform.
+- `lookback_days` (int): How recent the checked posts, listings, or tags should be, such as `7` or `14`.
+- `max_posts` (int): Maximum number of recent public posts, listings, or tags to inspect.
+
+**What it returns:**
+A trend context dictionary with `platform`, `size_range`, `sample_count`, `trending_tags`, `popular_styles`, `styling_cues`, `confidence`, `source_note`, and `reasoning`. `trending_tags` should contain popular tags found in the sampled public posts, such as `"streetwear"`, `"oversized"`, `"y2k"`, or `"gorpcore"`. `popular_styles` should translate those tags into human-readable style directions. `styling_cues` should contain concrete outfit cues to pass into `suggest_outfit`, such as `"style with baggy denim"`, `"add chunky shoes"`, or `"repeat black in accessories"`. `confidence` should be `"high"`, `"medium"`, or `"low"` depending on sample size and size-range match quality.
+
+**What happens if it fails or returns nothing:**
+If the platform request fails, times out, is rate-limited, or returns malformed data, return a fallback trend context with `confidence = "low"`, `sample_count = 0`, empty `trending_tags`, empty `popular_styles`, and reasoning that live trend data was unavailable. If recent posts exist but none match the user's size range, return `confidence = "low"` and tell the agent not to make a strong trend claim. If only a small number of posts match, return the best available cues but mark the result as low confidence. The agent should never stop the interaction because trend lookup failed.
+
+### Tool 7: retry_search_with_fallback
+
+**What it does:**
+Retries `search_listings` with loosened constraints when the first search returns no results. The tool should make controlled fallback attempts, such as removing the size filter, raising the max price slightly, or simplifying the description, then return both the retry results and a clear explanation of what changed.
+
+**Input parameters:**
+- `description` (str): The parsed item description from `session["parsed"]["description"]`.
+- `size` (str | None): The parsed size from `session["parsed"]["size"]`.
+- `max_price` (float | None): The parsed max price from `session["parsed"]["max_price"]`.
+- `max_attempts` (int): Maximum number of fallback searches to try.
+
+**What it returns:**
+A retry result dictionary with `results`, `adjustments`, `attempted_queries`, `recovered`, and `message`. `results` is a list of matching listing dictionaries from the first successful fallback search, or `[]` if all attempts fail. `adjustments` is a list of human-readable changes made during retry, such as `"removed size filter"` or `"raised max price from $30 to $40"`. `attempted_queries` is a list of every fallback search parameter set, including `description`, `size`, and `max_price`. `recovered` is `True` if a fallback search found results. `message` is the user-facing explanation of what was adjusted.
+
+**What happens if it fails or returns nothing:**
+If all retry attempts return no results, return `results = []`, `recovered = False`, and a message explaining that FitFindr tried loosening the search but still found no matches. If a retry attempt raises an exception, record that attempted query, skip to the next fallback, and continue. The agent should not crash because fallback search failed.
+
 ---
 
 ## Planning Loop
@@ -107,32 +143,38 @@ Next, parse the user message into `description`, `size`, and `max_price`. Use si
 
 The parser extracts `max_price` from patterns like `"under $30"` or `"$30"`, extracts `size` from patterns like `"size M"`, `"US 8"`, or waist sizes like `"W30"`, and builds `description` by removing the extracted price/size phrases from the original query. If the user does not provide a size, set `size = None`; if the user does not provide a maximum price, set `max_price = None`. Store these values in `session["parsed"]`.
 
-First, call `search_listings(description=session["parsed"]["description"], size=session["parsed"]["size"], max_price=session["parsed"]["max_price"])` and store the return value as `session["search_results"]`. If `session["style_profile"]` contains preferred style tags, colors, categories, or disliked terms, use those preferences to break ties or re-rank matching listings after search; do not filter out all results just because they do not match memory. After `search_listings` runs, check whether `search_results` is empty. If it is empty, call an LLM-backed no-results message helper with `session["parsed"]`, store the returned message in `session["error"]`, then return the session early without calling `estimate_price_fairness`, `suggest_outfit`, `create_fit_card`, or the memory update step. If the LLM message helper fails, use a deterministic fallback that mentions the parsed description, size, max price, and concrete ways to broaden the search.
+First, call `search_listings(description=session["parsed"]["description"], size=session["parsed"]["size"], max_price=session["parsed"]["max_price"])` and store the return value as `session["search_results"]`. If `session["style_profile"]` contains preferred style tags, colors, categories, or disliked terms, use those preferences to break ties or re-rank matching listings after search; do not filter out all results just because they do not match memory.
 
-If `search_results` is not empty, set `session["selected_item"] = search_results[0]` because results are already sorted strongest to weakest match. Then call `estimate_price_fairness(item=session["selected_item"])` and store the returned dictionary as `session["price_fairness"]`. This tool is non-fatal: if it returns `verdict = "not enough data"` or low-confidence reasoning, keep that result in the session, avoid making a strong price claim, and continue to outfit generation.
+After `search_listings` runs, check whether `session["search_results"]` is empty. If it is empty, call `retry_search_with_fallback(description=session["parsed"]["description"], size=session["parsed"]["size"], max_price=session["parsed"]["max_price"], max_attempts=3)` and store the result in `session["search_retry"]`. If `retry_search_with_fallback` returns `recovered = True`, store `session["search_results"] = retry_result["results"]`, `session["search_adjustments"] = retry_result["adjustments"]`, and `session["search_retry_message"] = retry_result["message"]`, then continue to select `session["selected_item"] = session["search_results"][0]`. The final response should tell the user what changed, such as `"I did not find anything in size XS, so I removed the size filter and found these options."`
 
-Use the `wardrobe` argument already stored in `session["wardrobe"]`; do not load a separate wardrobe inside `run_agent`. Call `suggest_outfit(new_item=session["selected_item"], wardrobe=session["wardrobe"])` and include `session["style_profile"]` as additional prompt context so the styling can reflect remembered preferences such as oversized fits, streetwear tags, black colors, or disliked terms. Store the returned string as `session["outfit_suggestion"]`.
+If `retry_search_with_fallback` returns `recovered = False`, use the retry result message plus the parsed values to set `session["error"]` with an LLM-backed no-results helper or deterministic fallback, then return the session early without calling `estimate_price_fairness`, `get_live_trend_context`, `suggest_outfit`, `create_fit_card`, or the memory update step.
+
+If `search_results` is not empty, set `session["selected_item"] = search_results[0]` because results are already sorted strongest to weakest match. Then call `estimate_price_fairness(item=session["selected_item"])` and store the returned dictionary as `session["price_fairness"]`. This tool is non-fatal: if it returns `verdict = "not enough data"` or low-confidence reasoning, keep that result in the session, avoid making a strong price claim, and continue to trend lookup and outfit generation.
+
+After price fairness, call `get_live_trend_context(description=session["parsed"]["description"], category=session["selected_item"]["category"], size=session["parsed"]["size"] or session["selected_item"]["size"], platform="depop", lookback_days=14, max_posts=25)` and store the returned dictionary as `session["trend_context"]`. This tool is non-fatal: if it returns `confidence = "low"`, `sample_count = 0`, or no matching trends, keep the fallback trend context in the session, avoid strong claims like "this is trending everywhere," and continue to outfit generation.
+
+Use the `wardrobe` argument already stored in `session["wardrobe"]`; do not load a separate wardrobe inside `run_agent`. Call `suggest_outfit(new_item=session["selected_item"], wardrobe=session["wardrobe"])` and include both `session["style_profile"]` and `session["trend_context"]` as additional prompt context. If `trend_context["confidence"]` is `"high"` or `"medium"`, the outfit suggestion should visibly use at least one `styling_cue` unless it conflicts with the user's wardrobe or remembered preferences. If trend confidence is `"low"`, the outfit should rely more on the selected item, wardrobe, and style profile, and mention trend context only cautiously. Store the returned string as `session["outfit_suggestion"]`.
 
 After `suggest_outfit` runs, check whether `session["outfit_suggestion"]` is a non-empty string. If it is empty, set `session["error"]` to a helpful message saying the agent found a listing but could not create an outfit suggestion, then return the session early. If the wardrobe is empty, `suggest_outfit` should already return general styling advice, so the agent should continue as long as the string is non-empty.
 
-Next, call `create_fit_card(outfit=session["outfit_suggestion"], new_item=session["selected_item"])` and store the returned string as `session["fit_card"]`. If `fit_card` is empty, set `session["error"]` to a helpful message saying the outfit was created but the fit card could not be generated and skip the memory update. If `fit_card` is non-empty, build a `profile_update` from the current query, selected item, wardrobe, and outfit suggestion: add selected listing `style_tags` to `preferred_style_tags`, selected listing `colors` to `preferred_colors`, selected listing `category` to `preferred_categories`, and simple query phrases like `"oversized"`, `"baggy"`, `"chunky sneakers"`, or `"minimal"` to `preferred_silhouettes` or `wardrobe_notes` when present. Call `style_profile_memory(user_id=session["user_id"], action="update", profile_update=profile_update)` and store the returned profile back in `session["style_profile"]`; if saving fails, set `session["memory_warning"]` but still return the selected item, price fairness, outfit suggestion, and fit card. The loop is done once the agent has either returned the no-results error session, returned an outfit-created-but-no-card error session, or returned a successful session containing `selected_item`, `price_fairness`, `outfit_suggestion`, `fit_card`, and updated `style_profile`.
+Next, call `create_fit_card(outfit=session["outfit_suggestion"], new_item=session["selected_item"])` and store the returned string as `session["fit_card"]`. If `fit_card` is empty, set `session["error"]` to a helpful message saying the outfit was created but the fit card could not be generated and skip the memory update. If `fit_card` is non-empty, build a `profile_update` from the current query, selected item, wardrobe, trend context, and outfit suggestion: add selected listing `style_tags` to `preferred_style_tags`, selected listing `colors` to `preferred_colors`, selected listing `category` to `preferred_categories`, and simple query phrases like `"oversized"`, `"baggy"`, `"chunky sneakers"`, or `"minimal"` to `preferred_silhouettes` or `wardrobe_notes` when present. Call `style_profile_memory(user_id=session["user_id"], action="update", profile_update=profile_update)` and store the returned profile back in `session["style_profile"]`; if saving fails, set `session["memory_warning"]` but still return the selected item, price fairness, trend context, outfit suggestion, and fit card. The loop is done once the agent has either returned the no-results error session, returned an outfit-created-but-no-card error session, or returned a successful session containing `selected_item`, `price_fairness`, `trend_context`, `outfit_suggestion`, `fit_card`, and updated `style_profile`.
 
 ---
 
 ## State Management
 
 **How does information from one tool get passed to the next?**
-`run_agent(query, wardrobe, user_id="demo_user")` creates one session dict with `_new_session(query, wardrobe, user_id)` and uses that dict as the single source of truth for the whole interaction. The session starts with `user_id`, `query`, `parsed = {}`, `search_results = []`, `selected_item = None`, `wardrobe`, `style_profile = None`, `memory_warning = None`, `price_fairness = None`, `outfit_suggestion = None`, `fit_card = None`, and `error = None`.
+`run_agent(query, wardrobe, user_id="demo_user")` creates one session dict with `_new_session(query, wardrobe, user_id)` and uses that dict as the single source of truth for the whole interaction. The session starts with `user_id`, `query`, `parsed = {}`, `search_results = []`, `search_retry = None`, `search_adjustments = []`, `search_retry_message = None`, `selected_item = None`, `wardrobe`, `style_profile = None`, `memory_warning = None`, `price_fairness = None`, `trend_context = None`, `outfit_suggestion = None`, `fit_card = None`, and `error = None`.
 
 Before parsing, the agent loads memory with `style_profile_memory(user_id=session["user_id"], action="load", profile_update=None)` and stores the result in `session["style_profile"]`. If loading fails, it stores an empty default profile and sets `session["memory_warning"]`, but `session["error"]` remains `None` because memory is not required to complete the current request.
 
-After parsing, the agent stores `session["parsed"] = {"description": description, "size": size, "max_price": max_price}`. Those parsed values are passed directly into `search_listings`, and the returned list is stored in `session["search_results"]`. If the list is empty, the agent uses the parsed values to generate `session["error"]` with an LLM-backed no-results helper, then returns the session immediately, leaving `selected_item`, `price_fairness`, `outfit_suggestion`, and `fit_card` as `None`. The loaded `style_profile` remains in the session for debugging, but it is not updated on a no-results run.
+After parsing, the agent stores `session["parsed"] = {"description": description, "size": size, "max_price": max_price}`. Those parsed values are passed directly into `search_listings`, and the returned list is stored in `session["search_results"]`. If the first search succeeds, `search_retry`, `search_adjustments`, and `search_retry_message` stay as their default values. If the first search returns `[]`, the agent stores the fallback result in `session["search_retry"]`. When fallback search recovers results, `session["search_results"]` is replaced with the recovered results, `session["search_adjustments"]` stores the loosened constraints, and `session["search_retry_message"]` stores the explanation shown to the user. If fallback search also fails, the agent uses the parsed values and retry message to generate `session["error"]`, then returns immediately, leaving `selected_item`, `price_fairness`, `trend_context`, `outfit_suggestion`, and `fit_card` as `None`. The loaded `style_profile` remains in the session for debugging, but it is not updated on a no-results run.
 
-If search succeeds, the agent stores the top result as `session["selected_item"] = session["search_results"][0]`. That same selected listing is passed into `estimate_price_fairness`, and the returned dictionary is stored as `session["price_fairness"]`. The price fairness result is supporting context only, so even `"not enough data"` stays in the session and the agent continues.
+If search succeeds, the agent stores the top result as `session["selected_item"] = session["search_results"][0]`. That same selected listing is passed into `estimate_price_fairness`, and the returned dictionary is stored as `session["price_fairness"]`. The selected listing category, selected or requested size, parsed description, target platform, and lookback settings are passed into `get_live_trend_context`, and the returned dictionary is stored as `session["trend_context"]`. Both price fairness and trend context are supporting context only, so `"not enough data"` price fairness or `"low"` trend confidence stays in the session and the agent continues.
 
-The selected listing, `session["wardrobe"]`, and `session["style_profile"]` are used to build the `suggest_outfit` prompt, and the returned string is stored as `session["outfit_suggestion"]`. If that string is empty, the agent sets `session["error"]` and returns early with the selected item and price fairness result still available in the session. The agent does not update style memory when no outfit was created.
+The selected listing, `session["wardrobe"]`, `session["style_profile"]`, and `session["trend_context"]` are used to build the `suggest_outfit` prompt, and the returned string is stored as `session["outfit_suggestion"]`. If that string is empty, the agent sets `session["error"]` and returns early with the selected item, price fairness result, and trend context still available in the session. The agent does not update style memory when no outfit was created.
 
-If the outfit suggestion is non-empty, the agent passes `session["outfit_suggestion"]` and `session["selected_item"]` into `create_fit_card`. The returned caption or fallback string is stored in `session["fit_card"]`. If `fit_card` is non-empty, the agent builds a `profile_update` from the query, selected item, and outfit suggestion, then calls `style_profile_memory(..., action="update", profile_update=profile_update)` and stores the returned profile in `session["style_profile"]`. If the update fails, set `session["memory_warning"]` and keep the completed user-facing response. On a successful run, `session["error"]` remains `None`, and the final session contains all data needed by the app: the original query, parsed filters, search results, selected listing, wardrobe, style profile, memory warning if any, price fairness result, outfit suggestion, and fit card. Because the app has three output panels, `session["price_fairness"]` should be displayed in the listing/results panel alongside the selected item rather than in a new panel.
+If the outfit suggestion is non-empty, the agent passes `session["outfit_suggestion"]` and `session["selected_item"]` into `create_fit_card`. The returned caption or fallback string is stored in `session["fit_card"]`. If `fit_card` is non-empty, the agent builds a `profile_update` from the query, selected item, trend context, and outfit suggestion, then calls `style_profile_memory(..., action="update", profile_update=profile_update)` and stores the returned profile in `session["style_profile"]`. If the update fails, set `session["memory_warning"]` and keep the completed user-facing response. On a successful run, `session["error"]` remains `None`, and the final session contains all data needed by the app: the original query, parsed filters, search retry message if any, search results, selected listing, wardrobe, style profile, memory warning if any, price fairness result, trend context, outfit suggestion, and fit card. Because the app has three output panels, `session["search_retry_message"]`, `session["price_fairness"]`, and a short `session["trend_context"]` source note should be displayed in the listing/results panel alongside the selected item rather than in a new panel.
 
 ---
 
@@ -142,8 +184,10 @@ For each tool, describe the specific failure mode you're handling and what the a
 
 | Tool | Failure mode | Agent response |
 |------|-------------|----------------|
-| search_listings | No listings match the user's `description`, `size`, and `max_price` filters, so the tool returns `[]`. | Call the no-results message helper with `session["parsed"]`, store the returned user-facing message in `session["error"]`, and return early without calling `estimate_price_fairness`, `suggest_outfit`, or `create_fit_card`. The helper asks the LLM to explain what failed and suggest concrete search adjustments; if the LLM is unavailable, it falls back to a deterministic message that mentions the parsed filters and suggests broadening the description, removing the size filter, or raising the max price. |
+| search_listings | No listings match the user's original `description`, `size`, and `max_price` filters, so the tool returns `[]`. | Do not return early yet. Call `retry_search_with_fallback` with the parsed filters. If retry recovers results, continue the normal flow and show `session["search_retry_message"]` to explain what changed. If retry also fails, call the no-results message helper with `session["parsed"]` and the retry adjustments, store the returned user-facing message in `session["error"]`, and return early without calling `estimate_price_fairness`, `get_live_trend_context`, `suggest_outfit`, or `create_fit_card`. |
+| retry_search_with_fallback | The first search returns no results, and one or more fallback attempts may also return no results or raise an exception. | Try controlled fallback searches without crashing. If a fallback succeeds, store the recovered results, continue the normal flow, and tell the user exactly what was loosened. If all fallbacks fail, return early with a no-results message that says FitFindr tried loosening the constraints and suggests what else the user can change. |
 | estimate_price_fairness | The selected item is missing required fields such as `price` or `category`, no comparable listings exist in the dataset, or the only comparable listings are weak matches. | Do not treat this as a fatal error. Store the returned dictionary in `session["price_fairness"]`; if `verdict` is `"not enough data"`, the agent should say it cannot confidently judge whether the price is fair and should avoid phrases like "good deal" or "overpriced." If comparisons are weak, show the best available verdict with low-confidence wording in the listing/results panel and continue to `suggest_outfit`. |
+| get_live_trend_context | The public platform request fails, times out, is rate-limited, returns malformed data, has no recent matches in the user's size range, or has too small a matching sample. | Do not treat this as fatal. Store a fallback trend context in `session["trend_context"]` with `confidence = "low"`, `sample_count = 0` if no usable data was found, and reasoning that live trend data was unavailable or too limited. Continue to `suggest_outfit`; the outfit should still use the selected item, wardrobe, and style profile, but should avoid strong trend claims. |
 | style_profile_memory | No saved profile exists, the profile file cannot be read, or the profile file cannot be written after a successful outfit. | If no profile exists, return an empty default profile and continue normally. If loading fails, store the empty default profile in `session["style_profile"]`, set `session["memory_warning"] = "Style memory could not be loaded, so this answer only uses the current query."`, and continue. If saving fails after the fit card is created, keep the final response and set `session["memory_warning"] = "This outfit worked, but I could not save your preferences for next time."` |
 | suggest_outfit | The wardrobe is empty, such as when the agent receives `get_empty_wardrobe()` with `items: []`. | Do not treat this as a fatal error. Keep `session["selected_item"]`, call `suggest_outfit` with the empty wardrobe, and store the returned general styling advice string in `session["outfit_suggestion"]`. The advice should tell the user that the agent found a listing but does not have closet items to pair it with yet, then offer a generic styling idea and invite the user to add wardrobe items for a more personal outfit. |
 | create_fit_card | The outfit input is empty or whitespace-only, or the LLM cannot create a caption. | If `session["outfit_suggestion"]` is empty before calling the tool, set `session["error"]` and return early. If `create_fit_card` returns a fallback/error string, store that string in `session["fit_card"]` so the user still gets the selected listing and outfit suggestion in plain text. |
@@ -202,16 +246,34 @@ search_listings(description, size, max_price)
     +-- results = []
     |       |
     |       v
-    |   generate_no_results_message(parsed)
+    |   retry_search_with_fallback(description, size, max_price, max_attempts=3)
     |       |
-    |       +-- LLM succeeds:
-    |       |   session.error = helpful search-refinement message
+    |       +-- recovered = true
+    |       |       |
+    |       |       v
+    |       |   Session State
+    |       |   search_retry = retry_result
+    |       |   search_results = retry_result.results
+    |       |   search_adjustments = retry_result.adjustments
+    |       |   search_retry_message = "Removed size filter..."
+    |       |       |
+    |       |       v
+    |       |   continue to selected_item = search_results[0]
     |       |
-    |       +-- LLM fails:
-    |           session.error = deterministic fallback message
-    |       |
-    |       v
-    |   Return session early without calling estimate_price_fairness, suggest_outfit, or create_fit_card
+    |       +-- recovered = false
+    |               |
+    |               v
+    |           generate_no_results_message(parsed + retry adjustments)
+    |               |
+    |               +-- LLM succeeds:
+    |               |   session.error = helpful search-refinement message
+    |               |
+    |               +-- LLM fails:
+    |                   session.error = deterministic fallback message
+    |               |
+    |               v
+    |           Return session early without calling estimate_price_fairness,
+    |           get_live_trend_context, suggest_outfit, or create_fit_card
     |
     +-- results = [listing_1, listing_2, ...]
             |
@@ -251,12 +313,48 @@ estimate_price_fairness(selected_item)
           reasoning: "..."
         }
             |
-            | selected_item + wardrobe + style_profile
+            | parsed.description + selected_item.category
+            | + parsed.size or selected_item.size
+            v
+get_live_trend_context(description, category, size, platform, lookback_days, max_posts)
+    |
+    | checks recent public posts/listings/tags on supported platform
+    |
+    +-- request fails, no size-range match, or tiny sample
+    |       |
+    |       v
+    |   Session State
+    |   trend_context = {
+    |     confidence: "low",
+    |     sample_count: 0,
+    |     trending_tags: [],
+    |     styling_cues: [],
+    |     reasoning: "Live trend data unavailable or too limited."
+    |   }
+    |       |
+    |       v
+    |   continue without making a strong trend claim
+    |
+    +-- trend data found
+            |
+            v
+        Session State
+        trend_context = {
+          platform: "...",
+          size_range: "...",
+          sample_count: number,
+          trending_tags: [...],
+          styling_cues: [...],
+          confidence: "high" or "medium"
+        }
+            |
+            | selected_item + wardrobe + style_profile + trend_context
             v
 suggest_outfit(selected_item, wardrobe)
     |
     | wardrobe comes from run_agent(query, wardrobe)
     | style_profile adds remembered preferences to the prompt
+    | trend_context adds current public-platform styling cues
     |
     +-- wardrobe.items = []
     |       |
@@ -293,7 +391,7 @@ create_fit_card(outfit_suggestion, selected_item)
     |   session.error = "Created an outfit, but could not create a fit card."
     |       |
     |       v
-    |   Return session with selected_item + price_fairness + outfit_suggestion
+    |   Return session with selected_item + price_fairness + trend_context + outfit_suggestion
     |
     +-- fit_card = caption or fallback string
             |
@@ -302,7 +400,8 @@ create_fit_card(outfit_suggestion, selected_item)
         fit_card = "..."
             |
             | build profile_update from query, selected_item,
-            | outfit_suggestion, colors, style_tags, and category
+            | trend_context, outfit_suggestion, colors,
+            | style_tags, and category
             v
 style_profile_memory(user_id, action="update", profile_update)
     |
@@ -322,7 +421,7 @@ style_profile_memory(user_id, action="update", profile_update)
         style_profile = updated remembered preferences
             |
             v
-Return final response with selected_item, price_fairness, style_profile, outfit_suggestion, fit_card, and optional memory_warning
+Return final response with selected_item, price_fairness, trend_context, style_profile, outfit_suggestion, fit_card, and optional memory_warning
 ```
 
 ---
@@ -340,14 +439,18 @@ For `estimate_price_fairness`, I will give Claude the `Tool 4: estimate_price_fa
 
 For `style_profile_memory`, I will give Claude the `Tool 5: style_profile_memory` block, the `State Management` section, the `Error Handling` row for memory, and the two-interaction example from `A Complete Interaction`. I expect Claude to produce a deterministic JSON-backed helper, not an LLM call, that can load an empty default profile, merge preference updates without duplicating list values, write the profile back to `data/style_profiles.json`, and return a consistent profile dict. Before using it, I will check that it handles a missing profile file, malformed JSON, missing `user_id`, read failure, write failure, and repeated updates without crashing.
 
-After Claude generates the five functions, I will use Claude to integrate them into the project files and review them against the Tools section. Claude should make the code consistent with the existing project structure, import helper functions from `utils/data_loader.py`, keep style profile memory deterministic and local, and avoid changing unrelated files. I will verify the milestone by running focused tests or manual function calls for successful search, no-results search, successful price fairness, missing-field price fairness, no-comparable price fairness, example wardrobe styling, empty wardrobe styling, complete fit card creation, incomplete outfit fallback, style profile load with no existing memory, style profile update, and two sequential interactions where the second uses preferences saved by the first.
+For `get_live_trend_context`, I will give Claude the `Tool 6: get_live_trend_context` block, the `Error Handling` row for trend lookup, and the `Architecture` section showing where trend context feeds into `suggest_outfit`. I expect Claude to produce a mockable public-platform lookup function that accepts `description`, `category`, `size`, `platform`, `lookback_days`, and `max_posts`, inspects recent public posts/listings/tags through approved access or a replaceable platform client, and returns `platform`, `size_range`, `sample_count`, `trending_tags`, `popular_styles`, `styling_cues`, `confidence`, `source_note`, and `reasoning`. Before using it, I will check that live failures, rate limits, malformed responses, no size-range matches, and tiny sample sizes all return low-confidence fallback dictionaries instead of raising.
+
+For `retry_search_with_fallback`, I will give Claude the `Tool 7: retry_search_with_fallback` block, the `Planning Loop` branch for empty search results, and the `Error Handling` rows for `search_listings` and retry. I expect Claude to produce a deterministic helper that calls `search_listings` with controlled fallback parameters, records each attempted query, returns recovered results when one fallback succeeds, and returns `recovered = False` with a clear message when all fallbacks fail. Before using it, I will check that it tries removing the size filter before broadening price, does not mutate `session["parsed"]`, records adjustments, catches exceptions per attempt, and never crashes the agent.
+
+After Claude generates the seven functions, I will use Claude to integrate them into the project files and review them against the Tools section. Claude should make the code consistent with the existing project structure, import helper functions from `utils/data_loader.py`, keep style profile memory deterministic and local, keep live trend access behind a mockable client boundary, keep fallback search deterministic, and avoid changing unrelated files. I will verify the milestone by running focused tests or manual function calls for successful search, retry recovered by removing size, retry recovered by raising max price, retry all-failed no-results, successful price fairness, missing-field price fairness, no-comparable price fairness, successful live trend lookup, trend fallback on platform failure, no size-range trend match, example wardrobe styling with trend cues, empty wardrobe styling, complete fit card creation, incomplete outfit fallback, style profile load with no existing memory, style profile update, and two sequential interactions where the second uses preferences saved by the first.
 
 **Milestone 4 - Planning loop and state management:**
-I will give Claude the completed `Planning Loop`, `State Management` once completed, `Error Handling`, `Architecture` ASCII diagram, and `A Complete Interaction` sections from `planning.md`. I expect Claude to produce the agent control flow that loads `style_profile_memory` at the start, parses a user query into `description`, `size`, and `max_price`, stores those values in `session["parsed"]`, calls `search_listings`, optionally re-ranks matches using remembered preferences, branches early on empty results with an LLM-generated no-results message plus deterministic fallback, stores `selected_item = results[0]`, calls `estimate_price_fairness(session["selected_item"])`, stores the returned dict in `session["price_fairness"]`, continues even if the verdict is `"not enough data"`, uses the wardrobe and style profile passed through the session, calls `suggest_outfit`, stores the returned string in `session["outfit_suggestion"]`, calls `create_fit_card(session["outfit_suggestion"], session["selected_item"])`, updates style memory after a successful fit card, and returns the completed session.
+I will give Claude the completed `Planning Loop`, `State Management` once completed, `Error Handling`, `Architecture` ASCII diagram, and `A Complete Interaction` sections from `planning.md`. I expect Claude to produce the agent control flow that loads `style_profile_memory` at the start, parses a user query into `description`, `size`, and `max_price`, stores those values in `session["parsed"]`, calls `search_listings`, optionally re-ranks matches using remembered preferences, calls `retry_search_with_fallback` if the first search returns `[]`, branches early only if retry also fails, stores `selected_item = results[0]`, calls `estimate_price_fairness(session["selected_item"])`, stores the returned dict in `session["price_fairness"]`, calls `get_live_trend_context(...)`, stores the returned dict in `session["trend_context"]`, continues even if trend confidence is `"low"`, uses the wardrobe, style profile, and trend context passed through the session, calls `suggest_outfit`, stores the returned string in `session["outfit_suggestion"]`, calls `create_fit_card(session["outfit_suggestion"], session["selected_item"])`, updates style memory after a successful fit card, and returns the completed session.
 
-I will use Claude as a reviewer for Milestone 4 by giving it the same `Planning Loop` section and `Architecture` diagram plus the generated planning-loop code. I will ask Claude to identify any missing branch, incorrect state key, or mismatch with the documented tool return shapes. Before trusting the implementation, I will manually trace the code against the `A Complete Interaction` example and verify that the session contains `user_id`, `parsed`, `search_results`, `selected_item`, `wardrobe`, `style_profile`, `memory_warning`, `price_fairness`, `outfit_suggestion`, `fit_card`, and `error` at the correct points.
+I will use Claude as a reviewer for Milestone 4 by giving it the same `Planning Loop` section and `Architecture` diagram plus the generated planning-loop code. I will ask Claude to identify any missing branch, incorrect state key, or mismatch with the documented tool return shapes. Before trusting the implementation, I will manually trace the code against the `A Complete Interaction` example and verify that the session contains `user_id`, `parsed`, `search_results`, `search_retry`, `search_adjustments`, `search_retry_message`, `selected_item`, `wardrobe`, `style_profile`, `memory_warning`, `price_fairness`, `trend_context`, `outfit_suggestion`, `fit_card`, and `error` at the correct points.
 
-To verify the final planning loop, I will run five end-to-end scenarios: the example vintage graphic tee query should return listings, a price fairness result, outfit advice, a fit card, and an updated style profile; a query with no matching listings should return early with an error message that explains the failed parsed filters and suggests concrete search adjustments, and should not call price fairness, outfit, fit-card, or memory-update logic; a run where `estimate_price_fairness` returns `"not enough data"` should still continue to outfit and fit-card generation while avoiding a strong price claim; a run with `get_empty_wardrobe()` should still return the selected listing with price context and general styling notes in `session["outfit_suggestion"]`; and two sequential interactions should prove memory works by saving preferences from the first interaction and using them in the second without the user re-entering those preferences.
+To verify the final planning loop, I will run seven end-to-end scenarios: the example vintage graphic tee query should return listings, a price fairness result, live trend context, outfit advice visibly using at least one medium/high-confidence trend cue, a fit card, and an updated style profile; a first search with no exact size match should recover through fallback search, continue the normal flow, and display the search adjustment message; a query with no matching listings even after retry should return early with an error message that explains the failed parsed filters and attempted adjustments, and should not call price fairness, trend lookup, outfit, fit-card, or memory-update logic; a run where `estimate_price_fairness` returns `"not enough data"` should still continue to trend lookup, outfit, and fit-card generation while avoiding a strong price claim; a run where `get_live_trend_context` returns `confidence = "low"` should still generate an outfit while avoiding strong trend claims; a run with `get_empty_wardrobe()` should still return the selected listing with price context, trend context, and general styling notes in `session["outfit_suggestion"]`; and two sequential interactions should prove memory works by saving preferences from the first interaction and using them in the second without the user re-entering those preferences.
 
 ---
 
@@ -357,7 +460,7 @@ Write out what a full user interaction looks like from start to finish ??tool ca
 
 **Example user query:** "I'm looking for a vintage graphic tee under $30. I mostly wear baggy jeans and chunky sneakers. What's out there and how would I style it?"
 
-FitFindr searches secondhand clothing listings, picks the best item for the user's request, estimates whether that listing's price is fair, then styles it with the wardrobe passed into `run_agent()` so the user gets shopping context and an outfit idea. For the example query, the request triggers `search_listings(description="vintage graphic tee", size=None, max_price=30)`, the selected listing triggers `estimate_price_fairness(item=<chosen listing>)`, the same selected listing triggers `suggest_outfit(new_item=<chosen listing>, wardrobe=<passed-in wardrobe>)`, and the completed outfit suggestion triggers `create_fit_card(outfit=<outfit suggestion string>, new_item=<chosen listing>)`. If search finds nothing, FitFindr should set `session["error"]` to an LLM-generated message that explains the failed filters and suggests what to try next, with a deterministic fallback if the LLM is unavailable; if price fairness has `"not enough data"`, it should avoid a strong price claim and keep going; if the wardrobe is empty from `get_empty_wardrobe()`, it should still show the listing with a general styling suggestion string; if the fit card cannot be created, it should return a descriptive fallback string rather than crashing.
+FitFindr searches secondhand clothing listings, picks the best item for the user's request, estimates whether that listing's price is fair, checks recent public fashion-platform trend signals for the relevant size range, then styles it with the wardrobe passed into `run_agent()` so the user gets shopping context and an outfit idea. For the example query, the request triggers `search_listings(description="vintage graphic tee", size=None, max_price=30)`, the selected listing triggers `estimate_price_fairness(item=<chosen listing>)`, the selected listing and parsed size context trigger `get_live_trend_context(description="vintage graphic tee", category="tops", size=<selected listing size>, platform="depop", lookback_days=14, max_posts=25)`, the same selected listing plus wardrobe, style profile, and trend context trigger `suggest_outfit(new_item=<chosen listing>, wardrobe=<passed-in wardrobe>)`, and the completed outfit suggestion triggers `create_fit_card(outfit=<outfit suggestion string>, new_item=<chosen listing>)`. If search finds nothing, FitFindr should set `session["error"]` to an LLM-generated message that explains the failed filters and suggests what to try next, with a deterministic fallback if the LLM is unavailable; if price fairness has `"not enough data"`, it should avoid a strong price claim and keep going; if trend context has `confidence = "low"`, it should avoid strong trend claims and keep going; if the wardrobe is empty from `get_empty_wardrobe()`, it should still show the listing with a general styling suggestion string; if the fit card cannot be created, it should return a descriptive fallback string rather than crashing.
 
 **Step 1:**
 The agent reads the user query and identifies three search constraints: item description = "vintage graphic tee", size = `None` because the user did not specify a size, and max price = 30. It stores those values in `session["parsed"]`, calls `search_listings(description="vintage graphic tee", size=None, max_price=30)`, and that tool uses `load_listings()` from `utils/data_loader.py` to search the mock secondhand listings. The tool returns matching listings such as the black 2003 tour bootleg-style graphic tee for $24 and the faded grey vintage band tee for $19; if it returns no matches, the agent generates a helpful no-results message from `session["parsed"]`, stores it in `session["error"]`, and stops the tool chain.
@@ -366,13 +469,19 @@ The agent reads the user query and identifies three search constraints: item des
 The agent chooses the strongest match from Step 1, likely the black "Graphic Tee - 2003 Tour Bootleg Style" because it is a vintage-style graphic tee under $30 and fits the user's baggy jeans/chunky sneakers style. It calls `estimate_price_fairness(item=session["selected_item"])` using that exact selected listing and stores the returned dict in `session["price_fairness"]`. If comparable tees in the dataset show that $24 is close to the comparable average, the agent can say the listing looks like a fair price; if the tool returns `"not enough data"`, the agent says it cannot confidently judge the price and continues without making a deal claim.
 
 **Step 3:**
-The agent uses the wardrobe passed into `run_agent()` and calls `suggest_outfit(new_item=session["selected_item"], wardrobe=session["wardrobe"])`. The tool returns an outfit suggestion string using the new tee with wardrobe pieces like baggy straight-leg jeans, chunky white sneakers, a vintage black denim jacket, and a black crossbody bag; if the wardrobe is empty from `get_empty_wardrobe()`, the string gives general styling advice instead of wardrobe-specific pairings.
+The agent calls `get_live_trend_context(description=session["parsed"]["description"], category=session["selected_item"]["category"], size=session["parsed"]["size"] or session["selected_item"]["size"], platform="depop", lookback_days=14, max_posts=25)` and stores the returned dict in `session["trend_context"]`. For the selected black vintage-style graphic tee, recent public platform tags in the relevant size range might return `trending_tags = ["streetwear", "oversized", "band tee"]`, `popular_styles = ["oversized streetwear", "black-and-denim styling"]`, and `styling_cues = ["style with baggy denim", "repeat black in accessories", "add chunky shoes"]`. If the platform request fails or no size-range trend signal exists, the agent stores a low-confidence fallback and continues without making a strong trend claim.
 
 **Step 4:**
-The agent sends the outfit suggestion from Step 3 and the selected listing to `create_fit_card(outfit=session["outfit_suggestion"], new_item=session["selected_item"])`. This tool formats the chosen listing, price, platform, colors, style tags, and styling notes into a short user-friendly caption string. If the outfit suggestion is empty or the caption model fails, the tool returns a descriptive fallback string so the user still gets a useful answer.
+The agent uses the wardrobe passed into `run_agent()` and calls `suggest_outfit(new_item=session["selected_item"], wardrobe=session["wardrobe"])` with `session["style_profile"]` and `session["trend_context"]` included in the prompt context. The tool returns an outfit suggestion string using the new tee with wardrobe pieces like baggy straight-leg jeans, chunky white sneakers, a vintage black denim jacket, and a black crossbody bag. Because the trend context had a usable cue like `"style with baggy denim"` or `"add chunky shoes"`, the outfit suggestion should visibly mention that trend-aware choice; if the wardrobe is empty from `get_empty_wardrobe()`, the string gives general styling advice instead of wardrobe-specific pairings.
+
+**Step 5:**
+The agent sends the outfit suggestion from Step 4 and the selected listing to `create_fit_card(outfit=session["outfit_suggestion"], new_item=session["selected_item"])`. This tool formats the chosen listing, price, platform, colors, style tags, trend-aware styling notes, and outfit notes into a short user-friendly caption string. If the outfit suggestion is empty or the caption model fails, the tool returns a descriptive fallback string so the user still gets a useful answer.
 
 **Final output to user:**
-The user sees a short list of the best matching listings, with the top recommendation highlighted: "Graphic Tee - 2003 Tour Bootleg Style," size L, good condition, $24 on Depop. In the same listing/results panel, the user also sees the price fairness result, such as "Price check: fair price - $24 is close to the average comparable tee price in the dataset," or a low-confidence note if there is not enough comparable data. They also see an outfit suggestion string plus a short fit card caption showing how to style it with their baggy straight-leg jeans, chunky white sneakers, vintage black denim jacket, and black crossbody bag.
+The user sees a short list of the best matching listings, with the top recommendation highlighted: "Graphic Tee - 2003 Tour Bootleg Style," size L, good condition, $24 on Depop. In the same listing/results panel, the user also sees the price fairness result, such as "Price check: fair price - $24 is close to the average comparable tee price in the dataset," plus a trend source note such as "Trend check: medium confidence from 18 recent Depop posts in this size range; oversized streetwear and black-and-denim styling are showing up often." They also see an outfit suggestion string plus a short fit card caption showing how to style it with their baggy straight-leg jeans, chunky white sneakers, vintage black denim jacket, and black crossbody bag.
+
+**Fallback search example:**
+If the user asks for `"vintage graphic tee size XS under $30"` and the first `search_listings` call finds no exact matches, the agent calls `retry_search_with_fallback(description="vintage graphic tee", size="XS", max_price=30, max_attempts=3)`. If removing `size="XS"` finds the black 2003 tour bootleg-style graphic tee and the faded grey vintage band tee, the agent stores those recovered results in `session["search_results"]`, stores `["removed size filter"]` in `session["search_adjustments"]`, and tells the user, `"I did not find an exact size XS match, so I removed the size filter and found these options under $30."` The agent then continues normally to price fairness, live trend context, outfit suggestion, fit card, and style memory update.
 
 **Style profile memory example:**
 Interaction 1 starts with no saved memory. The user says, "I like oversized streetwear, black pieces, baggy jeans, and chunky sneakers. Find me a vintage graphic tee under $30." The agent loads an empty default `style_profile`, completes the normal search, price check, outfit, and fit-card flow, then updates memory with preferences such as `preferred_style_tags = ["streetwear", "vintage", "graphic tee"]`, `preferred_colors = ["black"]`, `preferred_silhouettes = ["oversized", "baggy"]`, `preferred_categories = ["tops"]`, and `wardrobe_notes = "User likes baggy jeans and chunky sneakers."`

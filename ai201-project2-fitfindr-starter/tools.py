@@ -15,6 +15,7 @@ Tools:
 import json
 import os
 import re
+from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -279,12 +280,212 @@ def style_profile_memory(
     return updated_profile
 
 
+def _fallback_trend_context(
+    *,
+    platform: str,
+    size: str | None,
+    reasoning: str,
+) -> dict:
+    """Return the stable fallback shape for trend lookup failures."""
+    return {
+        "platform": platform,
+        "size_range": size,
+        "sample_count": 0,
+        "trending_tags": [],
+        "popular_styles": [],
+        "styling_cues": [],
+        "confidence": "low",
+        "source_note": f"No usable recent public {platform} trend signal.",
+        "reasoning": reasoning,
+    }
+
+
+def _fetch_public_trend_posts(
+    description: str,
+    category: str | None,
+    platform: str,
+    lookback_days: int,
+    max_posts: int,
+) -> list[dict]:
+    """
+    Fetch recent public platform trend posts/listings.
+
+    The default implementation uses a small demo sample so the project remains
+    deterministic and testable. In production, replace this function with an
+    official API or approved public endpoint client.
+    """
+    demo_posts = [
+        {
+            "platform": "depop",
+            "category": "tops",
+            "size": "L",
+            "tags": ["streetwear", "oversized", "band tee", "vintage"],
+            "styles": ["oversized streetwear", "black-and-denim styling"],
+            "cues": ["style with baggy denim", "repeat black in accessories", "add chunky shoes"],
+        },
+        {
+            "platform": "depop",
+            "category": "tops",
+            "size": "M/L",
+            "tags": ["graphic tee", "streetwear", "grunge", "oversized"],
+            "styles": ["grunge streetwear", "chunky shoe balance"],
+            "cues": ["add chunky shoes", "layer with a black jacket"],
+        },
+        {
+            "platform": "depop",
+            "category": "tops",
+            "size": "L",
+            "tags": ["vintage", "band tee", "black", "streetwear"],
+            "styles": ["black-and-denim styling", "vintage band tee fits"],
+            "cues": ["repeat black in accessories", "style with baggy denim"],
+        },
+        {
+            "platform": "depop",
+            "category": "outerwear",
+            "size": "M",
+            "tags": ["vintage", "streetwear", "track jacket", "oversized"],
+            "styles": ["vintage athletic layers", "oversized streetwear"],
+            "cues": ["zip over a graphic tee", "balance with loose denim"],
+        },
+        {
+            "platform": "depop",
+            "category": "outerwear",
+            "size": "L",
+            "tags": ["black", "streetwear", "workwear", "boxy"],
+            "styles": ["boxy jacket styling", "black utility layers"],
+            "cues": ["repeat black in shoes", "pair with baggy pants"],
+        },
+        {
+            "platform": "depop",
+            "category": "shoes",
+            "size": "US 8",
+            "tags": ["chunky", "platform", "streetwear"],
+            "styles": ["chunky shoe balance", "platform streetwear"],
+            "cues": ["balance chunky soles with wide-leg pants"],
+        },
+    ]
+
+    normalized_platform = str(platform or "").strip().lower()
+    normalized_category = str(category or "").strip().lower()
+    posts = [
+        post for post in demo_posts
+        if post["platform"] == normalized_platform
+        and (not normalized_category or post["category"] == normalized_category)
+    ]
+    return posts[:max(0, int(max_posts or 0))]
+
+
+def get_live_trend_context(
+    description: str,
+    category: str | None = None,
+    size: str | None = None,
+    platform: str = "depop",
+    lookback_days: int = 14,
+    max_posts: int = 25,
+) -> dict:
+    """
+    Return current trend context from recent public fashion-platform signals.
+
+    The platform fetch boundary is mockable for tests. Expected failures return
+    a low-confidence context instead of raising.
+    """
+    normalized_platform = str(platform or "depop").strip().lower() or "depop"
+    normalized_size = str(size).strip() if size is not None else None
+
+    def tokens(value: object) -> set[str]:
+        return set(re.findall(r"[a-z0-9]+", str(value).lower()))
+
+    def size_matches(post_size: object) -> bool:
+        if not normalized_size:
+            return True
+        requested = tokens(normalized_size)
+        available = tokens(post_size)
+        return bool(requested & available)
+
+    try:
+        posts = _fetch_public_trend_posts(
+            description=description,
+            category=category,
+            platform=normalized_platform,
+            lookback_days=lookback_days,
+            max_posts=max_posts,
+        )
+    except Exception:
+        return _fallback_trend_context(
+            platform=normalized_platform,
+            size=normalized_size,
+            reasoning="Live trend lookup failed, so the agent should avoid strong trend claims.",
+        )
+
+    if not isinstance(posts, list):
+        return _fallback_trend_context(
+            platform=normalized_platform,
+            size=normalized_size,
+            reasoning="Live trend lookup returned malformed data.",
+        )
+
+    matched_posts = [
+        post for post in posts
+        if isinstance(post, dict) and size_matches(post.get("size"))
+    ]
+
+    if not matched_posts:
+        return _fallback_trend_context(
+            platform=normalized_platform,
+            size=normalized_size,
+            reasoning="No recent public posts matched the user's size range.",
+        )
+
+    tag_counts = Counter()
+    style_counts = Counter()
+    cue_counts = Counter()
+    for post in matched_posts:
+        tag_counts.update(_dedupe_strings(post.get("tags")))
+        style_counts.update(_dedupe_strings(post.get("styles")))
+        cue_counts.update(_dedupe_strings(post.get("cues")))
+
+    sample_count = len(matched_posts)
+    if sample_count >= 10:
+        confidence = "high"
+    elif sample_count >= 3:
+        confidence = "medium"
+    else:
+        confidence = "low"
+
+    trending_tags = [tag for tag, _ in tag_counts.most_common(5)]
+    popular_styles = [style for style, _ in style_counts.most_common(4)]
+    styling_cues = [cue for cue, _ in cue_counts.most_common(4)]
+    source_note = (
+        f"Trend check: {confidence} confidence from {sample_count} recent "
+        f"{normalized_platform} public post(s) in size range {normalized_size or 'any'}."
+    )
+    reasoning = (
+        f"Matched recent public {normalized_platform} signals for "
+        f"{category or 'any category'} related to '{description}'."
+    )
+    if confidence == "low":
+        reasoning += " Sample size is small, so avoid strong trend claims."
+
+    return {
+        "platform": normalized_platform,
+        "size_range": normalized_size,
+        "sample_count": sample_count,
+        "trending_tags": trending_tags,
+        "popular_styles": popular_styles,
+        "styling_cues": styling_cues,
+        "confidence": confidence,
+        "source_note": source_note,
+        "reasoning": reasoning,
+    }
+
+
 # ── Tool 2: suggest_outfit ────────────────────────────────────────────────────
 
 def suggest_outfit(
     new_item: dict,
     wardrobe: dict,
     style_profile: dict | None = None,
+    trend_context: dict | None = None,
 ) -> str:
     """
     Given a thrifted item and the user's wardrobe, suggest 1–2 complete outfits.
@@ -355,6 +556,27 @@ def suggest_outfit(
             profile_parts.append(f"- wardrobe notes: {style_profile['wardrobe_notes']}")
         if profile_parts:
             profile_context = "\n\nRemembered style profile:\n" + "\n".join(profile_parts)
+    trend_prompt_context = ""
+    if isinstance(trend_context, dict):
+        trend_parts = []
+        if trend_context.get("confidence"):
+            trend_parts.append(f"- confidence: {trend_context['confidence']}")
+        if trend_context.get("trending_tags"):
+            trend_parts.append(
+                f"- trending tags: {', '.join(trend_context['trending_tags'])}"
+            )
+        if trend_context.get("popular_styles"):
+            trend_parts.append(
+                f"- popular styles: {', '.join(trend_context['popular_styles'])}"
+            )
+        if trend_context.get("styling_cues"):
+            trend_parts.append(
+                f"- styling cues: {', '.join(trend_context['styling_cues'])}"
+            )
+        if trend_context.get("source_note"):
+            trend_parts.append(f"- source note: {trend_context['source_note']}")
+        if trend_parts:
+            trend_prompt_context = "\n\nLive trend context:\n" + "\n".join(trend_parts)
 
     if has_wardrobe:
         wardrobe_text = "\n".join(format_item(item) for item in wardrobe_items)
@@ -367,12 +589,15 @@ Thrifted item:
 User wardrobe:
 {wardrobe_text}
 {profile_context}
+{trend_prompt_context}
 
 Requirements:
 - Mention the thrifted item by name.
 - Use specific wardrobe item names when possible.
 - If remembered style preferences are provided, use them when they fit this item.
 - Avoid disliked terms or styles if any are provided.
+- If live trend confidence is high or medium, visibly use at least one styling cue.
+- If live trend confidence is low, avoid strong trend claims.
 - Explain briefly why the colors, categories, or style tags work together.
 - Keep it concise and practical.
 """.strip()
@@ -383,12 +608,15 @@ The user's wardrobe is empty, so suggest general styling ideas for this thrifted
 Thrifted item:
 {item_summary}
 {profile_context}
+{trend_prompt_context}
 
 Requirements:
 - Do not say you can see closet items.
 - Give 1-2 complete outfit ideas using general pieces someone might own.
 - If remembered style preferences are provided, use them when they fit this item.
 - Avoid disliked terms or styles if any are provided.
+- If live trend confidence is high or medium, visibly use at least one styling cue.
+- If live trend confidence is low, avoid strong trend claims.
 - Mention that a more personal outfit is possible once wardrobe items are added.
 - Explain briefly what vibe the item suits.
 - Keep it concise and practical.
@@ -402,9 +630,16 @@ Requirements:
                 {
                     "role": "system",
                     "content": (
-                        "You are FitFindr, a concise secondhand fashion stylist. "
-                        "Give useful outfit advice with specific pieces, colors, "
-                        "and style reasoning. Avoid generic filler."
+                        "You are FitFindr, a secondhand fashion shopping and styling assistant. "
+                        "Do not rely on your general knowledge alone. Use the provided listing data, "
+                        "wardrobe data, saved style profile, price fairness result, and trend context "
+                        "when they are available. If an item, wardrobe detail, comparable price, or trend "
+                        "signal is not available in the provided data, say so clearly and avoid making "
+                        "unsupported claims.\n\n"
+                        "Keep your advice practical, specific, and easy to act on. Mention the source of "
+                        "your information when you have it, such as 'Based on the selected listing...', "
+                        "'Based on your saved style profile...', 'Based on comparable listings in the "
+                        "mock dataset...', or 'Based on the trend context...'."
                     ),
                 },
                 {"role": "user", "content": user_prompt},
