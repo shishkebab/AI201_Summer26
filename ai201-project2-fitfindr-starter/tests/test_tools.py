@@ -66,7 +66,7 @@ def test_search_price_filter():
     assert all(item["price"] <= 10 for item in results)
 
 
-def test_retry_search_recovers_by_removing_size(monkeypatch):
+def test_retry_search_remove_size_strategy_recovers(monkeypatch):
     recovered_item = {"id": "lst_retry_size", "title": "Recovered Tee"}
     calls = []
 
@@ -80,16 +80,25 @@ def test_retry_search_recovers_by_removing_size(monkeypatch):
 
     monkeypatch.setattr(tools, "search_listings", fake_search)
 
-    result = retry_search_with_fallback("vintage graphic tee", size="XS", max_price=30)
+    result = retry_search_with_fallback(
+        "vintage graphic tee",
+        size="XS",
+        max_price=30,
+        strategy="remove_size",
+        reason="Size may be too restrictive.",
+    )
 
     assert result["recovered"] is True
+    assert result["next_step"] == "continue_to_price_fairness"
+    assert result["strategy"] == "remove_size"
     assert result["results"] == [recovered_item]
     assert result["adjustments"] == ["removed size filter"]
+    assert result["attempted_query"]["strategy"] == "remove_size"
     assert result["attempted_queries"][0]["size"] is None
     assert calls == [{"description": "vintage graphic tee", "size": None, "max_price": 30.0}]
 
 
-def test_retry_search_recovers_by_raising_max_price(monkeypatch):
+def test_retry_search_raise_price_strategy_transforms_price(monkeypatch):
     recovered_item = {"id": "lst_retry_price", "title": "Recovered Jacket"}
 
     def fake_search(description, size=None, max_price=None):
@@ -99,7 +108,13 @@ def test_retry_search_recovers_by_raising_max_price(monkeypatch):
 
     monkeypatch.setattr(tools, "search_listings", fake_search)
 
-    result = retry_search_with_fallback("jacket", size=None, max_price=10)
+    result = retry_search_with_fallback(
+        "jacket",
+        size=None,
+        max_price=10,
+        strategy="raise_price",
+        reason="Budget may be too low.",
+    )
 
     assert result["recovered"] is True
     assert result["results"] == [recovered_item]
@@ -107,58 +122,168 @@ def test_retry_search_recovers_by_raising_max_price(monkeypatch):
     assert result["attempted_queries"][0]["max_price"] == 12.5
 
 
-def test_retry_search_returns_empty_when_all_attempts_fail(monkeypatch):
-    monkeypatch.setattr(tools, "search_listings", lambda **kwargs: [])
+def test_retry_search_remove_size_and_raise_price_strategy(monkeypatch):
+    seen = []
 
-    result = retry_search_with_fallback(
-        "designer ballgown", size="XXS", max_price=5, max_attempts=3
-    )
-
-    assert result["recovered"] is False
-    assert result["results"] == []
-    assert result["adjustments"] == []
-    assert len(result["attempted_queries"]) == 3
-    assert "still found no matches" in result["message"]
-
-
-def test_retry_search_records_attempted_queries(monkeypatch):
-    monkeypatch.setattr(tools, "search_listings", lambda **kwargs: [])
-
-    result = retry_search_with_fallback(
-        "vintage graphic tee", size="XS", max_price=30, max_attempts=4
-    )
-
-    assert [attempt["adjustments"] for attempt in result["attempted_queries"]] == [
-        ["removed size filter"],
-        ["raised max price by 25%"],
-        ["removed size filter and raised max price by 25%"],
-        ["simplified description"],
-    ]
-    assert result["attempted_queries"][-1]["description"] == "vintage graphic"
-
-
-def test_retry_search_catches_failed_attempt_and_continues(monkeypatch):
-    recovered_item = {"id": "lst_retry_after_error", "title": "Recovered Item"}
-    calls = []
-
-    def fake_search(description, size=None, max_price=None):
-        calls.append((description, size, max_price))
-        if len(calls) == 1:
-            raise RuntimeError("temporary search failure")
-        if size == "XS" and max_price == 37.5:
-            return [recovered_item]
-        return []
+    def fake_search(**kwargs):
+        seen.append(kwargs)
+        return [{"id": "combo"}]
 
     monkeypatch.setattr(tools, "search_listings", fake_search)
 
     result = retry_search_with_fallback(
-        "vintage graphic tee", size="XS", max_price=30, max_attempts=3
+        "vintage graphic tee",
+        size="XS",
+        max_price=20,
+        strategy="remove_size_and_raise_price",
+        reason="Both size and price may be too strict.",
     )
 
     assert result["recovered"] is True
-    assert result["results"] == [recovered_item]
-    assert result["attempted_queries"][0]["error"] == "temporary search failure"
-    assert result["adjustments"] == ["raised max price by 25%"]
+    assert seen == [{"description": "vintage graphic tee", "size": None, "max_price": 25.0}]
+    assert result["adjustments"] == ["removed size filter and raised max price by 25%"]
+
+
+def test_retry_search_simplify_description_strategy(monkeypatch):
+    seen = []
+
+    def fake_search(**kwargs):
+        seen.append(kwargs)
+        return [{"id": "simple"}]
+
+    monkeypatch.setattr(tools, "search_listings", fake_search)
+
+    result = retry_search_with_fallback(
+        "vintage graphic tee",
+        size="XS",
+        max_price=30,
+        strategy="simplify_description",
+        reason="Description may be too specific.",
+    )
+
+    assert result["recovered"] is True
+    assert seen == [{"description": "vintage graphic", "size": None, "max_price": 37.5}]
+    assert result["adjustments"] == ["simplified description"]
+
+
+def test_retry_search_broaden_style_terms_strategy(monkeypatch):
+    seen = []
+
+    def fake_search(**kwargs):
+        seen.append(kwargs)
+        return [{"id": "broad"}]
+
+    monkeypatch.setattr(tools, "search_listings", fake_search)
+
+    result = retry_search_with_fallback(
+        "vintage graphic tee",
+        size="XS",
+        max_price=30,
+        strategy="broaden_style_terms",
+        reason="Broader style terms may match.",
+    )
+
+    assert result["recovered"] is True
+    assert seen == [{"description": "graphic tee", "size": "XS", "max_price": 30.0}]
+    assert result["adjustments"] == ["broadened style terms"]
+
+
+def test_retry_search_invalid_strategy_returns_choose_another():
+    result = retry_search_with_fallback(
+        "vintage graphic tee",
+        size="XS",
+        max_price=30,
+        strategy="delete_filters",
+    )
+
+    assert result["recovered"] is False
+    assert result["next_step"] == "choose_another_retry_strategy"
+    assert result["attempted_query"] is None
+    assert "Unsupported retry strategy" in result["message"]
+
+
+def test_retry_search_repeated_strategy_returns_choose_another():
+    result = retry_search_with_fallback(
+        "vintage graphic tee",
+        size="XS",
+        max_price=30,
+        strategy="remove_size",
+        previous_attempts=[{"strategy": "remove_size"}],
+    )
+
+    assert result["recovered"] is False
+    assert result["next_step"] == "choose_another_retry_strategy"
+    assert result["attempted_query"] is None
+    assert "already tried" in result["message"]
+
+
+def test_retry_search_stop_strategy_returns_stop_no_results():
+    result = retry_search_with_fallback(
+        "vintage graphic tee",
+        size="XS",
+        max_price=30,
+        strategy="stop",
+        reason="User said exact size only.",
+    )
+
+    assert result["recovered"] is False
+    assert result["next_step"] == "stop_no_results"
+    assert result["attempted_queries"] == []
+
+
+def test_retry_search_failed_strategy_appends_attempt(monkeypatch):
+    monkeypatch.setattr(tools, "search_listings", lambda **kwargs: [])
+
+    result = retry_search_with_fallback(
+        "designer ballgown",
+        size="XXS",
+        max_price=5,
+        strategy="raise_price",
+        previous_attempts=[{"strategy": "remove_size", "result_count": 0}],
+    )
+
+    assert result["recovered"] is False
+    assert result["next_step"] == "choose_another_retry_strategy"
+    assert len(result["attempted_queries"]) == 2
+    assert result["attempted_query"]["strategy"] == "raise_price"
+    assert result["attempted_query"]["result_count"] == 0
+
+
+def test_retry_search_third_failed_strategy_stops(monkeypatch):
+    monkeypatch.setattr(tools, "search_listings", lambda **kwargs: [])
+
+    result = retry_search_with_fallback(
+        "designer ballgown",
+        size="XXS",
+        max_price=5,
+        strategy="simplify_description",
+        previous_attempts=[
+            {"strategy": "remove_size", "result_count": 0},
+            {"strategy": "raise_price", "result_count": 0},
+        ],
+    )
+
+    assert result["recovered"] is False
+    assert result["next_step"] == "stop_no_results"
+    assert len(result["attempted_queries"]) == 3
+
+
+def test_retry_search_records_search_exception(monkeypatch):
+    def fake_search(**kwargs):
+        raise RuntimeError("temporary search failure")
+
+    monkeypatch.setattr(tools, "search_listings", fake_search)
+
+    result = retry_search_with_fallback(
+        "vintage graphic tee",
+        size="XS",
+        max_price=30,
+        strategy="remove_size",
+    )
+
+    assert result["recovered"] is False
+    assert result["next_step"] == "choose_another_retry_strategy"
+    assert result["attempted_query"]["error"] == "temporary search failure"
 
 
 def test_suggest_outfit_with_wardrobe_uses_llm(monkeypatch):

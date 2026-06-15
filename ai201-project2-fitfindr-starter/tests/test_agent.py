@@ -169,7 +169,13 @@ def test_run_agent_retry_recovery_continues_to_fit_card(monkeypatch):
             ),
             tool_message(
                 "retry_search_with_fallback",
-                {"description": "vintage graphic tee", "size": "XS", "max_price": 30},
+                {
+                    "description": "vintage graphic tee",
+                    "size": "XS",
+                    "max_price": 30,
+                    "strategy": "remove_size",
+                    "reason": "Size may be too restrictive.",
+                },
             ),
             tool_messages(
                 FakeToolCall("estimate_price_fairness"),
@@ -188,10 +194,14 @@ def test_run_agent_retry_recovery_continues_to_fit_card(monkeypatch):
         "retry_search_with_fallback",
         lambda **kwargs: {
             "results": [item],
+            "strategy": "remove_size",
+            "reason": "Size may be too restrictive.",
             "adjustments": ["removed size filter"],
-            "attempted_queries": [],
+            "attempted_query": {"strategy": "remove_size", "result_count": 1},
+            "attempted_queries": [{"strategy": "remove_size", "result_count": 1}],
             "recovered": True,
             "message": "I removed the size filter and found options.",
+            "next_step": "continue_to_price_fairness",
         },
     )
 
@@ -200,13 +210,89 @@ def test_run_agent_retry_recovery_continues_to_fit_card(monkeypatch):
     assert session["error"] is None
     assert session["selected_item"] is item
     assert session["search_retry"]["recovered"] is True
+    assert session["search_retry"]["attempted_queries"][0]["strategy"] == "remove_size"
     assert session["search_adjustments"] == ["removed size filter"]
     assert session["search_retry_message"] == "I removed the size filter and found options."
     assert session["outfit_suggestion"] == "Wear it with jeans."
     assert session["fit_card"] == "Fit card caption."
 
 
-def test_run_agent_retry_failure_skips_downstream_tools(monkeypatch):
+def test_run_agent_failed_retry_returns_control_to_llm_for_another_strategy(monkeypatch):
+    item, _ = install_common_tool_fakes(monkeypatch)
+    fake_client = FakeGroqClient(
+        [
+            tool_message("search_listings", {"description": "designer ballgown"}),
+            tool_message(
+                "retry_search_with_fallback",
+                {
+                    "description": "designer ballgown",
+                    "strategy": "remove_size",
+                    "reason": "Size may be restrictive.",
+                },
+            ),
+            tool_message(
+                "retry_search_with_fallback",
+                {
+                    "description": "designer ballgown",
+                    "strategy": "raise_price",
+                    "reason": "Budget may be too low.",
+                },
+            ),
+            tool_messages(
+                FakeToolCall("estimate_price_fairness"),
+                FakeToolCall("get_live_trend_context"),
+                FakeToolCall("suggest_outfit"),
+                FakeToolCall("create_fit_card"),
+            ),
+            FakeMessage(content="Recovered on second retry."),
+        ]
+    )
+    retry_calls = []
+
+    def fake_retry(**kwargs):
+        retry_calls.append(kwargs)
+        if kwargs["strategy"] == "remove_size":
+            return {
+                "results": [],
+                "strategy": "remove_size",
+                "reason": kwargs["reason"],
+                "adjustments": ["removed size filter"],
+                "attempted_query": {"strategy": "remove_size", "result_count": 0},
+                "attempted_queries": [{"strategy": "remove_size", "result_count": 0}],
+                "recovered": False,
+                "message": "No matches after removing size.",
+                "next_step": "choose_another_retry_strategy",
+            }
+        return {
+            "results": [item],
+            "strategy": "raise_price",
+            "reason": kwargs["reason"],
+            "adjustments": ["raised max price by 25%"],
+            "attempted_query": {"strategy": "raise_price", "result_count": 1},
+            "attempted_queries": [
+                {"strategy": "remove_size", "result_count": 0},
+                {"strategy": "raise_price", "result_count": 1},
+            ],
+            "recovered": True,
+            "message": "I raised the max price and found options.",
+            "next_step": "continue_to_price_fairness",
+        }
+
+    monkeypatch.setattr(agent, "_get_groq_client", lambda: fake_client)
+    monkeypatch.setattr(agent, "search_listings", lambda **kwargs: [])
+    monkeypatch.setattr(agent, "retry_search_with_fallback", fake_retry)
+
+    session = agent.run_agent("designer ballgown size XXS under $5", {"items": []})
+
+    assert session["error"] is None
+    assert len(retry_calls) == 2
+    assert retry_calls[1]["previous_attempts"] == [{"strategy": "remove_size", "result_count": 0}]
+    assert session["selected_item"] is item
+    assert session["search_retry"]["strategy"] == "raise_price"
+    assert session["fit_card"] == "Fit card caption."
+
+
+def test_run_agent_retry_stop_skips_downstream_tools(monkeypatch):
     calls = {"price": False, "trend": False, "outfit": False, "fit_card": False}
 
     def fake_style_profile_memory(user_id, action, profile_update=None):
@@ -231,7 +317,14 @@ def test_run_agent_retry_failure_skips_downstream_tools(monkeypatch):
     fake_client = FakeGroqClient(
         [
             tool_message("search_listings", {"description": "designer ballgown"}),
-            tool_message("retry_search_with_fallback", {"description": "designer ballgown"}),
+            tool_message(
+                "retry_search_with_fallback",
+                {
+                    "description": "designer ballgown",
+                    "strategy": "stop",
+                    "reason": "User constraints are strict.",
+                },
+            ),
             FakeMessage(content="No matches."),
         ]
     )
@@ -244,10 +337,14 @@ def test_run_agent_retry_failure_skips_downstream_tools(monkeypatch):
         "retry_search_with_fallback",
         lambda **kwargs: {
             "results": [],
+            "strategy": "stop",
+            "reason": "User constraints are strict.",
             "adjustments": [],
+            "attempted_query": None,
             "attempted_queries": [],
             "recovered": False,
             "message": "I tried loosening the search but still found no matches.",
+            "next_step": "stop_no_results",
         },
     )
     monkeypatch.setattr(agent, "_generate_no_results_message", lambda parsed: "Try a broader search.")
@@ -263,6 +360,54 @@ def test_run_agent_retry_failure_skips_downstream_tools(monkeypatch):
     assert session["price_fairness"] is None
     assert session["trend_context"] is None
     assert session["outfit_suggestion"] is None
+    assert session["fit_card"] is None
+    assert calls == {"price": False, "trend": False, "outfit": False, "fit_card": False}
+
+
+def test_run_agent_retry_limit_sets_error(monkeypatch):
+    calls = {"price": False, "trend": False, "outfit": False, "fit_card": False}
+    fake_client = FakeGroqClient(
+        [
+            tool_message("search_listings", {"description": "designer ballgown"}),
+            tool_message(
+                "retry_search_with_fallback",
+                {"description": "designer ballgown", "strategy": "remove_size"},
+            ),
+        ]
+    )
+
+    monkeypatch.setattr(agent, "_get_groq_client", lambda: fake_client)
+    monkeypatch.setattr(agent, "style_profile_memory", lambda user_id, action, profile_update=None: default_profile(user_id))
+    monkeypatch.setattr(agent, "search_listings", lambda **kwargs: [])
+    monkeypatch.setattr(
+        agent,
+        "retry_search_with_fallback",
+        lambda **kwargs: {
+            "results": [],
+            "strategy": "remove_size",
+            "reason": "",
+            "adjustments": ["removed size filter"],
+            "attempted_query": {"strategy": "remove_size", "result_count": 0},
+            "attempted_queries": [
+                {"strategy": "raise_price", "result_count": 0},
+                {"strategy": "simplify_description", "result_count": 0},
+                {"strategy": "remove_size", "result_count": 0},
+            ],
+            "recovered": False,
+            "message": "I could not find exact matches after three retry strategies.",
+            "next_step": "stop_no_results",
+        },
+    )
+    monkeypatch.setattr(agent, "_generate_no_results_message", lambda parsed: "Try broader terms.")
+    monkeypatch.setattr(agent, "estimate_price_fairness", lambda item: calls.__setitem__("price", True))
+    monkeypatch.setattr(agent, "get_live_trend_context", lambda **kwargs: calls.__setitem__("trend", True))
+    monkeypatch.setattr(agent, "suggest_outfit", lambda **kwargs: calls.__setitem__("outfit", True))
+    monkeypatch.setattr(agent, "create_fit_card", lambda **kwargs: calls.__setitem__("fit_card", True))
+
+    session = agent.run_agent("designer ballgown size XXS under $5", {"items": []})
+
+    assert "three retry strategies" in session["error"]
+    assert session["selected_item"] is None
     assert session["fit_card"] is None
     assert calls == {"price": False, "trend": False, "outfit": False, "fit_card": False}
 

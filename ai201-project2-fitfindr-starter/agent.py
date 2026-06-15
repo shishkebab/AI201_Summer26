@@ -27,10 +27,23 @@ SYSTEM_PROMPT = (
     "price fairness, get trend context, suggest an outfit, and create a fit card. "
     "Do not invent listing details, prices, trend signals, or wardrobe items. "
     "If search_listings returns no results, call retry_search_with_fallback before "
-    "giving up. If retry also fails, explain what was tried and suggest broader "
-    "search terms, removing size, or raising the budget. Keep the final response "
-    "brief because the app displays structured panels from session state."
+    "giving up. You choose one approved retry strategy at a time: remove_size, "
+    "raise_price, remove_size_and_raise_price, simplify_description, "
+    "broaden_style_terms, or stop. Do not repeat a failed strategy. If retry "
+    "also fails or you choose stop, explain what was tried and suggest broader "
+    "search terms, a different size, or raising the budget. When calling tools, "
+    "never pass null for optional string fields like size; use 'any' instead. Keep the final "
+    "response brief because the app displays structured panels from session state."
 )
+
+APPROVED_RETRY_STRATEGIES = [
+    "remove_size",
+    "raise_price",
+    "remove_size_and_raise_price",
+    "simplify_description",
+    "broaden_style_terms",
+    "stop",
+]
 
 
 TOOL_DEFINITIONS = [
@@ -67,8 +80,11 @@ TOOL_DEFINITIONS = [
         "function": {
             "name": "retry_search_with_fallback",
             "description": (
-                "Retry a failed listing search with loosened constraints. Use this "
-                "when search_listings returns no results."
+                "Execute one approved retry strategy after search_listings returns "
+                "no results. Choose exactly one strategy: remove_size, raise_price, "
+                "remove_size_and_raise_price, simplify_description, "
+                "broaden_style_terms, or stop. Do not repeat strategies already "
+                "listed in previous_attempts."
             ),
             "parameters": {
                 "type": "object",
@@ -76,9 +92,21 @@ TOOL_DEFINITIONS = [
                     "description": {"type": "string"},
                     "size": {"type": "string"},
                     "max_price": {"type": "number"},
-                    "max_attempts": {"type": "integer", "default": 3},
+                    "strategy": {
+                        "type": "string",
+                        "enum": APPROVED_RETRY_STRATEGIES,
+                    },
+                    "reason": {
+                        "type": "string",
+                        "description": "Why this retry strategy fits the failed search.",
+                    },
+                    "previous_attempts": {
+                        "type": "array",
+                        "items": {"type": "object"},
+                        "description": "Retry attempts already made in this interaction.",
+                    },
                 },
-                "required": ["description"],
+                "required": ["description", "strategy"],
             },
         },
     },
@@ -504,6 +532,10 @@ def dispatch_tool(tool_name: str, tool_args: dict, session: dict) -> str:
                 "result_count": len(session["search_results"]),
                 "results": session["search_results"][:5],
                 "selected_item": session["selected_item"],
+                "parsed": session["parsed"],
+                "approved_retry_strategies": (
+                    APPROVED_RETRY_STRATEGIES if not session["search_results"] else []
+                ),
                 "next_step": (
                     "Call retry_search_with_fallback."
                     if not session["search_results"]
@@ -513,11 +545,20 @@ def dispatch_tool(tool_name: str, tool_args: dict, session: dict) -> str:
 
         elif tool_name == "retry_search_with_fallback":
             parsed = session.get("parsed") or _parse_query(session["query"])
+            existing_retry = session.get("search_retry")
+            previous_attempts = []
+            if isinstance(existing_retry, dict):
+                previous_attempts = existing_retry.get("attempted_queries") or []
+            provided_previous_attempts = tool_args.get("previous_attempts")
+            if isinstance(provided_previous_attempts, list):
+                previous_attempts = provided_previous_attempts
             retry_result = retry_search_with_fallback(
                 description=str(tool_args.get("description") or parsed.get("description") or ""),
                 size=tool_args.get("size", parsed.get("size")),
                 max_price=_coerce_float(tool_args.get("max_price", parsed.get("max_price"))),
-                max_attempts=_coerce_int(tool_args.get("max_attempts"), 3),
+                strategy=tool_args.get("strategy") or "stop",
+                reason=tool_args.get("reason") or "",
+                previous_attempts=previous_attempts,
             )
             session["search_retry"] = retry_result
             session["search_retry_message"] = retry_result.get("message")
@@ -528,7 +569,7 @@ def dispatch_tool(tool_name: str, tool_args: dict, session: dict) -> str:
                 )
                 session["search_adjustments"] = retry_result.get("adjustments", [])
                 _select_first_result(session)
-            else:
+            elif retry_result.get("next_step") == "stop_no_results":
                 retry_message = retry_result.get(
                     "message",
                     "I tried loosening the search but still found no matches.",
@@ -536,6 +577,8 @@ def dispatch_tool(tool_name: str, tool_args: dict, session: dict) -> str:
                 session["error"] = (
                     f"{retry_message}\n\n{_generate_no_results_message(parsed)}"
                 )
+            else:
+                retry_result["approved_retry_strategies"] = APPROVED_RETRY_STRATEGIES
             result = retry_result
 
         elif tool_name == "estimate_price_fairness":

@@ -145,16 +145,59 @@ def retry_search_with_fallback(
     description: str,
     size: str | None = None,
     max_price: float | None = None,
-    max_attempts: int = 3,
+    strategy: str = "stop",
+    reason: str = "",
+    previous_attempts: list[dict] | None = None,
 ) -> dict:
     """
-    Retry search_listings with controlled loosened constraints.
+    Execute one LLM-selected fallback search strategy.
 
-    Returns a dict with results, adjustments, attempted_queries, recovered,
-    and message. Expected search failures are recorded instead of raised.
+    The LLM chooses a strategy, but Python validates and executes only approved
+    transformations. Expected retry failures are recorded instead of raised.
     """
+    approved_strategies = {
+        "remove_size",
+        "raise_price",
+        "remove_size_and_raise_price",
+        "simplify_description",
+        "broaden_style_terms",
+        "stop",
+    }
+
+    def normalize_attempts(value: object) -> list[dict]:
+        if not isinstance(value, list):
+            return []
+        return [attempt for attempt in value if isinstance(attempt, dict)]
+
+    def build_result(
+        *,
+        results: list[dict] | None = None,
+        attempted_query: dict | None = None,
+        adjustments: list[str] | None = None,
+        recovered: bool = False,
+        message: str,
+        next_step: str,
+    ) -> dict:
+        attempts = list(attempted_queries)
+        if attempted_query is not None:
+            attempts.append(attempted_query)
+        return {
+            "results": results or [],
+            "strategy": normalized_strategy,
+            "reason": normalized_reason,
+            "adjustments": adjustments or [],
+            "attempted_query": attempted_query,
+            "attempted_queries": attempts,
+            "recovered": recovered,
+            "message": message,
+            "next_step": next_step,
+        }
+
     normalized_description = str(description or "").strip()
     normalized_size = str(size).strip() if size is not None and str(size).strip() else None
+    normalized_strategy = str(strategy or "").strip().lower()
+    normalized_reason = str(reason or "").strip()
+    attempted_queries = normalize_attempts(previous_attempts)
 
     try:
         normalized_max_price = (
@@ -163,102 +206,140 @@ def retry_search_with_fallback(
     except (TypeError, ValueError):
         normalized_max_price = None
 
-    try:
-        attempts_to_run = max(0, int(max_attempts))
-    except (TypeError, ValueError):
-        attempts_to_run = 3
-
     raised_price = (
         round(normalized_max_price * 1.25, 2)
         if normalized_max_price is not None
         else None
     )
-    planned_attempts: list[dict] = []
 
-    if normalized_size:
-        planned_attempts.append(
-            {
-                "description": normalized_description,
-                "size": None,
-                "max_price": normalized_max_price,
-                "adjustments": ["removed size filter"],
-            }
+    if normalized_strategy not in approved_strategies:
+        return build_result(
+            message=(
+                f"Unsupported retry strategy '{strategy}'. Choose one of: "
+                f"{', '.join(sorted(approved_strategies))}."
+            ),
+            next_step="choose_another_retry_strategy",
         )
 
-    if normalized_max_price is not None:
-        planned_attempts.append(
-            {
-                "description": normalized_description,
-                "size": normalized_size,
-                "max_price": raised_price,
-                "adjustments": ["raised max price by 25%"],
-            }
+    if normalized_strategy == "stop":
+        return build_result(
+            message=(
+                "I stopped retrying because loosening the search further may not "
+                "match the user's intent. Try a broader item name, a different "
+                "size, or a higher budget."
+            ),
+            next_step="stop_no_results",
         )
 
-    if normalized_size and normalized_max_price is not None:
-        planned_attempts.append(
-            {
-                "description": normalized_description,
-                "size": None,
-                "max_price": raised_price,
-                "adjustments": ["removed size filter and raised max price by 25%"],
-            }
+    used_strategies = {
+        str(attempt.get("strategy", "")).strip().lower()
+        for attempt in attempted_queries
+    }
+    if normalized_strategy in used_strategies:
+        return build_result(
+            message=(
+                f"The retry strategy '{normalized_strategy}' was already tried. "
+                "Choose a different approved retry strategy."
+            ),
+            next_step="choose_another_retry_strategy",
         )
 
-    description_words = normalized_description.split()
-    if len(description_words) > 2:
-        planned_attempts.append(
-            {
-                "description": " ".join(description_words[:2]),
-                "size": None,
-                "max_price": raised_price
-                if normalized_max_price is not None
-                else normalized_max_price,
-                "adjustments": ["simplified description"],
-            }
+    def simplified_description() -> str:
+        words = normalized_description.split()
+        return " ".join(words[:2]) if len(words) > 2 else normalized_description
+
+    def broadened_description() -> str:
+        words = normalized_description.split()
+        lowered = [word.lower() for word in words]
+        for phrase in ["graphic tee", "band tee", "track jacket", "combat boots"]:
+            phrase_words = phrase.split()
+            if all(word in lowered for word in phrase_words):
+                return phrase
+        for broad_term in ["tee", "jacket", "skirt", "boots", "shoes", "jeans", "pants"]:
+            if broad_term in lowered:
+                return broad_term
+        return words[-1] if words else normalized_description
+
+    strategy_attempts = {
+        "remove_size": {
+            "description": normalized_description,
+            "size": None,
+            "max_price": normalized_max_price,
+            "adjustments": ["removed size filter"],
+        },
+        "raise_price": {
+            "description": normalized_description,
+            "size": normalized_size,
+            "max_price": raised_price,
+            "adjustments": ["raised max price by 25%"],
+        },
+        "remove_size_and_raise_price": {
+            "description": normalized_description,
+            "size": None,
+            "max_price": raised_price,
+            "adjustments": ["removed size filter and raised max price by 25%"],
+        },
+        "simplify_description": {
+            "description": simplified_description(),
+            "size": None,
+            "max_price": raised_price if normalized_max_price is not None else None,
+            "adjustments": ["simplified description"],
+        },
+        "broaden_style_terms": {
+            "description": broadened_description(),
+            "size": normalized_size,
+            "max_price": normalized_max_price,
+            "adjustments": ["broadened style terms"],
+        },
+    }
+
+    attempt = strategy_attempts[normalized_strategy]
+    attempt_record = {
+        "description": attempt["description"],
+        "size": attempt["size"],
+        "max_price": attempt["max_price"],
+        "strategy": normalized_strategy,
+        "adjustments": list(attempt["adjustments"]),
+    }
+
+    try:
+        results = search_listings(
+            description=attempt["description"],
+            size=attempt["size"],
+            max_price=attempt["max_price"],
+        )
+        attempt_record["result_count"] = len(results)
+    except Exception as exc:
+        results = []
+        attempt_record["error"] = str(exc)
+        attempt_record["result_count"] = 0
+
+    if results:
+        adjustments = list(attempt["adjustments"])
+        return build_result(
+            results=results,
+            attempted_query=attempt_record,
+            adjustments=adjustments,
+            recovered=True,
+            message=_format_retry_message(
+                adjustments,
+                attempt["description"],
+                attempt["size"],
+                attempt["max_price"],
+            ),
+            next_step="continue_to_price_fairness",
         )
 
-    attempted_queries: list[dict] = []
-    for attempt in planned_attempts[:attempts_to_run]:
-        attempt_record = {
-            "description": attempt["description"],
-            "size": attempt["size"],
-            "max_price": attempt["max_price"],
-            "adjustments": list(attempt["adjustments"]),
-        }
-        try:
-            results = search_listings(
-                description=attempt["description"],
-                size=attempt["size"],
-                max_price=attempt["max_price"],
-            )
-            attempt_record["result_count"] = len(results)
-        except Exception as exc:
-            attempt_record["error"] = str(exc)
-            attempt_record["result_count"] = 0
-            attempted_queries.append(attempt_record)
-            continue
-
-        attempted_queries.append(attempt_record)
-        if results:
-            adjustments = list(attempt["adjustments"])
-            return {
-                "results": results,
-                "adjustments": adjustments,
-                "attempted_queries": attempted_queries,
-                "recovered": True,
-                "message": _format_retry_message(
-                    adjustments,
-                    attempt["description"],
-                    attempt["size"],
-                    attempt["max_price"],
-                ),
-            }
+    attempts_after_current = attempted_queries + [attempt_record]
+    if len(attempts_after_current) >= 3:
+        next_step = "stop_no_results"
+    else:
+        next_step = "choose_another_retry_strategy"
 
     adjustment_text = _format_adjustments(
         [
             adjustment
-            for attempt in attempted_queries
+            for attempt in attempts_after_current
             for adjustment in attempt.get("adjustments", [])
         ]
     )
@@ -270,18 +351,17 @@ def retry_search_with_fallback(
         )
     else:
         message = (
-            "I could not find exact matches, and there were no fallback searches "
-            "available to try. Try a broader item description, a different size, "
-            "or a higher budget."
+            "I could not find exact matches with that retry strategy. Try a "
+            "broader item description, a different size, or a higher budget."
         )
 
-    return {
-        "results": [],
-        "adjustments": [],
-        "attempted_queries": attempted_queries,
-        "recovered": False,
-        "message": message,
-    }
+    return build_result(
+        attempted_query=attempt_record,
+        adjustments=list(attempt["adjustments"]),
+        recovered=False,
+        message=message,
+        next_step=next_step,
+    )
 
 
 def _format_adjustments(adjustments: list[str]) -> str:
