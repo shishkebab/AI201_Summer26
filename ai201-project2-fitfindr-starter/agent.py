@@ -431,9 +431,11 @@ Write a short helpful response to the user. It should:
     return fallback
 
 
-def _log_tool_call(tool_name: str, tool_args: dict) -> None:
-    """Print a compact tool-call trace for terminal verification."""
-    print(f"[TOOL CALL] {tool_name}({tool_args})")
+def _log_python_tool_call(tool_name: str, tool_args: dict) -> None:
+    """Print the concrete arguments passed into a Python tool function."""
+    args_text = json.dumps(tool_args, default=str)
+    suffix = "..." if len(args_text) > 500 else ""
+    print(f"[PYTHON TOOL CALL] {tool_name}({args_text[:500]}{suffix})")
 
 
 def _log_tool_result(tool_name: str, result: object) -> None:
@@ -504,7 +506,6 @@ def _default_profile(user_id: str) -> dict:
 def dispatch_tool(tool_name: str, tool_args: dict, session: dict) -> str:
     """Route one LLM tool call to the matching Python tool and update session."""
     tool_args = tool_args if isinstance(tool_args, dict) else {}
-    _log_tool_call(tool_name, tool_args)
 
     if session.get("error") and tool_name not in {"search_listings", "retry_search_with_fallback"}:
         result = {"error": "Skipped because the interaction already has an error."}
@@ -522,6 +523,14 @@ def dispatch_tool(tool_name: str, tool_args: dict, session: dict) -> str:
                 "size": size,
                 "max_price": max_price,
             }
+            _log_python_tool_call(
+                "search_listings",
+                {
+                    "description": description,
+                    "size": size,
+                    "max_price": max_price,
+                },
+            )
             results = search_listings(description=description, size=size, max_price=max_price)
             session["search_results"] = _rerank_with_style_profile(
                 results,
@@ -552,13 +561,17 @@ def dispatch_tool(tool_name: str, tool_args: dict, session: dict) -> str:
             provided_previous_attempts = tool_args.get("previous_attempts")
             if isinstance(provided_previous_attempts, list):
                 previous_attempts = provided_previous_attempts
+            retry_args = {
+                "description": str(tool_args.get("description") or parsed.get("description") or ""),
+                "size": tool_args.get("size", parsed.get("size")),
+                "max_price": _coerce_float(tool_args.get("max_price", parsed.get("max_price"))),
+                "strategy": tool_args.get("strategy") or "stop",
+                "reason": tool_args.get("reason") or "",
+                "previous_attempts": previous_attempts,
+            }
+            _log_python_tool_call("retry_search_with_fallback", retry_args)
             retry_result = retry_search_with_fallback(
-                description=str(tool_args.get("description") or parsed.get("description") or ""),
-                size=tool_args.get("size", parsed.get("size")),
-                max_price=_coerce_float(tool_args.get("max_price", parsed.get("max_price"))),
-                strategy=tool_args.get("strategy") or "stop",
-                reason=tool_args.get("reason") or "",
-                previous_attempts=previous_attempts,
+                **retry_args,
             )
             session["search_retry"] = retry_result
             session["search_retry_message"] = retry_result.get("message")
@@ -585,6 +598,10 @@ def dispatch_tool(tool_name: str, tool_args: dict, session: dict) -> str:
             if not isinstance(session.get("selected_item"), dict):
                 result = {"error": "No selected item is available for price fairness."}
             else:
+                _log_python_tool_call(
+                    "estimate_price_fairness",
+                    {"item": session["selected_item"]},
+                )
                 session["price_fairness"] = estimate_price_fairness(session["selected_item"])
                 result = session["price_fairness"]
 
@@ -595,13 +612,17 @@ def dispatch_tool(tool_name: str, tool_args: dict, session: dict) -> str:
                 parsed = session.get("parsed") or _parse_query(session["query"])
                 selected_item = session["selected_item"]
                 try:
+                    trend_args = {
+                        "description": parsed.get("description") or session["query"],
+                        "category": selected_item.get("category"),
+                        "size": parsed.get("size") or selected_item.get("size"),
+                        "platform": tool_args.get("platform") or selected_item.get("platform", "depop"),
+                        "lookback_days": _coerce_int(tool_args.get("lookback_days"), 14),
+                        "max_posts": _coerce_int(tool_args.get("max_posts"), 25),
+                    }
+                    _log_python_tool_call("get_live_trend_context", trend_args)
                     session["trend_context"] = get_live_trend_context(
-                        description=parsed.get("description") or session["query"],
-                        category=selected_item.get("category"),
-                        size=parsed.get("size") or selected_item.get("size"),
-                        platform=tool_args.get("platform") or selected_item.get("platform", "depop"),
-                        lookback_days=_coerce_int(tool_args.get("lookback_days"), 14),
-                        max_posts=_coerce_int(tool_args.get("max_posts"), 25),
+                        **trend_args,
                     )
                 except Exception as exc:
                     session["trend_context"] = _fallback_trend_context(
@@ -615,11 +636,15 @@ def dispatch_tool(tool_name: str, tool_args: dict, session: dict) -> str:
             if not isinstance(session.get("selected_item"), dict):
                 result = {"error": "No selected item is available for outfit suggestion."}
             else:
+                outfit_args = {
+                    "new_item": session["selected_item"],
+                    "wardrobe": session["wardrobe"],
+                    "style_profile": session.get("style_profile"),
+                    "trend_context": session.get("trend_context"),
+                }
+                _log_python_tool_call("suggest_outfit", outfit_args)
                 session["outfit_suggestion"] = suggest_outfit(
-                    new_item=session["selected_item"],
-                    wardrobe=session["wardrobe"],
-                    style_profile=session.get("style_profile"),
-                    trend_context=session.get("trend_context"),
+                    **outfit_args,
                 )
                 if not session["outfit_suggestion"] or not session["outfit_suggestion"].strip():
                     session["error"] = (
@@ -631,9 +656,13 @@ def dispatch_tool(tool_name: str, tool_args: dict, session: dict) -> str:
             if not isinstance(session.get("selected_item"), dict):
                 result = {"error": "No selected item is available for fit card creation."}
             else:
+                fit_card_args = {
+                    "outfit": session.get("outfit_suggestion") or "",
+                    "new_item": session["selected_item"],
+                }
+                _log_python_tool_call("create_fit_card", fit_card_args)
                 session["fit_card"] = create_fit_card(
-                    outfit=session.get("outfit_suggestion") or "",
-                    new_item=session["selected_item"],
+                    **fit_card_args,
                 )
                 if not session["fit_card"] or not session["fit_card"].strip():
                     session["error"] = (
@@ -676,7 +705,14 @@ def _build_context_message(session: dict) -> str:
 
 def _load_style_memory(session: dict) -> None:
     """Load style memory before the tool-calling loop."""
-    _log_tool_call("style_profile_memory load", {"user_id": session["user_id"]})
+    _log_python_tool_call(
+        "style_profile_memory",
+        {
+            "user_id": session["user_id"],
+            "action": "load",
+            "profile_update": None,
+        },
+    )
     try:
         session["style_profile"] = style_profile_memory(
             user_id=session["user_id"],
@@ -698,12 +734,19 @@ def _update_style_memory(session: dict) -> None:
     """Update style memory after a successful fit card."""
     if not session.get("fit_card") or not isinstance(session.get("selected_item"), dict):
         return
-    _log_tool_call("style_profile_memory update", {"user_id": session["user_id"]})
     profile_update = _extract_profile_update(
         query=session["query"],
         selected_item=session["selected_item"],
         outfit_suggestion=session.get("outfit_suggestion") or "",
         trend_context=session.get("trend_context"),
+    )
+    _log_python_tool_call(
+        "style_profile_memory",
+        {
+            "user_id": session["user_id"],
+            "action": "update",
+            "profile_update": profile_update,
+        },
     )
     try:
         session["style_profile"] = style_profile_memory(
