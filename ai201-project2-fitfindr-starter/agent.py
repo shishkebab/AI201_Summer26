@@ -8,7 +8,13 @@ the same: it returns a session dict for the Gradio app to render.
 import json
 import re
 
-from config import DEFAULT_USER_ID, LLM_MODEL, MAX_TOOL_ROUNDS
+from config import (
+    DEFAULT_USER_ID,
+    LLM_MODEL,
+    MAX_TOOL_ROUNDS,
+    NO_RESULTS_MAX_TOKENS,
+    PLANNING_MAX_TOKENS,
+)
 from tools import (
     _get_groq_client,
     create_fit_card,
@@ -421,6 +427,7 @@ Write a short helpful response to the user. It should:
                 {"role": "user", "content": prompt},
             ],
             temperature=0.4,
+            max_tokens=NO_RESULTS_MAX_TOKENS,
         )
         message = response.choices[0].message.content.strip()
         if message:
@@ -817,7 +824,7 @@ def run_agent(
                 messages=messages,
                 tools=TOOL_DEFINITIONS,
                 tool_choice="auto",
-                max_tokens=250,
+                max_tokens=PLANNING_MAX_TOKENS,
             )
         except Exception as exc:
             session["error"] = (

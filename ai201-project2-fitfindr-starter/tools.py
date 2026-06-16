@@ -22,7 +22,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from groq import Groq
 
-from config import GROQ_API_KEY, LLM_MODEL
+from config import FIT_CARD_MAX_TOKENS, GROQ_API_KEY, LLM_MODEL, OUTFIT_MAX_TOKENS
 from utils.data_loader import load_listings
 
 load_dotenv()
@@ -899,7 +899,7 @@ Requirements:
                 {"role": "user", "content": user_prompt},
             ],
             temperature=0.7,
-            max_tokens=450,
+            max_tokens=OUTFIT_MAX_TOKENS,
         )
         outfit = response.choices[0].message.content.strip()
         if outfit:
@@ -1013,7 +1013,7 @@ Caption requirements:
                 {"role": "user", "content": prompt},
             ],
             temperature=0.9,
-            max_tokens=180,
+            max_tokens=FIT_CARD_MAX_TOKENS,
         )
         caption = response.choices[0].message.content.strip()
         if caption:
