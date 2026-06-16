@@ -817,6 +817,7 @@ def run_agent(
                 messages=messages,
                 tools=TOOL_DEFINITIONS,
                 tool_choice="auto",
+                max_tokens=250,
             )
         except Exception as exc:
             session["error"] = (
