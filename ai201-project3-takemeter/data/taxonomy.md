@@ -1,19 +1,10 @@
-# TakeMeter - planning.md
+# Podcast Format Taxonomy
+
+Use these four labels when annotating `train_episodes.json`. Each label captures the structural format of the episode — not the topic, production quality, or tone.
 
 ---
 
-## Community
-Description of the community ("Jazz" subreddit), your labels, and why these distinctions matter to people in that community.
-
-### Description of the cummunity
-The Jazz subreddit (https://www.reddit.com/r/Jazz/) is a community where people share personal reactions to artists and albums, ask for help finding recordings or recommendations, recommend specific music, and post factual information about jazz history, releases, and events. 
-
-### Labels and why the distinctions matter
-My labels are Appreciation, Question, Recommendation, and Information, which separate emotional first-person posts from posts that ask the community, suggest something to hear, or provide concrete details. These distinctions matter because jazz fans use the subreddit in different ways: to discover music, learn context, solve listening or collecting questions, and connect over what the music means to them.
-
----
-
-## Taxonomy (Label definitions)
+## Labels
 
 ### `Information`
 A post provides information or review about an event, jazz product, history. The information is backed up by specific statistics, quotes, date of the event, or other supporting evidence. 
@@ -76,6 +67,3 @@ appreciation
 ```
 
 These are the only four valid labels. Use exactly these strings in `my_labels.json`.
-
----
-
