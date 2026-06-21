@@ -303,7 +303,7 @@ The initial confusion matrix with the default hyperparameters is shown below (`c
 | `recommendation` | 1 | 0 | 0 | 7 |
 | `appreciation` | 1 | 0 | 0 | 6 |
 
-![final confusion matrix](./conusion_matrix_final.png)
+![final confusion matrix](./confusion_matrix_final.png)
 
 ### Wrong Predictions and Analysis
 
