@@ -85,7 +85,7 @@ Some descriptions genuinely fit more than one label. That's intentional — it m
 ## Valid Labels (for reference)
 
 ```
-review
+information
 question
 recommendation
 appreciation
