@@ -80,6 +80,7 @@ Some descriptions genuinely fit more than one label. That's intentional — it m
 **Information that asks:** If a post is a description of an event, jazz product, or history, and the writer asks for audiences' opinions on the content he described, label it `Information`.
 
 **Recommendation that asks:** If a post is a description of an event, jazz product, or history, and the writer asks for audiences' opinions on the content he described, label it `recommendation`.
+
 ---
 
 ## Valid Labels (for reference)
@@ -99,7 +100,7 @@ These are the only four valid labels. Use exactly these strings in `my_labels.js
 
 Some posts will be genuinely ambiguous because Reddit users often mix personal reaction, information, and recommendations in the same post. A post like "I love Idle Moments; it was recorded in 1963 with Joe Henderson and Bobby Hutcherson, and everyone should hear it" could fit `Appreciation`, `Information`, or `Recommendation`.
 
-When I encounter an ambiguous post during annotation, I will label it by the main purpose of the post rather than by every feature it contains. If the main purpose is to tell people to listen, I will choose `Recommendation`; if the main purpose is personal feeling, I will choose `Appreciation`; if the main purpose is factual context, I will choose `Information`; and if the post is primarily asking the audience for a response, I will choose `Question`.
+When I encounter an ambiguous post during annotation, I will label it by the main purpose of the post rather than by every feature it contains. If the main purpose is to tell people to listen, I will choose `Recommendation`. if the main purpose is personal feeling, I will choose `Appreciation`. if the main purpose is factual context, I will choose `Information`. and if the post is primarily asking the audience for a response, I will choose `Question`.
 
 ---
 
@@ -234,6 +235,25 @@ The final test set contained 30 posts. In the saved evaluation results, both the
 |---|---:|---:|---|
 | Zero-shot baseline (`llama-3.3-70b-versatile`) | 1.000 | 30 | Evaluated on 30/30 parseable responses |
 | Fine-tuned model (`distilbert-base-uncased`) | 1.000 | 30 | Saved in `evaluation_results.json` |
+
+### Hyperparameters
+
+The final fine-tuning run used these modified hyperparameters:
+
+```python
+num_train_epochs=6
+per_device_train_batch_size=8
+per_device_eval_batch_size=32
+learning_rate=2e-5
+weight_decay=0.01
+warmup_steps=8
+```
+
+I increased `num_train_epochs` to 6 because the dataset is small, with 200 total examples and about 140 training examples after the 70% / 15% / 15% split. More epochs gave the model more chances to learn the subtle differences between labels, especially the boundary between `recommendation` and `appreciation`.
+
+I used `per_device_train_batch_size=8` instead of a larger batch size because a smaller batch creates more optimizer updates per epoch. That matters for this project because the dataset is small; with too large a batch, the model sees the data but gets fewer chances to adjust its weights.
+
+I kept `learning_rate=2e-5` and `weight_decay=0.01` because they are stable defaults for fine-tuning a DistilBERT-style classifier. I changed `warmup_steps` to 8 because the training run has relatively few total steps, so a large warmup value like 50 would keep the learning rate too low for too much of training. A warmup of 8 steps is short enough to let the model reach the target learning rate early while still making the start of training more stable.
 
 ### Per-Class Metrics
 
