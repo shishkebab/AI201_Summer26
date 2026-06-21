@@ -15,7 +15,7 @@ My labels are Appreciation, Question, Recommendation, and Information, which sep
 
 ## Taxonomy (Label definitions)
 
-### `Information`
+### `information`
 A post provides information or review about an event, jazz product, history. The information is backed up by specific statistics, quotes, date of the event, or other supporting evidence. 
 
 **Key signal:** Provides information or review about jazz album, historical or current events. The information is backed up by specific statistics, quotes, date of the event, or other supporting evidence.
@@ -54,7 +54,7 @@ Example posts:
 
 ---
 
-### `recoommendation`
+### `recommendation`
 A post recommending a specific jazz song, album, or artist.
 
 **Key signal:** The post is recommending a specific jazz song, album, or artist to the audience.
