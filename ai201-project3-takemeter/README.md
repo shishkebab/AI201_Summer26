@@ -290,7 +290,7 @@ The final baseline confusion matrix was perfect on the 30-post test set:
 | `recommendation` | 0 | 0 | 8 | 0 |
 | `appreciation` | 0 | 0 | 0 | 7 |
 
-[baseline confusion matrix](./confusion_matrix_default_param.png)
+![baseline confusion matrix](./confusion_matrix_default_param.png)
 
 Because the saved fine-tuned model accuracy was also 1.000 on the same 30-example test set, its final confusion matrix had no off-diagonal errors as well (`confusion_matrix_final.png`).
 
@@ -303,7 +303,7 @@ The initial confusion matrix with the default hyperparameters is shown below (`c
 | `recommendation` | 1 | 0 | 0 | 7 |
 | `appreciation` | 1 | 0 | 0 | 6 |
 
-[final confusion matrix](./conusion_matrix_final.png)
+![final confusion matrix](./conusion_matrix_final.png)
 
 ### Wrong Predictions and Analysis
 
