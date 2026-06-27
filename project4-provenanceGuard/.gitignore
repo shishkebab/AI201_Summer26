@@ -1,0 +1,20 @@
+# API keys — never commit these
+.env
+data/style_profiles.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
+
+# Misc
+/data/backup.txt
