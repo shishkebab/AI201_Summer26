@@ -1,5 +1,5 @@
 from signals import run_groq_llm_classifier, run_stylometric_heuristics
-from scoring import combine_signals, label_for_attribution
+from scoring import combine_signals, generate_transparency_label
 
 samples = {
     "clearly_ai": """Artificial intelligence represents a transformative paradigm shift in modern society.
@@ -33,4 +33,4 @@ for name, text in samples.items():
     print("Combined:", decision["combined_ai_likelihood"])
     print("Confidence:", decision["confidence_score"])
     print("Attribution:", decision["attribution"])
-    print("Label:", label_for_attribution(decision["attribution"]))
+    print("Label:", generate_transparency_label(decision["attribution"], decision["confidence_score"]))

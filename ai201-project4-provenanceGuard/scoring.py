@@ -104,10 +104,30 @@ def combine_signals(signals: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
-def label_for_attribution(attribution: str) -> str:
-    labels = {
-        "likely_ai_generated": "Likely AI-generated",
-        "likely_human_written": "Likely human-written",
-        "uncertain": "Uncertain",
-    }
-    return labels.get(attribution, "Uncertain")
+def _confidence_percent(confidence_score: float) -> int:
+    return round(clamp(confidence_score) * 100)
+
+
+def generate_transparency_label(attribution: str, confidence_score: float) -> str:
+    confidence = _confidence_percent(confidence_score)
+    if attribution == "likely_ai_generated":
+        return (
+            "Likely AI-generated. Our review found strong AI-generation signals "
+            f"with {confidence}% confidence. The creator may appeal this label."
+        )
+    if attribution == "likely_human_written":
+        return (
+            "Likely human-written. Our review found strong human-writing signals "
+            f"with {confidence}% confidence."
+        )
+    return (
+        "Origin unclear. Our review found mixed or limited signals "
+        f"with {confidence}% confidence, so this should not be treated as an "
+        "AI-generated finding."
+    )
+
+
+def label_for_attribution(attribution: str, confidence_score: float | None = None) -> str:
+    if confidence_score is None:
+        confidence_score = 0.0
+    return generate_transparency_label(attribution, confidence_score)
