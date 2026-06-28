@@ -5,7 +5,8 @@ from uuid import uuid4
 
 from flask import Flask, jsonify, request
 
-from signals import run_groq_llm_classifier
+from scoring import combine_signals, label_for_attribution
+from signals import run_groq_llm_classifier, run_stylometric_heuristics
 
 
 app = Flask(__name__)
@@ -53,18 +54,6 @@ def make_content_id() -> str:
     return f"cnt_{timestamp}_{uuid4().hex[:8]}"
 
 
-def attribution_from_first_signal(signal: dict[str, object]) -> str:
-    if signal.get("status") != "completed":
-        return "uncertain"
-
-    ai_likelihood = float(signal.get("ai_likelihood", 0.5))
-    if ai_likelihood >= 0.65:
-        return "likely_ai_generated"
-    if ai_likelihood <= 0.35:
-        return "likely_human_written"
-    return "uncertain"
-
-
 def write_audit_event(event: dict[str, object]) -> None:
     DATA_DIR.mkdir(exist_ok=True)
     with AUDIT_LOG_PATH.open("a", encoding="utf-8") as audit_log:
@@ -77,15 +66,28 @@ def build_audit_entry(
     timestamp: str,
     attribution: str,
     confidence: float,
-    signal: dict[str, object],
+    combined_ai_likelihood: float,
+    signals: list[dict[str, object]],
 ) -> dict[str, object]:
+    signal_details = {
+        str(signal.get("name")): {
+            "score": signal.get("ai_likelihood"),
+            "quality": signal.get("quality"),
+            "status": signal.get("status"),
+        }
+        for signal in signals
+    }
     return {
         "content_id": content_id,
         "creator_id": creator_id,
         "timestamp": timestamp,
         "attribution": attribution,
         "confidence": confidence,
-        "llm_score": signal.get("ai_likelihood"),
+        "combined_confidence_score": confidence,
+        "combined_ai_likelihood": combined_ai_likelihood,
+        "llm_score": signal_details.get("groq_llm_classifier", {}).get("score"),
+        "stylometric_score": signal_details.get("stylometric_heuristics", {}).get("score"),
+        "signal_scores": signal_details,
         "status": "classified",
     }
 
@@ -113,10 +115,16 @@ def submit_content():
 
     content_id = make_content_id()
     created_at = datetime.now(timezone.utc).isoformat()
-    signal = run_groq_llm_classifier(str(metadata["text"]))
-    attribution = attribution_from_first_signal(signal)
-    confidence = 0.5
-    label = "Placeholder label: final transparency label will be generated after confidence scoring is implemented."
+    text = str(metadata["text"])
+    signals = [
+        run_groq_llm_classifier(text),
+        run_stylometric_heuristics(text),
+    ]
+    decision = combine_signals(signals)
+    attribution = str(decision["attribution"])
+    confidence = float(decision["confidence_score"])
+    combined_ai_likelihood = float(decision["combined_ai_likelihood"])
+    label = label_for_attribution(attribution)
 
     write_audit_event(
         build_audit_entry(
@@ -125,7 +133,8 @@ def submit_content():
             timestamp=created_at,
             attribution=attribution,
             confidence=confidence,
-            signal=signal,
+            combined_ai_likelihood=combined_ai_likelihood,
+            signals=signals,
         )
     )
 
@@ -135,8 +144,9 @@ def submit_content():
         "status": "analyzed",
         "attribution": attribution,
         "confidence": confidence,
+        "combined_ai_likelihood": combined_ai_likelihood,
         "label": label,
-        "signal": signal,
+        "signals": signals,
         "created_at": created_at,
     }
     return jsonify(response), 201

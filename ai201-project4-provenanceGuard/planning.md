@@ -180,13 +180,19 @@ This signal cannot understand meaning, source history, intent, or actual authors
 
 ### Combining Signals
 
-The first implementation will weight the Groq signal slightly more than the stylometric signal:
+The first implementation weights the Groq signal slightly more than the stylometric signal, but the actual combination is quality-weighted. This matters because stylometric measurements are unstable on short text. Low-quality stylometry should increase uncertainty, not overpower the direction of the LLM signal.
 
 ```text
+groq_weight = 0.60 * groq_quality
+stylometric_weight = 0.40 * stylometric_quality
+
 combined_ai_likelihood =
-  0.60 * groq_ai_likelihood +
-  0.40 * stylometric_ai_likelihood
+  ((groq_weight * groq_ai_likelihood) +
+   (stylometric_weight * stylometric_ai_likelihood)) /
+  (groq_weight + stylometric_weight)
 ```
+
+If both signal qualities are `0`, the combined score defaults to `0.5` and the result should be `uncertain`.
 
 The system will then calculate a separate `confidence_score`. Confidence means "how strongly the system supports the displayed label," not "probability that this is objectively true."
 
@@ -194,7 +200,8 @@ Initial confidence calculation:
 
 ```text
 distance_from_middle = abs(combined_ai_likelihood - 0.50) * 2
-signal_agreement = 1 - abs(groq_ai_likelihood - stylometric_ai_likelihood)
+lower_quality = min(groq_quality, stylometric_quality)
+signal_agreement = 1 - (abs(groq_ai_likelihood - stylometric_ai_likelihood) * lower_quality)
 quality_factor = average(signal quality values)
 
 confidence_score =
@@ -205,8 +212,8 @@ confidence_score =
 
 Then apply uncertainty penalties:
 
-- subtract `0.15` if the text has fewer than `80` words
-- subtract `0.10` if the two signals differ by more than `0.30`
+- subtract `0.05 * (1 - stylometric_quality)` if the text has fewer than `80` words
+- subtract `0.10 * lower_quality` if the two signals differ by more than `0.30`
 - subtract `0.20` if either signal fails
 - force `attribution_result = uncertain` if fewer than two signals complete successfully
 
@@ -225,27 +232,27 @@ Decision thresholds:
 
 ```text
 likely_ai_generated:
-  combined_ai_likelihood >= 0.82
-  and confidence_score >= 0.70
+  combined_ai_likelihood >= 0.65
+  and confidence_score >= 0.45
 
 likely_human_written:
   combined_ai_likelihood <= 0.25
-  and confidence_score >= 0.70
+  and confidence_score >= 0.45
 
 uncertain:
   anything between those ranges,
-  or confidence_score < 0.70,
+  or confidence_score < 0.45,
   or fewer than two completed signals
 ```
 
-This intentionally creates a wide uncertain zone. The system should avoid high-confidence AI labels unless the evidence is strong because false positives are especially harmful to human writers.
+This still creates a wide uncertain zone, especially for borderline formal writing and lightly edited AI text. The threshold for `likely_ai_generated` is lower than the original draft because quality weighting already prevents a weak stylometric score from dragging the combined score toward the wrong direction. The confidence gate remains important because false positives are especially harmful to human writers.
 
 Examples:
 
 - `combined_ai_likelihood = 0.60`, `confidence_score = 0.51` -> `uncertain`
-- `combined_ai_likelihood = 0.86`, `confidence_score = 0.78` -> `likely_ai_generated`
-- `combined_ai_likelihood = 0.18`, `confidence_score = 0.82` -> `likely_human_written`
-- `combined_ai_likelihood = 0.88`, `confidence_score = 0.55` -> `uncertain`, because the system is not confident enough
+- `combined_ai_likelihood = 0.66`, `confidence_score = 0.46` -> `likely_ai_generated`
+- `combined_ai_likelihood = 0.18`, `confidence_score = 0.61` -> `likely_human_written`
+- `combined_ai_likelihood = 0.66`, `confidence_score = 0.40` -> `uncertain`, because the system is not confident enough
 
 ## 3. Transparency Label Design
 
